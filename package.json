@@ -6,7 +6,7 @@
   "scripts": {
     "prepublish": "babel src --out-dir lib",
     "devmode": "babel --watch src --out-dir lib",
-    "test": "mocha --compilers js:babel-register"
+    "test": "mocha ./test/ --recursive --compilers js:babel-register"
   },
   "author": "Rotorz Limited",
   "license": "MIT",
