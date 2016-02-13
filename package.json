@@ -1,0 +1,19 @@
+{
+  "name": "webreed-core",
+  "version": "0.0.1",
+  "description": "Core library that support webreed projects.",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepublish": "babel src --out-dir lib",
+    "devmode": "babel --watch src --out-dir lib",
+    "test": "mocha --compilers js:babel-register"
+  },
+  "author": "Rotorz Limited",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.5.0",
+    "mocha": "^2.3.4",
+    "mocha-testdata": "^1.1.2",
+    "should": "^8.0.2"
+  }
+}
