@@ -9,7 +9,7 @@ export default class Environment {
     // Copy default behavior mappings into environment so that they can be selectively
     // overridden by the consumer of this API.
     Object.defineProperty(this, "behaviors", {
-      value: Object.assign({ }, defaultBehaviors)
+      value: Object.create(Object.assign({ }, defaultBehaviors))
     });
   }
 

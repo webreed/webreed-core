@@ -41,6 +41,12 @@ describe("Environment", function () {
         .should.throw();
     })
 
+    it("inherits default behaviors", function () {
+      delete this.env.behaviors.buildOutput;
+      this.env.behaviors.buildOutput
+        .should.be.a.Function();
+    })
+
   })
 
 
