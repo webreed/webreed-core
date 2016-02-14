@@ -1,8 +1,13 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+/** @module webreed/lib/Environment */
+
 import * as defaultBehaviors from "./behaviors/defaults";
 
+/**
+ * Represents the environment of a webreed project.
+ */
 export default class Environment {
 
   constructor() {
@@ -13,6 +18,12 @@ export default class Environment {
     });
   }
 
+  /**
+   * Builds output of the webreed project that is described by this environment.
+   *
+   * @returns {Promise}
+   *   A promise to complete the build.
+   */
   build() {
     return this.behaviors.buildOutput(this);
   }

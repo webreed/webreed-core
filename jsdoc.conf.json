@@ -1,0 +1,11 @@
+{
+  "opts": {
+    "recurse": true
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "source": {
+    "exclude": [ "_private", "node_modules", "lib", "out", "plugin_modules" ]
+  }
+}
