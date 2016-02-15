@@ -14,13 +14,13 @@ describe("Environment", function () {
 
   beforeEach(function () {
     this.env = new Environment();
-  })
+  });
 
 
   it("is named 'Environment'", function () {
     Environment.name
       .should.be.eql("Environment");
-  })
+  });
 
 
   describe("#constructor()", function () {
@@ -28,9 +28,9 @@ describe("Environment", function () {
     it("is a function", function () {
       Environment.prototype.constructor
         .should.be.a.Function();
-    })
+    });
 
-  })
+  });
 
 
   describe("#get behaviors(): object", function () {
@@ -38,20 +38,20 @@ describe("Environment", function () {
     it("is an object", function () {
       this.env.behaviors
         .should.be.an.Object();
-    })
+    });
 
     it("is read-only", function () {
       (() => this.env.behaviors = 42)
         .should.throw();
-    })
+    });
 
     it("inherits default behaviors", function () {
       delete this.env.behaviors.buildOutput;
       this.env.behaviors.buildOutput
         .should.be.a.Function();
-    })
+    });
 
-  })
+  });
 
 
   describe("#build(): Promise", function () {
@@ -59,12 +59,12 @@ describe("Environment", function () {
     it("is a function", function () {
       this.env.build
         .should.be.a.Function();
-    })
+    });
 
     it("returns a promise", function () {
       this.env.build()
         .should.be.a.Promise();
-    })
+    });
 
     it("assumes override 'buildOutput' behavior", function () {
       let invokedOverride = false;
@@ -78,8 +78,8 @@ describe("Environment", function () {
         .then(() => {
           invokedOverride.should.be.true();
         });
-    })
+    });
 
-  })
+  });
 
-})
+});

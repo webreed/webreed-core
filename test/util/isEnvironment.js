@@ -16,17 +16,17 @@ describe("util/isEnvironment", function () {
   it("is a function", function () {
     return isEnvironment
       .should.be.a.Function();
-  })
+  });
 
   given( undefined, null, 42, "foo" ).
   it("returns false when argument 'value' is not a webreed environment", function (value) {
     isEnvironment(value)
       .should.be.false();
-  })
+  });
 
   it("returns true when argument 'value' is a webreed environment", function () {
     isEnvironment(new Environment())
       .should.be.true();
-  })
+  });
 
-})
+});
