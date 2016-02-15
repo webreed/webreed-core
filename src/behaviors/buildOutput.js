@@ -3,7 +3,7 @@
 
 /** @module webreed/lib/behaviors/buildOutput */
 
-import { isEnvironment } from "../util";
+import isEnvironment from "../util/isEnvironment";
 
 /**
  * Builds output for a given webreed environment.
