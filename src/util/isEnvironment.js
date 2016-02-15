@@ -3,6 +3,7 @@
 
 /** @module webreed/lib/util/isEnvironment */
 
+
 /**
  * Determines whether a given value is a webreed environment.
  *

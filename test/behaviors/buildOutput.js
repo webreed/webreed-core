@@ -1,11 +1,15 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+
+// Packages
 import given from "mocha-testdata";
 import should from "should";
 
+// Project
 import Environment from "../../src/Environment";
 import buildOutput from "../../src/behaviors/buildOutput";
+
 
 describe("behaviors/buildOutput", function () {
 

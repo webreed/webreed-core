@@ -3,7 +3,10 @@
 
 /** @module webreed/lib/Environment */
 
+
+// Project
 import * as defaultBehaviors from "./behaviors/defaults";
+
 
 /**
  * Represents the environment of a webreed project.
