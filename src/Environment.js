@@ -8,6 +8,10 @@
 import * as defaultBehaviors from "./behaviors/defaults";
 
 
+// Symbols to simulate private fields
+const behaviorsProperty = Symbol();
+
+
 /**
  * Represents the environment of a webreed project.
  */
@@ -16,9 +20,7 @@ export default class Environment {
   constructor() {
     // Copy default behavior mappings into environment so that they can be selectively
     // overridden by the consumer of this API.
-    Object.defineProperty(this, "behaviors", {
-      value: Object.create(Object.assign({ }, defaultBehaviors))
-    });
+    this[behaviorsProperty] = Object.create(Object.assign({ }, defaultBehaviors));
   }
 
 
@@ -47,6 +49,9 @@ export default class Environment {
    * @member {object.<string, function>} behaviors
    * @readonly
    */
+  get behaviors() {
+    return this[behaviorsProperty];
+  }
 
 
   /**
