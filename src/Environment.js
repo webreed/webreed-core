@@ -6,6 +6,7 @@
 
 // System
 import path from "path";
+import url from "url";
 
 // Project
 import * as defaultBehaviors from "./behaviors/defaults";
@@ -14,9 +15,16 @@ import trimTrailingSlash from "./util/trimTrailingSlash";
 
 
 // Symbols to simulate private fields
+const baseUrlField = Symbol();
 const behaviorsField = Symbol();
+const hiddenUrlExtensionsField = Symbol();
+const hiddenUrlFileNamesField = Symbol();
 const namedPathsField = Symbol();
 const projectRootPathField = Symbol();
+
+
+const defaultBaseUrlValue = "/";
+const defaultProjectRootPathValue = "";
 
 
 /**
@@ -25,14 +33,37 @@ const projectRootPathField = Symbol();
 export default class Environment {
 
   constructor() {
-    // Copy default behavior mappings into environment so that they can be selectively
-    // overridden by the consumer of this API.
-    this[behaviorsField] = Object.create(Object.assign({ }, defaultBehaviors));
+    let inheritedBehaviors = Object.assign({ }, defaultBehaviors);
 
+    this[baseUrlField] = defaultBaseUrlValue;
+    this[behaviorsField] = Object.create(inheritedBehaviors);
+    this[hiddenUrlExtensionsField] = new Set();
+    this[hiddenUrlFileNamesField] = new Set();
     this[namedPathsField] = { };
-    this[projectRootPathField] = "";
+    this[projectRootPathField] = defaultProjectRootPathValue;
   }
 
+
+  /**
+   * Base URL of the project which is assumed by default when generating output
+   * relative URLs. This should be the URL representing the root-most level of the
+   * generated output; for instance, "http://www.example.com/".
+   *
+   * A value of "/" is useful in situations where you want to be able to easily move
+   * the generated output to different locations or servers.
+   *
+   * @member {string}
+   * @default "/"
+   */
+  get baseUrl() {
+    return this[baseUrlField];
+  }
+  set baseUrl(value) {
+    console.assert(typeof value === "string",
+        "argument 'value' must be a string");
+
+    this[baseUrlField] = value;
+  }
 
   /**
    * Map of behaviors that can be used within the context of the environment.
@@ -61,6 +92,26 @@ export default class Environment {
    */
   get behaviors() {
     return this[behaviorsField];
+  }
+
+  /**
+   * Set of file extensions that should be hidden in generated URLs.
+   *
+   * @member {Set.<string>}
+   * @readonly
+   */
+  get hiddenUrlExtensions() {
+    return this[hiddenUrlExtensionsField];
+  }
+
+  /**
+   * Set of file names that should be hidden in generated URLs.
+   *
+   * @member {Set.<string>}
+   * @readonly
+   */
+  get hiddenUrlFileNames() {
+    return this[hiddenUrlFileNamesField];
   }
 
   /**
@@ -121,6 +172,45 @@ export default class Environment {
     }
 
     return _path_ + extension;
+  }
+
+  /**
+   * Gets the URL of a resource from a given output relative path.
+   *
+   * @param {string} outputRelativePath
+   *   Output relative path of content including file name and extension.
+   * @param {string} [baseUrl]
+   *   Base URL that `path` should be resolved from; defaults to the project base URL.
+   *
+   * @returns {string}
+   *   The URL associated with the specified output path.
+   */
+  getUrlForResource(outputRelativePath, baseUrl) {
+    baseUrl = baseUrl || this.baseUrl;
+
+    console.assert(typeof outputRelativePath === "string",
+        "argument 'outputRelativePath' must be a string");
+    console.assert(typeof baseUrl === "string",
+        "argument 'baseUrl' must be a string");
+
+    outputRelativePath = outputRelativePath || "";
+
+    let fileName = path.basename(outputRelativePath);
+    if (this.hiddenUrlFileNames.has(fileName)) {
+      // Remove file name from output relative path.
+      outputRelativePath = outputRelativePath.substr(0, outputRelativePath.length - fileName.length);
+    }
+    else {
+      // It is commonplace to hide ".html" from URLs since they can be automatically
+      // resolved with the likes of a ".htaccess" file.
+      let extension = path.extname(outputRelativePath);
+      if (extension && this.hiddenUrlExtensions.has(extension)) {
+        // Remove extension from output relative path.
+        outputRelativePath = outputRelativePath.substr(0, outputRelativePath.length - extension.length);
+      }
+    }
+
+    return url.resolve(baseUrl, outputRelativePath);
   }
 
   /**

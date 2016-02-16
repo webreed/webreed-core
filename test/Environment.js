@@ -37,6 +37,31 @@ describe("Environment", function () {
   });
 
 
+  describe("#baseUrl", function () {
+
+    it("has an initial value of '/'", function () {
+      let newEnv = new Environment();
+      newEnv.baseUrl
+        .should.be.eql("/");
+    });
+
+  });
+
+  describe("#baseUrl=", function () {
+
+    it("throws error when argument 'value' is not a string", function () {
+      (() => this.env.baseUrl = 42)
+        .should.throw("argument 'value' must be a string");
+    });
+
+    it("updates value of the property", function () {
+      this.env.baseUrl = "http://example.com";
+      this.env.baseUrl
+        .should.be.eql("http://example.com");
+    });
+
+  });
+
   describe("#behaviors", function () {
 
     it("is an object", function () {
@@ -53,6 +78,42 @@ describe("Environment", function () {
       delete this.env.behaviors.buildOutput;
       this.env.behaviors.buildOutput
         .should.be.a.Function();
+    });
+
+  });
+
+  describe("#hiddenUrlExtensions", function () {
+
+    it("is a set", function () {
+      this.env.hiddenUrlExtensions.has
+        .should.be.a.Function();
+      this.env.hiddenUrlExtensions.add
+        .should.be.a.Function();
+      this.env.hiddenUrlExtensions.delete
+        .should.be.a.Function();
+    });
+
+    it("is read-only", function () {
+      (() => this.env.hiddenUrlExtensions = new Set())
+        .should.throw();
+    });
+
+  });
+
+  describe("#hiddenUrlFileNames", function () {
+
+    it("is a set", function () {
+      this.env.hiddenUrlFileNames.has
+        .should.be.a.Function();
+      this.env.hiddenUrlFileNames.add
+        .should.be.a.Function();
+      this.env.hiddenUrlFileNames.delete
+        .should.be.a.Function();
+    });
+
+    it("is read-only", function () {
+      (() => this.env.hiddenUrlFileNames = new Set())
+        .should.throw();
     });
 
   });
@@ -149,6 +210,65 @@ describe("Environment", function () {
     ).
     it("returns the expected output relative path", function (path, extension, page, expectedResult) {
       this.env.getOutputRelativePathForResource(path, extension, page)
+        .should.be.eql(expectedResult);
+    });
+
+  });
+
+  describe("#getUrlForResource(outputRelativePath, [baseUrl])", function () {
+
+    it("is a function", function () {
+      this.env.getUrlForResource
+        .should.be.a.Function();
+    });
+
+    it("throws error when argument 'outputRelativePath' is not a string", function () {
+      (() => this.env.getUrlForResource(42))
+        .should.throw("argument 'outputRelativePath' must be a string");
+    });
+
+    it("throws error when argument 'baseUrl' is defined but is not a string", function () {
+      (() => this.env.getUrlForResource("", 42))
+        .should.throw("argument 'baseUrl' must be a string");
+    });
+
+    given(
+      [ "", null, "/" ],
+      [ "blog", null, "/blog" ],
+      [ "blog", "http://example.com", "http://example.com/blog" ],
+      [ "blog/index.html", null, "/blog/index.html" ],
+      [ "blog/index.html", "http://example.com", "http://example.com/blog/index.html" ],
+      [ "blog/feed.rss", null, "/blog/feed.rss" ],
+      [ "blog/feed.rss", "http://example.com", "http://example.com/blog/feed.rss" ]
+    ).
+    it("returns the expected URL", function (outputRelativePath, baseUrl, expectedResult) {
+      this.env.getUrlForResource(outputRelativePath, baseUrl)
+        .should.be.eql(expectedResult);
+    });
+
+    given(
+      [ "blog/index.html", null, "/blog/index" ],
+      [ "blog/index.html", "http://example.com", "http://example.com/blog/index" ],
+      [ "blog/default.html", null, "/blog/default" ],
+      [ "blog/default.html", "http://example.com", "http://example.com/blog/default" ]
+    ).
+    it("returns the expected URL taking hidden extensions into account", function (outputRelativePath, baseUrl, expectedResult) {
+      this.env.hiddenUrlExtensions.add(".html");
+
+      this.env.getUrlForResource(outputRelativePath, baseUrl)
+        .should.be.eql(expectedResult);
+    });
+
+    given(
+      [ "blog/index.html", null, "/blog/" ],
+      [ "blog/index.html", "http://example.com", "http://example.com/blog/" ],
+      [ "blog/default.html", null, "/blog/default.html" ],
+      [ "blog/default.html", "http://example.com", "http://example.com/blog/default.html" ]
+    ).
+    it("returns the expected URL taking hidden file names into account", function (outputRelativePath, baseUrl, expectedResult) {
+      this.env.hiddenUrlFileNames.add("index.html");
+
+      this.env.getUrlForResource(outputRelativePath, baseUrl)
         .should.be.eql(expectedResult);
     });
 
