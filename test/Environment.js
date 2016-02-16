@@ -37,7 +37,7 @@ describe("Environment", function () {
   });
 
 
-  describe("#get behaviors: object", function () {
+  describe("#behaviors", function () {
 
     it("is an object", function () {
       this.env.behaviors
@@ -57,7 +57,7 @@ describe("Environment", function () {
 
   });
 
-  describe("#get projectRootPath: string", function () {
+  describe("#projectRootPath", function () {
 
     it("is empty by default", function () {
       let newEnv = new Environment();
@@ -67,7 +67,7 @@ describe("Environment", function () {
 
   });
 
-  describe("#set projectRootPath: string", function () {
+  describe("#projectRootPath=", function () {
 
     it("throws error when argument 'value' is not a string", function () {
       (() => this.env.projectRootPath = 42)
@@ -89,7 +89,7 @@ describe("Environment", function () {
   });
 
 
-  describe("#build(): Promise", function () {
+  describe("#build()", function () {
 
     it("is a function", function () {
       this.env.build
@@ -154,7 +154,7 @@ describe("Environment", function () {
 
   });
 
-  describe("#resolvePath(name, [resolvePath]): string", function () {
+  describe("#resolvePath(name, [relativePath])", function () {
 
     it("is a function", function () {
       this.env.resolvePath
