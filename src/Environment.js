@@ -21,8 +21,36 @@ export default class Environment {
     });
   }
 
+
   /**
-   * Builds output of the webreed project that is described by this environment.
+   * Map of behaviors that can be used within the context of the environment.
+   *
+   * The default behaviors can be overridden:
+   *
+   * ```
+   * env.behaviors.buildOutput = function customBuildOutput(env) {
+   *     // Do stuff before the default behavior...
+   *
+   *     // You can apply the default behavior.
+   *     env.behaviors.prototype.buildOutput.apply(arguments);
+   *
+   *     // Do stuff after the default behavior...
+   * };
+   * ```
+   *
+   * The default behavior can be restored by deleting the custom behavior:
+   *
+   * ```
+   * delete env.behaviors.buildOutput;
+   * ```
+   *
+   * @member {object.<string, function>} behaviors
+   * @readonly
+   */
+
+
+  /**
+   * Builds output of the webreed project that is described by the environment.
    *
    * @returns {Promise}
    *   A promise to complete the build.
