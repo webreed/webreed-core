@@ -11,6 +11,7 @@ import should from "should";
 
 // Project
 import Environment from "../src/Environment";
+import Resource from "../src/Resource";
 
 
 describe("Environment", function () {
@@ -174,6 +175,31 @@ describe("Environment", function () {
         .then(() => {
           invokedOverride.should.be.true();
         });
+    });
+
+  });
+
+  describe("#createResource", function () {
+
+    it("is a function", function () {
+      this.env.createResource
+        .should.be.a.Function();
+    });
+
+    it("returns a Resource", function () {
+      this.env.createResource()
+        .should.be.instanceOf(Resource);
+    });
+
+    it("returns a new Resource instance each time", function () {
+      this.env.createResource()
+        .should.not.be.exactly(this.env.createResource());
+    });
+
+    it("passes properties to constructor of new resource", function () {
+      let props = { type: "greeting", message: "Hello, world!" };
+      this.env.createResource(props)
+        .should.have.properties(props);
     });
 
   });

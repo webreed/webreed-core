@@ -10,6 +10,7 @@ import url from "url";
 
 // Project
 import * as defaultBehaviors from "./behaviors/defaults";
+import Resource from "./Resource";
 import normalizePathSeparators from "./util/normalizePathSeparators";
 import trimTrailingSlash from "./util/trimTrailingSlash";
 
@@ -141,6 +142,18 @@ export default class Environment {
    */
   build() {
     return this.behaviors.buildOutput(this);
+  }
+
+  /**
+   * Creates an object representing a source or intermediate resource.
+   *
+   * @param {object} [props = null]
+   *   Properties that describe the resource.
+   *
+   * @returns {module:webreed/lib/Resource}
+   */
+  createResource(props) {
+    return new Resource(this, props);
   }
 
   /**
