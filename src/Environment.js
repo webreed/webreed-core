@@ -8,6 +8,9 @@
 import path from "path";
 import url from "url";
 
+// Packages
+import moment from "moment";
+
 // Project
 import * as defaultBehaviors from "./behaviors/defaults";
 import Resource from "./Resource";
@@ -22,6 +25,7 @@ const hiddenUrlExtensionsField = Symbol();
 const hiddenUrlFileNamesField = Symbol();
 const namedPathsField = Symbol();
 const projectRootPathField = Symbol();
+const timeStartedField = Symbol();
 
 
 const defaultBaseUrlValue = "/";
@@ -42,6 +46,12 @@ export default class Environment {
     this[hiddenUrlFileNamesField] = new Set();
     this[namedPathsField] = { };
     this[projectRootPathField] = defaultProjectRootPathValue;
+    this[timeStartedField] = moment();
+
+    //!TODO: Make the value of the `timeStartedField` immutable when moment.js resolves:
+    //   TypeError: Can't add property _isValid, object is not extensible
+    //    at valid__isValid (...\node_modules\moment\moment.js:93:24)
+    //this[timeStartedField] = Object.freeze(moment());
   }
 
 
@@ -131,6 +141,16 @@ export default class Environment {
         "argument 'value' must be a string");
 
     this[projectRootPathField] = trimTrailingSlash(value);
+  }
+
+  /**
+   * The time that the webreed environment was created.
+   *
+   * @member {module:moment}
+   * @readonly
+   */
+  get timeStarted() {
+    return this[timeStartedField];
   }
 
 

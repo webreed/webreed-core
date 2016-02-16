@@ -7,6 +7,7 @@ import path from "path";
 
 // Packages
 import given from "mocha-testdata";
+import moment from "moment";
 import should from "should";
 
 // Project
@@ -146,6 +147,22 @@ describe("Environment", function () {
       this.env.projectRootPath = "/abc/";
       this.env.projectRootPath
         .should.be.eql("/abc");
+    });
+
+  });
+
+  describe("#timeStarted", function () {
+
+    it("is a moment", function () {
+      moment.isMoment(this.env.timeStarted)
+        .should.be.true();
+    });
+
+    it("is the time that the environment was created", function () {
+      let timeBeforeStarted = moment();
+      let newEnv = new Environment();
+      timeBeforeStarted.isSameOrBefore(newEnv.timeStarted)
+        .should.be.true();
     });
 
   });
