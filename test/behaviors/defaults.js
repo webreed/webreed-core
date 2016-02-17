@@ -13,7 +13,8 @@ import * as defaultBehaviors from "../../src/behaviors/defaults";
 describe("behaviors/defaults", function () {
 
   given(
-    "buildOutput"
+    "buildOutput",
+    "getSourceContentRelativePaths"
   ).
   it("has expected default behaviors", function (behaviorName) {
     defaultBehaviors[behaviorName]
