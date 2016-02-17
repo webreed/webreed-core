@@ -19,7 +19,7 @@ describe("Environment", function () {
 
   beforeEach(function () {
     this.env = new Environment();
-    this.env.projectRootPath = path.join(__dirname, "fixtures");
+    this.env.projectRootPath = path.join(__dirname, "fixtures/project");
   });
 
 
@@ -337,17 +337,17 @@ describe("Environment", function () {
 
     it("resolves path of a named sub-directory within project", function () {
       this.env.resolvePath("def")
-        .should.be.eql(path.resolve(__dirname, "fixtures/def"));
+        .should.be.eql(path.resolve(__dirname, "fixtures/project/def"));
     });
 
     it("resolves path from a named sub-directory within project", function () {
       this.env.resolvePath("def", "ghi/jkl")
-        .should.be.eql(path.resolve(__dirname, "fixtures/def/ghi/jkl"));
+        .should.be.eql(path.resolve(__dirname, "fixtures/project/def/ghi/jkl"));
     });
 
     it("trims trailing slash from argument 'relativePath'", function () {
       this.env.resolvePath("def", "ghi/jkl/")
-        .should.be.eql(path.resolve(__dirname, "fixtures/def/ghi/jkl"));
+        .should.be.eql(path.resolve(__dirname, "fixtures/project/def/ghi/jkl"));
     });
 
   });
@@ -373,13 +373,13 @@ describe("Environment", function () {
     it("overrides a named path", function () {
       this.env.setPath("content", "new-content/2015");
       this.env.resolvePath("content")
-        .should.be.eql(path.resolve(__dirname, "fixtures/new-content/2015"));
+        .should.be.eql(path.resolve(__dirname, "fixtures/project/new-content/2015"));
     });
 
     it("trims trailing slash from argument 'path'", function () {
       this.env.setPath("content", "new-content/2015/");
       this.env.resolvePath("content")
-        .should.be.eql(path.resolve(__dirname, "fixtures/new-content/2015"));
+        .should.be.eql(path.resolve(__dirname, "fixtures/project/new-content/2015"));
     });
 
     it("returns self allowing for chained calls", function () {
