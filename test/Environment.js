@@ -11,6 +11,7 @@ import moment from "moment";
 import should from "should";
 
 // Project
+import AliasMap from "../src/AliasMap";
 import Environment from "../src/Environment";
 import Resource from "../src/Resource";
 
@@ -84,6 +85,34 @@ describe("Environment", function () {
 
   });
 
+  describe("#generators", function () {
+
+    it("is an `AliasMap`", function () {
+      this.env.generators
+        .should.be.instanceOf(AliasMap);
+    });
+
+    it("is read-only", function () {
+      (() => this.env.generators = 42)
+        .should.throw();
+    });
+
+  });
+
+  describe("#handlers", function () {
+
+    it("is an `AliasMap`", function () {
+      this.env.handlers
+        .should.be.instanceOf(AliasMap);
+    });
+
+    it("is read-only", function () {
+      (() => this.env.handlers = 42)
+        .should.throw();
+    });
+
+  });
+
   describe("#hiddenUrlExtensions", function () {
 
     it("is a set", function () {
@@ -120,6 +149,20 @@ describe("Environment", function () {
 
   });
 
+  describe("#modes", function () {
+
+    it("is an `AliasMap`", function () {
+      this.env.modes
+        .should.be.instanceOf(AliasMap);
+    });
+
+    it("is read-only", function () {
+      (() => this.env.modes = 42)
+        .should.throw();
+    });
+
+  });
+
   describe("#projectRootPath", function () {
 
     it("is empty by default", function () {
@@ -151,6 +194,20 @@ describe("Environment", function () {
 
   });
 
+  describe("#templateEngines", function () {
+
+    it("is an `AliasMap`", function () {
+      this.env.templateEngines
+        .should.be.instanceOf(AliasMap);
+    });
+
+    it("is read-only", function () {
+      (() => this.env.templateEngines = 42)
+        .should.throw();
+    });
+
+  });
+
   describe("#timeStarted", function () {
 
     it("is a moment", function () {
@@ -163,6 +220,20 @@ describe("Environment", function () {
       let newEnv = new Environment();
       timeBeforeStarted.isSameOrBefore(newEnv.timeStarted)
         .should.be.true();
+    });
+
+  });
+
+  describe("#transformers", function () {
+
+    it("is an `AliasMap`", function () {
+      this.env.transformers
+        .should.be.instanceOf(AliasMap);
+    });
+
+    it("is read-only", function () {
+      (() => this.env.transformers = 42)
+        .should.throw();
     });
 
   });

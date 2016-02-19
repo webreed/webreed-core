@@ -13,19 +13,29 @@ import moment from "moment";
 
 // Project
 import * as defaultBehaviors from "./behaviors/defaults";
+import AliasMap from "./AliasMap";
 import Resource from "./Resource";
 import normalizePathSeparators from "./util/normalizePathSeparators";
 import trimTrailingSlash from "./util/trimTrailingSlash";
 
 
 // Symbols to simulate private fields
-const baseUrlField = Symbol();
 const behaviorsField = Symbol();
+
+const projectRootPathField = Symbol();
+const namedPathsField = Symbol();
+
+const baseUrlField = Symbol();
 const hiddenUrlExtensionsField = Symbol();
 const hiddenUrlFileNamesField = Symbol();
-const namedPathsField = Symbol();
-const projectRootPathField = Symbol();
+
 const timeStartedField = Symbol();
+
+const generatorsField = Symbol();
+const handlersField = Symbol();
+const modesField = Symbol();
+const templateEnginesField = Symbol();
+const transformersField = Symbol();
 
 
 const defaultBaseUrlValue = "/";
@@ -40,18 +50,26 @@ export default class Environment {
   constructor() {
     let inheritedBehaviors = Object.assign({ }, defaultBehaviors);
 
-    this[baseUrlField] = defaultBaseUrlValue;
     this[behaviorsField] = Object.create(inheritedBehaviors);
+
+    this[projectRootPathField] = defaultProjectRootPathValue;
+    this[namedPathsField] = { };
+
+    this[baseUrlField] = defaultBaseUrlValue;
     this[hiddenUrlExtensionsField] = new Set();
     this[hiddenUrlFileNamesField] = new Set();
-    this[namedPathsField] = { };
-    this[projectRootPathField] = defaultProjectRootPathValue;
-    this[timeStartedField] = moment();
 
     //!TODO: Make the value of the `timeStartedField` immutable when moment.js resolves:
     //   TypeError: Can't add property _isValid, object is not extensible
     //    at valid__isValid (...\node_modules\moment\moment.js:93:24)
     //this[timeStartedField] = Object.freeze(moment());
+    this[timeStartedField] = moment();
+
+    this[generatorsField] = new AliasMap();
+    this[handlersField] = new AliasMap();
+    this[modesField] = new AliasMap();
+    this[templateEnginesField] = new AliasMap();
+    this[transformersField] = new AliasMap();
   }
 
 
@@ -102,6 +120,26 @@ export default class Environment {
   }
 
   /**
+   * Map of content generators.
+   *
+   * @member {module:webreed/lib/AliasMap.<string, module:webreed/lib/interfaces/Generator>}
+   * @readonly
+   */
+  get generators() {
+    return this[generatorsField];
+  }
+
+  /**
+   * Map of content handlers.
+   *
+   * @member {module:webreed/lib/AliasMap.<string, module:webreed/lib/interfaces/Handler>}
+   * @readonly
+   */
+  get handlers() {
+    return this[handlersField];
+  }
+
+  /**
    * Set of file extensions that should be hidden in generated URLs.
    *
    * @member {Set.<string>}
@@ -119,6 +157,16 @@ export default class Environment {
    */
   get hiddenUrlFileNames() {
     return this[hiddenUrlFileNamesField];
+  }
+
+  /**
+   * Map of file modes.
+   *
+   * @member {module:webreed/lib/AliasMap.<string, module:webreed/lib/interfaces/Mode>}
+   * @readonly
+   */
+  get modes() {
+    return this[modesField];
   }
 
   /**
@@ -140,6 +188,16 @@ export default class Environment {
   }
 
   /**
+   * Map of template engines.
+   *
+   * @member {module:webreed/lib/AliasMap.<string, module:webreed/lib/interfaces/TemplateEngine>}
+   * @readonly
+   */
+  get templateEngines() {
+    return this[templateEnginesField];
+  }
+
+  /**
    * The time that the webreed environment was created.
    *
    * @member {module:moment}
@@ -147,6 +205,16 @@ export default class Environment {
    */
   get timeStarted() {
     return this[timeStartedField];
+  }
+
+  /**
+   * Map of content transformers.
+   *
+   * @member {module:webreed/lib/AliasMap.<string, module:webreed/lib/interfaces/Transformer>}
+   * @readonly
+   */
+  get transformers() {
+    return this[transformersField];
   }
 
 
