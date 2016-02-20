@@ -12,7 +12,7 @@ import should from "should";
 
 // Project
 import AliasMap from "../src/AliasMap";
-import ContentType from "../src/ContentType";
+import ResourceType from "../src/ResourceType";
 import Environment from "../src/Environment";
 import Resource from "../src/Resource";
 
@@ -86,21 +86,21 @@ describe("Environment", function () {
 
   });
 
-  describe("#contentTypes", function () {
+  describe("#resourceTypes", function () {
 
     it("is an `AliasMap`", function () {
-      this.env.contentTypes
+      this.env.resourceTypes
         .should.be.instanceOf(AliasMap);
     });
 
     it("is read-only", function () {
-      (() => this.env.contentTypes = 42)
+      (() => this.env.resourceTypes = 42)
         .should.throw();
     });
 
-    it("falls back to the default content type '*'", function () {
-      this.env.contentTypes.set("*", new ContentType());
-      this.env.contentTypes.resolve("key-that-does-not-exist")
+    it("falls back to the default resource type '*'", function () {
+      this.env.resourceTypes.set("*", new ResourceType());
+      this.env.resourceTypes.resolve("key-that-does-not-exist")
         .should.be.eql("*");
     });
 

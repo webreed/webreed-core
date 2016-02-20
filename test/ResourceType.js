@@ -7,27 +7,27 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import ContentType from "../src/ContentType";
+import ResourceType from "../src/ResourceType";
 import PluginContext from "../src/PluginContext";
 
 
-describe("ContentType", function () {
+describe("ResourceType", function () {
 
   beforeEach(function () {
-    this.contentType = new ContentType();
+    this.resourceType = new ResourceType();
   });
 
 
-  it("is named 'ContentType'", function () {
-    ContentType.name
-      .should.be.eql("ContentType");
+  it("is named 'ResourceType'", function () {
+    ResourceType.name
+      .should.be.eql("ResourceType");
   });
 
 
   describe("#constructor()", function () {
 
     it("is a function", function () {
-      ContentType.prototype.constructor
+      ResourceType.prototype.constructor
         .should.be.a.Function();
     });
 
@@ -37,12 +37,12 @@ describe("ContentType", function () {
   describe("#custom", function () {
 
     it("is read-only", function () {
-      (() => this.contentType.custom = 42)
+      (() => this.resourceType.custom = 42)
         .should.throw();
     });
 
     it("is empty object by default", function () {
-      this.contentType.custom
+      this.resourceType.custom
         .should.be.eql({ });
     });
 
@@ -51,7 +51,7 @@ describe("ContentType", function () {
   describe("#defaultTargetExtension", function () {
 
     it("is `null` by default", function () {
-      should( this.contentType.defaultTargetExtension )
+      should( this.resourceType.defaultTargetExtension )
         .be.null();
     });
 
@@ -61,19 +61,19 @@ describe("ContentType", function () {
 
     given( undefined, 42, "" ).
     it("throws error when argument 'value' is a not `null` and is not a non-empty string", function (value) {
-      (() => this.contentType.defaultTargetExtension = value)
+      (() => this.resourceType.defaultTargetExtension = value)
         .should.throw("argument 'value' must be `null` or a non-empty string");
     });
 
     it("throws error when argument 'value' has the value '.'", function () {
-      (() => this.contentType.defaultTargetExtension = ".")
+      (() => this.resourceType.defaultTargetExtension = ".")
         .should.throw("argument 'value' must not be '.'");
     });
 
     given( null, ".html" ).
     it("takes on assigned value", function (value) {
-      this.contentType.defaultTargetExtension = value;
-      should( this.contentType.defaultTargetExtension )
+      this.resourceType.defaultTargetExtension = value;
+      should( this.resourceType.defaultTargetExtension )
         .be.eql(value);
     });
 
@@ -82,7 +82,7 @@ describe("ContentType", function () {
   describe("#generator", function () {
 
     it("is `null` by default", function () {
-      should(this.contentType.generator)
+      should(this.resourceType.generator)
         .be.null();
     });
 
@@ -92,20 +92,20 @@ describe("ContentType", function () {
 
     given( undefined, 42, "", { }, [ ] ).
     it("throws error when argument 'value' is non-null and is not a `PluginContext`", function (value) {
-      (() => this.contentType.generator = value)
+      (() => this.resourceType.generator = value)
         .should.throw("argument 'value' must be `null` or a `PluginContext`");
     });
 
     it("takes on a value of `null`", function () {
-      this.contentType.generator = null;
-      should(this.contentType.generator)
+      this.resourceType.generator = null;
+      should(this.resourceType.generator)
         .be.null();
     });
 
     it("takes on the assigned generator", function () {
       let generator = new PluginContext("foo");
-      this.contentType.generator = generator;
-      this.contentType.generator
+      this.resourceType.generator = generator;
+      this.resourceType.generator
         .should.be.exactly(generator);
     });
 
@@ -114,7 +114,7 @@ describe("ContentType", function () {
   describe("#handler", function () {
 
     it("is `null` by default", function () {
-      should(this.contentType.handler)
+      should(this.resourceType.handler)
         .be.null();
     });
 
@@ -124,20 +124,20 @@ describe("ContentType", function () {
 
     given( undefined, 42, "", { }, [ ] ).
     it("throws error when argument 'value' is non-null and is not a `PluginContext`", function (value) {
-      (() => this.contentType.handler = value)
+      (() => this.resourceType.handler = value)
         .should.throw("argument 'value' must be `null` or a `PluginContext`");
     });
 
     it("takes on a value of `null`", function () {
-      this.contentType.handler = null;
-      should(this.contentType.handler)
+      this.resourceType.handler = null;
+      should(this.resourceType.handler)
         .be.null();
     });
 
     it("takes on the assigned handler", function () {
       let handler = new PluginContext("foo");
-      this.contentType.handler = handler;
-      this.contentType.handler
+      this.resourceType.handler = handler;
+      this.resourceType.handler
         .should.be.exactly(handler);
     });
 
@@ -147,20 +147,20 @@ describe("ContentType", function () {
 
     given( undefined, 42, "", { }, [ ] ).
     it("throws error when argument 'value' is non-null and is not a `PluginContext`", function (value) {
-      (() => this.contentType.mode = value)
+      (() => this.resourceType.mode = value)
         .should.throw("argument 'value' must be `null` or a `PluginContext`");
     });
 
     it("takes on a value of `null`", function () {
-      this.contentType.mode = null;
-      should(this.contentType.mode)
+      this.resourceType.mode = null;
+      should(this.resourceType.mode)
         .be.null();
     });
 
     it("takes on the assigned mode", function () {
       let mode = new PluginContext("foo");
-      this.contentType.mode = mode;
-      this.contentType.mode
+      this.resourceType.mode = mode;
+      this.resourceType.mode
         .should.be.exactly(mode);
     });
 
@@ -169,7 +169,7 @@ describe("ContentType", function () {
   describe("#parseFrontmatter", function () {
 
     it("is `true` by default", function () {
-      this.contentType.parseFrontmatter
+      this.resourceType.parseFrontmatter
         .should.be.true();
     });
 
@@ -179,20 +179,20 @@ describe("ContentType", function () {
 
     given( undefined, 42, "", { }, [ ] ).
     it("throws error when argument 'value' is not boolean", function (value) {
-      (() => this.contentType.parseFrontmatter = value)
+      (() => this.resourceType.parseFrontmatter = value)
         .should.throw("argument 'value' must be `true` or `false`");
     });
 
     it("takes on a value of `false`", function () {
-      this.contentType.parseFrontmatter = false;
-      this.contentType.parseFrontmatter
+      this.resourceType.parseFrontmatter = false;
+      this.resourceType.parseFrontmatter
         .should.be.false();
     });
 
     it("takes on a value of `true`", function () {
-      this.contentType.parseFrontmatter = false;
-      this.contentType.parseFrontmatter = true;
-      this.contentType.parseFrontmatter
+      this.resourceType.parseFrontmatter = false;
+      this.resourceType.parseFrontmatter = true;
+      this.resourceType.parseFrontmatter
         .should.be.true();
     });
 
@@ -201,7 +201,7 @@ describe("ContentType", function () {
   describe("#templateEngine", function () {
 
     it("is `null` by default", function () {
-      should(this.contentType.templateEngine)
+      should(this.resourceType.templateEngine)
         .be.null();
     });
 
@@ -211,20 +211,20 @@ describe("ContentType", function () {
 
     given( undefined, 42, "", { }, [ ] ).
     it("throws error when argument 'value' is non-null and is not a `PluginContext`", function (value) {
-      (() => this.contentType.templateEngine = value)
+      (() => this.resourceType.templateEngine = value)
         .should.throw("argument 'value' must be `null` or a `PluginContext`");
     });
 
     it("takes on a value of `null`", function () {
-      this.contentType.templateEngine = null;
-      should(this.contentType.templateEngine)
+      this.resourceType.templateEngine = null;
+      should(this.resourceType.templateEngine)
         .be.null();
     });
 
     it("takes on the assigned template engine", function () {
       let templateEngine = new PluginContext("foo");
-      this.contentType.templateEngine = templateEngine;
-      this.contentType.templateEngine
+      this.resourceType.templateEngine = templateEngine;
+      this.resourceType.templateEngine
         .should.be.exactly(templateEngine);
     });
 
@@ -233,12 +233,12 @@ describe("ContentType", function () {
   describe("#transforms", function () {
 
     it("is read-only", function () {
-      (() => this.contentType.transforms = 42)
+      (() => this.resourceType.transforms = 42)
         .should.throw();
     });
 
     it("is empty by default", function () {
-      this.contentType.transforms
+      this.resourceType.transforms
         .should.have.properties({ preprocess: [ ], conversions: { }, postprocess: [ ] });
     });
 
@@ -246,12 +246,12 @@ describe("ContentType", function () {
 
       given( undefined, null, 42 ).
       it("throws error when argument 'value' is not iterable", function (value) {
-        (() => this.contentType.transforms.preprocess = value)
+        (() => this.resourceType.transforms.preprocess = value)
           .should.throw("argument 'value' must be iterable");
       });
 
       it("throws error when argument 'value' is not an iterable of `PluginContext`", function () {
-        (() => this.contentType.transforms.preprocess = [ 42 ])
+        (() => this.resourceType.transforms.preprocess = [ 42 ])
           .should.throw("argument 'value' must be an iterable of zero-or-more `PluginContext` values");
       });
 
@@ -261,8 +261,8 @@ describe("ContentType", function () {
         [  [ new PluginContext("foo"), new PluginContext("bar") ]  ]
       ).
       it("takes on assigned value", function (value) {
-        this.contentType.transforms.preprocess = value;
-        this.contentType.transforms.preprocess
+        this.resourceType.transforms.preprocess = value;
+        this.resourceType.transforms.preprocess
           .should.be.eql(value);
       });
 
@@ -272,7 +272,7 @@ describe("ContentType", function () {
 
       given( undefined, null, 42, "", [ ] ).
       it("throws error when argument 'value' is not an object", function (value) {
-        (() => this.contentType.transforms.conversions = value)
+        (() => this.resourceType.transforms.conversions = value)
           .should.throw("argument 'value' must be an object");
       });
 
@@ -282,12 +282,12 @@ describe("ContentType", function () {
         { ".html": 42 }
       ).
       it("throws error when argument 'value' has a property value that is not iterable", function (value) {
-        (() => this.contentType.transforms.conversions = value)
+        (() => this.resourceType.transforms.conversions = value)
           .should.throw("argument 'value[\".html\"]' must be iterable");
       });
 
       it("throws error when argument 'value' has a property value that is not an iterable of `PluginContext`", function () {
-        (() => this.contentType.transforms.conversions = { ".html": [ 42 ] })
+        (() => this.resourceType.transforms.conversions = { ".html": [ 42 ] })
           .should.throw("argument 'value[\".html\"]' must be an iterable of zero-or-more `PluginContext` values");
       });
 
@@ -298,8 +298,8 @@ describe("ContentType", function () {
         { ".html": [ new PluginContext("foo"), new PluginContext("bar") ] }
       ).
       it("takes on assigned value", function (value) {
-        this.contentType.transforms.conversions = value;
-        this.contentType.transforms.conversions
+        this.resourceType.transforms.conversions = value;
+        this.resourceType.transforms.conversions
           .should.be.eql(value);
       });
 
@@ -309,12 +309,12 @@ describe("ContentType", function () {
 
       given( undefined, null, 42 ).
       it("throws error when argument 'value' is not iterable", function (value) {
-        (() => this.contentType.transforms.postprocess = value)
+        (() => this.resourceType.transforms.postprocess = value)
           .should.throw("argument 'value' must be iterable");
       });
 
       it("throws error when argument 'value' is not an iterable of `PluginContext`", function () {
-        (() => this.contentType.transforms.postprocess = [ 42 ])
+        (() => this.resourceType.transforms.postprocess = [ 42 ])
           .should.throw("argument 'value' must be an iterable of zero-or-more `PluginContext` values");
       });
 
@@ -324,8 +324,8 @@ describe("ContentType", function () {
         [  [ new PluginContext("foo"), new PluginContext("bar") ]  ]
       ).
       it("takes on assigned value", function (value) {
-        this.contentType.transforms.postprocess = value;
-        this.contentType.transforms.postprocess
+        this.resourceType.transforms.postprocess = value;
+        this.resourceType.transforms.postprocess
           .should.be.eql(value);
       });
 

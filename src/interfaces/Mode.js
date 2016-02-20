@@ -16,7 +16,7 @@
    *
    * @param {string} path
    *   Path to the resource file.
-   * @param {module:webreed/lib/ContentType} [contentType]
+   * @param {module:webreed/lib/ResourceType} [resourceType]
    *   Configuration of the type of source resource.
    *
    * @returns {Promise.<object>}
@@ -32,7 +32,7 @@
    *   Path to the output file.
    * @param {module:webreed/lib/Resource|object} resource
    *   The resource that is to be written.
-   * @param {module:webreed/lib/ContentType} [contentType]
+   * @param {module:webreed/lib/ResourceType} [resourceType]
    *   Configuration of the type of source resource.
    *
    * @returns {Promise}

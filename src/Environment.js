@@ -31,7 +31,7 @@ const hiddenUrlFileNamesField = Symbol();
 
 const timeStartedField = Symbol();
 
-const contentTypesField = Symbol();
+const resourceTypesField = Symbol();
 const generatorsField = Symbol();
 const handlersField = Symbol();
 const modesField = Symbol();
@@ -42,7 +42,7 @@ const transformersField = Symbol();
 const defaultBaseUrlValue = "/";
 const defaultProjectRootPathValue = "";
 
-const resolveContentTypeFallback = (aliasMap, key) => "*";
+const resolveResourceTypeFallback = (aliasMap, key) => "*";
 
 
 /**
@@ -68,7 +68,7 @@ export default class Environment {
     //this[timeStartedField] = Object.freeze(moment());
     this[timeStartedField] = moment();
 
-    this[contentTypesField] = new AliasMap(null, null, resolveContentTypeFallback);
+    this[resourceTypesField] = new AliasMap(null, null, resolveResourceTypeFallback);
     this[generatorsField] = new AliasMap();
     this[handlersField] = new AliasMap();
     this[modesField] = new AliasMap();
@@ -124,13 +124,13 @@ export default class Environment {
   }
 
   /**
-   * Map of content types.
+   * Map of resource types.
    *
-   * @member {module:webreed/lib/AliasMap.<string, module:webreed/lib/ContentType>}
+   * @member {module:webreed/lib/AliasMap.<string, module:webreed/lib/ResourceType>}
    * @readonly
    */
-  get contentTypes() {
-    return this[contentTypesField];
+  get resourceTypes() {
+    return this[resourceTypesField];
   }
 
   /**

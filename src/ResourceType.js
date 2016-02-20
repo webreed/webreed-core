@@ -1,7 +1,7 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
-/** @module webreed/lib/ContentType */
+/** @module webreed/lib/ResourceType */
 
 
 // Project
@@ -26,7 +26,7 @@ const preprocessField = Symbol();
 /**
  * Defines a type of content and the various transformations that should be performed.
  */
-export default class ContentType {
+export default class ResourceType {
 
   constructor() {
     this[customField] = { };
@@ -51,10 +51,10 @@ export default class ContentType {
   }
 
   /**
-   * The default target extension to assume for output content when the content type
+   * The default target extension to assume for output content when the resource type
    * represents the final sequence of an extension chain.
    *
-   * For instance, a ".nunjucks" content type could have a default target extension of
+   * For instance, a ".nunjucks" resource type could have a default target extension of
    * ".html" meaning that a source content file with the name "info.nunjucks" would
    * produce an output file with the name "info.html". Although this would have no effect
    * on a source content file with the name "info.json.nunjucks".
@@ -82,7 +82,7 @@ export default class ContentType {
    * Plugin context identifying the generator plugin.
    *
    * Additional properties or overrides can be passed to the plugin via the options
-   * supplied by the plugin context whenever the plugin is used for this content type.
+   * supplied by the plugin context whenever the plugin is used for this resource type.
    *
    * @member {?module:webreed/lib/PluginContext}
    */
@@ -100,7 +100,7 @@ export default class ContentType {
    * Plugin context identifying the content handler plugin.
    *
    * Additional properties or overrides can be passed to the plugin via the options
-   * supplied by the plugin context whenever the plugin is used for this content type.
+   * supplied by the plugin context whenever the plugin is used for this resource type.
    *
    * @member {?module:webreed/lib/PluginContext}
    */
@@ -118,7 +118,7 @@ export default class ContentType {
    * Plugin context identifying the file mode plugin.
    *
    * Additional properties or overrides can be passed to the plugin via the options
-   * supplied by the plugin context whenever the plugin is used for this content type.
+   * supplied by the plugin context whenever the plugin is used for this resource type.
    *
    * @member {?module:webreed/lib/PluginContext}
    */
@@ -152,7 +152,7 @@ export default class ContentType {
    * Plugin context identifying the template engine plugin.
    *
    * Additional properties or overrides can be passed to the plugin via the options
-   * supplied by the plugin context whenever the plugin is used for this content type.
+   * supplied by the plugin context whenever the plugin is used for this resource type.
    *
    * @member {?module:webreed/lib/PluginContext}
    */
@@ -169,7 +169,7 @@ export default class ContentType {
   /**
    * Identifies transform plugins that are used at various stages of content transformation.
    *
-   * @member {module:webreed/lib/ContentType~ContentTransforms}
+   * @member {module:webreed/lib/ResourceType~ContentTransforms}
    * @readonly
    */
   get transforms() {
@@ -205,7 +205,7 @@ class ContentTransforms {
   }
 
   /**
-   * Map of conversion transformations from the current content type to another.
+   * Map of conversion transformations from the current resource type to another.
    *
    * @member {object.<string, ?module:webreed/lib/PluginContext[]>}
    */
