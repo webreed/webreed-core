@@ -5,3 +5,4 @@
 
 export { default as buildOutput } from "./buildOutput";
 export { default as getSourceContentRelativePaths } from "./getSourceContentRelativePaths";
+export { default as resolveResourceMode } from "./resolveResourceMode";
