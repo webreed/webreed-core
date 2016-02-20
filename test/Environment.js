@@ -86,6 +86,31 @@ describe("Environment", function () {
 
   });
 
+  describe("#defaultGeneratorName", function () {
+
+    it("is 'standard' by default", function () {
+      this.env.defaultGeneratorName
+        .should.be.eql("standard");
+    });
+
+  });
+
+  describe("#defaultGeneratorName=", function () {
+
+    given( undefined, null, 42, "" ).
+    it("throws error if argument 'value' is not a non-empty string", function (value) {
+      (() => this.env.defaultGeneratorName = value)
+        .should.throw("argument 'value' must be a non-empty string");
+    });
+
+    it("updates value of the property", function () {
+      this.env.defaultGeneratorName = "foo";
+      this.env.defaultGeneratorName
+        .should.be.eql("foo");
+    });
+
+  });
+
   describe("#resourceTypes", function () {
 
     it("is an `AliasMap`", function () {

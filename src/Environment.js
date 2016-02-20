@@ -31,6 +31,7 @@ const hiddenUrlFileNamesField = Symbol();
 
 const timeStartedField = Symbol();
 
+const defaultGeneratorNameField = Symbol();
 const resourceTypesField = Symbol();
 const generatorsField = Symbol();
 const handlersField = Symbol();
@@ -68,6 +69,7 @@ export default class Environment {
     //this[timeStartedField] = Object.freeze(moment());
     this[timeStartedField] = moment();
 
+    this[defaultGeneratorNameField] = "standard";
     this[resourceTypesField] = new AliasMap(null, null, resolveResourceTypeFallback);
     this[generatorsField] = new AliasMap();
     this[handlersField] = new AliasMap();
@@ -121,6 +123,21 @@ export default class Environment {
    */
   get behaviors() {
     return this[behaviorsField];
+  }
+
+  /**
+   * Name of the default generator.
+   *
+   * @member {string}
+   */
+  get defaultGeneratorName() {
+    return this[defaultGeneratorNameField];
+  }
+  set defaultGeneratorName(value) {
+    console.assert(typeof value === "string" && value !== "",
+        "argument 'value' must be a non-empty string");
+
+    this[defaultGeneratorNameField] = value;
   }
 
   /**
