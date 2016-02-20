@@ -33,7 +33,7 @@ export default class ResourceType {
     this[defaultTargetExtensionField] = null;
     this[generatorField] = null;
     this[handlerField] = null;
-    this[modeField] = null;
+    this[modeField] = "text";
     this[parseFrontmatterField] = true;
     this[templateEngineField] = null;
     this[transformsField] = new ContentTransforms();
@@ -115,21 +115,19 @@ export default class ResourceType {
   }
 
   /**
-   * Plugin context identifying the file mode plugin.
+   * Name of the file mode.
    *
-   * Additional properties or overrides can be passed to the plugin via the options
-   * supplied by the plugin context whenever the plugin is used for this resource type.
-   *
-   * @member {?module:webreed/lib/PluginContext}
+   * @member {string}
+   * @default "text"
    */
   get mode() {
-    return this[handlerField];
+    return this[modeField];
   }
   set mode(value) {
-    console.assert(value === null || value instanceof PluginContext,
-      "argument 'value' must be `null` or a `PluginContext`");
+    console.assert(typeof value === "string" && value !== "",
+      "argument 'value' must be a non-empty string");
 
-    this[handlerField] = value;
+    this[modeField] = value;
   }
 
   /**

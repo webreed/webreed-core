@@ -143,25 +143,27 @@ describe("ResourceType", function () {
 
   });
 
-  describe("#mode=", function () {
+  describe("#mode", function () {
 
-    given( undefined, 42, "", { }, [ ] ).
-    it("throws error when argument 'value' is non-null and is not a `PluginContext`", function (value) {
-      (() => this.resourceType.mode = value)
-        .should.throw("argument 'value' must be `null` or a `PluginContext`");
+    it("is 'text' by default", function () {
+      this.resourceType.mode
+        .should.be.eql("text");
     });
 
-    it("takes on a value of `null`", function () {
-      this.resourceType.mode = null;
-      should(this.resourceType.mode)
-        .be.null();
+  });
+
+  describe("#mode=", function () {
+
+    given( undefined, null, 42, "", { }, [ ] ).
+    it("throws error when argument 'value' is not a non-empty string", function (value) {
+      (() => this.resourceType.mode = value)
+        .should.throw("argument 'value' must be a non-empty string");
     });
 
     it("takes on the assigned mode", function () {
-      let mode = new PluginContext("foo");
-      this.resourceType.mode = mode;
+      this.resourceType.mode = "foo";
       this.resourceType.mode
-        .should.be.exactly(mode);
+        .should.be.eql("foo");
     });
 
   });
