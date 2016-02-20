@@ -25,6 +25,8 @@
    *   Template in source form.
    * @param {object} templateParams
    *   Bag of parameters to pass to the template.
+   * @param {object} context
+   *   An object with properties providing some context for the operation.
    *
    * @returns {Observable.<module:webreed/lib/Resource>}
    *   An observable stream of zero-or-more output resources.
@@ -39,6 +41,8 @@
    *   Name of the template file relative to the 'templates' directory.
    * @param {object} templateParams
    *   Bag of parameters to pass to the template.
+   * @param {object} context
+   *   An object with properties providing some context for the operation.
    *
    * @returns {Observable.<module:webreed/lib/Resource>}
    *   An observable stream of zero-or-more output resources.
