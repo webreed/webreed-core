@@ -4,6 +4,9 @@ _private
 # Build output
 lib
 
+# Vim
+*.swp
+
 # Logs
 logs
 *.log
