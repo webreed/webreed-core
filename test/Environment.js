@@ -434,6 +434,77 @@ describe("Environment", function () {
 
   });
 
+  describe("#invoke(behaviorName, ...)", function () {
+
+    it("it a function", function () {
+      this.env.invoke
+        .should.be.a.Function();
+    });
+
+    given( undefined, null, 42, "" ).
+    it("throws error when argument 'behaviorName' is not a non-empty string", function (behaviorName) {
+      (() => this.env.invoke(behaviorName))
+        .should.throw("argument 'behaviorName' must be a non-empty string");
+    });
+
+    it("throws error when behavior is not defined", function () {
+      (() => this.env.invoke("behaviorThatDoesNotExist"))
+        .should.throw("Behavior 'behaviorThatDoesNotExist' is not defined.");
+    });
+
+    it("should invoke the specified behavior", function () {
+      let invokedFakeBehavior = false;
+      this.env.behaviors.fakeBehavior = function(env) {
+        invokedFakeBehavior = true;
+      };
+
+      this.env.invoke("fakeBehavior");
+
+      invokedFakeBehavior
+        .should.be.true();
+    });
+
+    it("should provide correct environment for argument 'env'", function () {
+      let providedEnvArgument;
+      this.env.behaviors.fakeBehavior = function(env) {
+        providedEnvArgument = env;
+      };
+
+      this.env.invoke("fakeBehavior");
+
+      providedEnvArgument
+        .should.be.exactly(this.env);
+    });
+
+    given(
+      [  [ ]                 ],
+      [  [ 1 ]               ],
+      [  [ 1, true ]         ],
+      [  [ 1, true, "bob" ]  ]
+    ).
+    it("should provide correct arguments", function (behaviorArguments) {
+      let providedArguments;
+      this.env.behaviors.fakeBehavior = function(env) {
+        providedArguments = Array.from(arguments).slice(1);
+      };
+
+      this.env.invoke("fakeBehavior", ...behaviorArguments);
+
+      providedArguments
+        .should.be.eql(behaviorArguments);
+    });
+
+    it("relays return value of behavior", function () {
+      this.env.behaviors.fakeBehavior = function(env) {
+        return 42;
+      };
+
+      this.env.invoke("fakeBehavior")
+        .should.be.eql(42);
+    });
+
+  });
+
   describe("#resolvePath(name, [relativePath])", function () {
 
     it("is a function", function () {

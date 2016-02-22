@@ -342,6 +342,32 @@ export default class Environment {
   }
 
   /**
+   * Invokes behavior from the {@link module:webreed/lib/Environment}.
+   *
+   * @param {string} behaviorName
+   *   Name of the behavior.
+   * @param {...any} behaviorArguments
+   *   Zero-or-more arguments that will be provided to the behavior.
+   *
+   * @returns {any}
+   *   Result returned by the the behavior.
+   *
+   * @throws {Error}
+   * - If requested behavior is not defined.
+   */
+  invoke(behaviorName, ...behaviorArguments) {
+    console.assert(typeof behaviorName === "string" && behaviorName !== "",
+        "argument 'behaviorName' must be a non-empty string");
+
+    let behavior = this.behaviors[behaviorName];
+    if (!behavior) {
+      throw new Error(`Behavior '${behaviorName}' is not defined.`);
+    }
+
+    return behavior(this, ...behaviorArguments);
+  }
+
+  /**
    * Resolves a named path relative to the project's root path.
    *
    * Assumes a directory with the name provided by argument `name` relative to the
