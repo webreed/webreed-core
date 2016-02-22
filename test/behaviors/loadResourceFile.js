@@ -144,7 +144,6 @@ describe("behaviors/loadResourceFile", function () {
 
   it("reverts to 'text' mode when resource type does not specify a mode", function () {
     let fakeTextMode = new FakeMode();
-
     this.env.modes.set("text", fakeTextMode);
     this.env.resourceTypes.set(".bar", new ResourceType());
 

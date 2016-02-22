@@ -8,3 +8,4 @@ export { default as getSourceContentRelativePaths } from "./getSourceContentRela
 export { default as loadResourceFile } from "./loadResourceFile";
 export { default as loadSourceContent } from "./loadSourceContent";
 export { default as resolveResourceMode } from "./resolveResourceMode";
+export { default as saveResourceFile } from "./saveResourceFile";
