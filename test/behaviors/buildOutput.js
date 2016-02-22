@@ -23,7 +23,7 @@ describe("behaviors/buildOutput", function () {
       .should.be.a.Function();
   });
 
-  it("throws error when argument 'env' is not an object", function () {
+  it("throws error when argument 'env' is not a webreed environment", function () {
     (() => buildOutput(null))
       .should.throw("argument 'env' must be a webreed environment");
   });

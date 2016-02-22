@@ -26,7 +26,7 @@ describe("behaviors/resolveResourceMode", function () {
   });
 
 
-  it("throws error when argument 'env' is not an object", function () {
+  it("throws error when argument 'env' is not a webreed environment", function () {
     (() => resolveResourceMode(null))
       .should.throw("argument 'env' must be a webreed environment");
   });
