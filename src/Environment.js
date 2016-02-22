@@ -256,7 +256,7 @@ export default class Environment {
    *   A promise to complete the build.
    */
   build() {
-    return this.behaviors.buildOutput(this);
+    return this.invoke("buildOutput");
   }
 
   /**
