@@ -17,6 +17,7 @@ describe("behaviors/buildOutput", function () {
     this.env = new Environment();
   });
 
+
   it("is a function", function () {
     buildOutput
       .should.be.a.Function();
