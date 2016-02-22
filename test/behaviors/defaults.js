@@ -15,6 +15,7 @@ describe("behaviors/defaults", function () {
   given(
     "buildOutput",
     "getSourceContentRelativePaths",
+    "loadResourceFile",
     "resolveResourceMode"
   ).
   it("has expected default behaviors", function (behaviorName) {

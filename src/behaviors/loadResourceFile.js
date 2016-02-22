@@ -7,7 +7,12 @@
 // System
 import path from "path";
 
+// Packages
+import _ from "lodash";
+
 // Project
+import getExtensionChainFromPath from "../util/getExtensionChainFromPath";
+import getTargetExtensionFromPath from "../util/getTargetExtensionFromPath";
 import isEnvironment from "../util/isEnvironment";
 
 
@@ -18,25 +23,25 @@ import isEnvironment from "../util/isEnvironment";
  *
  * @param {module:webreed/lib/Environment} env
  *   An environment that represents a webreed project.
- * @param {string} inputPath
+ * @param {string} filePath
  *   Path to the input resource file, which must be non-empty.
  * @param {string} [resourceTypeExtension = null]
  *   When specified allows caller to specify the type of the resource; otherwise the
- *   resource type is resolved using file extension from argument 'inputPath'.
+ *   resource type is resolved using file extension from argument 'filePath'.
  * @param {object} [baseProperties = null]
  *   Base properties for the resource which can be overridden by properties found in the
- *   source resources frontmatter.
+ *   source resource's frontmatter.
  *
  * @returns {Promise}
- *   A promise to return a {@link module:webreed/lib/Resource} representing the
- *   resource and its frontmatter; or to throw an error.
+ *   A promise to return a {@link module:webreed/lib/Resource} representing the resource
+ *   and its frontmatter; or to throw an error.
  *
  * @throws {Error}
  * - If attempting to load resource with an unknown mode.
  */
-export default function loadResourceFile(env, inputPath, resourceTypeExtension, baseProperties) {
+export default function loadResourceFile(env, filePath, resourceTypeExtension, baseProperties) {
   if (resourceTypeExtension === undefined || resourceTypeExtension === null) {
-    resourceTypeExtension = path.extname(inputPath);
+    resourceTypeExtension = path.extname(filePath);
   }
   if (baseProperties === undefined) {
     baseProperties = null;
@@ -44,20 +49,48 @@ export default function loadResourceFile(env, inputPath, resourceTypeExtension, 
 
   console.assert(isEnvironment(env),
       "argument 'env' must be a webreed environment");
-  console.assert(typeof inputPath === "string" && inputPath !== "",
-      "argument 'inputPath' must be a non-empty string");
+  console.assert(typeof filePath === "string" && filePath !== "",
+      "argument 'filePath' must be a non-empty string");
   console.assert(typeof resourceTypeExtension === "string",
       "argument 'resourceTypeExtension' must be `null` or a string");
   console.assert(typeof baseProperties === "object",
       "argument 'baseProperties' must be `null` or an object");
 
-  // Resolve the resource type here rather than using `this.resourceTypes.lookup`
+  let sourceExtensionChain = getExtensionChainFromPath(filePath);
+  let targetExtension = getTargetExtensionFromPath(filePath);
+
+  // Resolve an implied target extension.
+  let targetResourceType = env.resourceTypes.lookupQuiet(targetExtension);
+  if (targetResourceType && typeof targetResourceType.defaultTransform === "string") {
+    // Update extension in base properties.
+    targetExtension = targetResourceType.defaultTransform;
+
+    // Make sure that `__sourceExtensionChain` includes an implied `defaultTransform`.
+    if (!sourceExtensionChain.startsWith(targetResourceType.defaultTransform)) {
+      sourceExtensionChain = targetResourceType.defaultTransform + sourceExtensionChain;
+    }
+  }
+
+  // Resolve the resource type here rather than using `env.resourceTypes.lookup`
   // below so that the resolved resource type extension can be included in the
   // meta data of the loaded resource.
   resourceTypeExtension = env.resourceTypes.resolve(resourceTypeExtension);
 
   let resourceType = env.resourceTypes.get(resourceTypeExtension);
-  let resolvedMode = env.behaviors.resolveResourceMode(env, null, resourceType);
+  let resolvedMode = env.invoke("resolveResourceMode", null, resourceType);
 
-  return Promise.resolve();
+  return resolvedMode.mode.readFile(filePath, resourceType)
+    .then(data => {
+      if (baseProperties !== null) {
+        let resourceOverridesBaseProperties = (objectValue, sourceValue) =>
+            objectValue === undefined ? sourceValue : objectValue;
+        _.assign(data, baseProperties, resourceOverridesBaseProperties);
+      }
+      data.__sourceExtensionChain = sourceExtensionChain;
+      data.__sourceFilePath = filePath;
+      data.__sourceType = resourceTypeExtension;
+      data.__mode = resolvedMode.name;
+      data._extension = targetExtension;
+      return env.createResource(data);
+    });
 }
