@@ -41,12 +41,6 @@ describe("behaviors/resolveResourceMode", function () {
       .should.throw("argument 'resourceType' must be `null` or an object");
   });
 
-  given( 42, "" ).
-  it("throws error when argument 'fallbackModeName' is specified but is not a non-empty string", function (value) {
-    (() => resolveResourceMode(this.env, null, null, value))
-      .should.throw("argument 'fallbackModeName' must be `null` or a non-empty string");
-  });
-
 
   it("throws error when resource mode (from argument 'resource') is not defined", function () {
     let fakeResource = { __mode: "mode-that-is-not-defined" };
@@ -59,11 +53,6 @@ describe("behaviors/resolveResourceMode", function () {
     fakeResourceType.mode = "mode-that-is-not-defined";
 
     (() => resolveResourceMode(this.env, null, fakeResourceType))
-      .should.throw(`Resource mode 'mode-that-is-not-defined' is not defined.`)
-  });
-
-  it("throws error when resource mode (from argument 'fallbackModeName') is not defined", function () {
-    (() => resolveResourceMode(this.env, null, null, "mode-that-is-not-defined"))
       .should.throw(`Resource mode 'mode-that-is-not-defined' is not defined.`)
   });
 
@@ -89,14 +78,6 @@ describe("behaviors/resolveResourceMode", function () {
     fakeResourceType.mode = "fake";
 
     resolveResourceMode(this.env, null, fakeResourceType)
-      .should.be.eql({ name: "fake", mode: fakeResourceMode });
-  });
-
-  it("returns resolved resource mode (from argument 'fallbackModeName')", function () {
-    let fakeResourceMode = { value: 42 };
-    this.env.modes.set("fake", fakeResourceMode);
-
-    resolveResourceMode(this.env, null, null, "fake")
       .should.be.eql({ name: "fake", mode: fakeResourceMode });
   });
 

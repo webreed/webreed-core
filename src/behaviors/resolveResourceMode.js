@@ -17,8 +17,6 @@ import isEnvironment from "../util/isEnvironment";
  *   The resource that will be processed with the mode that is being resolved.
  * @param {module:webreed/lib/ResourceType|object} [resourceType = null]
  *   The type of resource that will be processed with the mode that is being resolved.
- * @param {string} [fallbackModeName = null]
- *   Name of the fallback resource mode; must be non-empty.
  *
  * @returns {object}
  *   An object with the following properties:
@@ -35,8 +33,6 @@ export default function resolveResourceMode(env, resource, resourceType, fallbac
       "argument 'resource' must be `null` or an object");
   console.assert(resourceType === undefined || typeof resourceType === "object",
       "argument 'resourceType' must be `null` or an object");
-  console.assert(fallbackModeName === undefined || fallbackModeName === null || (typeof fallbackModeName === "string" && fallbackModeName !== ""),
-      "argument 'fallbackModeName' must be `null` or a non-empty string");
 
   let modeName;
 
@@ -47,7 +43,7 @@ export default function resolveResourceMode(env, resource, resourceType, fallbac
     modeName = resourceType.mode;
   }
   else {
-    modeName = fallbackModeName || env.defaultModeName;
+    modeName = env.defaultModeName;
   }
 
   let resolvedModeName = env.modes.resolve(modeName);
