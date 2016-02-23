@@ -8,10 +8,10 @@ import should from "should";
 
 // Project
 import Environment from "../../src/Environment";
-import buildOutput from "../../src/behaviors/buildOutput";
+import build from "../../src/behaviors/build";
 
 
-describe("behaviors/buildOutput", function () {
+describe("behaviors/build", function () {
 
   beforeEach(function () {
     this.env = new Environment();
@@ -19,22 +19,22 @@ describe("behaviors/buildOutput", function () {
 
 
   it("is a function", function () {
-    buildOutput
+    build
       .should.be.a.Function();
   });
 
   it("throws error when argument 'env' is not a webreed environment", function () {
-    (() => buildOutput(null))
+    (() => build(null))
       .should.throw("argument 'env' must be a webreed environment");
   });
 
   it("returns a promise", function () {
-    buildOutput(this.env)
+    build(this.env)
       .should.be.a.Promise();
   });
 
   it("fulfills its promise", function () {
-    return buildOutput(this.env)
+    return build(this.env)
       .should.be.fulfilled();
   });
 

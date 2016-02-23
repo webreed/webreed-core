@@ -79,8 +79,8 @@ describe("Environment", function () {
     });
 
     it("inherits default behaviors", function () {
-      delete this.env.behaviors.buildOutput;
-      this.env.behaviors.buildOutput
+      delete this.env.behaviors.build;
+      this.env.behaviors.build
         .should.be.a.Function();
     });
 
@@ -297,10 +297,10 @@ describe("Environment", function () {
         .should.be.a.Promise();
     });
 
-    it("assumes override 'buildOutput' behavior", function () {
+    it("assumes override 'build' behavior", function () {
       let invokedOverride = false;
 
-      this.env.behaviors.buildOutput = function () {
+      this.env.behaviors.build = function () {
         invokedOverride = true;
         return Promise.resolve();
       };

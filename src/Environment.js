@@ -105,18 +105,18 @@ export default class Environment {
    *
    * The default behaviors can be overridden:
    *
-   *     env.behaviors.buildOutput = function customBuildOutput(env) {
+   *     env.behaviors.build = function customBuild(env) {
    *       // Do stuff before the default behavior...
    *
    *       // You can apply the default behavior.
-   *       env.behaviors.prototype.buildOutput.apply(arguments);
+   *       env.behaviors.prototype.build.apply(arguments);
    *
    *       // Do stuff after the default behavior...
    *     };
    *
    * The default behavior can be restored by deleting the custom behavior:
    *
-   *     delete env.behaviors.buildOutput;
+   *     delete env.behaviors.build;
    *
    * @member {object.<string, function>} behaviors
    * @readonly
@@ -256,7 +256,7 @@ export default class Environment {
    *   A promise to complete the build.
    */
   build() {
-    return this.invoke("buildOutput");
+    return this.invoke("build");
   }
 
   /**

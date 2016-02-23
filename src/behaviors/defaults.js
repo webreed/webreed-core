@@ -3,7 +3,7 @@
 
 /** @module webreed/lib/behaviors/defaults */
 
-export { default as buildOutput } from "./buildOutput";
+export { default as build } from "./build";
 export { default as getSourceContentRelativePaths } from "./getSourceContentRelativePaths";
 export { default as loadResourceFile } from "./loadResourceFile";
 export { default as loadSourceContent } from "./loadSourceContent";

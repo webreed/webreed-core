@@ -13,7 +13,7 @@ import * as defaultBehaviors from "../../src/behaviors/defaults";
 describe("behaviors/defaults", function () {
 
   given(
-    "buildOutput",
+    "build",
     "getSourceContentRelativePaths",
     "loadResourceFile",
     "loadSourceContent",
