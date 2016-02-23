@@ -21,7 +21,7 @@ import isEnvironment from "../util/isEnvironment";
  * @returns {object}
  *   An object with the following properties:
  *   - **name** (string) - Name of the mode.
- *   - **handlers** (object) - Mode handler methods.
+ *   - **mode** (object) - Resource mode instance.
  *
  * @throws {Error}
  * - If the resolved resource mode is not defined.
