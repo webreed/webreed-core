@@ -27,7 +27,7 @@ export default class PluginContext {
         "argument 'options' must be `undefined`, `null` or an object");
 
     this.name = name;
-    this.options = options || { };
+    this.options = options;
   }
 
 
