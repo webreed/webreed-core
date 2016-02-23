@@ -8,9 +8,6 @@
 import isEnvironment from "../util/isEnvironment";
 
 
-const finalfallbackModeName = "text";
-
-
 /**
  * Resolves the resource mode for the given context.
  *
@@ -50,7 +47,7 @@ export default function resolveResourceMode(env, resource, resourceType, fallbac
     modeName = resourceType.mode;
   }
   else {
-    modeName = fallbackModeName || finalfallbackModeName;
+    modeName = fallbackModeName || env.defaultModeName;
   }
 
   let resolvedModeName = env.modes.resolve(modeName);

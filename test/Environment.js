@@ -111,6 +111,31 @@ describe("Environment", function () {
 
   });
 
+  describe("#defaultModeName", function () {
+
+    it("is 'text' by default", function () {
+      this.env.defaultModeName
+        .should.be.eql("text");
+    });
+
+  });
+
+  describe("#defaultModeName=", function () {
+
+    given( undefined, null, 42, "" ).
+    it("throws error if argument 'value' is not a non-empty string", function (value) {
+      (() => this.env.defaultModeName = value)
+        .should.throw("argument 'value' must be a non-empty string");
+    });
+
+    it("updates value of the property", function () {
+      this.env.defaultModeName = "foo";
+      this.env.defaultModeName
+        .should.be.eql("foo");
+    });
+
+  });
+
   describe("#resourceTypes", function () {
 
     it("is an `AliasMap`", function () {

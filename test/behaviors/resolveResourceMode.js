@@ -67,7 +67,7 @@ describe("behaviors/resolveResourceMode", function () {
       .should.throw(`Resource mode 'mode-that-is-not-defined' is not defined.`)
   });
 
-  it("throws error when final fallback resource mode is not defined", function () {
+  it("throws error when default resource mode is not defined", function () {
     (() => resolveResourceMode(this.env))
       .should.throw(`Resource mode 'text' is not defined.`)
   });
@@ -100,12 +100,13 @@ describe("behaviors/resolveResourceMode", function () {
       .should.be.eql({ name: "fake", mode: fakeResourceMode });
   });
 
-  it("returns resolved final fallback resource mode", function () {
+  it("returns resolved default resource mode", function () {
     let fakeResourceMode = { value: 42 };
-    this.env.modes.set("text", fakeResourceMode);
+    this.env.modes.set("abc", fakeResourceMode);
+    this.env.defaultModeName = "abc";
 
     resolveResourceMode(this.env)
-      .should.be.eql({ name: "text", mode: fakeResourceMode });
+      .should.be.eql({ name: "abc", mode: fakeResourceMode });
   });
 
 

@@ -32,10 +32,11 @@ const hiddenUrlFileNamesField = Symbol();
 const timeStartedField = Symbol();
 
 const defaultGeneratorNameField = Symbol();
-const resourceTypesField = Symbol();
+const defaultModeNameField = Symbol();
 const generatorsField = Symbol();
 const handlersField = Symbol();
 const modesField = Symbol();
+const resourceTypesField = Symbol();
 const templateEnginesField = Symbol();
 const transformersField = Symbol();
 
@@ -70,6 +71,7 @@ export default class Environment {
     this[timeStartedField] = moment();
 
     this[defaultGeneratorNameField] = "standard";
+    this[defaultModeNameField] = "text";
     this[resourceTypesField] = new AliasMap(null, null, resolveResourceTypeFallback);
     this[generatorsField] = new AliasMap();
     this[handlersField] = new AliasMap();
@@ -138,6 +140,21 @@ export default class Environment {
         "argument 'value' must be a non-empty string");
 
     this[defaultGeneratorNameField] = value;
+  }
+
+  /**
+   * Name of the default resource mode.
+   *
+   * @member {string}
+   */
+  get defaultModeName() {
+    return this[defaultModeNameField];
+  }
+  set defaultModeName(value) {
+    console.assert(typeof value === "string" && value !== "",
+        "argument 'value' must be a non-empty string");
+
+    this[defaultModeNameField] = value;
   }
 
   /**
