@@ -17,6 +17,7 @@ describe("behaviors/defaults", function () {
     "getSourceContentRelativePaths",
     "loadResourceFile",
     "loadSourceContent",
+    "resolveGenerator",
     "resolveResourceMode",
     "saveResourceFile"
   ).
