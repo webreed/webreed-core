@@ -12,7 +12,7 @@ import url from "url";
 import _ from "lodash";
 
 // Project
-import isEnvironment from "./util/isEnvironment";
+import Environment from "./Environment";
 
 
 /**
@@ -31,7 +31,7 @@ export default class Resource {
       props = { };
     }
 
-    console.assert(isEnvironment(env),
+    console.assert(env instanceof Environment,
         "argument 'env' must be a webreed environment");
     console.assert(typeof props === "object",
         "argument 'props' must be an object");
@@ -86,7 +86,7 @@ export default class Resource {
   clone(overrides, overrideEnv) {
     console.assert(!overrides || typeof overrides === "object",
         "argument 'overrides' must be an object");
-    console.assert(!overrideEnv || isEnvironment(overrideEnv),
+    console.assert(!overrideEnv || overrideEnv instanceof Environment,
         "argument 'overrideEnv' must be a webreed environment");
 
     return new Resource(overrideEnv || this.__env, overrides, this);

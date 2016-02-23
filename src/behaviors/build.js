@@ -5,7 +5,7 @@
 
 
 // Project
-import isEnvironment from "../util/isEnvironment";
+import Environment from "../Environment";
 
 
 /**
@@ -18,7 +18,7 @@ import isEnvironment from "../util/isEnvironment";
  *   A promise to complete the build.
  */
 export default function buildOutput(env) {
-  console.assert(isEnvironment(env),
+  console.assert(env instanceof Environment,
       "argument 'env' must be a webreed environment");
 
   return Promise.resolve();

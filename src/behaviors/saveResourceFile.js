@@ -8,7 +8,7 @@
 import path from "path";
 
 // Project
-import isEnvironment from "../util/isEnvironment";
+import Environment from "../Environment";
 
 
 /**
@@ -34,7 +34,7 @@ export default function saveResourceFile(env, outputFilePath, resource, resource
     resourceTypeExtension = path.extname(outputFilePath);
   }
 
-  console.assert(isEnvironment(env),
+  console.assert(env instanceof Environment,
       "argument 'env' must be a webreed environment");
   console.assert(typeof outputFilePath === "string" && outputFilePath !== "",
       "argument 'outputFilePath' must be a non-empty string");

@@ -5,7 +5,7 @@
 
 
 // Project
-import isEnvironment from "../util/isEnvironment";
+import Environment from "../Environment";
 
 
 /**
@@ -27,7 +27,7 @@ import isEnvironment from "../util/isEnvironment";
  * - If the resolved resource mode is not defined.
  */
 export default function resolveResourceMode(env, resource, resourceType, fallbackModeName) {
-  console.assert(isEnvironment(env),
+  console.assert(env instanceof Environment,
       "argument 'env' must be a webreed environment");
   console.assert(resource === undefined || typeof resource === "object",
       "argument 'resource' must be `null` or an object");

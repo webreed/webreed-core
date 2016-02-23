@@ -9,7 +9,7 @@ import Rx from "rxjs";
 import glob from "glob";
 
 // Project
-import isEnvironment from "../util/isEnvironment";
+import Environment from "../Environment";
 
 
 /**
@@ -22,7 +22,7 @@ import isEnvironment from "../util/isEnvironment";
  *   An observable collection of content relative paths.
  */
 export default function getSourceContentRelativePaths(env) {
-  console.assert(isEnvironment(env),
+  console.assert(env instanceof Environment,
       "argument 'env' must be a webreed environment");
 
   let results = glob.sync("**/*", {

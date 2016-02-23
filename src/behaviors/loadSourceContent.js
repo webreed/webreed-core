@@ -11,8 +11,8 @@ import path from "path";
 import _ from "lodash";
 
 // Project
+import Environment from "../Environment";
 import getExtensionChainFromPath from "../util/getExtensionChainFromPath";
-import isEnvironment from "../util/isEnvironment";
 import normalizePathSeparators from "../util/normalizePathSeparators";
 
 
@@ -44,7 +44,7 @@ export default function loadSourceContent(env, contentRelativePath, resourceType
     baseProperties = null;
   }
 
-  console.assert(isEnvironment(env),
+  console.assert(env instanceof Environment,
       "argument 'env' must be a webreed environment");
   console.assert(typeof contentRelativePath === "string" && contentRelativePath !== "",
       "argument 'contentRelativePath' must be a non-empty string");
