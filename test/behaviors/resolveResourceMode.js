@@ -8,7 +8,6 @@ import should from "should";
 
 // Project
 import Environment from "../../src/Environment";
-import PluginContext from "../../src/PluginContext";
 import ResourceType from "../../src/ResourceType";
 import resolveResourceMode from "../../src/behaviors/resolveResourceMode";
 
