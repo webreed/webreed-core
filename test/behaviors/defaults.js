@@ -14,6 +14,7 @@ describe("behaviors/defaults", function () {
 
   given(
     "build",
+    "generateResource",
     "getSourceContentRelativePaths",
     "loadResourceFile",
     "loadSourceContent",
