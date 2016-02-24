@@ -20,6 +20,7 @@ describe("behaviors/defaults", function () {
     "loadSourceContent",
     "resolveGenerator",
     "resolveResourceMode",
+    "resolveTemplateEngine",
     "saveResourceFile"
   ).
   it("has expected default behaviors", function (behaviorName) {
