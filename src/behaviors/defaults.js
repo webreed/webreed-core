@@ -3,6 +3,7 @@
 
 /** @module webreed/lib/behaviors/defaults */
 
+export { default as applyTemplateToResource } from "./applyTemplateToResource";
 export { default as build } from "./build";
 export { default as generateResource } from "./generateResource";
 export { default as getSourceContentRelativePaths } from "./getSourceContentRelativePaths";
