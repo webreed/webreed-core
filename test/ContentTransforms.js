@@ -109,39 +109,4 @@ describe("ContentTransforms", function () {
 
   });
 
-  describe("#postprocess", function () {
-
-    it("is empty by default", function () {
-      this.contentTransforms.postprocess
-        .should.be.eql([ ]);
-    });
-
-  });
-
-  describe("#postprocess=", function () {
-
-    given( undefined, null, 42 ).
-    it("throws error when argument 'value' is not iterable", function (value) {
-      (() => this.contentTransforms.postprocess = value)
-        .should.throw("argument 'value' must be iterable");
-    });
-
-    it("throws error when argument 'value' is not an iterable of `PluginContext`", function () {
-      (() => this.contentTransforms.postprocess = [ 42 ])
-        .should.throw("argument 'value' must be an iterable of zero-or-more `PluginContext` values");
-    });
-
-    given(
-      [  [ ]                                                     ],
-      [  [ new PluginContext("foo") ]                            ],
-      [  [ new PluginContext("foo"), new PluginContext("bar") ]  ]
-    ).
-    it("takes on assigned value", function (value) {
-      this.contentTransforms.postprocess = value;
-      this.contentTransforms.postprocess
-        .should.be.eql(value);
-    });
-
-  });
-
 });

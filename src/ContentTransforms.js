@@ -11,7 +11,6 @@ import PluginContext from "./PluginContext";
 // Symbols to simulate private fields
 const processField = Symbol();
 const conversionsField = Symbol();
-const postprocessField = Symbol();
 
 
 /**
@@ -22,7 +21,6 @@ export default class ContentTransforms {
   constructor() {
     this.process = [ ];
     this.conversions = { };
-    this.postprocess = [ ];
   }
 
 
@@ -52,19 +50,6 @@ export default class ContentTransforms {
        "argument 'value' must be an object");
 
     this[conversionsField] = sanitizePluginContextLookupArgument("value", value);
-  }
-
-  /**
-   * An array of zero-or-more transforms that are applied in order to a resource **after**
-   * any conversion transformations are applied.
-   *
-   * @member {?module:webreed/lib/PluginContext[]}
-   */
-  get postprocess() {
-    return this[postprocessField];
-  }
-  set postprocess(value) {
-    this[postprocessField] = sanitizePluginContextArrayArgument("value", value);
   }
 
 }
