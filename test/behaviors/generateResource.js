@@ -40,7 +40,7 @@ describe("behaviors/generateResource", function () {
 
   it("throws error when argument 'env' is not a webreed environment", function () {
     let resource = this.env.createResource();
-    let resourceType = new ResourceType("foo");
+    let resourceType = new ResourceType();
 
     (() => generateResource(null, resource, resourceType))
       .should.throw("argument 'env' must be a webreed environment");
@@ -48,7 +48,7 @@ describe("behaviors/generateResource", function () {
 
   given( undefined, null, 42, "", { } ).
   it("throws error when argument 'resource' is not a `Resource`", function (resource) {
-    let resourceType = new ResourceType("foo");
+    let resourceType = new ResourceType();
     (() => generateResource(this.env, resource, resourceType))
       .should.throw("argument 'resource' must be a `Resource`");
   });
@@ -63,7 +63,7 @@ describe("behaviors/generateResource", function () {
 
   it("throws error when resource references an unknown generator", function () {
     let resource = this.env.createResource({ _generator: "generator-that-does-not-exist" });
-    let resourceType = new ResourceType("foo");
+    let resourceType = new ResourceType();
 
     (() => generateResource(this.env, resource, resourceType))
       .should.throw("Generator 'generator-that-does-not-exist' is not defined.");
@@ -71,7 +71,7 @@ describe("behaviors/generateResource", function () {
 
   it("throws error when resource type references an unknown generator", function () {
     let resource = this.env.createResource();
-    let resourceType = new ResourceType("foo");
+    let resourceType = new ResourceType();
     resourceType.generator = new PluginContext("generator-that-does-not-exist");
 
     (() => generateResource(this.env, resource, resourceType))
@@ -81,7 +81,7 @@ describe("behaviors/generateResource", function () {
 
   it("returns an observable stream of output resources", function () {
     let resource = this.env.createResource();
-    let resourceType = new ResourceType("foo");
+    let resourceType = new ResourceType();
 
     generateResource(this.env, resource, resourceType)
       .should.be.instanceOf(Rx.Observable);
@@ -89,7 +89,7 @@ describe("behaviors/generateResource", function () {
 
   it("produces an output `Resource`", function () {
     let resource = this.env.createResource();
-    let resourceType = new ResourceType("foo");
+    let resourceType = new ResourceType();
 
     return generateResource(this.env, resource, resourceType)
       .reduce((a, outputResource) => a || outputResource.wentThroughFakeGenerator, false)
@@ -99,7 +99,7 @@ describe("behaviors/generateResource", function () {
 
   it("rejects with error from generator", function () {
     let resource = this.env.createResource({ _generator: "always-fails" });
-    let resourceType = new ResourceType("foo");
+    let resourceType = new ResourceType();
 
     return generateResource(this.env, resource, resourceType)
       .toPromise()
@@ -111,7 +111,7 @@ describe("behaviors/generateResource", function () {
     let fakeGenerator = this.env.generators.get("standard");
 
     let resource = this.env.createResource({ inputProperty: 42 });
-    let resourceType = new ResourceType("foo");
+    let resourceType = new ResourceType();
 
     return generateResource(this.env, resource, resourceType)
       .toPromise()
@@ -137,7 +137,7 @@ describe("behaviors/generateResource", function () {
     let instanceOptions = { key: "value" };
 
     let resource = this.env.createResource({ inputProperty: 42 });
-    let resourceType = new ResourceType("foo");
+    let resourceType = new ResourceType();
     resourceType.generator = new PluginContext("standard", instanceOptions);
 
     return generateResource(this.env, resource, resourceType)
