@@ -37,6 +37,9 @@ export default function applyTemplateToResource(env, resource, templateName) {
   let resolvedTemplateEngine = env.invoke("resolveTemplateEngine", templateName);
 
   return resolvedTemplateEngine.templateEngine.renderTemplate(templateName, resource, {
-    templateEngine: { name: resolvedTemplateEngine.name, options: resolvedTemplateEngine.options }
+    templateEngine: {
+      name: resolvedTemplateEngine.name,
+      options: resolvedTemplateEngine.options
+    }
   });
 }
