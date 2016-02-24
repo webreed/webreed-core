@@ -109,28 +109,6 @@ describe("behaviors/generateResource", function () {
 
   it("provides correct arguments to the generator's 'generate' function", function () {
     let fakeGenerator = this.env.generators.get("standard");
-
-    let resource = this.env.createResource({ inputProperty: 42 });
-    let resourceType = new ResourceType();
-
-    return generateResource(this.env, resource, resourceType)
-      .toPromise()
-      .then(() => {
-        fakeGenerator.lastGenerateArguments[0].inputProperty
-          .should.be.eql(42);
-
-        fakeGenerator.lastGenerateArguments[1].generator
-          .should.have.properties({
-            name: "standard",
-            options: { }
-          });
-        fakeGenerator.lastGenerateArguments[1].resourceType
-          .should.be.exactly(resourceType);
-      });
-  });
-
-  it("includes generator instance options in argument 'context' that is provided to 'generate' function", function () {
-    let fakeGenerator = this.env.generators.get("standard");
     let instanceOptions = { key: "value" };
 
     let resource = this.env.createResource({ inputProperty: 42 });
@@ -140,6 +118,9 @@ describe("behaviors/generateResource", function () {
     return generateResource(this.env, resource, resourceType)
       .toPromise()
       .then(() => {
+        fakeGenerator.lastGenerateArguments[0].inputProperty
+          .should.be.eql(42);
+
         fakeGenerator.lastGenerateArguments[1].generator
           .should.have.properties({
             name: "standard",
