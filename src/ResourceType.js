@@ -18,9 +18,9 @@ const parseFrontmatterField = Symbol();
 const templateEngineField = Symbol();
 const transformsField = Symbol();
 
+const processField = Symbol();
 const conversionsField = Symbol();
 const postprocessField = Symbol();
-const preprocessField = Symbol();
 
 
 /**
@@ -183,7 +183,7 @@ export default class ResourceType {
 class ContentTransforms {
 
   constructor() {
-    this.preprocess = [ ];
+    this.process = [ ];
     this.conversions = { };
     this.postprocess = [ ];
   }
@@ -195,11 +195,11 @@ class ContentTransforms {
    *
    * @member {?module:webreed/lib/PluginContext[]}
    */
-  get preprocess() {
-    return this[preprocessField];
+  get process() {
+    return this[processField];
   }
-  set preprocess(value) {
-    this[preprocessField] = sanitizePluginContextArrayArgument("value", value);
+  set process(value) {
+    this[processField] = sanitizePluginContextArrayArgument("value", value);
   }
 
   /**

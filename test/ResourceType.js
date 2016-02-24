@@ -241,19 +241,19 @@ describe("ResourceType", function () {
 
     it("is empty by default", function () {
       this.resourceType.transforms
-        .should.have.properties({ preprocess: [ ], conversions: { }, postprocess: [ ] });
+        .should.have.properties({ process: [ ], conversions: { }, postprocess: [ ] });
     });
 
-    describe(".preprocess=", function () {
+    describe(".process=", function () {
 
       given( undefined, null, 42 ).
       it("throws error when argument 'value' is not iterable", function (value) {
-        (() => this.resourceType.transforms.preprocess = value)
+        (() => this.resourceType.transforms.process = value)
           .should.throw("argument 'value' must be iterable");
       });
 
       it("throws error when argument 'value' is not an iterable of `PluginContext`", function () {
-        (() => this.resourceType.transforms.preprocess = [ 42 ])
+        (() => this.resourceType.transforms.process = [ 42 ])
           .should.throw("argument 'value' must be an iterable of zero-or-more `PluginContext` values");
       });
 
@@ -263,8 +263,8 @@ describe("ResourceType", function () {
         [  [ new PluginContext("foo"), new PluginContext("bar") ]  ]
       ).
       it("takes on assigned value", function (value) {
-        this.resourceType.transforms.preprocess = value;
-        this.resourceType.transforms.preprocess
+        this.resourceType.transforms.process = value;
+        this.resourceType.transforms.process
           .should.be.eql(value);
       });
 
