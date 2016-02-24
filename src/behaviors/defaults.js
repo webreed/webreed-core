@@ -6,6 +6,7 @@
 export { default as applySequenceOfTransformsToResource } from "./applySequenceOfTransformsToResource";
 export { default as applyTemplateToResource } from "./applyTemplateToResource";
 export { default as build } from "./build";
+export { default as decodeResource } from "./decodeResource";
 export { default as generateResource } from "./generateResource";
 export { default as getSourceContentRelativePaths } from "./getSourceContentRelativePaths";
 export { default as loadResourceFile } from "./loadResourceFile";

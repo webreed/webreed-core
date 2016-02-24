@@ -16,6 +16,7 @@ describe("behaviors/defaults", function () {
     "applySequenceOfTransformsToResource",
     "applyTemplateToResource",
     "build",
+    "decodeResource",
     "generateResource",
     "getSourceContentRelativePaths",
     "loadResourceFile",
