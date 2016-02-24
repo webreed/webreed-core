@@ -116,18 +116,15 @@ describe("behaviors/generateResource", function () {
     return generateResource(this.env, resource, resourceType)
       .toPromise()
       .then(() => {
-        fakeGenerator.lastGenerateArguments[0]
-          .should.be.exactly(this.env);
-
-        fakeGenerator.lastGenerateArguments[1].inputProperty
+        fakeGenerator.lastGenerateArguments[0].inputProperty
           .should.be.eql(42);
 
-        fakeGenerator.lastGenerateArguments[2].generator
+        fakeGenerator.lastGenerateArguments[1].generator
           .should.have.properties({
             name: "standard",
             options: { }
           });
-        fakeGenerator.lastGenerateArguments[2].resourceType
+        fakeGenerator.lastGenerateArguments[1].resourceType
           .should.be.exactly(resourceType);
       });
   });
@@ -143,12 +140,12 @@ describe("behaviors/generateResource", function () {
     return generateResource(this.env, resource, resourceType)
       .toPromise()
       .then(() => {
-        fakeGenerator.lastGenerateArguments[2].generator
+        fakeGenerator.lastGenerateArguments[1].generator
           .should.have.properties({
             name: "standard",
             options: instanceOptions
           });
-        fakeGenerator.lastGenerateArguments[2].resourceType
+        fakeGenerator.lastGenerateArguments[1].resourceType
           .should.be.exactly(resourceType);
       });
   });

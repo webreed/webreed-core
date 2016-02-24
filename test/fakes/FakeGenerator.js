@@ -8,7 +8,7 @@ import Rx from "rxjs";
 
 export default class FakeGenerator {
 
-  generate(env, resource, resourceType) {
+  generate(resource, resourceType) {
     this.lastGenerateArguments = Array.from(arguments);
     return Rx.Observable.of(resource.clone({
       wentThroughFakeGenerator: true

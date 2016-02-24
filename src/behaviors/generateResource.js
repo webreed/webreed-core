@@ -36,7 +36,7 @@ export default function generateResource(env, resource, resourceType) {
 
   let resolvedGenerator = env.invoke("resolveGenerator", resource, resourceType);
 
-  return resolvedGenerator.generator.generate(env, resource, {
+  return resolvedGenerator.generator.generate(resource, {
     generator: {
       name: resolvedGenerator.name,
       options: resolvedGenerator.options
