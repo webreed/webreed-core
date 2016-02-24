@@ -361,13 +361,13 @@ describe("AliasMap", function () {
         .should.throw("The magical key 'z' could not be resolved.");
     });
 
-    it("invokes #resolve to resolve the specified key", function () {
+    it("invokes #noisyResolve to resolve the specified key", function () {
       let invokedResolveMethod = false;
 
       let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ]);
-      newAliasMap.resolve = function (key) {
+      newAliasMap.noisyResolve = function (key) {
         invokedResolveMethod = true;
-        return AliasMap.prototype.resolve.call(this, key);
+        return AliasMap.prototype.noisyResolve.call(this, key);
       };
 
       newAliasMap.lookup("b");
@@ -382,7 +382,7 @@ describe("AliasMap", function () {
       let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ]);
       newAliasMap.get = function (key) {
         invokedGetMethod = true;
-        return AliasMap.prototype.resolve.call(this, key);
+        return AliasMap.prototype.get.call(this, key);
       };
 
       newAliasMap.lookup("b");
@@ -438,6 +438,50 @@ describe("AliasMap", function () {
       newAliasMap.lookup("b");
 
       invokedGetMethod
+        .should.be.true();
+    });
+
+  });
+
+  describe("#noisyResolve(key)", function () {
+
+    it("is a function", function () {
+      this.aliasMap.noisyResolve
+        .should.be.a.Function();
+    });
+
+    given( undefined, null, 42, "" ).
+    it("throws error when argument 'key' is not a non-empty string", function (key) {
+      (() => this.aliasMap.noisyResolve(key))
+        .should.throw("argument 'key' must be a non-empty string");
+    });
+
+    it("throws error when the specified key could not be resolved", function () {
+      let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ]);
+      (() => newAliasMap.noisyResolve("z"))
+        .should.throw("Key 'z' could not be resolved.");
+    });
+
+    it("throws error with customized message when the specified key could not be resolved", function () {
+      let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ], {
+        strings: { invalidKey: "The magical key '{key}' could not be resolved." }
+      });
+      (() => newAliasMap.noisyResolve("z"))
+        .should.throw("The magical key 'z' could not be resolved.");
+    });
+
+    it("invokes #resolve to resolve the specified key", function () {
+      let invokedResolveMethod = false;
+
+      let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ]);
+      newAliasMap.resolve = function (key) {
+        invokedResolveMethod = true;
+        return AliasMap.prototype.resolve.call(this, key);
+      };
+
+      newAliasMap.noisyResolve("b");
+
+      invokedResolveMethod
         .should.be.true();
     });
 

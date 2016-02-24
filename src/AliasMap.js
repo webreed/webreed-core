@@ -216,11 +216,7 @@ export default class AliasMap {
    * @see {@link module:webreed/lib/AliasMap#lookupQuiet}
    */
   lookup(key) {
-    let resolvedKey = this.resolve(key);
-    if (resolvedKey === undefined) {
-      let errorMessage = formatUnicorn(this[optionsField].strings.invalidKey, { key: key });
-      throw new Error(errorMessage);
-    }
+    let resolvedKey = this.noisyResolve(key);
     return this[mapField].get(resolvedKey);
   }
 
@@ -250,6 +246,38 @@ export default class AliasMap {
     else {
       return undefined;
     }
+  }
+
+  /**
+   * Resolves the specified key of an entry much like the {@link module:webreed/lib/AliasMap#resolve}
+   * except throws an error if the key does not exist and cannot otherwise be resolved.
+   *
+   * - Normalizes casing of the key when `ignoreCase` was specified when constructing
+   *   the {@link module:webreed/lib/AliasMap}.
+   *
+   * - Transparently resolves alias references.
+   *
+   * - Reverts to a fallback function when `fallbackResolve` was specified when
+   *   constructing the {@link module:webreed/lib/AliasMap}.
+   *
+   * @param {string} key
+   *   Key or alias key of the entry, which must be non-empty.
+   *
+   * @returns {string}
+   *   The resolved key of an entry.
+   *
+   * @throws {Error}
+   * - If no entry was found for `key`.
+   * - If alias `key` could not be resolved.
+   * - If a circular alias reference was encountered.
+   */
+  noisyResolve(key) {
+    let resolvedKey = this.resolve(key);
+    if (resolvedKey === undefined) {
+      let errorMessage = formatUnicorn(this[optionsField].strings.invalidKey, { key: key });
+      throw new Error(errorMessage);
+    }
+    return resolvedKey;
   }
 
   /**
