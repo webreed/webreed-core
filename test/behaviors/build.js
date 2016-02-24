@@ -23,6 +23,12 @@ describe("behaviors/build", function () {
       .should.be.a.Function();
   });
 
+  it("is named 'build'", function () {
+    build.name
+      .should.be.eql("build");
+  });
+
+
   it("throws error when argument 'env' is not a webreed environment", function () {
     (() => build(null))
       .should.throw("argument 'env' must be a webreed environment");

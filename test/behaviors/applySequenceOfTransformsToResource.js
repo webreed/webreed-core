@@ -37,6 +37,11 @@ describe("behaviors/applySequenceOfTransformsToResource", function () {
       .should.be.a.Function();
   });
 
+  it("is named 'applySequenceOfTransformsToResource'", function () {
+    applySequenceOfTransformsToResource.name
+      .should.be.eql("applySequenceOfTransformsToResource");
+  });
+
 
   it("throws error when argument 'env' is not a webreed environment", function () {
     let resource = this.env.createResource();

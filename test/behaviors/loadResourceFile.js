@@ -47,6 +47,11 @@ describe("behaviors/loadResourceFile", function () {
       .should.be.a.Function();
   });
 
+  it("is named 'loadResourceFile'", function () {
+    loadResourceFile.name
+      .should.be.eql("loadResourceFile");
+  });
+
 
   it("throws error when argument 'env' is not a webreed environment", function () {
     let filePath = getFixturePath("index.html");

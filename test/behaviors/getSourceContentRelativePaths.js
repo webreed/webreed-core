@@ -28,6 +28,12 @@ describe("behaviors/getSourceContentRelativePaths", function () {
       .should.be.a.Function();
   });
 
+  it("is named 'getSourceContentRelativePaths'", function () {
+    getSourceContentRelativePaths.name
+      .should.be.eql("getSourceContentRelativePaths");
+  });
+
+
   it("throws error when argument 'env' is not a webreed environment", function () {
     (() => getSourceContentRelativePaths(null))
       .should.throw("argument 'env' must be a webreed environment");

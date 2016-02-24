@@ -44,6 +44,12 @@ describe("behaviors/loadSourceContent", function () {
       .should.be.a.Function();
   });
 
+  it("is named 'loadSourceContent'", function () {
+    loadSourceContent.name
+      .should.be.eql("loadSourceContent");
+  });
+
+
   it("fulfills with a `Resource`", function () {
     return loadSourceContent(this.env, "index.html")
       .should.eventually.be.instanceOf(Resource);

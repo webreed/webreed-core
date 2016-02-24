@@ -46,6 +46,11 @@ describe("behaviors/saveResourceFile", function () {
       .should.be.a.Function();
   });
 
+  it("is named 'saveResourceFile'", function () {
+    saveResourceFile.name
+      .should.be.eql("saveResourceFile");
+  });
+
 
   it("throws error when argument 'env' is not a webreed environment", function () {
     let outputFilePath = getOutputPath("index.html");

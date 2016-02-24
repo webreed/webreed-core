@@ -46,6 +46,11 @@ describe("behaviors/applyTemplateToResource", function () {
       .should.be.a.Function();
   });
 
+  it("is named 'applyTemplateToResource'", function () {
+    applyTemplateToResource.name
+      .should.be.eql("applyTemplateToResource");
+  });
+
 
   it("throws error when argument 'env' is not a webreed environment", function () {
     let resource = this.env.createResource();

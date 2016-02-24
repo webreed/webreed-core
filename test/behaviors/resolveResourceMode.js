@@ -24,6 +24,11 @@ describe("behaviors/resolveResourceMode", function () {
       .should.be.a.Function();
   });
 
+  it("is named 'resolveResourceMode'", function () {
+    resolveResourceMode.name
+      .should.be.eql("resolveResourceMode");
+  });
+
 
   it("throws error when argument 'env' is not a webreed environment", function () {
     (() => resolveResourceMode(null))

@@ -25,6 +25,11 @@ describe("behaviors/resolveGenerator", function () {
       .should.be.a.Function();
   });
 
+  it("is named 'resolveGenerator'", function () {
+    resolveGenerator.name
+      .should.be.eql("resolveGenerator");
+  });
+
 
   it("throws error when argument 'env' is not a webreed environment", function () {
     (() => resolveGenerator(null))

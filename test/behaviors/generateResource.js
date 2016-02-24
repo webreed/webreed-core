@@ -32,6 +32,11 @@ describe("behaviors/generateResource", function () {
       .should.be.a.Function();
   });
 
+  it("is named 'generateResource'", function () {
+    generateResource.name
+      .should.be.eql("generateResource");
+  });
+
 
   it("throws error when argument 'env' is not a webreed environment", function () {
     let resource = this.env.createResource();
