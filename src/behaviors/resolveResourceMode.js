@@ -46,10 +46,7 @@ export default function resolveResourceMode(env, resource, resourceType, fallbac
     modeName = env.defaultModeName;
   }
 
-  let resolvedModeName = env.modes.resolve(modeName);
-  if (resolvedModeName === undefined) {
-    throw new Error(`Resource mode '${modeName}' is not defined.`);
-  }
+  let resolvedModeName = env.modes.noisyResolve(modeName);
 
   return {
     name: resolvedModeName,

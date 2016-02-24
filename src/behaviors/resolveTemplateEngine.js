@@ -45,10 +45,7 @@ export default function resolveTemplateEngine(env, templateName) {
   }
 
   let templateEngineName = templateEngineInstance.name;
-  let resolvedTemplateEngineName = env.templateEngines.resolve(templateEngineName);
-  if (resolvedTemplateEngineName === undefined) {
-    throw new Error(`Template engine '${templateEngineName}' is not defined.`);
-  }
+  let resolvedTemplateEngineName = env.templateEngines.noisyResolve(templateEngineName);
 
   return {
     name: resolvedTemplateEngineName,

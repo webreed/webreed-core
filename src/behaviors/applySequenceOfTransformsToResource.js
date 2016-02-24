@@ -34,11 +34,7 @@ export default function applySequenceOfTransformsToResource(env, resource, trans
       "argument 'transformers' must be `null` or an array");
 
   let reducer = (stream, transformer) => {
-    let resolvedTransformerName = env.transformers.resolve(transformer.name);
-    if (resolvedTransformerName === undefined) {
-      throw new Error(`Transformer '${transformer.name}' is not defined.`);
-    }
-
+    let resolvedTransformerName = env.transformers.noisyResolve(transformer.name);
     let transformerPlugin = env.transformers.get(resolvedTransformerName);
 
     return stream.flatMap(resource => transformerPlugin.transform(resource, {

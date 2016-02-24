@@ -49,10 +49,7 @@ export default function resolveGenerator(env, resource, resourceType) {
     generatorName = env.defaultGeneratorName;
   }
 
-  let resolvedGeneratorName = env.generators.resolve(generatorName);
-  if (resolvedGeneratorName === undefined) {
-    throw new Error(`Generator '${generatorName}' is not defined.`);
-  }
+  let resolvedGeneratorName = env.generators.noisyResolve(generatorName);
 
   return {
     name: resolvedGeneratorName,

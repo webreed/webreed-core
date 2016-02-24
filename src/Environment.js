@@ -72,14 +72,25 @@ export default class Environment {
     this[defaultModeNameField] = "text";
 
     this[resourceTypesField] = new AliasMap(null, {
-      fallbackResolve: (aliasMap, key) => "*"
+      fallbackResolve: (aliasMap, key) => "*",
+      strings: { invalidKey: "Resource type '{key}' is not defined. Consider specifying a fallback using the key '*'." }
     });
 
-    this[generatorsField] = new AliasMap();
-    this[handlersField] = new AliasMap();
-    this[modesField] = new AliasMap();
-    this[templateEnginesField] = new AliasMap();
-    this[transformersField] = new AliasMap();
+    this[generatorsField] = new AliasMap(null, {
+      strings: { invalidKey: "Generator '{key}' is not defined." }
+    });
+    this[handlersField] = new AliasMap(null, {
+      strings: { invalidKey: "Content handler '{key}' is not defined." }
+    });
+    this[modesField] = new AliasMap(null, {
+      strings: { invalidKey: "Resource mode '{key}' is not defined." }
+    });
+    this[templateEnginesField] = new AliasMap(null, {
+      strings: { invalidKey: "Template engine '{key}' is not defined." }
+    });
+    this[transformersField] = new AliasMap(null, {
+      strings: { invalidKey: "Transformer '{key}' is not defined." }
+    });
   }
 
 
