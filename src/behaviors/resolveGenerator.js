@@ -22,6 +22,7 @@ import Environment from "../Environment";
  *   An object with the following properties:
  *   - **name** (string) - Name of the generator.
  *   - **generator** (object) - Generator instance.
+ *   - **options** (object) - Generator plugin instance options.
  *
  * @throws {Error}
  * - If the resolved generator is not defined.
