@@ -7,8 +7,9 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import ResourceType from "../src/ResourceType";
+import ContentTransforms from "../src/ContentTransforms";
 import PluginContext from "../src/PluginContext";
+import ResourceType from "../src/ResourceType";
 
 
 describe("ResourceType", function () {
@@ -239,98 +240,9 @@ describe("ResourceType", function () {
         .should.throw();
     });
 
-    it("is empty by default", function () {
+    it("is a `ContentTransforms` instance", function () {
       this.resourceType.transforms
-        .should.have.properties({ process: [ ], conversions: { }, postprocess: [ ] });
-    });
-
-    describe(".process=", function () {
-
-      given( undefined, null, 42 ).
-      it("throws error when argument 'value' is not iterable", function (value) {
-        (() => this.resourceType.transforms.process = value)
-          .should.throw("argument 'value' must be iterable");
-      });
-
-      it("throws error when argument 'value' is not an iterable of `PluginContext`", function () {
-        (() => this.resourceType.transforms.process = [ 42 ])
-          .should.throw("argument 'value' must be an iterable of zero-or-more `PluginContext` values");
-      });
-
-      given(
-        [  [ ]                                                     ],
-        [  [ new PluginContext("foo") ]                            ],
-        [  [ new PluginContext("foo"), new PluginContext("bar") ]  ]
-      ).
-      it("takes on assigned value", function (value) {
-        this.resourceType.transforms.process = value;
-        this.resourceType.transforms.process
-          .should.be.eql(value);
-      });
-
-    });
-
-    describe(".conversions=", function () {
-
-      given( undefined, null, 42, "", [ ] ).
-      it("throws error when argument 'value' is not an object", function (value) {
-        (() => this.resourceType.transforms.conversions = value)
-          .should.throw("argument 'value' must be an object");
-      });
-
-      given(
-        { ".html": undefined },
-        { ".html": null },
-        { ".html": 42 }
-      ).
-      it("throws error when argument 'value' has a property value that is not iterable", function (value) {
-        (() => this.resourceType.transforms.conversions = value)
-          .should.throw("argument 'value[\".html\"]' must be iterable");
-      });
-
-      it("throws error when argument 'value' has a property value that is not an iterable of `PluginContext`", function () {
-        (() => this.resourceType.transforms.conversions = { ".html": [ 42 ] })
-          .should.throw("argument 'value[\".html\"]' must be an iterable of zero-or-more `PluginContext` values");
-      });
-
-      given(
-        { },
-        { ".html": [ ] },
-        { ".html": [ new PluginContext("foo") ] },
-        { ".html": [ new PluginContext("foo"), new PluginContext("bar") ] }
-      ).
-      it("takes on assigned value", function (value) {
-        this.resourceType.transforms.conversions = value;
-        this.resourceType.transforms.conversions
-          .should.be.eql(value);
-      });
-
-    });
-
-    describe(".postprocess=", function () {
-
-      given( undefined, null, 42 ).
-      it("throws error when argument 'value' is not iterable", function (value) {
-        (() => this.resourceType.transforms.postprocess = value)
-          .should.throw("argument 'value' must be iterable");
-      });
-
-      it("throws error when argument 'value' is not an iterable of `PluginContext`", function () {
-        (() => this.resourceType.transforms.postprocess = [ 42 ])
-          .should.throw("argument 'value' must be an iterable of zero-or-more `PluginContext` values");
-      });
-
-      given(
-        [  [ ]                                                     ],
-        [  [ new PluginContext("foo") ]                            ],
-        [  [ new PluginContext("foo"), new PluginContext("bar") ]  ]
-      ).
-      it("takes on assigned value", function (value) {
-        this.resourceType.transforms.postprocess = value;
-        this.resourceType.transforms.postprocess
-          .should.be.eql(value);
-      });
-
+        .should.be.instanceOf(ContentTransforms);
     });
 
   });
