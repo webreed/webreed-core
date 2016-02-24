@@ -18,7 +18,7 @@ import ResourceType from "../ResourceType";
  * @param {module:webreed/lib/Resource} resource
  *   The resource that is being generated.
  * @param {module:webreed/lib/ResourceType} resourceType
- *   Represents the type of resource that is being read.
+ *   Represents the type of resource that is being generated.
  *
  * @returns {Observable.<module:webreed/lib/Resource>}
  *   An observable stream of output resources.
