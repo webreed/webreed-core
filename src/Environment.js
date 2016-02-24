@@ -44,8 +44,6 @@ const transformersField = Symbol();
 const defaultBaseUrlValue = "/";
 const defaultProjectRootPathValue = "";
 
-const resolveResourceTypeFallback = (aliasMap, key) => "*";
-
 
 /**
  * Represents the environment of a webreed project.
@@ -72,7 +70,11 @@ export default class Environment {
 
     this[defaultGeneratorNameField] = "standard";
     this[defaultModeNameField] = "text";
-    this[resourceTypesField] = new AliasMap(null, null, resolveResourceTypeFallback);
+
+    this[resourceTypesField] = new AliasMap(null, {
+      fallbackResolve: (aliasMap, key) => "*"
+    });
+
     this[generatorsField] = new AliasMap();
     this[handlersField] = new AliasMap();
     this[modesField] = new AliasMap();

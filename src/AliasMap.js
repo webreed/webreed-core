@@ -4,21 +4,30 @@
 /** @module webreed/lib/AliasMap */
 
 
+// Packages
+import _ from "lodash";
+import formatUnicorn from "format-unicorn/safe";
+
 // Project
 import getTargetFromAliasReference from "./util/getTargetFromAliasReference";
 import isAliasReference from "./util/isAliasReference";
 
 
 // Symbols to simulate private fields
-const fallbackResolveField = Symbol();
-const ignoreCaseField = Symbol();
+const optionsField = Symbol();
 const mapField = Symbol();
 
 // Exported to facilitate with unit testing.
 export const __innerMapField = mapField;
 
 
-// See end of file for private utility functions!
+const defaultOptions = Object.freeze({
+  fallbackResolve: (aliasMap, key) => undefined,
+  ignoreCase: false,
+  strings: {
+    invalidKey: "Key '{key}' could not be resolved."
+  }
+});
 
 
 /**
@@ -30,20 +39,25 @@ export default class AliasMap {
    * @param {iterable} [iterable]
    *   A collection of key/value pairs. When specified each key-value pair is set using
    *   the method {@link module:webreed/lib/AliasMap#set}.
-   * @param {boolean} [ignoreCase = false]
+   *
+   * @param {boolean} [options.ignoreCase = false]
    *   Indicates whether character casing of keys is to be ignored.
-   * @param {module:webreed/lib/AliasMap~fallbackResolve} [fallbackResolve = null]
+   * @param {module:webreed/lib/AliasMap~fallbackResolve} [options.fallbackResolve = null]
    *   A function that is invoked when attempting to resolve a key that does not exist.
+   * @param {string} [options.strings.invalidKey = "Key '{0}' could not be resolved."]
+   *   Customizable strings.
    */
-  constructor(iterable, ignoreCase, fallbackResolve) {
-    console.assert(fallbackResolve === undefined || fallbackResolve === null || typeof fallbackResolve === "function",
-        "argument 'fallbackResolve' must be a function");
+  constructor(iterable, options) {
     console.assert(iterable === undefined || iterable === null || typeof iterable[Symbol.iterator] === "function",
         "argument 'iterable' must be an iterable object");
+    console.assert(options === undefined || typeof options === "object",
+        "argument 'options' must be an object");
 
+    options = _.defaultsDeep({ }, options, defaultOptions);
+    options.ignoreCase = !!options.ignoreCase;
+
+    this[optionsField] = Object.freeze(options);
     this[mapField] = new Map();
-    this[fallbackResolveField] = fallbackResolve || ((aliasMap, key) => undefined);
-    this[ignoreCaseField] = !!ignoreCase;
 
     this[Symbol.iterator] = this[mapField][Symbol.iterator];
 
@@ -79,7 +93,7 @@ export default class AliasMap {
    * @readonly
    */
   get ignoreCase() {
-    return this[ignoreCaseField];
+    return this[optionsField].ignoreCase;
   }
 
   /**
@@ -204,7 +218,8 @@ export default class AliasMap {
   lookup(key) {
     let resolvedKey = this.resolve(key);
     if (resolvedKey === undefined) {
-      throw new Error(`Key '${key}' could not be resolved.`);
+      let errorMessage = formatUnicorn(this[optionsField].strings.invalidKey, { key: key });
+      throw new Error(errorMessage);
     }
     return this[mapField].get(resolvedKey);
   }
@@ -262,7 +277,7 @@ export default class AliasMap {
 
     let value = this[mapField].get(key);
     if (value === undefined) {
-      key = this[fallbackResolveField](this, key);
+      key = this[optionsField].fallbackResolve(this, key);
       if (key !== undefined) {
         value = this[mapField].get(key);
       }

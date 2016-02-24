@@ -41,9 +41,9 @@ describe("AliasMap", function () {
         .should.throw("argument 'iterable' must be an iterable object");
     });
 
-    it("throws error when argument 'fallbackResolve' is not a function", function () {
-      (() => new AliasMap(null, null, 42))
-        .should.throw("argument 'fallbackResolve' must be a function");
+    it("throws error when argument 'options' is not an object", function () {
+      (() => new AliasMap(null, 42))
+        .should.throw("argument 'options' must be an object");
     });
 
     it("calls #set for each key/value pair yielded by argument 'iterable'", function () {
@@ -79,7 +79,7 @@ describe("AliasMap", function () {
 
     given( false, true ).
     it("matches value that was specified in constructor", function (ignoreCase) {
-      let newAliasMap = new AliasMap(null, ignoreCase);
+      let newAliasMap = new AliasMap(null, { ignoreCase: ignoreCase });
       newAliasMap.ignoreCase
         .should.be.eql(ignoreCase);
     });
@@ -152,7 +152,7 @@ describe("AliasMap", function () {
     ).
     it("transforms key to match character casing configuration", function (deleteKey, expectedDeleteKey, ignoreCase) {
       let invokedDeleteWithKey;
-      let newAliasMap = new AliasMap(null, ignoreCase);
+      let newAliasMap = new AliasMap(null, { ignoreCase: ignoreCase });
       newAliasMap[__innerMapField].delete = function (key) { invokedDeleteWithKey = key; };
 
       newAliasMap.delete(deleteKey);
@@ -257,7 +257,7 @@ describe("AliasMap", function () {
     ).
     it("transforms key to match character casing configuration", function (getKey, expectedGetKey, ignoreCase) {
       let invokedGetWithKey;
-      let newAliasMap = new AliasMap(null, ignoreCase);
+      let newAliasMap = new AliasMap(null, { ignoreCase: ignoreCase });
       newAliasMap[__innerMapField].get = function (key) { invokedGetWithKey = key; };
 
       newAliasMap.get(getKey);
@@ -297,7 +297,7 @@ describe("AliasMap", function () {
     ).
     it("transforms key to match character casing configuration", function (hasKey, expectedHasKey, ignoreCase) {
       let invokedHasWithKey;
-      let newAliasMap = new AliasMap(null, ignoreCase);
+      let newAliasMap = new AliasMap(null, { ignoreCase: ignoreCase });
       newAliasMap[__innerMapField].has = function (key) { invokedHasWithKey = key; };
 
       newAliasMap.has(hasKey);
@@ -351,6 +351,14 @@ describe("AliasMap", function () {
       let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ]);
       (() => newAliasMap.lookup("z"))
         .should.throw("Key 'z' could not be resolved.");
+    });
+
+    it("throws error with customized message when the specified key could not be resolved", function () {
+      let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ], {
+        strings: { invalidKey: "The magical key '{key}' could not be resolved." }
+      });
+      (() => newAliasMap.lookup("z"))
+        .should.throw("The magical key 'z' could not be resolved.");
     });
 
     it("invokes #resolve to resolve the specified key", function () {
@@ -470,9 +478,11 @@ describe("AliasMap", function () {
 
     it("reverts to fallback function when key cannot be resolved", function () {
       let invokedFallbackResolveFunction;
-      let newAliasMap = new AliasMap(null, null, function fallbackResolve() {
-        invokedFallbackResolveFunction = true;
-        return undefined;
+      let newAliasMap = new AliasMap(null, {
+        fallbackResolve: function () {
+          invokedFallbackResolveFunction = true;
+          return undefined;
+        }
       });
 
       newAliasMap.resolve("z");
@@ -482,7 +492,7 @@ describe("AliasMap", function () {
     });
 
     it("normalizes casing of key when AliasMap ignores casing of keys", function () {
-      let newAliasMap = new AliasMap([ [ "A", 42 ] ], true);
+      let newAliasMap = new AliasMap([ [ "A", 42 ] ], { ignoreCase: true });
 
       let result1 = newAliasMap.resolve("A");
       let result2 = newAliasMap.resolve("a");
@@ -492,7 +502,7 @@ describe("AliasMap", function () {
     });
 
     it("does not normalize casing of key when AliasMap is case-sensitive", function () {
-      let newAliasMap = new AliasMap([ [ "A", 42 ] ], false);
+      let newAliasMap = new AliasMap([ [ "A", 42 ] ], { ignoreCase: false });
 
       let result1 = newAliasMap.resolve("A");
       let result2 = newAliasMap.resolve("a");
@@ -526,7 +536,7 @@ describe("AliasMap", function () {
       let newAliasMap = new AliasMap([
         [ "A", 42 ],
         [ "b", "alias-of(a)" ]
-      ], true);
+      ], { ignoreCase: true });
 
       newAliasMap.resolve("B")
         .should.be.eql("a");
@@ -537,7 +547,7 @@ describe("AliasMap", function () {
         [ "A", 42 ],
         [ "b", "alias-of(a)" ],
         [ "C", "alias-of(B)" ]
-      ], true);
+      ], { ignoreCase: true });
 
       newAliasMap.resolve("C")
         .should.be.eql("a");
@@ -573,7 +583,7 @@ describe("AliasMap", function () {
     ).
     it("transforms key to match character casing configuration", function (setKey, expectedSetKey, ignoreCase) {
       let invokedSetWithKey;
-      let newAliasMap = new AliasMap(null, ignoreCase);
+      let newAliasMap = new AliasMap(null, { ignoreCase: ignoreCase });
       newAliasMap[__innerMapField].set = function (key) { invokedSetWithKey = key; };
 
       newAliasMap.set(setKey);
