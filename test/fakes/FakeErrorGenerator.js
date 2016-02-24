@@ -10,7 +10,7 @@ export default class FakeErrorGenerator {
 
   generate(env, resource, resourceType) {
     return new Rx.Observable(observer => {
-      setTimeout(() => observer.error(new Error("generate failed!")), 0);
+      observer.error(new Error("generate failed!"));
     });
   }
 

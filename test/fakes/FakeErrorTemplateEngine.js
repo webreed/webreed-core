@@ -9,17 +9,18 @@ import Rx from "rxjs";
 export default class FakeTemplateEngine {
 
   clearTemplateCache() {
+    return Promise.reject(new Error("clearTemplateCache failed!"));
   }
 
   renderTemplateString(template, templateParams, context) {
     return new Rx.Observable(observer => {
-      setTimeout(() => observer.error(new Error("renderTemplateString failed!")), 0);
+      observer.error(new Error("renderTemplateString failed!"));
     });
   }
 
   renderTemplate(templateName, templateParams, context) {
     return new Rx.Observable(observer => {
-      setTimeout(() => observer.error(new Error("renderTemplate failed!")), 0);
+      observer.error(new Error("renderTemplate failed!"));
     });
   }
 

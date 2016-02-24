@@ -9,7 +9,9 @@ import Rx from "rxjs";
 export default class FakeErrorTransformer {
 
   transform(resource, context) {
-    return new Rx.Observable( observer => observer.error(new Error("transform failed!")) );
+    return new Rx.Observable(observer =>
+      observer.error(new Error("transform failed!"))
+    );
   }
 
 }
