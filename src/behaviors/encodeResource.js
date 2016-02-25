@@ -4,9 +4,6 @@
 /** @module webreed/lib/behaviors/encodeResource */
 
 
-// Packages
-import Rx from "rxjs";
-
 // Project
 import Environment from "../Environment";
 import Resource from "../Resource";
@@ -23,8 +20,8 @@ import ResourceType from "../ResourceType";
  * @param {module:webreed/lib/ResourceType} resourceType
  *   Represents the type of resource that is being encoded.
  *
- * @returns {Observable.<module:webreed/lib/Resource>}
- *   An observable stream of output resources.
+ * @returns {Promise.<module:webreed/lib/Resource>}
+ *   A promise to fulfill with the encoded resource.
  */
 export default function encodeResource(env, resource, resourceType) {
   console.assert(env instanceof Environment,
@@ -47,6 +44,6 @@ export default function encodeResource(env, resource, resourceType) {
     });
   }
   else {
-    return Rx.Observable.of(resource);
+    return Promise.resolve(resource);
   }
 }

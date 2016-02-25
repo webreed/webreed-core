@@ -22,9 +22,8 @@
    * @param {object} context
    *   An object with properties providing some context for the operation.
    *
-   * @returns {Observable.<module:webreed/lib/Resource>}
-   *   An observable stream of zero-or-more output resources. The content handler may
-   *   decide to yield the input resource untouched in this stream.
+   * @returns {Promise.<module:webreed/lib/Resource>}
+   *   A promise to fulfill with the decoded resource.
    */
 
   /**
@@ -40,7 +39,6 @@
    * @param {object} context
    *   An object with properties providing some context for the operation.
    *
-   * @returns {Observable.<module:webreed/lib/Resource>}
-   *   An observable stream of zero-or-more output resources. The content handler may
-   *   decide to yield the input resource untouched in this stream.
+   * @returns {Promise.<module:webreed/lib/Resource>}
+   *   A promise to fulfill with the encoded resource.
    */

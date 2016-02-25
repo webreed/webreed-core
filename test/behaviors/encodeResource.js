@@ -3,7 +3,6 @@
 
 
 // Packages
-import Rx from "rxjs";
 import given from "mocha-testdata";
 import should from "should";
 
@@ -24,7 +23,7 @@ describe("behaviors/encodeResource", function () {
   beforeEach(function () {
     this.env = new Environment();
     this.env.handlers.set("fake", new FakeHandler());
-    this.env.handlers.set("always-fails", new FakeErrorHandler());
+    this.env.handlers.set("alwaysFails", new FakeErrorHandler());
   });
 
 
@@ -74,12 +73,12 @@ describe("behaviors/encodeResource", function () {
   });
 
 
-  it("returns an observable stream of output resources", function () {
+  it("returns a promise", function () {
     let resource = this.env.createResource();
     let resourceType = new ResourceType();
 
     encodeResource(this.env, resource, resourceType)
-      .should.be.instanceOf(Rx.Observable);
+      .should.be.a.Promise();
   });
 
   it("produces an output `Resource`", function () {
@@ -87,18 +86,15 @@ describe("behaviors/encodeResource", function () {
     let resourceType = new ResourceType();
 
     return encodeResource(this.env, resource, resourceType)
-      .reduce((a, outputResource) => outputResource, null)
-      .toPromise()
       .should.eventually.be.instanceOf(Resource);
   });
 
   it("rejects with error from content handler", function () {
     let resource = this.env.createResource();
     let resourceType = new ResourceType();
-    resourceType.handler = new PluginContext("always-fails");
+    resourceType.handler = new PluginContext("alwaysFails");
 
     return encodeResource(this.env, resource, resourceType)
-      .toPromise()
       .should.be.rejectedWith("encode failed!");
   });
 
@@ -111,7 +107,6 @@ describe("behaviors/encodeResource", function () {
     resourceType.handler = new PluginContext("fake", { foo: 123 });
 
     return encodeResource(this.env, resource, resourceType)
-      .toPromise()
       .then(() => {
         fakeHandler.lastEncodeArguments[0].inputProperty
           .should.be.eql(42);
@@ -132,34 +127,7 @@ describe("behaviors/encodeResource", function () {
     resourceType.handler = new PluginContext("fake");
 
     return encodeResource(this.env, resource, resourceType)
-      .reduce((a, outputResource) => outputResource, null)
-      .toPromise()
       .should.eventually.have.property("body", "encoded[boo!]");
-  });
-
-  it("produces multiple outputs", function () {
-    let resource = this.env.createResource({ body: "boo!" });
-    let resourceType = new ResourceType();
-    resourceType.handler = new PluginContext("fake", { pageCount: 2 });
-
-    return encodeResource(this.env, resource, resourceType)
-      .toArray()
-      .toPromise()
-      .then(results => {
-        results.length
-          .should.be.eql(2);
-
-        results[0]
-          .should.have.properties({
-            page: 1,
-            body: "encoded[boo!]"
-          });
-        results[1]
-          .should.have.properties({
-            page: 2,
-            body: "encoded[boo!]"
-          });
-      });
   });
 
 });
