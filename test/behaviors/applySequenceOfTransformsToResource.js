@@ -77,7 +77,7 @@ describe("behaviors/applySequenceOfTransformsToResource", function () {
   });
 
 
-  it("returns an observable stream of output resources", function () {
+  it("returns an observable stream", function () {
     let resource = this.env.createResource();
     let transformers = [ ];
 
