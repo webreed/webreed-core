@@ -102,7 +102,7 @@ describe("behaviors/applyTemplateToResource", function () {
       .should.be.instanceOf(Rx.Observable);
   });
 
-  it("produces an output `Resource`", function () {
+  it("resolves with an output `Resource`", function () {
     let resource = this.env.createResource();
     let templateName = "test.nunjucks";
 

@@ -50,7 +50,7 @@ describe("behaviors/loadSourceContent", function () {
   });
 
 
-  it("fulfills with a `Resource`", function () {
+  it("resolves with a `Resource`", function () {
     return loadSourceContent(this.env, "index.html")
       .should.eventually.be.instanceOf(Resource);
   });

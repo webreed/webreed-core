@@ -110,7 +110,7 @@ describe("behaviors/loadResourceFile", function () {
       .should.be.a.Promise();
   });
 
-  it("fulfills with a `Resource`", function () {
+  it("resolves with a `Resource`", function () {
     let filePath = getFixturePath("index.html");
     return loadResourceFile(this.env, filePath)
       .should.eventually.be.instanceOf(Resource);

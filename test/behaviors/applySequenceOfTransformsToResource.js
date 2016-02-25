@@ -85,7 +85,7 @@ describe("behaviors/applySequenceOfTransformsToResource", function () {
       .should.be.instanceOf(Rx.Observable);
   });
 
-  it("produces an output `Resource`", function () {
+  it("resolves with an output `Resource`", function () {
     let resource = this.env.createResource({ foo: 42 });
     let transformers = [ ];
 
@@ -137,7 +137,7 @@ describe("behaviors/applySequenceOfTransformsToResource", function () {
       .should.eventually.have.property("body", "start,a,b,c");
   });
 
-  it("produces multiple outputs", function () {
+  it("resolves with multiple outputs", function () {
     let resource = this.env.createResource({ body: "start" });
     let transformers = [
       new PluginContext("fake-two-pages"),

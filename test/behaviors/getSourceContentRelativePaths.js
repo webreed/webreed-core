@@ -44,7 +44,7 @@ describe("behaviors/getSourceContentRelativePaths", function () {
       .should.be.instanceOf(Rx.Observable);
   });
 
-  it("returns an observable with the expected source content paths", function () {
+  it("resolves with the expected source content paths", function () {
     return getSourceContentRelativePaths(this.env)
       .toArray()
       .toPromise()

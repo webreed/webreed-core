@@ -81,7 +81,7 @@ describe("behaviors/decodeResource", function () {
       .should.be.a.Promise();
   });
 
-  it("produces an output `Resource`", function () {
+  it("resolves with an output `Resource`", function () {
     let sourceResource = this.env.createResource();
     let resourceType = new ResourceType();
 
@@ -121,7 +121,7 @@ describe("behaviors/decodeResource", function () {
       });
   });
 
-  it("produces the decoded `Resource`", function () {
+  it("resolves with the decoded `Resource`", function () {
     let sourceResource = this.env.createResource({ body: "boo!" });
     let resourceType = new ResourceType();
     resourceType.handler = new PluginContext("fake");
