@@ -92,7 +92,7 @@ describe("behaviors/loadSourceContent", function () {
     // the unit tests of 'loadResourceFile' are also valid for 'loadSourceContent'.
     this.env.behaviors.loadResourceFile = function (env, filePath) {
       loadedFilePath = filePath;
-      return Promise.resolve({ });
+      return env.behaviors.__proto__.loadResourceFile.apply(null, arguments);
     };
 
     return loadSourceContent(this.env, "index.html")

@@ -123,10 +123,11 @@ export default class Environment {
    *     env.behaviors.build = function customBuild(env) {
    *       // Do stuff before the default behavior...
    *
-   *       // You can apply the default behavior.
-   *       env.behaviors.prototype.build.apply(arguments);
-   *
-   *       // Do stuff after the default behavior...
+   *       // You can then apply the default behavior.
+   *       return env.behaviors.__proto__.build.apply(null, arguments)
+   *         .then(() => {
+   *           // Do stuff after the default behavior...
+   *         });
    *     };
    *
    * The default behavior can be restored by deleting the custom behavior:
