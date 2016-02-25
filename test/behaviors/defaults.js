@@ -22,6 +22,7 @@ describe("behaviors/defaults", function () {
     "getSourceContentRelativePaths",
     "loadResourceFile",
     "loadSourceContent",
+    "processResource",
     "resolveGenerator",
     "resolveResourceMode",
     "resolveTemplateEngine",

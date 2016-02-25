@@ -12,6 +12,7 @@ export { default as generateResource } from "./generateResource";
 export { default as getSourceContentRelativePaths } from "./getSourceContentRelativePaths";
 export { default as loadResourceFile } from "./loadResourceFile";
 export { default as loadSourceContent } from "./loadSourceContent";
+export { default as processResource } from "./processResource";
 export { default as resolveGenerator } from "./resolveGenerator";
 export { default as resolveResourceMode } from "./resolveResourceMode";
 export { default as resolveTemplateEngine } from "./resolveTemplateEngine";
