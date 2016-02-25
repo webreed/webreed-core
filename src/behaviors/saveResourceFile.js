@@ -9,6 +9,7 @@ import path from "path";
 
 // Project
 import Environment from "../Environment";
+import Resource from "../Resource";
 
 
 /**
@@ -16,7 +17,7 @@ import Environment from "../Environment";
  *
  * @param {string} outputFilePath
  *   Path to the output resource file, which must be non-empty.
- * @param {module:webreed/lib/Resource|object} resource
+ * @param {module:webreed/lib/Resource} resource
  *   The resource that is to be saved.
  * @param {string} [resourceTypeExtension = null]
  *   When specified allows the caller to override the type of the resource. Assumes
@@ -38,8 +39,8 @@ export default function saveResourceFile(env, outputFilePath, resource, resource
       "argument 'env' must be a webreed environment");
   console.assert(typeof outputFilePath === "string" && outputFilePath !== "",
       "argument 'outputFilePath' must be a non-empty string");
-  console.assert(resource !== null && typeof resource === "object",
-      "argument 'resource' must be an object");
+  console.assert(resource instanceof Resource,
+      "argument 'resource' must be a `Resource`");
   console.assert(typeof resourceTypeExtension === "string",
       "argument 'resourceTypeExtension' must be `null` or a string");
 

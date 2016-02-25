@@ -54,28 +54,28 @@ describe("behaviors/saveResourceFile", function () {
 
   it("throws error when argument 'env' is not a webreed environment", function () {
     let outputFilePath = getOutputPath("index.html");
-    let resource = { };
+    let resource = this.env.createResource();
     (() => saveResourceFile(null, outputFilePath, resource))
       .should.throw("argument 'env' must be a webreed environment");
   });
 
-  given( undefined, null, 42, "" ).
+  given( undefined, null, 42, "", { }, [ ] ).
   it("throws error when argument 'outputFilePath' is not a non-empty string", function (outputFilePath) {
-    let resource = { };
+    let resource = this.env.createResource();
     (() => saveResourceFile(this.env, outputFilePath, resource))
       .should.throw("argument 'outputFilePath' must be a non-empty string");
   });
 
-  it("throws error when argument 'resource' is not an object", function () {
+  given( undefined, null, 42, "", { }, [ ] ).
+  it("throws error when argument 'resource' is not a `Resource`", function (resource) {
     let outputFilePath = getOutputPath("index.html");
-    let resource = 42;
     (() => saveResourceFile(this.env, outputFilePath, resource))
-      .should.throw("argument 'resource' must be an object");
+      .should.throw("argument 'resource' must be a `Resource`");
   });
 
   it("throws error when argument 'resourceTypeExtension' is not a string", function () {
     let outputFilePath = getOutputPath("index.html");
-    let resource = { };
+    let resource = this.env.createResource();
     let resourceTypeExtension = 42;
     (() => saveResourceFile(this.env, outputFilePath, resource, resourceTypeExtension))
       .should.throw("argument 'resourceTypeExtension' must be `null` or a string");
@@ -84,7 +84,7 @@ describe("behaviors/saveResourceFile", function () {
 
   it("throws error when saving resource with an unknown mode (via argument 'filePath')", function () {
     let outputFilePath = getOutputPath("index.foo");
-    let resource = { };
+    let resource = this.env.createResource();
 
     let fakeResourceType = new ResourceType();
     fakeResourceType.mode = "unknown";
@@ -96,7 +96,7 @@ describe("behaviors/saveResourceFile", function () {
 
   it("throws error when loading resource with an unknown mode (via argument 'resourceTypeExtension')", function () {
     let outputFilePath = getOutputPath("index.foo");
-    let resource = { };
+    let resource = this.env.createResource();
     let resourceTypeExtension = ".foo";
 
     let fakeResourceType = new ResourceType();
@@ -110,7 +110,7 @@ describe("behaviors/saveResourceFile", function () {
 
   it("returns a promise", function () {
     let outputFilePath = getOutputPath("index.html");
-    let resource = { };
+    let resource = this.env.createResource();
 
     saveResourceFile(this.env, outputFilePath, resource)
       .should.be.a.Promise();
@@ -118,7 +118,7 @@ describe("behaviors/saveResourceFile", function () {
 
   it("rejects with error from mode", function () {
     let outputFilePath = getOutputPath("index.always-fails");
-    let resource = { };
+    let resource = this.env.createResource();
 
     saveResourceFile(this.env, outputFilePath, resource)
       .should.be.rejectedWith("readFile failed!");
@@ -130,7 +130,7 @@ describe("behaviors/saveResourceFile", function () {
     let fakeMode = this.env.modes.get("fake");
 
     let outputFilePath = getOutputPath("index.html");
-    let resource = { };
+    let resource = this.env.createResource();
 
     return saveResourceFile(this.env, outputFilePath, resource)
       .then(() => {
@@ -149,7 +149,7 @@ describe("behaviors/saveResourceFile", function () {
     this.env.resourceTypes.set(".bar", new ResourceType());
 
     let outputFilePath = getOutputPath("index.bar");
-    let resource = { };
+    let resource = this.env.createResource();
 
     return saveResourceFile(this.env, outputFilePath, resource)
       .then(() => {
