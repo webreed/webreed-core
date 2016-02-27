@@ -4,41 +4,36 @@
 /** @module webreed/lib/interfaces/Handler */
 
 /**
- * Interface for a mechanism that can encode and decode a resource.
+ * Interface for a plugin that can encode and/or decode data.
  *
  * @interface module:webreed/lib/interfaces/Handler
  */
 
   /**
-   * Decodes a source resource allowing templates and transforms to interact with the data.
-   *
-   * This method does not mutate the input resource when modifications occur; instead
-   * it creates and returns a new {@link module:webreed/lib/Resource}.
+   * Decodes the given encoded data so that templates, transforms and/or generators can
+   * interact with it.
    *
    * @method module:webreed/lib/interfaces/Handler#decode
    *
-   * @param {module:webreed/lib/Resource} sourceResource
-   *   The source resource.
+   * @param {any} encodedData
+   *   The input data that is to be decoded.
    * @param {object} context
    *   An object with properties providing some context for the operation.
    *
-   * @returns {Promise.<module:webreed/lib/Resource>}
-   *   A promise to fulfill with the decoded resource.
+   * @returns {Promise.<any>}
+   *   A promise to fulfill with the decoded data.
    */
 
   /**
-   * Encodes a resource so that it can be written to output.
-   *
-   * This method does not mutate the input resource when modifications occur; instead
-   * it creates and returns a new {@link module:webreed/lib/Resource}.
+   * Encodes data so that it can be persisted.
    *
    * @method module:webreed/lib/interfaces/Handler#encode
    *
-   * @param {module:webreed/lib/Resource} resource
-   *   The resource.
+   * @param {any} data
+   *   Input data that is to be encoded.
    * @param {object} context
    *   An object with properties providing some context for the operation.
    *
-   * @returns {Promise.<module:webreed/lib/Resource>}
-   *   A promise to fulfill with the encoded resource.
+   * @returns {Promise.<any>}
+   *   A promise to fulfill with the encoded data.
    */

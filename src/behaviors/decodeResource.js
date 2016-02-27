@@ -15,7 +15,7 @@ import ResourceType from "../ResourceType";
  *
  * @param {module:webreed/lib/Environment} env
  *   An environment that represents a webreed project.
- * @param {module:webreed/lib/Resource} sourceResource
+ * @param {module:webreed/lib/Resource} resource
  *   The source resource that is being decoded.
  * @param {module:webreed/lib/ResourceType} resourceType
  *   Represents the type of resource that is being processed.
@@ -23,11 +23,11 @@ import ResourceType from "../ResourceType";
  * @returns {Promise.<module:webreed/lib/Resource>}
  *   A promise to fulfill with the decoded resource.
  */
-export default function decodeResource(env, sourceResource, resourceType) {
+export default function decodeResource(env, resource, resourceType) {
   console.assert(env instanceof Environment,
       "argument 'env' must be a webreed environment");
-  console.assert(sourceResource instanceof Resource,
-      "argument 'sourceResource' must be a `Resource`");
+  console.assert(resource instanceof Resource,
+      "argument 'resource' must be a `Resource`");
   console.assert(resourceType instanceof ResourceType,
       "argument 'resourceType' must be a `ResourceType`");
 
@@ -35,15 +35,16 @@ export default function decodeResource(env, sourceResource, resourceType) {
     let resolvedHandlerName = env.handlers.noisyResolve(resourceType.handler.name);
     let handlerPlugin = env.handlers.get(resolvedHandlerName);
 
-    return handlerPlugin.decode(sourceResource, {
+    return handlerPlugin.decode(resource.body, {
       handler: {
         name: resolvedHandlerName,
         options: resourceType.handler.options
       },
+      resource: resource,
       resourceType: resourceType
     });
   }
   else {
-    return Promise.resolve(sourceResource);
+    return Promise.resolve(resource.body);
   }
 }

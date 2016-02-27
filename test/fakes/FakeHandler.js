@@ -4,18 +4,18 @@
 
 export default class FakeHandler {
 
-  decode(sourceResource, context) {
+  decode(encodedData, context) {
     this.lastDecodeArguments = Array.from(arguments);
-    return Promise.resolve(sourceResource.clone({
-        body: `decoded[${sourceResource.body}]`
-      }));
+    return Promise.resolve(
+      `decoded[${encodedData}]`
+    );
   }
 
-  encode(resource, context) {
+  encode(data, context) {
     this.lastEncodeArguments = Array.from(arguments);
-    return Promise.resolve(resource.clone({
-        body: `encoded[${resource.body}]`
-      }));
+    return Promise.resolve(
+      `encoded[${data}]`
+    );
   }
 
 }
