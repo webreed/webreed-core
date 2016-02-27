@@ -24,7 +24,7 @@ import getTargetExtensionFromPath from "../util/getTargetExtensionFromPath";
  * @param {module:webreed/lib/Environment} env
  *   An environment that represents a webreed project.
  * @param {string} filePath
- *   Path to the input resource file, which must be non-empty.
+ *   Absolute path to the input resource file, which must be non-empty.
  * @param {string} [resourceTypeExtension = null]
  *   When specified allows caller to specify the type of the resource; otherwise the
  *   resource type is resolved using file extension from argument 'filePath'.

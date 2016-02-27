@@ -16,7 +16,7 @@ import Resource from "../Resource";
  * Saves a resource file.
  *
  * @param {string} outputFilePath
- *   Path to the output resource file, which must be non-empty.
+ *   Absolute path to the output resource file, which must be non-empty.
  * @param {module:webreed/lib/Resource} resource
  *   The resource that is to be saved.
  * @param {string} [resourceTypeExtension = null]
