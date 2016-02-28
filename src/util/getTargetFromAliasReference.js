@@ -16,7 +16,7 @@
  */
 export default function getTargetFromAliasReference(value) {
   if (typeof value === "string") {
-    let match = value.match(/^alias-of\(([^\(\)]+)\)$/);
+    let match = value.match(/^alias-of\(([^\(\)]*)\)$/);
     if (match !== null) {
       return match[1];
     }

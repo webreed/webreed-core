@@ -17,13 +17,13 @@ describe("util/isAliasReference", function () {
       .should.be.a.Function();
   });
 
-  given( "alias-of(hello)", "alias-of(hello-world)", "alias-of(super/special.test)" ).
+  given( "alias-of()", "alias-of(hello)", "alias-of(hello-world)", "alias-of(super/special.test)" ).
   it("returns `true` when argument 'value' is an alias reference", function (value) {
     isAliasReference(value)
       .should.be.true();
   });
 
-  given( null, 42, "hello", "alias-of", "alias-of()", "alias-of(foo" ).
+  given( null, 42, "hello", "alias-of", "alias-of(foo" ).
   it("returns `false` when argument 'value' is not an alias reference", function (value) {
     isAliasReference(value)
       .should.be.false();

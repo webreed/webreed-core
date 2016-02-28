@@ -56,10 +56,10 @@ describe("AliasMap", function () {
         }
       }
 
-      new MockedAliasMap([ [ "A", 2 ], [ "b", 4 ] ]);
+      new MockedAliasMap([ [ "", 42 ], [ "A", 2 ], [ "b", 4 ] ]);
 
       entries
-        .should.be.eql([ [ "A", 2 ], [ "b", 4 ] ]);
+        .should.be.eql([ [ "", 42 ], [ "A", 2 ], [ "b", 4 ] ]);
     });
 
   });
@@ -136,16 +136,18 @@ describe("AliasMap", function () {
         .should.be.a.Function();
     });
 
-    given( undefined, null, 42, "" ).
-    it("throws error when argument 'key' is not a non-empty string", function (key) {
+    given( undefined, null, 42 ).
+    it("throws error when argument 'key' is not a string", function (key) {
       (() => this.aliasMap.delete(key))
-        .should.throw("argument 'key' must be a non-empty string");
+        .should.throw("argument 'key' must be a string");
     });
 
     given(
+      [ ""  , ""  , false ],
       [ "A" , "A" , false ],
       [ "BB", "BB", false ],
       [ "c" , "c" , false ],
+      [ ""  , ""  , true ],
       [ "A" , "a" , true ],
       [ "BB", "bb", true ],
       [ "c" , "c" , true ]
@@ -187,9 +189,9 @@ describe("AliasMap", function () {
     });
 
     it("returns an iterator that yields key/value pairs representing the AliasMap", function () {
-      let newAliasMap = new AliasMap([ [ "A", 2 ], [ "b", 4 ], [ "c", 8 ] ]);
+      let newAliasMap = new AliasMap([ [ "", 42 ], [ "A", 2 ], [ "b", 4 ], [ "c", 8 ] ]);
       Array.from(newAliasMap.entries())
-        .should.be.eql([ [ "A", 2 ], [ "b", 4 ], [ "c", 8 ] ]);
+        .should.be.eql([ [ "", 42 ], [ "A", 2 ], [ "b", 4 ], [ "c", 8 ] ]);
     });
 
   });
@@ -207,7 +209,7 @@ describe("AliasMap", function () {
     });
 
     it("passes key, value and map to callback for each entry", function () {
-      let newAliasMap = new AliasMap([ [ "A", 2 ], [ "b", 4 ], [ "c", 8 ] ]);
+      let newAliasMap = new AliasMap([ [ "", 42 ], [ "A", 2 ], [ "b", 4 ], [ "c", 8 ] ]);
 
       let entries = [ ];
 
@@ -218,7 +220,7 @@ describe("AliasMap", function () {
       });
 
       entries
-        .should.be.eql([ [ "A", 2 ], [ "b", 4 ], [ "c", 8 ] ]);
+        .should.be.eql([ [ "", 42 ], [ "A", 2 ], [ "b", 4 ], [ "c", 8 ] ]);
     });
 
     it("binds `this` of callback", function () {
@@ -241,16 +243,18 @@ describe("AliasMap", function () {
         .should.be.a.Function();
     });
 
-    given( undefined, null, 42, "" ).
-    it("throws error when argument 'key' is not a non-empty string", function (key) {
+    given( undefined, null, 42 ).
+    it("throws error when argument 'key' is not a string", function (key) {
       (() => this.aliasMap.get(key))
-        .should.throw("argument 'key' must be a non-empty string");
+        .should.throw("argument 'key' must be a string");
     });
 
     given(
+      [ ""  , ""  , false ],
       [ "A" , "A" , false ],
       [ "BB", "BB", false ],
       [ "c" , "c" , false ],
+      [ ""  , ""  , true ],
       [ "A" , "a" , true ],
       [ "BB", "bb", true ],
       [ "c" , "c" , true ]
@@ -281,16 +285,18 @@ describe("AliasMap", function () {
         .should.be.a.Function();
     });
 
-    given( undefined, null, 42, "" ).
-    it("throws error when argument 'key' is not a non-empty string", function (key) {
+    given( undefined, null, 42 ).
+    it("throws error when argument 'key' is not a string", function (key) {
       (() => this.aliasMap.has(key))
-        .should.throw("argument 'key' must be a non-empty string");
+        .should.throw("argument 'key' must be a string");
     });
 
     given(
+      [ ""  , ""  , false ],
       [ "A" , "A" , false ],
       [ "BB", "BB", false ],
       [ "c" , "c" , false ],
+      [ ""  , ""  , true ],
       [ "A" , "a" , true ],
       [ "BB", "bb", true ],
       [ "c" , "c" , true ]
@@ -341,10 +347,10 @@ describe("AliasMap", function () {
         .should.be.a.Function();
     });
 
-    given( undefined, null, 42, "" ).
-    it("throws error when argument 'key' is not a non-empty string", function (key) {
+    given( undefined, null, 42 ).
+    it("throws error when argument 'key' is not a string", function (key) {
       (() => this.aliasMap.lookup(key))
-        .should.throw("argument 'key' must be a non-empty string");
+        .should.throw("argument 'key' must be a string");
     });
 
     it("throws error when the specified key could not be resolved", function () {
@@ -400,10 +406,10 @@ describe("AliasMap", function () {
         .should.be.a.Function();
     });
 
-    given( undefined, null, 42, "" ).
-    it("throws error when argument 'key' is not a non-empty string", function (key) {
+    given( undefined, null, 42 ).
+    it("throws error when argument 'key' is not a string", function (key) {
       (() => this.aliasMap.lookupQuiet(key))
-        .should.throw("argument 'key' must be a non-empty string");
+        .should.throw("argument 'key' must be a string");
     });
 
     it("returns `undefined` when the specified key could not be resolved", function () {
@@ -450,10 +456,10 @@ describe("AliasMap", function () {
         .should.be.a.Function();
     });
 
-    given( undefined, null, 42, "" ).
-    it("throws error when argument 'key' is not a non-empty string", function (key) {
+    given( undefined, null, 42 ).
+    it("throws error when argument 'key' is not a string", function (key) {
       (() => this.aliasMap.noisyResolve(key))
-        .should.throw("argument 'key' must be a non-empty string");
+        .should.throw("argument 'key' must be a string");
     });
 
     it("throws error when the specified key could not be resolved", function () {
@@ -494,10 +500,10 @@ describe("AliasMap", function () {
         .should.be.a.Function();
     });
 
-    given( undefined, null, 42, "" ).
-    it("throws error when argument 'key' is not a non-empty string", function (key) {
+    given( undefined, null, 42 ).
+    it("throws error when argument 'key' is not a string", function (key) {
       (() => this.aliasMap.resolve(key))
-        .should.throw("argument 'key' must be a non-empty string");
+        .should.throw("argument 'key' must be a string");
     });
 
     it("throws error when attempting to resolve a circular reference", function () {
@@ -576,6 +582,16 @@ describe("AliasMap", function () {
         .should.be.eql("A");
     });
 
+    it("resolves alias reference with empty target key", function () {
+      let newAliasMap = new AliasMap([
+        [ "", 42 ],
+        [ "b", "alias-of()" ]
+      ]);
+
+      newAliasMap.resolve("b")
+        .should.be.eql("");
+    });
+
     it("resolves alias reference with mixed casing AliasMap is not case-sensitive", function () {
       let newAliasMap = new AliasMap([
         [ "A", 42 ],
@@ -606,10 +622,10 @@ describe("AliasMap", function () {
         .should.be.a.Function();
     });
 
-    given( undefined, null, 42, "" ).
-    it("throws error when argument 'key' is not a non-empty string", function (key) {
+    given( undefined, null, 42 ).
+    it("throws error when argument 'key' is not a string", function (key) {
       (() => this.aliasMap.set(key, 42))
-        .should.throw("argument 'key' must be a non-empty string");
+        .should.throw("argument 'key' must be a string");
     });
 
     it("returns the AliasMap instance so that method calls can be chained", function () {
@@ -618,9 +634,11 @@ describe("AliasMap", function () {
     });
 
     given(
+      [ ""  , ""  , false ],
       [ "A" , "A" , false ],
       [ "BB", "BB", false ],
       [ "c" , "c" , false ],
+      [ ""  , ""  , true ],
       [ "A" , "a" , true ],
       [ "BB", "bb", true ],
       [ "c" , "c" , true ]
@@ -661,9 +679,9 @@ describe("AliasMap", function () {
     });
 
     it("returns an iterator that yields the values of the AliasMap", function () {
-      let newAliasMap = new AliasMap([ [ "A", 2 ], [ "b", 4 ], [ "c", 8 ] ]);
+      let newAliasMap = new AliasMap([ [ "", 42 ], [ "A", 2 ], [ "b", 4 ], [ "c", 8 ] ]);
       Array.from(newAliasMap.values())
-        .should.be.eql([ 2, 4, 8 ]);
+        .should.be.eql([ 42, 2, 4, 8 ]);
     });
 
   });

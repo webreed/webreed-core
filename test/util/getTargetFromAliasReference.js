@@ -18,6 +18,7 @@ describe("util/getTargetFromAliasReference", function () {
   });
 
   given(
+    [ "alias-of()", "" ],
     [ "alias-of(hello)", "hello" ],
     [ "alias-of(hello-world)", "hello-world" ],
     [ "alias-of(super/special.test)", "super/special.test" ]
@@ -27,7 +28,7 @@ describe("util/getTargetFromAliasReference", function () {
       .should.be.eql(expectedResult);
   });
 
-  given( null, 42, "hello", "alias-of", "alias-of()", "alias-of(foo" ).
+  given( null, 42, "hello", "alias-of", "alias-of(foo" ).
   it("returns `null` when argument 'value' is not an alias reference", function (value) {
     let result = getTargetFromAliasReference(value);
     should.not.exist(result);

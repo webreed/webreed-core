@@ -361,8 +361,8 @@ export default class AliasMap {
 
 
 function sanitizeKey(aliasMap, key) {
-  console.assert(typeof key === "string" && key !== "",
-      "argument 'key' must be a non-empty string");
+  console.assert(typeof key === "string",
+      "argument 'key' must be a string");
 
   return aliasMap.ignoreCase ? key.toLowerCase() : key;
 }
