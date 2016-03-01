@@ -19,7 +19,7 @@ describe("behaviors/getSourceContentRelativePaths", function () {
 
   beforeEach(function () {
     this.env = new Environment();
-    this.env.projectRootPath = path.join(path.dirname(__dirname), "fixtures/project-with-excluded-files");
+    this.env.projectRootPath = path.join(path.dirname(__dirname), "fixtures/project-with-excluded-content");
   });
 
 
