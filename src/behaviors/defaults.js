@@ -3,6 +3,7 @@
 
 /** @module webreed/lib/behaviors/defaults */
 
+export { default as applyExtensionChainToResource } from "./applyExtensionChainToResource";
 export { default as applySequenceOfTransformsToResource } from "./applySequenceOfTransformsToResource";
 export { default as applyTemplateToResource } from "./applyTemplateToResource";
 export { default as build } from "./build";

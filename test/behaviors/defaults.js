@@ -13,6 +13,7 @@ import * as defaultBehaviors from "../../src/behaviors/defaults";
 describe("behaviors/defaults", function () {
 
   given(
+    "applyExtensionChainToResource",
     "applySequenceOfTransformsToResource",
     "applyTemplateToResource",
     "build",
