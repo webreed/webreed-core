@@ -4,14 +4,16 @@
 
 // Packages
 import Rx from "rxjs";
+import formatUnicorn from "format-unicorn/safe";
 
 
 export default class FakeTransformer {
 
-  constructor(value, pageCount) {
+  constructor(value, pageCount, bodyFormat) {
     this.value = value;
     this.pageCount = pageCount || 1;
     this.hasMultipleOutputs = this.pageCount !== 1;
+    this.bodyFormat = bodyFormat || "{body},{value}";
   }
 
   transform(resource, context) {
@@ -19,7 +21,7 @@ export default class FakeTransformer {
     return Rx.Observable.range(1, this.pageCount)
       .map(page => resource.clone({
         page: this.hasMultipleOutputs ? page : resource.page,
-        body: resource.body + "," + this.value
+        body: formatUnicorn(this.bodyFormat, { body: resource.body, value: this.value })
       }));
   }
 

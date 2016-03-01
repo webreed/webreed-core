@@ -5,17 +5,18 @@
 
 
 // Project
-import ContentTransforms from "./ContentTransforms";
 import PluginContext from "./PluginContext";
 
 
 // Symbols to simulate private fields
+const conversionsField = Symbol();
 const customField = Symbol();
 const defaultTargetExtensionField = Symbol();
 const generatorField = Symbol();
 const handlerField = Symbol();
 const modeField = Symbol();
 const parseFrontmatterField = Symbol();
+const processField = Symbol();
 const templateEngineField = Symbol();
 const transformsField = Symbol();
 
@@ -26,16 +27,32 @@ const transformsField = Symbol();
 export default class ResourceType {
 
   constructor() {
+    this[conversionsField] = { };
     this[customField] = { };
     this[defaultTargetExtensionField] = null;
     this[generatorField] = null;
     this[handlerField] = null;
     this[modeField] = "text";
     this[parseFrontmatterField] = true;
+    this[processField] = [ ];
     this[templateEngineField] = null;
-    this[transformsField] = new ContentTransforms();
   }
 
+
+  /**
+   * Map of conversion transformations from the current resource type to another.
+   *
+   * @member {object.<string, ?module:webreed/lib/PluginContext[]>}
+   */
+  get conversions() {
+    return this[conversionsField];
+  }
+  set conversions(value) {
+    console.assert(value !== null && typeof value === "object",
+       "argument 'value' must be an object");
+
+    this[conversionsField] = sanitizePluginContextLookupArgument("value", value);
+  }
 
   /**
    * Holds custom key/value pairs.
@@ -144,6 +161,19 @@ export default class ResourceType {
   }
 
   /**
+   * An array of zero-or-more transforms that are applied in order to a resource **before**
+   * any conversion transformations are applied.
+   *
+   * @member {?module:webreed/lib/PluginContext[]}
+   */
+  get process() {
+    return this[processField];
+  }
+  set process(value) {
+    this[processField] = sanitizePluginContextArrayArgument("value", value);
+  }
+
+  /**
    * Plugin context identifying the template engine plugin.
    *
    * Additional properties or overrides can be passed to the plugin via the options
@@ -161,14 +191,25 @@ export default class ResourceType {
     this[templateEngineField] = value;
   }
 
-  /**
-   * Identifies transform plugins that are used at various stages of content transformation.
-   *
-   * @member {module:webreed/lib/ContentTransforms}
-   * @readonly
-   */
-  get transforms() {
-    return this[transformsField];
-  }
+}
 
+
+function sanitizePluginContextArrayArgument(argumentName, value) {
+  console.assert(!!value && typeof value[Symbol.iterator] === "function",
+      `argument '${argumentName}' must be iterable`);
+
+  value = Array.from(value);
+
+  console.assert(value.reduce((a, v) => a && v instanceof PluginContext, true),
+      `argument '${argumentName}' must be an iterable of zero-or-more \`PluginContext\` values`);
+
+  return value;
+}
+
+function sanitizePluginContextLookupArgument(argumentName, value) {
+  let result = { };
+  for (let key of Object.keys(value)) {
+    result[key] = sanitizePluginContextArrayArgument(`${argumentName}["${key}"]`, value[key]);
+  }
+  return result;
 }

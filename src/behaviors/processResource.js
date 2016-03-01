@@ -31,5 +31,5 @@ export default function processResource(env, resource, resourceType) {
   console.assert(resourceType instanceof ResourceType,
       "argument 'resourceType' must be a `ResourceType`");
 
-  return env.invoke("applySequenceOfTransformsToResource", resource, resourceType.transforms.process);
+  return env.invoke("applySequenceOfTransformsToResource", resource, resourceType.process);
 }

@@ -83,7 +83,7 @@ describe("behaviors/processResource", function () {
   it("rejects with error from process transformer", function () {
     let resource = this.env.createResource();
     let resourceType = new ResourceType();
-    resourceType.transforms.process = [ new PluginContext("transformerAlwaysFails") ];
+    resourceType.process = [ new PluginContext("transformerAlwaysFails") ];
 
     return processResource(this.env, resource, resourceType)
       .toPromise()

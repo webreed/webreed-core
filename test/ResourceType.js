@@ -7,7 +7,6 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import ContentTransforms from "../src/ContentTransforms";
 import PluginContext from "../src/PluginContext";
 import ResourceType from "../src/ResourceType";
 
@@ -34,6 +33,52 @@ describe("ResourceType", function () {
 
   });
 
+
+  describe("#conversions", function () {
+
+    it("is empty by default", function () {
+      this.resourceType.conversions
+        .should.be.eql({ });
+    });
+
+  });
+
+  describe("#conversions=", function () {
+
+    given( undefined, null, 42, "", [ ] ).
+    it("throws error when argument 'value' is not an object", function (value) {
+      (() => this.resourceType.conversions = value)
+        .should.throw("argument 'value' must be an object");
+    });
+
+    given(
+      { ".html": undefined },
+      { ".html": null },
+      { ".html": 42 }
+    ).
+    it("throws error when argument 'value' has a property value that is not iterable", function (value) {
+      (() => this.resourceType.conversions = value)
+        .should.throw("argument 'value[\".html\"]' must be iterable");
+    });
+
+    it("throws error when argument 'value' has a property value that is not an iterable of `PluginContext`", function () {
+      (() => this.resourceType.conversions = { ".html": [ 42 ] })
+        .should.throw("argument 'value[\".html\"]' must be an iterable of zero-or-more `PluginContext` values");
+    });
+
+    given(
+      { },
+      { ".html": [ ] },
+      { ".html": [ new PluginContext("foo") ] },
+      { ".html": [ new PluginContext("foo"), new PluginContext("bar") ] }
+    ).
+    it("takes on assigned value", function (value) {
+      this.resourceType.conversions = value;
+      this.resourceType.conversions
+        .should.be.eql(value);
+    });
+
+  });
 
   describe("#custom", function () {
 
@@ -201,6 +246,41 @@ describe("ResourceType", function () {
 
   });
 
+  describe("#process", function () {
+
+    it("is empty by default", function () {
+      this.resourceType.process
+        .should.be.eql([ ]);
+    });
+
+  });
+
+  describe("#process=", function () {
+
+    given( undefined, null, 42 ).
+    it("throws error when argument 'value' is not iterable", function (value) {
+      (() => this.resourceType.process = value)
+        .should.throw("argument 'value' must be iterable");
+    });
+
+    it("throws error when argument 'value' is not an iterable of `PluginContext`", function () {
+      (() => this.resourceType.process = [ 42 ])
+        .should.throw("argument 'value' must be an iterable of zero-or-more `PluginContext` values");
+    });
+
+    given(
+      [  [ ]                                                     ],
+      [  [ new PluginContext("foo") ]                            ],
+      [  [ new PluginContext("foo"), new PluginContext("bar") ]  ]
+    ).
+    it("takes on assigned value", function (value) {
+      this.resourceType.process = value;
+      this.resourceType.process
+        .should.be.eql(value);
+    });
+
+  });
+
   describe("#templateEngine", function () {
 
     it("is `null` by default", function () {
@@ -229,20 +309,6 @@ describe("ResourceType", function () {
       this.resourceType.templateEngine = templateEngine;
       this.resourceType.templateEngine
         .should.be.exactly(templateEngine);
-    });
-
-  });
-
-  describe("#transforms", function () {
-
-    it("is read-only", function () {
-      (() => this.resourceType.transforms = 42)
-        .should.throw();
-    });
-
-    it("is a `ContentTransforms` instance", function () {
-      this.resourceType.transforms
-        .should.be.instanceOf(ContentTransforms);
     });
 
   });
