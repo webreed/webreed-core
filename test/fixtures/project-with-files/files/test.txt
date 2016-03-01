@@ -1,0 +1,1 @@
+A file that gets copied to the output directory.
