@@ -61,13 +61,13 @@ export default function loadResourceFile(env, filePath, resourceTypeExtension, b
 
   // Resolve an implied target extension.
   let targetResourceType = env.resourceTypes.lookupQuiet(targetExtension);
-  if (targetResourceType && typeof targetResourceType.defaultTransform === "string") {
+  if (targetResourceType && typeof targetResourceType.defaultTargetExtension === "string") {
     // Update extension in base properties.
-    targetExtension = targetResourceType.defaultTransform;
+    targetExtension = targetResourceType.defaultTargetExtension;
 
-    // Make sure that `__sourceExtensionChain` includes an implied `defaultTransform`.
-    if (!sourceExtensionChain.startsWith(targetResourceType.defaultTransform)) {
-      sourceExtensionChain = targetResourceType.defaultTransform + sourceExtensionChain;
+    // Make sure that `__sourceExtensionChain` includes an implied `defaultTargetExtension`.
+    if (!sourceExtensionChain.startsWith(targetResourceType.defaultTargetExtension)) {
+      sourceExtensionChain = targetResourceType.defaultTargetExtension + sourceExtensionChain;
     }
   }
 

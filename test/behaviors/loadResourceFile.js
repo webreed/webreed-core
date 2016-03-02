@@ -36,6 +36,11 @@ describe("behaviors/loadResourceFile", function () {
     defaultResourceType.mode = "fake";
     this.env.resourceTypes.set("*", defaultResourceType);
 
+    let markdownResourceType = new ResourceType();
+    markdownResourceType.mode = "fake";
+    markdownResourceType.defaultTargetExtension = ".html";
+    this.env.resourceTypes.set(".md", markdownResourceType);
+
     let alwaysFailsResourceType = new ResourceType();
     alwaysFailsResourceType.mode = "alwaysFails";
     this.env.resourceTypes.set(".always-fails", alwaysFailsResourceType);
@@ -175,6 +180,18 @@ describe("behaviors/loadResourceFile", function () {
         __sourceFilePath: filePath,
         __sourceType: ".foo",
         __mode: "fake"
+      });
+  });
+
+  given( "index.md", "index.html.md" ).
+  it("takes target extension from `ResourceType#defaultTargetExtension`", function (contentRelativePath) {
+    let filePath = getFixturePath(contentRelativePath);
+    return loadResourceFile(this.env, filePath)
+      .should.eventually.have.properties({
+        __sourceExtensionChain: ".html.md",
+        __sourceFilePath: filePath,
+        __sourceType: ".md",
+        _extension: ".html"
       });
   });
 
