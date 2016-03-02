@@ -21,5 +21,10 @@ export default function build(env) {
   console.assert(env instanceof Environment,
       "argument 'env' must be a webreed environment");
 
-  return Promise.resolve();
+  return Promise.resolve()
+    .then(() => console.log("Processing content files..."))
+    .then(() => env.invoke("processSourceContentFiles"))
+    .then(() => console.log("Copying output files..."))
+    .then(() => env.invoke("copyFilesToOutput"))
+    .then(() => console.log("Completed."));
 }
