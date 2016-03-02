@@ -49,8 +49,9 @@ describe("behaviors/build", function () {
   });
 
 
-  it("throws error when argument 'env' is not a webreed environment", function () {
-    (() => build(null))
+  given( undefined, null, 42, "" ).
+  it("throws error when argument 'env' is not a webreed environment", function (env) {
+    (() => build(env))
       .should.throw("argument 'env' must be a webreed environment");
   });
 

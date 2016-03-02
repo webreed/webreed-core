@@ -30,18 +30,21 @@ describe("behaviors/resolveResourceMode", function () {
   });
 
 
-  it("throws error when argument 'env' is not a webreed environment", function () {
-    (() => resolveResourceMode(null))
+  given( undefined, null, 42, "" ).
+  it("throws error when argument 'env' is not a webreed environment", function (env) {
+    (() => resolveResourceMode(env))
       .should.throw("argument 'env' must be a webreed environment");
   });
 
-  it("throws error when argument 'resource' is specified but is not an object", function () {
-    (() => resolveResourceMode(this.env, 42))
+  given( 42, "" ).
+  it("throws error when argument 'resource' is specified but is not an object", function (resource) {
+    (() => resolveResourceMode(this.env, resource))
       .should.throw("argument 'resource' must be `null` or an object");
   });
 
-  it("throws error when argument 'resourceType' is specified but is not an object", function () {
-    (() => resolveResourceMode(this.env, null, 42))
+  given( 42, "" ).
+  it("throws error when argument 'resourceType' is specified but is not an object", function (resourceType) {
+    (() => resolveResourceMode(this.env, null, resourceType))
       .should.throw("argument 'resourceType' must be `null` or an object");
   });
 

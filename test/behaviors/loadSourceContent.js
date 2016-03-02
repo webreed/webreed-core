@@ -61,8 +61,9 @@ describe("behaviors/loadSourceContent", function () {
   });
 
 
-  it("throws error when argument 'env' is not a webreed environment", function () {
-    (() => loadSourceContent(null, "index.html"))
+  given( undefined, null, 42, "" ).
+  it("throws error when argument 'env' is not a webreed environment", function (env) {
+    (() => loadSourceContent(env, "index.html"))
       .should.throw("argument 'env' must be a webreed environment");
   });
 

@@ -58,9 +58,10 @@ describe("behaviors/loadResourceFile", function () {
   });
 
 
-  it("throws error when argument 'env' is not a webreed environment", function () {
+  given( undefined, null, 42, "" ).
+  it("throws error when argument 'env' is not a webreed environment", function (env) {
     let filePath = getFixturePath("index.html");
-    (() => loadResourceFile(null, filePath))
+    (() => loadResourceFile(env, filePath))
       .should.throw("argument 'env' must be a webreed environment");
   });
 

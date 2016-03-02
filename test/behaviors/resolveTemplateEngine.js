@@ -45,9 +45,10 @@ describe("behaviors/resolveTemplateEngine", function () {
   });
 
 
-  it("throws error when argument 'env' is not a webreed environment", function () {
+  given( undefined, null, 42, "" ).
+  it("throws error when argument 'env' is not a webreed environment", function (env) {
     let templateName = "test.nunjucks";
-    (() => resolveTemplateEngine(null, templateName))
+    (() => resolveTemplateEngine(env, templateName))
       .should.throw("argument 'env' must be a webreed environment");
   });
 

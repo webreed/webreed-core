@@ -31,18 +31,21 @@ describe("behaviors/resolveGenerator", function () {
   });
 
 
-  it("throws error when argument 'env' is not a webreed environment", function () {
-    (() => resolveGenerator(null))
+  given( undefined, null, 42, "" ).
+  it("throws error when argument 'env' is not a webreed environment", function (env) {
+    (() => resolveGenerator(env))
       .should.throw("argument 'env' must be a webreed environment");
   });
 
-  it("throws error when argument 'resource' is specified but is not an object", function () {
-    (() => resolveGenerator(this.env, 42))
+  given( 42, "" ).
+  it("throws error when argument 'resource' is specified but is not an object", function (resource) {
+    (() => resolveGenerator(this.env, resource))
       .should.throw("argument 'resource' must be `null` or an object");
   });
 
-  it("throws error when argument 'resourceType' is specified but is not an object", function () {
-    (() => resolveGenerator(this.env, null, 42))
+  given( 42, "" ).
+  it("throws error when argument 'resourceType' is specified but is not an object", function (resourceType) {
+    (() => resolveGenerator(this.env, null, resourceType))
       .should.throw("argument 'resourceType' must be `null` or an object");
   });
 

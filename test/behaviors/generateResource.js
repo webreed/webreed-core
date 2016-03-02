@@ -38,11 +38,12 @@ describe("behaviors/generateResource", function () {
   });
 
 
-  it("throws error when argument 'env' is not a webreed environment", function () {
+  given( undefined, null, 42, "" ).
+  it("throws error when argument 'env' is not a webreed environment", function (env) {
     let resource = this.env.createResource();
     let resourceType = new ResourceType();
 
-    (() => generateResource(null, resource, resourceType))
+    (() => generateResource(env, resource, resourceType))
       .should.throw("argument 'env' must be a webreed environment");
   });
 

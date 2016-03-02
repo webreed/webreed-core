@@ -34,8 +34,9 @@ describe("behaviors/getSourceContentRelativePaths", function () {
   });
 
 
-  it("throws error when argument 'env' is not a webreed environment", function () {
-    (() => getSourceContentRelativePaths(null))
+  given( undefined, null, 42, "" ).
+  it("throws error when argument 'env' is not a webreed environment", function (env) {
+    (() => getSourceContentRelativePaths(env))
       .should.throw("argument 'env' must be a webreed environment");
   });
 

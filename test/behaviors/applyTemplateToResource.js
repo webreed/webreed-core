@@ -52,11 +52,12 @@ describe("behaviors/applyTemplateToResource", function () {
   });
 
 
-  it("throws error when argument 'env' is not a webreed environment", function () {
+  given( undefined, null, 42, "" ).
+  it("throws error when argument 'env' is not a webreed environment", function (env) {
     let resource = this.env.createResource();
     let templateName = "test.nunjucks";
 
-    (() => applyTemplateToResource(null, resource, templateName))
+    (() => applyTemplateToResource(env, resource, templateName))
       .should.throw("argument 'env' must be a webreed environment");
   });
 

@@ -58,8 +58,9 @@ describe("behaviors/processSourceContentFiles", function () {
   });
 
 
-  it("throws error when argument 'env' is not a webreed environment", function () {
-    (() => processSourceContentFiles(null))
+  given( undefined, null, 42, "" ).
+  it("throws error when argument 'env' is not a webreed environment", function (env) {
+    (() => processSourceContentFiles(env))
       .should.throw("argument 'env' must be a webreed environment");
   });
 

@@ -52,10 +52,11 @@ describe("behaviors/saveResourceFile", function () {
   });
 
 
-  it("throws error when argument 'env' is not a webreed environment", function () {
+  given( undefined, null, 42, "" ).
+  it("throws error when argument 'env' is not a webreed environment", function (env) {
     let outputFilePath = getOutputPath("index.html");
     let resource = this.env.createResource();
-    (() => saveResourceFile(null, outputFilePath, resource))
+    (() => saveResourceFile(env, outputFilePath, resource))
       .should.throw("argument 'env' must be a webreed environment");
   });
 
