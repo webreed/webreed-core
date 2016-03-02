@@ -24,6 +24,7 @@ describe("behaviors/defaults", function () {
     "loadResourceFile",
     "loadSourceContent",
     "processResource",
+    "processSourceContentFiles",
     "resolveGenerator",
     "resolveResourceMode",
     "resolveTemplateEngine",
