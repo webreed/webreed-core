@@ -39,7 +39,7 @@ export default function resolveResourceMode(env, resource, resourceType, fallbac
   if (!!resource && !!resource.__mode) {
     modeName = resource.__mode;
   }
-  else if (!!resourceType && !!resourceType.mode) {
+  else if (!!resourceType) {
     modeName = resourceType.mode;
   }
   else {
