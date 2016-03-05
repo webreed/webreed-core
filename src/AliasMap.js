@@ -13,14 +13,6 @@ import getTargetFromAliasReference from "./util/getTargetFromAliasReference";
 import isAliasReference from "./util/isAliasReference";
 
 
-// Symbols to simulate private fields
-const optionsField = Symbol();
-const mapField = Symbol();
-
-// Exported to facilitate with unit testing.
-export const __innerMapField = mapField;
-
-
 const defaultOptions = Object.freeze({
   fallbackResolve: (aliasMap, key) => undefined,
   ignoreCase: false,
@@ -56,10 +48,10 @@ export default class AliasMap {
     options = _.defaultsDeep({ }, options, defaultOptions);
     options.ignoreCase = !!options.ignoreCase;
 
-    this[optionsField] = Object.freeze(options);
-    this[mapField] = new Map();
+    this._options = Object.freeze(options);
+    this._map = new Map();
 
-    this[Symbol.iterator] = this[mapField][Symbol.iterator];
+    this[Symbol.iterator] = this._map[Symbol.iterator];
 
     if (!!iterable) {
       for (let entry of iterable) {
@@ -93,7 +85,7 @@ export default class AliasMap {
    * @readonly
    */
   get ignoreCase() {
-    return this[optionsField].ignoreCase;
+    return this._options.ignoreCase;
   }
 
   /**
@@ -103,7 +95,7 @@ export default class AliasMap {
    * @readonly
    */
   get size() {
-    return this[mapField].size;
+    return this._map.size;
   }
 
 
@@ -111,7 +103,7 @@ export default class AliasMap {
    * Clears all entries from the collection.
    */
   clear() {
-    this[mapField].clear();
+    this._map.clear();
   }
 
   /**
@@ -125,7 +117,7 @@ export default class AliasMap {
    */
   delete(key) {
     key = sanitizeKey(this, key);
-    return this[mapField].delete(key);
+    return this._map.delete(key);
   }
 
   /**
@@ -134,7 +126,7 @@ export default class AliasMap {
    * @returns {Iterator}
    */
   entries() {
-    return this[mapField].entries();
+    return this._map.entries();
   }
 
   /**
@@ -149,7 +141,7 @@ export default class AliasMap {
     console.assert(typeof callback === "function",
         "argument 'callback' must be a function");
 
-    this[mapField].forEach((value, key) =>
+    this._map.forEach((value, key) =>
       callback.call(thisArg, value, key, this)
     );
   }
@@ -166,7 +158,7 @@ export default class AliasMap {
    */
   get(key) {
     key = sanitizeKey(this, key);
-    return this[mapField].get(key);
+    return this._map.get(key);
   }
 
   /**
@@ -183,7 +175,7 @@ export default class AliasMap {
    */
   has(key) {
     key = sanitizeKey(this, key);
-    return this[mapField].has(key);
+    return this._map.has(key);
   }
 
   /**
@@ -192,7 +184,7 @@ export default class AliasMap {
    * @returns {Iterator}
    */
   keys() {
-    return this[mapField].keys();
+    return this._map.keys();
   }
 
   /**
@@ -217,7 +209,7 @@ export default class AliasMap {
    */
   lookup(key) {
     let resolvedKey = this.noisyResolve(key);
-    return this[mapField].get(resolvedKey);
+    return this._map.get(resolvedKey);
   }
 
   /**
@@ -241,7 +233,7 @@ export default class AliasMap {
   lookupQuiet(key) {
     let resolvedKey = this.resolve(key);
     if (resolvedKey !== undefined) {
-      return this[mapField].get(resolvedKey);
+      return this._map.get(resolvedKey);
     }
     else {
       return undefined;
@@ -274,7 +266,7 @@ export default class AliasMap {
   noisyResolve(key) {
     let resolvedKey = this.resolve(key);
     if (resolvedKey === undefined) {
-      let errorMessage = formatUnicorn(this[optionsField].strings.invalidKey, { key: key });
+      let errorMessage = formatUnicorn(this._options.strings.invalidKey, { key: key });
       throw new Error(errorMessage);
     }
     return resolvedKey;
@@ -303,11 +295,11 @@ export default class AliasMap {
   resolve(key) {
     key = sanitizeKey(this, key);
 
-    let value = this[mapField].get(key);
+    let value = this._map.get(key);
     if (value === undefined) {
-      key = this[optionsField].fallbackResolve(this, key);
+      key = this._options.fallbackResolve(this, key);
       if (key !== undefined) {
-        value = this[mapField].get(key);
+        value = this._map.get(key);
       }
       if (value === undefined) {
         return undefined;
@@ -344,7 +336,7 @@ export default class AliasMap {
    */
   set(key, value) {
     key = sanitizeKey(this, key);
-    this[mapField].set(key, value);
+    this._map.set(key, value);
     return this;
   }
 
@@ -354,7 +346,7 @@ export default class AliasMap {
    * @returns {Iterator}
    */
   values() {
-    return this[mapField].values();
+    return this._map.values();
   }
 
 }

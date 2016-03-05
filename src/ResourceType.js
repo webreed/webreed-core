@@ -8,34 +8,21 @@
 import PluginContext from "./PluginContext";
 
 
-// Symbols to simulate private fields
-const conversionsField = Symbol();
-const customField = Symbol();
-const defaultTargetExtensionField = Symbol();
-const generatorField = Symbol();
-const handlerField = Symbol();
-const modeField = Symbol();
-const parseFrontmatterField = Symbol();
-const processField = Symbol();
-const templateEngineField = Symbol();
-const transformsField = Symbol();
-
-
 /**
  * Defines a type of content and the various transformations that should be performed.
  */
 export default class ResourceType {
 
   constructor() {
-    this[conversionsField] = { };
-    this[customField] = { };
-    this[defaultTargetExtensionField] = null;
-    this[generatorField] = null;
-    this[handlerField] = null;
-    this[modeField] = "text";
-    this[parseFrontmatterField] = true;
-    this[processField] = [ ];
-    this[templateEngineField] = null;
+    this._conversions = { };
+    this._custom = { };
+    this._defaultTargetExtension = null;
+    this._generator = null;
+    this._handler = null;
+    this._mode = "text";
+    this._parseFrontmatter = true;
+    this._process = [ ];
+    this._templateEngine = null;
   }
 
 
@@ -45,13 +32,13 @@ export default class ResourceType {
    * @member {object.<string, ?module:webreed/lib/PluginContext[]>}
    */
   get conversions() {
-    return this[conversionsField];
+    return this._conversions;
   }
   set conversions(value) {
     console.assert(value !== null && typeof value === "object",
        "argument 'value' must be an object");
 
-    this[conversionsField] = sanitizePluginContextLookupArgument("value", value);
+    this._conversions = sanitizePluginContextLookupArgument("value", value);
   }
 
   /**
@@ -61,7 +48,7 @@ export default class ResourceType {
    * @readonly
    */
   get custom() {
-    return this[customField];
+    return this._custom;
   }
 
   /**
@@ -81,7 +68,7 @@ export default class ResourceType {
    * - If argument `value` is a value of ".".
    */
   get defaultTargetExtension() {
-    return this[defaultTargetExtensionField];
+    return this._defaultTargetExtension;
   }
   set defaultTargetExtension(value) {
     console.assert(value === null || (typeof value === "string" && value !== ""),
@@ -89,7 +76,7 @@ export default class ResourceType {
     console.assert(value !== ".",
       "argument 'value' must not be '.'");
 
-    this[defaultTargetExtensionField] = value;
+    this._defaultTargetExtension = value;
   }
 
   /**
@@ -101,13 +88,13 @@ export default class ResourceType {
    * @member {?module:webreed/lib/PluginContext}
    */
   get generator() {
-    return this[generatorField];
+    return this._generator;
   }
   set generator(value) {
     console.assert(value === null || value instanceof PluginContext,
       "argument 'value' must be `null` or a `PluginContext`");
 
-    this[generatorField] = value;
+    this._generator = value;
   }
 
   /**
@@ -119,13 +106,13 @@ export default class ResourceType {
    * @member {?module:webreed/lib/PluginContext}
    */
   get handler() {
-    return this[handlerField];
+    return this._handler;
   }
   set handler(value) {
     console.assert(value === null || value instanceof PluginContext,
       "argument 'value' must be `null` or a `PluginContext`");
 
-    this[handlerField] = value;
+    this._handler = value;
   }
 
   /**
@@ -135,13 +122,13 @@ export default class ResourceType {
    * @default "text"
    */
   get mode() {
-    return this[modeField];
+    return this._mode;
   }
   set mode(value) {
     console.assert(typeof value === "string" && value !== "",
       "argument 'value' must be a non-empty string");
 
-    this[modeField] = value;
+    this._mode = value;
   }
 
   /**
@@ -151,13 +138,13 @@ export default class ResourceType {
    * @member {boolean}
    */
   get parseFrontmatter() {
-    return this[parseFrontmatterField];
+    return this._parseFrontmatter;
   }
   set parseFrontmatter(value) {
     console.assert(value === true || value === false,
        "argument 'value' must be `true` or `false`");
 
-    this[parseFrontmatterField] = value;
+    this._parseFrontmatter = value;
   }
 
   /**
@@ -167,10 +154,10 @@ export default class ResourceType {
    * @member {?module:webreed/lib/PluginContext[]}
    */
   get process() {
-    return this[processField];
+    return this._process;
   }
   set process(value) {
-    this[processField] = sanitizePluginContextArrayArgument("value", value);
+    this._process = sanitizePluginContextArrayArgument("value", value);
   }
 
   /**
@@ -182,13 +169,13 @@ export default class ResourceType {
    * @member {?module:webreed/lib/PluginContext}
    */
   get templateEngine() {
-    return this[templateEngineField];
+    return this._templateEngine;
   }
   set templateEngine(value) {
     console.assert(value === null || value instanceof PluginContext,
       "argument 'value' must be `null` or a `PluginContext`");
 
-    this[templateEngineField] = value;
+    this._templateEngine = value;
   }
 
 }

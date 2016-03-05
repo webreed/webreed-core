@@ -19,28 +19,6 @@ import normalizePathSeparators from "./util/normalizePathSeparators";
 import trimTrailingSlash from "./util/trimTrailingSlash";
 
 
-// Symbols to simulate private fields
-const behaviorsField = Symbol();
-
-const projectRootPathField = Symbol();
-const namedPathsField = Symbol();
-
-const baseUrlField = Symbol();
-const hiddenUrlExtensionsField = Symbol();
-const hiddenUrlFileNamesField = Symbol();
-
-const timeStartedField = Symbol();
-
-const defaultGeneratorNameField = Symbol();
-const defaultModeNameField = Symbol();
-const generatorsField = Symbol();
-const handlersField = Symbol();
-const modesField = Symbol();
-const resourceTypesField = Symbol();
-const templateEnginesField = Symbol();
-const transformersField = Symbol();
-
-
 const defaultBaseUrlValue = "/";
 const defaultProjectRootPathValue = "";
 
@@ -53,42 +31,42 @@ export default class Environment {
   constructor() {
     let inheritedBehaviors = Object.assign({ }, defaultBehaviors);
 
-    this[behaviorsField] = Object.create(inheritedBehaviors);
+    this._behaviors = Object.create(inheritedBehaviors);
 
-    this[projectRootPathField] = defaultProjectRootPathValue;
-    this[namedPathsField] = { };
+    this._projectRootPath = defaultProjectRootPathValue;
+    this._namedPaths = { };
 
-    this[baseUrlField] = defaultBaseUrlValue;
-    this[hiddenUrlExtensionsField] = new Set();
-    this[hiddenUrlFileNamesField] = new Set();
+    this._baseUrl = defaultBaseUrlValue;
+    this._hiddenUrlExtensions = new Set();
+    this._hiddenUrlFileNames = new Set();
 
     //!TODO: Make the value of the `timeStartedField` immutable when moment.js resolves:
     //   TypeError: Can't add property _isValid, object is not extensible
     //    at valid__isValid (...\node_modules\moment\moment.js:93:24)
-    //this[timeStartedField] = Object.freeze(moment());
-    this[timeStartedField] = moment();
+    //this._timeStarted = Object.freeze(moment());
+    this._timeStarted = moment();
 
-    this[defaultGeneratorNameField] = "standard";
-    this[defaultModeNameField] = "text";
+    this._defaultGeneratorName = "standard";
+    this._defaultModeName = "text";
 
-    this[resourceTypesField] = new AliasMap(null, {
+    this._resourceTypes = new AliasMap(null, {
       fallbackResolve: (aliasMap, key) => "*",
       strings: { invalidKey: "Resource type '{key}' is not defined. Consider specifying a fallback using the key '*'." }
     });
 
-    this[generatorsField] = new AliasMap(null, {
+    this._generators = new AliasMap(null, {
       strings: { invalidKey: "Generator '{key}' is not defined." }
     });
-    this[handlersField] = new AliasMap(null, {
+    this._handlers = new AliasMap(null, {
       strings: { invalidKey: "Content handler '{key}' is not defined." }
     });
-    this[modesField] = new AliasMap(null, {
+    this._modes = new AliasMap(null, {
       strings: { invalidKey: "Resource mode '{key}' is not defined." }
     });
-    this[templateEnginesField] = new AliasMap(null, {
+    this._templateEngines = new AliasMap(null, {
       strings: { invalidKey: "Template engine '{key}' is not defined." }
     });
-    this[transformersField] = new AliasMap(null, {
+    this._transformers = new AliasMap(null, {
       strings: { invalidKey: "Transformer '{key}' is not defined." }
     });
   }
@@ -106,13 +84,13 @@ export default class Environment {
    * @default "/"
    */
   get baseUrl() {
-    return this[baseUrlField];
+    return this._baseUrl;
   }
   set baseUrl(value) {
     console.assert(typeof value === "string",
         "argument 'value' must be a string");
 
-    this[baseUrlField] = value;
+    this._baseUrl = value;
   }
 
   /**
@@ -138,7 +116,7 @@ export default class Environment {
    * @readonly
    */
   get behaviors() {
-    return this[behaviorsField];
+    return this._behaviors;
   }
 
   /**
@@ -147,13 +125,13 @@ export default class Environment {
    * @member {string}
    */
   get defaultGeneratorName() {
-    return this[defaultGeneratorNameField];
+    return this._defaultGeneratorName;
   }
   set defaultGeneratorName(value) {
     console.assert(typeof value === "string" && value !== "",
         "argument 'value' must be a non-empty string");
 
-    this[defaultGeneratorNameField] = value;
+    this._defaultGeneratorName = value;
   }
 
   /**
@@ -162,13 +140,13 @@ export default class Environment {
    * @member {string}
    */
   get defaultModeName() {
-    return this[defaultModeNameField];
+    return this._defaultModeName;
   }
   set defaultModeName(value) {
     console.assert(typeof value === "string" && value !== "",
         "argument 'value' must be a non-empty string");
 
-    this[defaultModeNameField] = value;
+    this._defaultModeName = value;
   }
 
   /**
@@ -178,7 +156,7 @@ export default class Environment {
    * @readonly
    */
   get resourceTypes() {
-    return this[resourceTypesField];
+    return this._resourceTypes;
   }
 
   /**
@@ -188,7 +166,7 @@ export default class Environment {
    * @readonly
    */
   get generators() {
-    return this[generatorsField];
+    return this._generators;
   }
 
   /**
@@ -198,7 +176,7 @@ export default class Environment {
    * @readonly
    */
   get handlers() {
-    return this[handlersField];
+    return this._handlers;
   }
 
   /**
@@ -208,7 +186,7 @@ export default class Environment {
    * @readonly
    */
   get hiddenUrlExtensions() {
-    return this[hiddenUrlExtensionsField];
+    return this._hiddenUrlExtensions;
   }
 
   /**
@@ -218,7 +196,7 @@ export default class Environment {
    * @readonly
    */
   get hiddenUrlFileNames() {
-    return this[hiddenUrlFileNamesField];
+    return this._hiddenUrlFileNames;
   }
 
   /**
@@ -228,7 +206,7 @@ export default class Environment {
    * @readonly
    */
   get modes() {
-    return this[modesField];
+    return this._modes;
   }
 
   /**
@@ -240,13 +218,13 @@ export default class Environment {
    * - If assigning a path that has multiple trailing forward slash characters.
    */
   get projectRootPath() {
-    return this[projectRootPathField];
+    return this._projectRootPath;
   }
   set projectRootPath(value) {
     console.assert(typeof value === "string",
         "argument 'value' must be a string");
 
-    this[projectRootPathField] = trimTrailingSlash(value);
+    this._projectRootPath = trimTrailingSlash(value);
   }
 
   /**
@@ -256,7 +234,7 @@ export default class Environment {
    * @readonly
    */
   get templateEngines() {
-    return this[templateEnginesField];
+    return this._templateEngines;
   }
 
   /**
@@ -266,7 +244,7 @@ export default class Environment {
    * @readonly
    */
   get timeStarted() {
-    return this[timeStartedField];
+    return this._timeStarted;
   }
 
   /**
@@ -276,7 +254,7 @@ export default class Environment {
    * @readonly
    */
   get transformers() {
-    return this[transformersField];
+    return this._transformers;
   }
 
 
@@ -421,7 +399,7 @@ export default class Environment {
     console.assert(!relativePath || typeof relativePath === "string",
         "argument 'relativePath' must be a string");
 
-    let namedPath = this[namedPathsField][name];
+    let namedPath = this._namedPaths[name];
     if (namedPath === undefined) {
       namedPath = name;
     }
@@ -453,7 +431,7 @@ export default class Environment {
     console.assert(typeof path === "string",
         "argument 'path' must be a string");
 
-    this[namedPathsField][name] = path;
+    this._namedPaths[name] = path;
 
     return this;
   }

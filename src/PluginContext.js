@@ -4,11 +4,6 @@
 /** @module webreed/lib/PluginContext */
 
 
-// Symbols to simulate private fields
-const nameField = Symbol();
-const optionsField = Symbol();
-
-
 /**
  * Identifies a named plugin with optional options.
  */
@@ -37,13 +32,13 @@ export default class PluginContext {
    * @member {string}
    */
   get name() {
-    return this[nameField];
+    return this._name;
   }
   set name(value) {
     console.assert(typeof value === "string" && value !== "",
         "argument 'value' must be a non-empty string");
 
-    this[nameField] = value;
+    this._name = value;
   }
 
   /**
@@ -54,13 +49,13 @@ export default class PluginContext {
    * @member {object}
    */
   get options() {
-    return this[optionsField];
+    return this._options;
   }
   set options(value) {
     console.assert(value === undefined || value === null || typeof value === "object",
         "argument 'value' must be `undefined`, `null` or an object");
 
-    this[optionsField] = value || { };
+    this._options = value || { };
   }
 
 }

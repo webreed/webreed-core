@@ -8,7 +8,6 @@ import should from "should";
 
 // Project
 import AliasMap from "../src/AliasMap";
-import { __innerMapField } from "../src/AliasMap";
 
 
 describe("AliasMap", function () {
@@ -117,7 +116,7 @@ describe("AliasMap", function () {
 
     it("invokes 'clear' on underlying map", function () {
       let invokedClear = false;
-      this.aliasMap[__innerMapField].clear = function () {
+      this.aliasMap._map.clear = function () {
         invokedClear = true;
       };
 
@@ -155,7 +154,7 @@ describe("AliasMap", function () {
     it("transforms key to match character casing configuration", function (deleteKey, expectedDeleteKey, ignoreCase) {
       let invokedDeleteWithKey;
       let newAliasMap = new AliasMap(null, { ignoreCase: ignoreCase });
-      newAliasMap[__innerMapField].delete = function (key) { invokedDeleteWithKey = key; };
+      newAliasMap._map.delete = function (key) { invokedDeleteWithKey = key; };
 
       newAliasMap.delete(deleteKey);
 
@@ -262,7 +261,7 @@ describe("AliasMap", function () {
     it("transforms key to match character casing configuration", function (getKey, expectedGetKey, ignoreCase) {
       let invokedGetWithKey;
       let newAliasMap = new AliasMap(null, { ignoreCase: ignoreCase });
-      newAliasMap[__innerMapField].get = function (key) { invokedGetWithKey = key; };
+      newAliasMap._map.get = function (key) { invokedGetWithKey = key; };
 
       newAliasMap.get(getKey);
 
@@ -271,7 +270,7 @@ describe("AliasMap", function () {
     });
 
     it("returns the value from the underlying map", function () {
-      this.aliasMap[__innerMapField].get = function (key) { return 42; };
+      this.aliasMap._map.get = function (key) { return 42; };
       this.aliasMap.get("foo")
         .should.be.eql(42);
     });
@@ -304,7 +303,7 @@ describe("AliasMap", function () {
     it("transforms key to match character casing configuration", function (hasKey, expectedHasKey, ignoreCase) {
       let invokedHasWithKey;
       let newAliasMap = new AliasMap(null, { ignoreCase: ignoreCase });
-      newAliasMap[__innerMapField].has = function (key) { invokedHasWithKey = key; };
+      newAliasMap._map.has = function (key) { invokedHasWithKey = key; };
 
       newAliasMap.has(hasKey);
 
@@ -313,7 +312,7 @@ describe("AliasMap", function () {
     });
 
     it("returns the value from the underlying map", function () {
-      this.aliasMap[__innerMapField].has = function (key) { return 42; };
+      this.aliasMap._map.has = function (key) { return 42; };
       this.aliasMap.has("foo")
         .should.be.eql(42);
     });
@@ -646,7 +645,7 @@ describe("AliasMap", function () {
     it("transforms key to match character casing configuration", function (setKey, expectedSetKey, ignoreCase) {
       let invokedSetWithKey;
       let newAliasMap = new AliasMap(null, { ignoreCase: ignoreCase });
-      newAliasMap[__innerMapField].set = function (key) { invokedSetWithKey = key; };
+      newAliasMap._map.set = function (key) { invokedSetWithKey = key; };
 
       newAliasMap.set(setKey);
 
@@ -656,7 +655,7 @@ describe("AliasMap", function () {
 
     it("passes new value to `set` function of underlying map", function () {
       let invokedSetWithValue;
-      this.aliasMap[__innerMapField].set = function (key, value) { invokedSetWithValue = value; };
+      this.aliasMap._map.set = function (key, value) { invokedSetWithValue = value; };
 
       this.aliasMap.set("a", 42);
 
