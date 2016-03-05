@@ -19,8 +19,8 @@ import normalizePathSeparators from "./util/normalizePathSeparators";
 import trimTrailingSlash from "./util/trimTrailingSlash";
 
 
-const defaultBaseUrlValue = "/";
-const defaultProjectRootPathValue = "";
+const DEFAULT_BASE_URL = "/";
+const DEFAULT_PROJECT_ROOT_PATH = "";
 
 
 /**
@@ -33,10 +33,10 @@ export default class Environment {
 
     this._behaviors = Object.create(inheritedBehaviors);
 
-    this._projectRootPath = defaultProjectRootPathValue;
+    this._projectRootPath = DEFAULT_PROJECT_ROOT_PATH;
     this._namedPaths = { };
 
-    this._baseUrl = defaultBaseUrlValue;
+    this._baseUrl = DEFAULT_BASE_URL;
     this._hiddenUrlExtensions = new Set();
     this._hiddenUrlFileNames = new Set();
 
