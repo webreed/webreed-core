@@ -28,8 +28,8 @@
    * @param {object} context
    *   An object with properties providing some context for the operation.
    *
-   * @returns {Observable.<module:webreed/lib/Resource>}
-   *   An observable stream of zero-or-more output resources.
+   * @returns {Observable.<string>}
+   *   An observable stream of zero-or-more outputs.
    */
 
   /**
@@ -44,6 +44,6 @@
    * @param {object} context
    *   An object with properties providing some context for the operation.
    *
-   * @returns {Observable.<module:webreed/lib/Resource>}
-   *   An observable stream of zero-or-more output resources.
+   * @returns {Observable.<string>}
+   *   An observable stream of zero-or-more outputs.
    */

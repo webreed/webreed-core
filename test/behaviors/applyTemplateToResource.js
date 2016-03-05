@@ -108,9 +108,8 @@ describe("behaviors/applyTemplateToResource", function () {
     let templateName = "test.nunjucks";
 
     return applyTemplateToResource(this.env, resource, templateName)
-      .reduce((a, outputResource) => a || outputResource.wentThroughFakeTemplateEngine, false)
       .toPromise()
-      .should.eventually.be.true();
+      .should.eventually.be.eql("Template Output: [[test.nunjucks]]");
   });
 
   it("rejects with error from template engine", function () {

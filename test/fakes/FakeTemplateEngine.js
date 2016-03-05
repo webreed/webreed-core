@@ -13,16 +13,12 @@ export default class FakeTemplateEngine {
 
   renderTemplateString(template, templateParams, context) {
     this.lastRenderTemplateStringArguments = Array.from(arguments);
-    return Rx.Observable.of({
-      wentThroughFakeTemplateEngine: true
-    });
+    return Rx.Observable.of(`Template Output: [[${template}]]`);
   }
 
   renderTemplate(templateName, templateParams, context) {
     this.lastRenderTemplateArguments = Array.from(arguments);
-    return Rx.Observable.of({
-      wentThroughFakeTemplateEngine: true
-    });
+    return Rx.Observable.of(`Template Output: [[${templateName}]]`);
   }
 
 }
