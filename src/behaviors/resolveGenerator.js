@@ -6,6 +6,8 @@
 
 // Project
 import Environment from "../Environment";
+import Resource from "../Resource";
+import ResourceType from "../ResourceType";
 
 
 /**
@@ -13,9 +15,9 @@ import Environment from "../Environment";
  *
  * @param {module:webreed/lib/Environment} env
  *   An environment that represents a webreed project.
- * @param {module:webreed/lib/Resource|object} [resource = null]
+ * @param {module:webreed/lib/Resource} [resource = null]
  *   The resource that will be processed with the generator that is being resolved.
- * @param {module:webreed/lib/ResourceType|object} [resourceType = null]
+ * @param {module:webreed/lib/ResourceType} [resourceType = null]
  *   The type of resource that will be processed with the generator that is being resolved.
  *
  * @returns {object}
@@ -28,12 +30,15 @@ import Environment from "../Environment";
  * - If the resolved generator is not defined.
  */
 export default function resolveGenerator(env, resource, resourceType) {
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
-  console.assert(resource === undefined || typeof resource === "object",
-      "argument 'resource' must be `null` or an object");
-  console.assert(resourceType === undefined || typeof resourceType === "object",
-      "argument 'resourceType' must be `null` or an object");
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
+  if (resource !== undefined && resource !== null && !(resource instanceof Resource)) {
+    throw new TypeError("argument 'resource' must be a `Resource`");
+  }
+  if (resourceType !== undefined && resourceType !== null && !(resourceType instanceof ResourceType)) {
+    throw new TypeError("argument 'resourceType' must be a `ResourceType`");
+  }
 
   let generatorName;
   let generatorOptions = { };

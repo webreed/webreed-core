@@ -6,6 +6,8 @@
 
 // Project
 import Environment from "../Environment";
+import Resource from "../Resource";
+import ResourceType from "../ResourceType";
 
 
 /**
@@ -26,13 +28,16 @@ import Environment from "../Environment";
  * @throws {Error}
  * - If the resolved resource mode is not defined.
  */
-export default function resolveResourceMode(env, resource, resourceType, fallbackModeName) {
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
-  console.assert(resource === undefined || typeof resource === "object",
-      "argument 'resource' must be `null` or an object");
-  console.assert(resourceType === undefined || typeof resourceType === "object",
-      "argument 'resourceType' must be `null` or an object");
+export default function resolveResourceMode(env, resource, resourceType) {
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
+  if (resource !== undefined && resource !== null && !(resource instanceof Resource)) {
+    throw new TypeError("argument 'resource' must be a `Resource`");
+  }
+  if (resourceType !== undefined && resourceType !== null && !(resourceType instanceof ResourceType)) {
+    throw new TypeError("argument 'resourceType' must be a `ResourceType`");
+  }
 
   let modeName;
 

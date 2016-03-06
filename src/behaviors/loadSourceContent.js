@@ -44,12 +44,18 @@ export default function loadSourceContent(env, contentRelativePath, resourceType
     baseProperties = null;
   }
 
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
-  console.assert(typeof contentRelativePath === "string" && contentRelativePath !== "",
-      "argument 'contentRelativePath' must be a non-empty string");
-  console.assert(typeof baseProperties === "object",
-      "argument 'baseProperties' must be `null` or an object");
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
+  if (typeof contentRelativePath !== "string") {
+    throw new TypeError("argument 'contentRelativePath' must be a string");
+  }
+  if (contentRelativePath === "") {
+    throw new Error("argument 'contentRelativePath' must be a non-empty string")
+  }
+  if (typeof baseProperties !== "object") {
+    throw new TypeError("argument 'baseProperties' must be an object");
+  }
 
   let contentFilePath = env.resolvePath("content", contentRelativePath);
   let sourceExtensionChain = getExtensionChainFromPath(contentRelativePath);

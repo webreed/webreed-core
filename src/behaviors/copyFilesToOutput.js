@@ -21,8 +21,9 @@ import Environment from "../Environment";
  *   A promise to complete the copy files operation.
  */
 export default function copyFilesToOutput(env) {
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
 
   let filesPath = env.resolvePath("files");
   let outputPath = env.resolvePath("output");

@@ -16,10 +16,15 @@ export default class PluginContext {
    *   Options for context of the plugin.
    */
   constructor(name, options) {
-    console.assert(typeof name === "string" && name !== "",
-        "argument 'name' must be a non-empty string");
-    console.assert(options === undefined || options === null || typeof options === "object",
-        "argument 'options' must be `undefined`, `null` or an object");
+    if (typeof name !== "string") {
+      throw new TypeError("argument 'name' must be a string");
+    }
+    if (name === "") {
+      throw new Error("argument 'name' must be a non-empty string");
+    }
+    if (options !== undefined && options !== null && typeof options !== "object") {
+      throw new TypeError("argument 'options' must be an object");
+    }
 
     this.name = name;
     this.options = options;
@@ -35,8 +40,12 @@ export default class PluginContext {
     return this._name;
   }
   set name(value) {
-    console.assert(typeof value === "string" && value !== "",
-        "argument 'value' must be a non-empty string");
+    if (typeof value !== "string") {
+      throw new TypeError("argument 'value' must be a string");
+    }
+    if (value === "") {
+      throw new Error("argument 'value' must be a non-empty string");
+    }
 
     this._name = value;
   }
@@ -52,8 +61,9 @@ export default class PluginContext {
     return this._options;
   }
   set options(value) {
-    console.assert(value === undefined || value === null || typeof value === "object",
-        "argument 'value' must be `undefined`, `null` or an object");
+    if (value !== undefined && value !== null && typeof value !== "object") {
+      throw new TypeError("argument 'value' must be an object");
+    }
 
     this._options = value || { };
   }

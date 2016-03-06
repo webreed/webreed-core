@@ -27,12 +27,18 @@ import Resource from "../Resource";
  * - If the resolved template engine is not defined.
  */
 export default function applyTemplateToResource(env, resource, templateName) {
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
-  console.assert(resource instanceof Resource,
-      "argument 'resource' must be a `Resource`");
-  console.assert(typeof templateName === "string" && templateName !== "",
-      "argument 'templateName' must be a non-empty string");
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
+  if (!(resource instanceof Resource)) {
+    throw new TypeError("argument 'resource' must be a `Resource`");
+  }
+  if (typeof templateName !== "string") {
+    throw new TypeError("argument 'templateName' must be a string");
+  }
+  if (templateName === "") {
+    throw new Error("argument 'templateName' must be a non-empty string");
+  }
 
   let resolvedTemplateEngine = env.invoke("resolveTemplateEngine", templateName);
 

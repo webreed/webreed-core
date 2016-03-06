@@ -26,20 +26,23 @@ export default class Resource {
    * @param {object} [props = null]
    *   Property values that define the resource.
    */
-  constructor(env, props, _sourceResource) {
+  constructor(env, props, cloneFromResource) {
     if (props === undefined || props === null) {
       props = { };
     }
 
-    console.assert(env instanceof Environment,
-        "argument 'env' must be a webreed environment");
-    console.assert(typeof props === "object",
-        "argument 'props' must be an object");
-    console.assert(!_sourceResource || typeof _sourceResource === "object",
-        "internal argument '_sourceResource' must be an object");
+    if (!(env instanceof Environment)) {
+      throw new TypeError("argument 'env' must be a webreed environment");
+    }
+    if (typeof props !== "object") {
+      throw new TypeError("argument 'props' must be an object");
+    }
+    if (!!cloneFromResource && !(cloneFromResource instanceof Resource)) {
+      throw new TypeError("argument 'cloneFromResource' must be a `Resource`");
+    }
 
-    if (!!_sourceResource) {
-      props = _.chain(_sourceResource)
+    if (!!cloneFromResource) {
+      props = _.chain(cloneFromResource)
         .cloneDeep()
         .assign(props)
         .value();
@@ -84,10 +87,12 @@ export default class Resource {
    *   A new instance.
    */
   clone(overrides, overrideEnv) {
-    console.assert(!overrides || typeof overrides === "object",
-        "argument 'overrides' must be an object");
-    console.assert(!overrideEnv || overrideEnv instanceof Environment,
-        "argument 'overrideEnv' must be a webreed environment");
+    if (!!overrides && typeof overrides !== "object") {
+      throw new TypeError("argument 'overrides' must be an object");
+    }
+    if (!!overrideEnv && !(overrideEnv instanceof Environment)) {
+      throw new TypeError("argument 'overrideEnv' must be a webreed environment");
+    }
 
     return new Resource(overrideEnv || this.__env, overrides, this);
   }

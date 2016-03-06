@@ -30,10 +30,15 @@ import Environment from "../Environment";
  * - If the resolved template engine is not defined.
  */
 export default function resolveTemplateEngine(env, templateName) {
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
-  console.assert(typeof templateName === "string" && templateName !== "",
-      "argument 'templateName' must be a non-empty string");
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
+  if (typeof templateName !== "string") {
+    throw new TypeError("argument 'templateName' must be a string");
+  }
+  if (templateName === "") {
+    throw new Error("argument 'templateName' must be a non-empty string");
+  }
 
   let templateExtension = path.extname(templateName);
   let resolvedTemplateExtension = env.resourceTypes.resolve(templateExtension);

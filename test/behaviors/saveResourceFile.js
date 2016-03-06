@@ -60,8 +60,15 @@ describe("behaviors/saveResourceFile", function () {
       .should.throw("argument 'env' must be a webreed environment");
   });
 
-  given( undefined, null, 42, "", { }, [ ] ).
-  it("throws error when argument 'outputFilePath' is not a non-empty string", function (outputFilePath) {
+  given( undefined, null, 42, { }, [ ] ).
+  it("throws error when argument 'outputFilePath' is not a string", function (outputFilePath) {
+    let resource = this.env.createResource();
+    (() => saveResourceFile(this.env, outputFilePath, resource))
+      .should.throw("argument 'outputFilePath' must be a string");
+  });
+
+  it("throws error when argument 'outputFilePath' is an empty string", function () {
+    let outputFilePath = "";
     let resource = this.env.createResource();
     (() => saveResourceFile(this.env, outputFilePath, resource))
       .should.throw("argument 'outputFilePath' must be a non-empty string");
@@ -79,7 +86,7 @@ describe("behaviors/saveResourceFile", function () {
     let resource = this.env.createResource();
     let resourceTypeExtension = 42;
     (() => saveResourceFile(this.env, outputFilePath, resource, resourceTypeExtension))
-      .should.throw("argument 'resourceTypeExtension' must be `null` or a string");
+      .should.throw("argument 'resourceTypeExtension' must be a string");
   });
 
 

@@ -105,10 +105,16 @@ describe("ResourceType", function () {
 
   describe("#defaultTargetExtension=", function () {
 
-    given( undefined, 42, "" ).
-    it("throws error when argument 'value' is a not `null` and is not a non-empty string", function (value) {
+    given( undefined, 42 ).
+    it("throws error when argument 'value' is not a string", function (value) {
       (() => this.resourceType.defaultTargetExtension = value)
-        .should.throw("argument 'value' must be `null` or a non-empty string");
+        .should.throw("argument 'value' must be a string");
+    });
+
+    it("throws error when argument 'value' is an empty string", function () {
+      let value = "";
+      (() => this.resourceType.defaultTargetExtension = value)
+        .should.throw("argument 'value' must be a non-empty string");
     });
 
     it("throws error when argument 'value' has the value '.'", function () {
@@ -200,8 +206,14 @@ describe("ResourceType", function () {
 
   describe("#mode=", function () {
 
-    given( undefined, null, 42, "", { }, [ ] ).
-    it("throws error when argument 'value' is not a non-empty string", function (value) {
+    given( undefined, null, 42, { }, [ ] ).
+    it("throws error when argument 'value' is not a string", function (value) {
+      (() => this.resourceType.mode = value)
+        .should.throw("argument 'value' must be a string");
+    });
+
+    it("throws error when argument 'value' is not a non-empty string", function () {
+      let value = "";
       (() => this.resourceType.mode = value)
         .should.throw("argument 'value' must be a non-empty string");
     });
@@ -228,7 +240,7 @@ describe("ResourceType", function () {
     given( undefined, 42, "", { }, [ ] ).
     it("throws error when argument 'value' is not boolean", function (value) {
       (() => this.resourceType.parseFrontmatter = value)
-        .should.throw("argument 'value' must be `true` or `false`");
+        .should.throw("argument 'value' must be a boolean value");
     });
 
     it("takes on a value of `false`", function () {

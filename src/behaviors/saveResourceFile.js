@@ -35,14 +35,21 @@ export default function saveResourceFile(env, outputFilePath, resource, resource
     resourceTypeExtension = path.extname(outputFilePath);
   }
 
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
-  console.assert(typeof outputFilePath === "string" && outputFilePath !== "",
-      "argument 'outputFilePath' must be a non-empty string");
-  console.assert(resource instanceof Resource,
-      "argument 'resource' must be a `Resource`");
-  console.assert(typeof resourceTypeExtension === "string",
-      "argument 'resourceTypeExtension' must be `null` or a string");
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
+  if (typeof outputFilePath !== "string") {
+    throw new TypeError("argument 'outputFilePath' must be a string");
+  }
+  if (outputFilePath === "") {
+    throw new Error("argument 'outputFilePath' must be a non-empty string");
+  }
+  if (!(resource instanceof Resource)) {
+    throw new TypeError("argument 'resource' must be a `Resource`");
+  }
+  if (typeof resourceTypeExtension !== "string") {
+    throw new TypeError("argument 'resourceTypeExtension' must be a string");
+  }
 
   let resourceType = env.resourceTypes.lookup(resourceTypeExtension);
   let resolvedMode = env.invoke("resolveResourceMode", resource, resourceType);

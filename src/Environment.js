@@ -8,6 +8,8 @@
 import path from "path";
 import url from "url";
 
+const join = path.join;
+
 // Packages
 import moment from "moment";
 
@@ -87,8 +89,9 @@ export default class Environment {
     return this._baseUrl;
   }
   set baseUrl(value) {
-    console.assert(typeof value === "string",
-        "argument 'value' must be a string");
+    if (typeof value !== "string") {
+      throw new TypeError("argument 'value' must be a string");
+    }
 
     this._baseUrl = value;
   }
@@ -128,8 +131,12 @@ export default class Environment {
     return this._defaultGeneratorName;
   }
   set defaultGeneratorName(value) {
-    console.assert(typeof value === "string" && value !== "",
-        "argument 'value' must be a non-empty string");
+    if (typeof value !== "string") {
+      throw new TypeError("argument 'value' must be a string");
+    }
+    if (value === "") {
+      throw new Error("argument 'value' must be a non-empty string");
+    }
 
     this._defaultGeneratorName = value;
   }
@@ -143,8 +150,12 @@ export default class Environment {
     return this._defaultModeName;
   }
   set defaultModeName(value) {
-    console.assert(typeof value === "string" && value !== "",
-        "argument 'value' must be a non-empty string");
+    if (typeof value !== "string") {
+      throw new TypeError("argument 'value' must be a string");
+    }
+    if (value === "") {
+      throw new Error("argument 'value' must be a non-empty string");
+    }
 
     this._defaultModeName = value;
   }
@@ -221,8 +232,9 @@ export default class Environment {
     return this._projectRootPath;
   }
   set projectRootPath(value) {
-    console.assert(typeof value === "string",
-        "argument 'value' must be a string");
+    if (typeof value !== "string") {
+      throw new TypeError("argument 'value' must be a string");
+    }
 
     this._projectRootPath = trimTrailingSlash(value);
   }
@@ -293,22 +305,28 @@ export default class Environment {
    * @returns {string}
    *   The output relative path for the resource.
    */
-  getOutputRelativePathForResource(_path_, extension, page) {
+  getOutputRelativePathForResource(path, extension, page) {
     extension = extension || "";
     page = page || "";
 
-    console.assert(typeof _path_ === "string" && _path_ !== "",
-        "argument 'path' must be a non-empty string");
-    console.assert(typeof extension === "string",
-        "argument 'extension' must be a string, null or undefined");
-    console.assert(typeof page === "string",
-        "argument 'page' must be a string, null or undefined");
-
-    if (page != "") {
-      _path_ = normalizePathSeparators(path.join(_path_, page));
+    if (typeof path !== "string") {
+      throw new TypeError("argument 'path' must be a string");
+    }
+    if (path === "") {
+      throw new Error("argument 'path' must be a non-empty string");
+    }
+    if (typeof extension !== "string") {
+      throw new TypeError("argument 'extension' must be a string");
+    }
+    if (typeof page !== "string") {
+      throw new TypeError("argument 'page' must be a string");
     }
 
-    return _path_ + extension;
+    if (page != "") {
+      path = normalizePathSeparators(join(path, page));
+    }
+
+    return path + extension;
   }
 
   /**
@@ -325,10 +343,12 @@ export default class Environment {
   getUrlForResource(outputRelativePath, baseUrl) {
     baseUrl = baseUrl || this.baseUrl;
 
-    console.assert(typeof outputRelativePath === "string",
-        "argument 'outputRelativePath' must be a string");
-    console.assert(typeof baseUrl === "string",
-        "argument 'baseUrl' must be a string");
+    if (typeof outputRelativePath !== "string") {
+      throw new TypeError("argument 'outputRelativePath' must be a string");
+    }
+    if (typeof baseUrl !== "string") {
+      throw new TypeError("argument 'baseUrl' must be a string");
+    }
 
     outputRelativePath = outputRelativePath || "";
 
@@ -365,8 +385,12 @@ export default class Environment {
    * - If requested behavior is not defined.
    */
   invoke(behaviorName, ...behaviorArguments) {
-    console.assert(typeof behaviorName === "string" && behaviorName !== "",
-        "argument 'behaviorName' must be a non-empty string");
+    if (typeof behaviorName !== "string") {
+      throw new TypeError("argument 'behaviorName' must be a string");
+    }
+    if (behaviorName === "") {
+      throw new Error("argument 'behaviorName' must be a non-empty string");
+    }
 
     let behavior = this.behaviors[behaviorName];
     if (!behavior) {
@@ -394,10 +418,15 @@ export default class Environment {
    * @see {@link module:webreed/lib/Environment#setPath}
    */
   resolvePath(name, relativePath) {
-    console.assert(typeof name === "string" && name !== "",
-        "argument 'name' must be a non-empty string");
-    console.assert(!relativePath || typeof relativePath === "string",
-        "argument 'relativePath' must be a string");
+    if (typeof name !== "string") {
+      throw new TypeError("argument 'name' must be a string");
+    }
+    if (name === "") {
+      throw new Error("argument 'name' must be a non-empty string");
+    }
+    if (relativePath !== undefined && relativePath !== null && typeof relativePath !== "string") {
+      throw new TypeError("argument 'relativePath' must be a string");
+    }
 
     let namedPath = this._namedPaths[name];
     if (namedPath === undefined) {
@@ -426,10 +455,15 @@ export default class Environment {
    * @see {@link module:webreed/lib/Environment#projectRootPath}
    */
   setPath(name, path) {
-    console.assert(typeof name === "string" && name !== "",
-        "argument 'name' must be a non-empty string");
-    console.assert(typeof path === "string",
-        "argument 'path' must be a string");
+    if (typeof name !== "string") {
+      throw new TypeError("argument 'name' must be a string");
+    }
+    if (name === "") {
+      throw new Error("argument 'name' must be a non-empty string");
+    }
+    if (typeof path !== "string") {
+      throw new TypeError("argument 'path' must be a string");
+    }
 
     this._namedPaths[name] = path;
 

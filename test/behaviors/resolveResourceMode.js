@@ -39,18 +39,18 @@ describe("behaviors/resolveResourceMode", function () {
   given( 42, "" ).
   it("throws error when argument 'resource' is specified but is not an object", function (resource) {
     (() => resolveResourceMode(this.env, resource))
-      .should.throw("argument 'resource' must be `null` or an object");
+      .should.throw("argument 'resource' must be a `Resource`");
   });
 
   given( 42, "" ).
   it("throws error when argument 'resourceType' is specified but is not an object", function (resourceType) {
     (() => resolveResourceMode(this.env, null, resourceType))
-      .should.throw("argument 'resourceType' must be `null` or an object");
+      .should.throw("argument 'resourceType' must be a `ResourceType`");
   });
 
 
   it("throws error when resource mode (from argument 'resource') is not defined", function () {
-    let fakeResource = { __mode: "mode-that-is-not-defined" };
+    let fakeResource = this.env.createResource({ __mode: "mode-that-is-not-defined" });
     (() => resolveResourceMode(this.env, fakeResource))
       .should.throw(`Resource mode 'mode-that-is-not-defined' is not defined.`)
   });
@@ -72,7 +72,7 @@ describe("behaviors/resolveResourceMode", function () {
   it("returns resolved resource mode (from argument 'resource')", function () {
     let fakeResourceMode = { value: 42 };
     this.env.modes.set("fake", fakeResourceMode);
-    let fakeResource = { __mode: "fake" };
+    let fakeResource = this.env.createResource({ __mode: "fake" });
 
     resolveResourceMode(this.env, fakeResource)
       .should.be.eql({ name: "fake", mode: fakeResourceMode });

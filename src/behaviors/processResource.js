@@ -24,12 +24,15 @@ import ResourceType from "../ResourceType";
  *   An observable stream of output resources.
  */
 export default function processResource(env, resource, resourceType) {
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
-  console.assert(resource instanceof Resource,
-      "argument 'resource' must be a `Resource`");
-  console.assert(resourceType instanceof ResourceType,
-      "argument 'resourceType' must be a `ResourceType`");
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
+  if (!(resource instanceof Resource)) {
+    throw new TypeError("argument 'resource' must be a `Resource`");
+  }
+  if (!(resourceType instanceof ResourceType)) {
+    throw new TypeError("argument 'resourceType' must be a `ResourceType`");
+  }
 
   return env.invoke("applySequenceOfTransformsToResource", resource, resourceType.process);
 }

@@ -18,8 +18,9 @@ import Environment from "../Environment";
  *   A promise to complete the process source content files operation.
  */
 export default function processSourceContentFiles(env) {
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
 
   return env.invoke("getSourceContentRelativePaths")
     .reduce(

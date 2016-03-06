@@ -97,8 +97,14 @@ describe("Environment", function () {
 
   describe("#defaultGeneratorName=", function () {
 
-    given( undefined, null, 42, "" ).
-    it("throws error if argument 'value' is not a non-empty string", function (value) {
+    given( undefined, null, 42 ).
+    it("throws error if argument 'value' is not a string", function (value) {
+      (() => this.env.defaultGeneratorName = value)
+        .should.throw("argument 'value' must be a string");
+    });
+
+    it("throws error if argument 'value' is an empty string", function () {
+      let value = "";
       (() => this.env.defaultGeneratorName = value)
         .should.throw("argument 'value' must be a non-empty string");
     });
@@ -122,8 +128,14 @@ describe("Environment", function () {
 
   describe("#defaultModeName=", function () {
 
-    given( undefined, null, 42, "" ).
-    it("throws error if argument 'value' is not a non-empty string", function (value) {
+    given( undefined, null, 42 ).
+    it("throws error if argument 'value' is not a string", function (value) {
+      (() => this.env.defaultModeName = value)
+        .should.throw("argument 'value' must be a string");
+    });
+
+    it("throws error if argument 'value' is an empty string", function () {
+      let value = "";
       (() => this.env.defaultModeName = value)
         .should.throw("argument 'value' must be a non-empty string");
     });
@@ -370,20 +382,26 @@ describe("Environment", function () {
         .should.be.a.Function();
     });
 
-    given( 42, "" ).
-    it("throws error if argument 'path' is not a non-empty string", function (path) {
+    it("throws error if argument 'path' is not a string", function () {
+      let path = 42;
+      (() => this.env.getOutputRelativePathForResource(path))
+        .should.throw("argument 'path' must be a string");
+    });
+
+    it("throws error if argument 'path' is not a string", function () {
+      let path = "";
       (() => this.env.getOutputRelativePathForResource(path))
         .should.throw("argument 'path' must be a non-empty string");
     });
 
-    it("throws error if argument 'extension' is defined and non-null but is not a string", function () {
+    it("throws error if argument 'extension' is not a string", function () {
       (() => this.env.getOutputRelativePathForResource("abc", 42))
-        .should.throw("argument 'extension' must be a string, null or undefined");
+        .should.throw("argument 'extension' must be a string");
     });
 
-    it("throws error if argument 'page' is defined and non-null but is not a string", function () {
+    it("throws error if argument 'page' is not a string", function () {
       (() => this.env.getOutputRelativePathForResource("abc", null, 42))
-        .should.throw("argument 'page' must be a string, null or undefined");
+        .should.throw("argument 'page' must be a string");
     });
 
     given(
@@ -466,8 +484,14 @@ describe("Environment", function () {
         .should.be.a.Function();
     });
 
-    given( undefined, null, 42, "" ).
-    it("throws error when argument 'behaviorName' is not a non-empty string", function (behaviorName) {
+    given( undefined, null, 42 ).
+    it("throws error when argument 'behaviorName' is not a string", function (behaviorName) {
+      (() => this.env.invoke(behaviorName))
+        .should.throw("argument 'behaviorName' must be a string");
+    });
+
+    it("throws error when argument 'behaviorName' is an empty string", function () {
+      let behaviorName = "";
       (() => this.env.invoke(behaviorName))
         .should.throw("argument 'behaviorName' must be a non-empty string");
     });
@@ -537,14 +561,21 @@ describe("Environment", function () {
         .should.be.a.Function();
     });
 
-    given( 42, "" ).
-    it("throws error when argument 'name' is not a non-empty string", function (name) {
+    it("throws error when argument 'name' is not a string", function () {
+      let name = 42;
+      (() => this.env.resolvePath(name))
+        .should.throw("argument 'name' must be a string");
+    });
+
+    it("throws error when argument 'name' is an empty string", function () {
+      let name = "";
       (() => this.env.resolvePath(name))
         .should.throw("argument 'name' must be a non-empty string");
     });
 
     it("throws error when argument 'relativePath' is not a string", function () {
-      (() => this.env.resolvePath("content", 42))
+      let outputRelativePath = 42;
+      (() => this.env.resolvePath("content", outputRelativePath))
         .should.throw("argument 'relativePath' must be a string");
     });
 
@@ -572,9 +603,13 @@ describe("Environment", function () {
         .should.be.a.Function();
     });
 
-    given( 42, "" ).
-    it("throws error if argument 'name' is not a non-empty string", function (name) {
-      (() => this.env.setPath(name, ""))
+    it("throws error when argument 'name' is not a string", function () {
+      (() => this.env.setPath(42, "abc"))
+        .should.throw("argument 'name' must be a string");
+    });
+
+    it("throws error when argument 'name' is an empty string", function () {
+      (() => this.env.setPath("", "abc"))
         .should.throw("argument 'name' must be a non-empty string");
     });
 

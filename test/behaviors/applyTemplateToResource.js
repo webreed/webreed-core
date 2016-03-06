@@ -69,9 +69,17 @@ describe("behaviors/applyTemplateToResource", function () {
       .should.throw("argument 'resource' must be a `Resource`");
   });
 
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'templateName' is not a non-empty string", function (templateName) {
+  given( undefined, null, 42 ).
+  it("throws error when argument 'templateName' is not a string", function (templateName) {
     let resource = this.env.createResource();
+
+    (() => applyTemplateToResource(this.env, resource, templateName))
+      .should.throw("argument 'templateName' must be a string");
+  });
+
+  it("throws error when argument 'templateName' is not a non-empty string", function () {
+    let resource = this.env.createResource();
+    let templateName = "";
 
     (() => applyTemplateToResource(this.env, resource, templateName))
       .should.throw("argument 'templateName' must be a non-empty string");

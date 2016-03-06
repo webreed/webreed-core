@@ -24,12 +24,15 @@ import ResourceType from "../ResourceType";
  *   A promise to fulfill with the decoded resource.
  */
 export default function decodeResource(env, resource, resourceType) {
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
-  console.assert(resource instanceof Resource,
-      "argument 'resource' must be a `Resource`");
-  console.assert(resourceType instanceof ResourceType,
-      "argument 'resourceType' must be a `ResourceType`");
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
+  if (!(resource instanceof Resource)) {
+    throw new TypeError("argument 'resource' must be a `Resource`");
+  }
+  if (!(resourceType instanceof ResourceType)) {
+    throw new TypeError("argument 'resourceType' must be a `ResourceType`");
+  }
 
   if (resourceType.handler !== null) {
     let resolvedHandlerName = env.handlers.noisyResolve(resourceType.handler.name);

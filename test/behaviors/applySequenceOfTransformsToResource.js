@@ -65,7 +65,7 @@ describe("behaviors/applySequenceOfTransformsToResource", function () {
     let transformers = 42;
 
     (() => applySequenceOfTransformsToResource(this.env, resource, transformers))
-      .should.throw("argument 'transformers' must be `null` or an array");
+      .should.throw("argument 'transformers' must be an array");
   });
 
 

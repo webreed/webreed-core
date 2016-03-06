@@ -18,8 +18,9 @@ import Environment from "../Environment";
  *   A promise to complete the build.
  */
 export default function build(env) {
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
 
   return Promise.resolve()
     .then(() => console.log("Processing content files..."))

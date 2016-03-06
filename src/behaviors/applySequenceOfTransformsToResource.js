@@ -26,12 +26,19 @@ import Resource from "../Resource";
  *   An observable stream of transformed resources.
  */
 export default function applySequenceOfTransformsToResource(env, resource, transformers) {
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
-  console.assert(resource instanceof Resource,
-      "argument 'resource' must be a `Resource`");
-  console.assert(transformers === undefined || transformers === null || Array.isArray(transformers),
-      "argument 'transformers' must be `null` or an array");
+  if (transformers === undefined || transformers === null) {
+    transformers = [ ];
+  }
+
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
+  if (!(resource instanceof Resource)) {
+    throw new TypeError("argument 'resource' must be a `Resource`");
+  }
+  if (!Array.isArray(transformers)) {
+    throw new TypeError("argument 'transformers' must be an array");
+  }
 
   let reducer = (stream, transformer) => {
     let resolvedTransformerName = env.transformers.noisyResolve(transformer.name);
@@ -45,6 +52,5 @@ export default function applySequenceOfTransformsToResource(env, resource, trans
     }));
   };
 
-  return (transformers || [ ])
-    .reduce(reducer, Rx.Observable.of(resource));
+  return transformers.reduce(reducer, Rx.Observable.of(resource));
 }

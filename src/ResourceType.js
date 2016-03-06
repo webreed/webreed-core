@@ -35,8 +35,9 @@ export default class ResourceType {
     return this._conversions;
   }
   set conversions(value) {
-    console.assert(value !== null && typeof value === "object",
-       "argument 'value' must be an object");
+    if (value === undefined || value === null || typeof value !== "object") {
+      throw new TypeError("argument 'value' must be an object");
+    }
 
     this._conversions = sanitizePluginContextLookupArgument("value", value);
   }
@@ -71,10 +72,17 @@ export default class ResourceType {
     return this._defaultTargetExtension;
   }
   set defaultTargetExtension(value) {
-    console.assert(value === null || (typeof value === "string" && value !== ""),
-      "argument 'value' must be `null` or a non-empty string");
-    console.assert(value !== ".",
-      "argument 'value' must not be '.'");
+    if (value !== null) {
+      if (typeof value !== "string") {
+        throw new TypeError("argument 'value' must be a string");
+      }
+      if (value === "") {
+        throw new Error("argument 'value' must be a non-empty string");
+      }
+      if (value === ".") {
+        throw new Error("argument 'value' must not be '.'");
+      }
+    }
 
     this._defaultTargetExtension = value;
   }
@@ -91,9 +99,9 @@ export default class ResourceType {
     return this._generator;
   }
   set generator(value) {
-    console.assert(value === null || value instanceof PluginContext,
-      "argument 'value' must be `null` or a `PluginContext`");
-
+    if (value !== null && !(value instanceof PluginContext)) {
+      throw new TypeError("argument 'value' must be `null` or a `PluginContext`");
+    }
     this._generator = value;
   }
 
@@ -109,9 +117,9 @@ export default class ResourceType {
     return this._handler;
   }
   set handler(value) {
-    console.assert(value === null || value instanceof PluginContext,
-      "argument 'value' must be `null` or a `PluginContext`");
-
+    if (value !== null && !(value instanceof PluginContext)) {
+      throw new TypeError("argument 'value' must be `null` or a `PluginContext`");
+    }
     this._handler = value;
   }
 
@@ -125,9 +133,12 @@ export default class ResourceType {
     return this._mode;
   }
   set mode(value) {
-    console.assert(typeof value === "string" && value !== "",
-      "argument 'value' must be a non-empty string");
-
+    if (typeof value !== "string") {
+      throw new TypeError("argument 'value' must be a string");
+    }
+    if (value === "") {
+      throw new Error("argument 'value' must be a non-empty string");
+    }
     this._mode = value;
   }
 
@@ -141,9 +152,9 @@ export default class ResourceType {
     return this._parseFrontmatter;
   }
   set parseFrontmatter(value) {
-    console.assert(value === true || value === false,
-       "argument 'value' must be `true` or `false`");
-
+    if (typeof value !== "boolean") {
+      throw new TypeError("argument 'value' must be a boolean value");
+    }
     this._parseFrontmatter = value;
   }
 
@@ -172,9 +183,9 @@ export default class ResourceType {
     return this._templateEngine;
   }
   set templateEngine(value) {
-    console.assert(value === null || value instanceof PluginContext,
-      "argument 'value' must be `null` or a `PluginContext`");
-
+    if (value !== null && !(value instanceof PluginContext)) {
+      throw new TypeError("argument 'value' must be `null` or a `PluginContext`");
+    }
     this._templateEngine = value;
   }
 
@@ -182,13 +193,15 @@ export default class ResourceType {
 
 
 function sanitizePluginContextArrayArgument(argumentName, value) {
-  console.assert(!!value && typeof value[Symbol.iterator] === "function",
-      `argument '${argumentName}' must be iterable`);
+  if (!value || typeof value[Symbol.iterator] !== "function") {
+    throw new TypeError(`argument '${argumentName}' must be iterable`);
+  }
 
   value = Array.from(value);
 
-  console.assert(value.reduce((a, v) => a && v instanceof PluginContext, true),
-      `argument '${argumentName}' must be an iterable of zero-or-more \`PluginContext\` values`);
+  if (!value.reduce((a, v) => a && v instanceof PluginContext, true)) {
+    throw new TypeError(`argument '${argumentName}' must be an iterable of zero-or-more \`PluginContext\` values`);
+  }
 
   return value;
 }

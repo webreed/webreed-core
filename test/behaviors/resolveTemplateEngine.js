@@ -52,8 +52,14 @@ describe("behaviors/resolveTemplateEngine", function () {
       .should.throw("argument 'env' must be a webreed environment");
   });
 
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'templateName' is not a non-empty string", function (templateName) {
+  given( undefined, null, 42 ).
+  it("throws error when argument 'templateName' is not a string", function (templateName) {
+    (() => resolveTemplateEngine(this.env, templateName))
+      .should.throw("argument 'templateName' must be a string");
+  });
+
+  it("throws error when argument 'templateName' is an empty string", function () {
+    let templateName = "";
     (() => resolveTemplateEngine(this.env, templateName))
       .should.throw("argument 'templateName' must be a non-empty string");
   });

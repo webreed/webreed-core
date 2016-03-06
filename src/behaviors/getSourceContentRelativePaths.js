@@ -22,8 +22,9 @@ import Environment from "../Environment";
  *   An observable collection of content relative paths.
  */
 export default function getSourceContentRelativePaths(env) {
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
 
   let results = glob.sync("**/*", {
     cwd: env.resolvePath("content"),

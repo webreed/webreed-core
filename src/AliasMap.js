@@ -40,10 +40,12 @@ export default class AliasMap {
    *   Customizable strings.
    */
   constructor(iterable, options) {
-    console.assert(iterable === undefined || iterable === null || typeof iterable[Symbol.iterator] === "function",
-        "argument 'iterable' must be an iterable object");
-    console.assert(options === undefined || typeof options === "object",
-        "argument 'options' must be an object");
+    if (iterable !== undefined && iterable !== null && typeof iterable[Symbol.iterator] !== "function") {
+      throw new TypeError("argument 'iterable' must be an iterable object");
+    }
+    if (options !== undefined && options !== null && typeof options !== "object") {
+      throw new TypeError("argument 'options' must be an object");
+    }
 
     options = _.defaultsDeep({ }, options, defaultOptions);
     options.ignoreCase = !!options.ignoreCase;
@@ -138,8 +140,9 @@ export default class AliasMap {
    *   Value to use as `this` when executing the callback.
    */
   forEach(callback, thisArg) {
-    console.assert(typeof callback === "function",
-        "argument 'callback' must be a function");
+    if (typeof callback !== "function") {
+      throw new TypeError("argument 'callback' must be a function");
+    }
 
     this._map.forEach((value, key) =>
       callback.call(thisArg, value, key, this)
@@ -353,8 +356,9 @@ export default class AliasMap {
 
 
 function sanitizeKey(aliasMap, key) {
-  console.assert(typeof key === "string",
-      "argument 'key' must be a string");
+  if (typeof key !== "string") {
+    throw new TypeError("argument 'key' must be a string");
+  }
 
   return aliasMap.ignoreCase ? key.toLowerCase() : key;
 }

@@ -36,12 +36,15 @@ import Resource from "../Resource";
  *   An observable stream of output resources.
  */
 export default function applyExtensionChainToResource(env, resource, extensionChain) {
-  console.assert(env instanceof Environment,
-      "argument 'env' must be a webreed environment");
-  console.assert(resource instanceof Resource,
-      "argument 'resource' must be a `Resource`");
-  console.assert(typeof extensionChain === "string",
-      "argument 'extensionChain' must be a string");
+  if (!(env instanceof Environment)) {
+    throw new TypeError("argument 'env' must be a webreed environment");
+  }
+  if (!(resource instanceof Resource)) {
+    throw new TypeError("argument 'resource' must be a `Resource`");
+  }
+  if (typeof extensionChain !== "string") {
+    throw new TypeError("argument 'extensionChain' must be a string");
+  }
 
   // Compose ordered list of extensions in chain.
   let extensions = (extensionChain.match(/\.[^\.]+/g) || [ "" ]).reverse();

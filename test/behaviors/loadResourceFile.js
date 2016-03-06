@@ -65,8 +65,14 @@ describe("behaviors/loadResourceFile", function () {
       .should.throw("argument 'env' must be a webreed environment");
   });
 
-  given( undefined, null, 42, "" ).
+  given( undefined, null, 42 ).
   it("throws error when argument 'filePath' is not a string", function (filePath) {
+    (() => loadResourceFile(this.env, filePath))
+      .should.throw("argument 'filePath' must be a string");
+  });
+
+  it("throws error when argument 'filePath' is an empty string", function () {
+    let filePath = "";
     (() => loadResourceFile(this.env, filePath))
       .should.throw("argument 'filePath' must be a non-empty string");
   });
@@ -75,14 +81,14 @@ describe("behaviors/loadResourceFile", function () {
     let filePath = getFixturePath("index.html");
     let resourceTypeExtension = 42;
     (() => loadResourceFile(this.env, filePath, resourceTypeExtension))
-      .should.throw("argument 'resourceTypeExtension' must be `null` or a string");
+      .should.throw("argument 'resourceTypeExtension' must be a string");
   });
 
   it("throws error when argument 'baseProperties' is not an object", function () {
     let filePath = getFixturePath("index.html");
     let baseProperties = 42;
     (() => loadResourceFile(this.env, filePath, null, baseProperties))
-      .should.throw("argument 'baseProperties' must be `null` or an object");
+      .should.throw("argument 'baseProperties' must be an object");
   });
 
 

@@ -40,18 +40,18 @@ describe("behaviors/resolveGenerator", function () {
   given( 42, "" ).
   it("throws error when argument 'resource' is specified but is not an object", function (resource) {
     (() => resolveGenerator(this.env, resource))
-      .should.throw("argument 'resource' must be `null` or an object");
+      .should.throw("argument 'resource' must be a `Resource`");
   });
 
   given( 42, "" ).
   it("throws error when argument 'resourceType' is specified but is not an object", function (resourceType) {
     (() => resolveGenerator(this.env, null, resourceType))
-      .should.throw("argument 'resourceType' must be `null` or an object");
+      .should.throw("argument 'resourceType' must be a `ResourceType`");
   });
 
 
   it("throws error when generator (from argument 'resource') is not defined", function () {
-    let fakeResource = { _generator: "generator-that-is-not-defined" };
+    let fakeResource = this.env.createResource({ _generator: "generator-that-is-not-defined" });
     (() => resolveGenerator(this.env, fakeResource))
       .should.throw(`Generator 'generator-that-is-not-defined' is not defined.`)
   });
@@ -73,7 +73,7 @@ describe("behaviors/resolveGenerator", function () {
   it("returns resolved generator (from argument 'resource')", function () {
     let fakeGenerator = { value: 42 };
     this.env.generators.set("fake", fakeGenerator);
-    let fakeResource = { _generator: "fake" };
+    let fakeResource = this.env.createResource({ _generator: "fake" });
 
     resolveGenerator(this.env, fakeResource)
       .should.be.eql({ name: "fake", generator: fakeGenerator, options: { } });

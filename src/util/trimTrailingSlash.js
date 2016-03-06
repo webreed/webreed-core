@@ -14,8 +14,9 @@
  *   The trimmed value. Always returns a value of "/" when the input value is "/".
  */
 export default function trimTrailingSlash(value) {
-  console.assert(typeof value === "string",
-      "argument 'value' must be a string");
+  if (typeof value !== "string") {
+    throw new TypeError("argument 'value' must be a string");
+  }
 
   if (value.length > 1 && value.endsWith("/")) {
     value = value.substr(0, value.length - 1);
