@@ -10,7 +10,7 @@
  * @param {any} value
  *   Some value of any type.
  *
- * @returns {string|undefined}
+ * @returns {string}
  *   A string that identifies the target of the alias reference when argument `value` is
  *   an alias reference; otherwise, a value of `null`.
  */

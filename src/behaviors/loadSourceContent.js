@@ -25,10 +25,10 @@ import normalizePathSeparators from "../util/normalizePathSeparators";
  *   An environment that represents a webreed project.
  * @param {string} contentRelativePath
  *   Path to the content file (relative to the "content" directory), which must be non-empty.
- * @param {string} [resourceTypeExtension = null]
+ * @param {string} resourceTypeExtension
  *   When specified allows caller to specify the type of the resource; otherwise the
  *   resource type is resolved using file extension from argument 'filePath'.
- * @param {object} [baseProperties = null]
+ * @param {object} baseProperties
  *   Base properties for the resource which can be overridden by properties found in the
  *   source resource's frontmatter.
  *
@@ -39,11 +39,7 @@ import normalizePathSeparators from "../util/normalizePathSeparators";
  * @throws {Error}
  * - If attempting to load resource with an unknown mode.
  */
-export default function loadSourceContent(env, contentRelativePath, resourceTypeExtension, baseProperties) {
-  if (baseProperties === undefined) {
-    baseProperties = null;
-  }
-
+export default function loadSourceContent(env, contentRelativePath, resourceTypeExtension = null, baseProperties = null) {
   if (!(env instanceof Environment)) {
     throw new TypeError("argument 'env' must be a webreed environment");
   }

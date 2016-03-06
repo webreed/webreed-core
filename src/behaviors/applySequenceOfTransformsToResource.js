@@ -19,14 +19,14 @@ import Resource from "../Resource";
  *   An environment that represents a webreed project.
  * @param {module:webreed/lib/Resource} resource
  *   The resource that is to be transformed.
- * @param {module:webreed/lib/PluginContext[]} [transformers = null]
+ * @param {module:webreed/lib/PluginContext[]} transformers
  *   An array of zero-or-more transformers that will be applied to the input resource.
  *
  * @returns {Observable.<module:webreed/lib/Resource>}
  *   An observable stream of transformed resources.
  */
-export default function applySequenceOfTransformsToResource(env, resource, transformers) {
-  if (transformers === undefined || transformers === null) {
+export default function applySequenceOfTransformsToResource(env, resource, transformers = null) {
+  if (transformers === null) {
     transformers = [ ];
   }
 

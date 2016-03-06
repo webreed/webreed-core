@@ -297,17 +297,17 @@ export default class Environment {
    *
    * @param {string} path
    *   Path of the output resource.
-   * @param {string} [extension]
+   * @param {string} extension
    *   File extension of the output resource.
-   * @param {string} [page]
+   * @param {string} page
    *   Page of the output resource (useful for paginated resources).
    *
    * @returns {string}
    *   The output relative path for the resource.
    */
-  getOutputRelativePathForResource(path, extension, page) {
-    extension = extension || "";
-    page = page || "";
+  getOutputRelativePathForResource(path, extension = null, page = null) {
+    extension = extension !== null ? extension : "";
+    page = page !== null ? page : "";
 
     if (typeof path !== "string") {
       throw new TypeError("argument 'path' must be a string");
@@ -334,14 +334,14 @@ export default class Environment {
    *
    * @param {string} outputRelativePath
    *   Output relative path of content including file name and extension.
-   * @param {string} [baseUrl]
+   * @param {string} baseUrl
    *   Base URL that `path` should be resolved from; defaults to the project base URL.
    *
    * @returns {string}
    *   The URL associated with the specified output path.
    */
-  getUrlForResource(outputRelativePath, baseUrl) {
-    baseUrl = baseUrl || this.baseUrl;
+  getUrlForResource(outputRelativePath, baseUrl = null) {
+    baseUrl = baseUrl !== null ? baseUrl : this.baseUrl;
 
     if (typeof outputRelativePath !== "string") {
       throw new TypeError("argument 'outputRelativePath' must be a string");
@@ -408,7 +408,7 @@ export default class Environment {
    *
    * @param {string} name
    *   Name of the path, which must be non-empty.
-   * @param {string} [relativePath]
+   * @param {string} relativePath
    *   Path relative to the named path.
    *
    * @returns {string}
@@ -417,14 +417,14 @@ export default class Environment {
    * @see {@link module:webreed/lib/Environment#projectRootPath}
    * @see {@link module:webreed/lib/Environment#setPath}
    */
-  resolvePath(name, relativePath) {
+  resolvePath(name, relativePath = "") {
     if (typeof name !== "string") {
       throw new TypeError("argument 'name' must be a string");
     }
     if (name === "") {
       throw new Error("argument 'name' must be a non-empty string");
     }
-    if (relativePath !== undefined && relativePath !== null && typeof relativePath !== "string") {
+    if (typeof relativePath !== "string") {
       throw new TypeError("argument 'relativePath' must be a string");
     }
 
@@ -435,7 +435,7 @@ export default class Environment {
 
     let result = path.resolve(this.projectRootPath, namedPath);
 
-    if (!!relativePath) {
+    if (relativePath !== "") {
       result = path.resolve(result, relativePath);
     }
 

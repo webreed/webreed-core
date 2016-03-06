@@ -28,10 +28,11 @@ const defaultOptions = Object.freeze({
 export default class AliasMap {
 
   /**
-   * @param {iterable} [iterable]
+   * @param {iterable} iterable
    *   A collection of key/value pairs. When specified each key-value pair is set using
    *   the method {@link module:webreed/lib/AliasMap#set}.
    *
+   * @param {object} [options = null]
    * @param {boolean} [options.ignoreCase = false]
    *   Indicates whether character casing of keys is to be ignored.
    * @param {module:webreed/lib/AliasMap~fallbackResolve} [options.fallbackResolve = null]
@@ -39,11 +40,11 @@ export default class AliasMap {
    * @param {string} [options.strings.invalidKey = "Key '{0}' could not be resolved."]
    *   Customizable strings.
    */
-  constructor(iterable, options) {
-    if (iterable !== undefined && iterable !== null && typeof iterable[Symbol.iterator] !== "function") {
+  constructor(iterable = null, options = null) {
+    if (iterable !== null && typeof iterable[Symbol.iterator] !== "function") {
       throw new TypeError("argument 'iterable' must be an iterable object");
     }
-    if (options !== undefined && options !== null && typeof options !== "object") {
+    if (options !== null && typeof options !== "object") {
       throw new TypeError("argument 'options' must be an object");
     }
 

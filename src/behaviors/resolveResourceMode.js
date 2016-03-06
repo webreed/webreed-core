@@ -15,9 +15,9 @@ import ResourceType from "../ResourceType";
  *
  * @param {module:webreed/lib/Environment} env
  *   An environment that represents a webreed project.
- * @param {module:webreed/lib/Resource|object} [resource = null]
+ * @param {module:webreed/lib/Resource|object} resource
  *   The resource that will be processed with the mode that is being resolved.
- * @param {module:webreed/lib/ResourceType|object} [resourceType = null]
+ * @param {module:webreed/lib/ResourceType|object} resourceType
  *   The type of resource that will be processed with the mode that is being resolved.
  *
  * @returns {object}
@@ -28,14 +28,14 @@ import ResourceType from "../ResourceType";
  * @throws {Error}
  * - If the resolved resource mode is not defined.
  */
-export default function resolveResourceMode(env, resource, resourceType) {
+export default function resolveResourceMode(env, resource = null, resourceType = null) {
   if (!(env instanceof Environment)) {
     throw new TypeError("argument 'env' must be a webreed environment");
   }
-  if (resource !== undefined && resource !== null && !(resource instanceof Resource)) {
+  if (resource !== null && !(resource instanceof Resource)) {
     throw new TypeError("argument 'resource' must be a `Resource`");
   }
-  if (resourceType !== undefined && resourceType !== null && !(resourceType instanceof ResourceType)) {
+  if (resourceType !== null && !(resourceType instanceof ResourceType)) {
     throw new TypeError("argument 'resourceType' must be a `ResourceType`");
   }
 

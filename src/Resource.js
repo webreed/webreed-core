@@ -23,10 +23,12 @@ export default class Resource {
   /**
    * @param {module:webreed/lib/Environment} env
    *   The webreed environment that the resource is to be associated with.
-   * @param {object} [props = null]
+   * @param {object} props
    *   Property values that define the resource.
+   * @param {module:Webreed/lib/Resource} cloneFromResource
+   *   A resource to clone properties from.
    */
-  constructor(env, props, cloneFromResource) {
+  constructor(env, props = null, cloneFromResource = null) {
     if (props === undefined || props === null) {
       props = { };
     }
@@ -37,11 +39,11 @@ export default class Resource {
     if (typeof props !== "object") {
       throw new TypeError("argument 'props' must be an object");
     }
-    if (!!cloneFromResource && !(cloneFromResource instanceof Resource)) {
+    if (cloneFromResource !== null && !(cloneFromResource instanceof Resource)) {
       throw new TypeError("argument 'cloneFromResource' must be a `Resource`");
     }
 
-    if (!!cloneFromResource) {
+    if (cloneFromResource !== null) {
       props = _.chain(cloneFromResource)
         .cloneDeep()
         .assign(props)
@@ -76,21 +78,21 @@ export default class Resource {
    * Creates a new copy of the resource and can optionally can override the values of
    * properties (or remove the properties entirely) when `overrides` are provided.
    *
-   * @param {object} [overrides = null]
+   * @param {object} overrides
    *   Optional override values. Unwanted properties can be removed by supplying a value
    *   of `undefined` for each of the unwanted properties.
-   * @param {module:webreed/lib/Environment} [overrideEnv]
+   * @param {module:webreed/lib/Environment} overrideEnv
    *   When specified overrides the webreed environment that the cloned resource is to
    *   be associated with.
    *
    * @returns {module:webreed/lib/Resource}
    *   A new instance.
    */
-  clone(overrides, overrideEnv) {
-    if (!!overrides && typeof overrides !== "object") {
+  clone(overrides = null, overrideEnv = null) {
+    if (overrides !== null && typeof overrides !== "object") {
       throw new TypeError("argument 'overrides' must be an object");
     }
-    if (!!overrideEnv && !(overrideEnv instanceof Environment)) {
+    if (overrideEnv !== null && !(overrideEnv instanceof Environment)) {
       throw new TypeError("argument 'overrideEnv' must be a webreed environment");
     }
 

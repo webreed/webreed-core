@@ -25,10 +25,10 @@ import getTargetExtensionFromPath from "../util/getTargetExtensionFromPath";
  *   An environment that represents a webreed project.
  * @param {string} filePath
  *   Absolute path to the input resource file, which must be non-empty.
- * @param {string} [resourceTypeExtension = null]
+ * @param {string} resourceTypeExtension
  *   When specified allows caller to specify the type of the resource; otherwise the
  *   resource type is resolved using file extension from argument 'filePath'.
- * @param {object} [baseProperties = null]
+ * @param {object} baseProperties
  *   Base properties for the resource which can be overridden by properties found in the
  *   source resource's frontmatter.
  *
@@ -39,12 +39,9 @@ import getTargetExtensionFromPath from "../util/getTargetExtensionFromPath";
  * @throws {Error}
  * - If attempting to load resource with an unknown mode.
  */
-export default function loadResourceFile(env, filePath, resourceTypeExtension, baseProperties) {
-  if (resourceTypeExtension === undefined || resourceTypeExtension === null) {
+export default function loadResourceFile(env, filePath, resourceTypeExtension = null, baseProperties = null) {
+  if (resourceTypeExtension === null) {
     resourceTypeExtension = path.extname(filePath);
-  }
-  if (baseProperties === undefined) {
-    baseProperties = null;
   }
 
   if (!(env instanceof Environment)) {

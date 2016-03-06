@@ -12,17 +12,17 @@ export default class PluginContext {
   /**
    * @param {string} name
    *   Name of the plugin.
-   * @param {object} [options = null]
+   * @param {object} options
    *   Options for context of the plugin.
    */
-  constructor(name, options) {
+  constructor(name, options = null) {
     if (typeof name !== "string") {
       throw new TypeError("argument 'name' must be a string");
     }
     if (name === "") {
       throw new Error("argument 'name' must be a non-empty string");
     }
-    if (options !== undefined && options !== null && typeof options !== "object") {
+    if (options !== null && typeof options !== "object") {
       throw new TypeError("argument 'options' must be an object");
     }
 

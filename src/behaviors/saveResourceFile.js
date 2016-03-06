@@ -19,10 +19,9 @@ import Resource from "../Resource";
  *   Absolute path to the output resource file, which must be non-empty.
  * @param {module:webreed/lib/Resource} resource
  *   The resource that is to be saved.
- * @param {string} [resourceTypeExtension = null]
- *   When specified allows the caller to override the type of the resource. Assumes
- *   file extension from `outputFilePath` argument when `resourceTypeExtension` is
- *   `undefined` or `null`.
+ * @param {string} resourceTypeExtension
+ *   When specified allows the caller to override the type of the resource. Assumes file
+ *   extension from `outputFilePath` argument when `resourceTypeExtension` is `null`.
  *
  * @returns {Promise}
  *   A promise to notify upon completion; or to throw an error.
@@ -30,8 +29,8 @@ import Resource from "../Resource";
  * @throws {Error}
  * - If attempting to save resource with an unknown mode.
  */
-export default function saveResourceFile(env, outputFilePath, resource, resourceTypeExtension) {
-  if (resourceTypeExtension === undefined || resourceTypeExtension === null) {
+export default function saveResourceFile(env, outputFilePath, resource, resourceTypeExtension = null) {
+  if (resourceTypeExtension === null) {
     resourceTypeExtension = path.extname(outputFilePath);
   }
 
