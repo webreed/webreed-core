@@ -3,7 +3,7 @@
 
 
 import Environment from "../Environment";
-import Handler from "../interfaces/Handler";
+import Handler from "../plugin/Handler";
 import Resource from "../Resource";
 import ResourceType from "../ResourceType";
 

@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 import Environment from "../Environment";
 import PluginContext from "../PluginContext";
 import Resource from "../Resource";
-import Transformer from "../interfaces/Transformer";
+import Transformer from "../plugin/Transformer";
 
 
 /**

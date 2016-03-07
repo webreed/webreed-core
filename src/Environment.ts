@@ -8,13 +8,13 @@ const join = path.join;
 
 import * as defaultBehaviors from "./behaviors/defaults";
 import AliasMap from "./AliasMap";
-import Generator from "./interfaces/Generator";
-import Handler from "./interfaces/Handler";
-import Mode from "./interfaces/Mode";
+import Generator from "./plugin/Generator";
+import Handler from "./plugin/Handler";
+import Mode from "./plugin/Mode";
 import Resource from "./Resource";
 import ResourceType from "./ResourceType";
-import TemplateEngine from "./interfaces/TemplateEngine";
-import Transformer from "./interfaces/Transformer";
+import TemplateEngine from "./plugin/TemplateEngine";
+import Transformer from "./plugin/Transformer";
 import normalizePathSeparators from "./util/normalizePathSeparators";
 import trimTrailingSlash from "./util/trimTrailingSlash";
 

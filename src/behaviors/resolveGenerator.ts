@@ -3,7 +3,7 @@
 
 
 import Environment from "../Environment";
-import Generator from "../interfaces/Generator";
+import Generator from "../plugin/Generator";
 import Resource from "../Resource";
 import ResourceType from "../ResourceType";
 

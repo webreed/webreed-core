@@ -3,7 +3,7 @@
 
 
 import Environment from "../Environment";
-import Mode from "../interfaces/Mode";
+import Mode from "../plugin/Mode";
 import Resource from "../Resource";
 import ResourceType from "../ResourceType";
 

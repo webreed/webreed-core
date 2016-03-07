@@ -6,7 +6,7 @@ import {extname} from "path";
 
 import Environment from "../Environment";
 import ResourceType from "../ResourceType";
-import TemplateEngine from "../interfaces/TemplateEngine";
+import TemplateEngine from "../plugin/TemplateEngine";
 
 
 /**
