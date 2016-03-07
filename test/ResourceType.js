@@ -104,6 +104,31 @@ describe("ResourceType", function () {
 
   });
 
+  describe("#encoding", function () {
+
+    it("is `null` by default", function () {
+      should(this.resourceType.encoding)
+        .be.null();
+    });
+
+  });
+
+  describe("#encoding=", function () {
+
+    it("takes on a value of `null`", function () {
+      this.resourceType.encoding = null;
+      should(this.resourceType.encoding)
+        .be.null();
+    });
+
+    it("takes on the assigned encoding", function () {
+      this.resourceType.encoding = "utf8";
+      this.resourceType.encoding
+        .should.be.eql("utf8");
+    });
+
+  });
+
   describe("#generator", function () {
 
     it("is `null` by default", function () {

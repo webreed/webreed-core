@@ -96,6 +96,11 @@ export default class Resource {
   _path: string;
 
   /**
+   * Encoding of the resource type (for instance, this could be a value of "utf8").
+   */
+  _encoding: string;
+
+  /**
    * File extension of the resource.
    */
   _extension: string;

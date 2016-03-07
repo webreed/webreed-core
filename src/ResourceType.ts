@@ -23,6 +23,7 @@ export default class ResourceType {
   private _conversions: TransformationPluginMap = { };
   private _custom: CustomResourceTypeOptions = { };
   private _defaultTargetExtension: string = null;
+  private _encoding: string = null;
   private _generator: PluginContext = null;
   private _handler: PluginContext = null;
   private _mode: string = "text";
@@ -79,6 +80,16 @@ export default class ResourceType {
     }
 
     this._defaultTargetExtension = value;
+  }
+
+  /**
+   * Encoding of the resource's body.
+   */
+  get encoding(): string {
+    return this._encoding;
+  }
+  set encoding(value: string) {
+    this._encoding = value;
   }
 
   /**

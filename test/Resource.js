@@ -41,6 +41,12 @@ describe("Resource", function () {
         .should.be.eql("/abc");
     });
 
+    it("has a default _encoding of undefined", function () {
+      let resource = new Resource(this.env);
+      should( resource._encoding )
+        .be.undefined();
+    });
+
     it("has a default _extension of ''", function () {
       let resource = new Resource(this.env);
       resource._extension
