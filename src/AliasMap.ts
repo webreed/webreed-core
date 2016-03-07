@@ -112,14 +112,14 @@ export class AliasMap<V> {
   /**
    * Indicates whether character casing of keys is ignored.
    */
-  get ignoreCase(): boolean {
+  public get ignoreCase(): boolean {
     return this._options.ignoreCase;
   }
 
   /**
    * The number of entries in the collection.
    */
-  get size(): number {
+  public get size(): number {
     return this._map.size;
   }
 
@@ -127,7 +127,7 @@ export class AliasMap<V> {
   /**
    * Clears all entries from the collection.
    */
-  clear(): void {
+  public clear(): void {
     this._map.clear();
   }
 
@@ -140,7 +140,7 @@ export class AliasMap<V> {
    * @returns
    *   A value of `true` if an entry is removed; otherwise, a value of `false`.
    */
-  delete(key: string): boolean {
+  public delete(key: string): boolean {
     key = this._sanitizeKey(key);
     return this._map.delete(key);
   }
@@ -148,7 +148,7 @@ export class AliasMap<V> {
   /**
    * Gets an object that iterates the collection's key/value pairs.
    */
-  entries(): Iterator<[string, V | string]> {
+  public entries(): Iterator<[string, V | string]> {
     return this._map.entries();
   }
 
@@ -160,7 +160,7 @@ export class AliasMap<V> {
    * @param thisArg
    *   Value to use as `this` when executing the callback.
    */
-  forEach(callback: ForEachCallback<V>, thisArg?: any): void {
+  public forEach(callback: ForEachCallback<V>, thisArg?: any): void {
     this._map.forEach((value, key) =>
       callback.call(thisArg, value, key, this)
     );
@@ -174,7 +174,7 @@ export class AliasMap<V> {
    *
    * @see [[AliasMap.lookup]]
    */
-  get(key: string): V | string {
+  public get(key: string): V | string {
     key = this._sanitizeKey(key);
     return this._map.get(key);
   }
@@ -190,7 +190,7 @@ export class AliasMap<V> {
    *
    * @see [[AliasMap.lookup]]
    */
-  has(key: string): boolean {
+  public has(key: string): boolean {
     key = this._sanitizeKey(key);
     return this._map.has(key);
   }
@@ -198,7 +198,7 @@ export class AliasMap<V> {
   /**
    * Gets an object that iterates the collection's keys.
    */
-  keys(): Iterator<string> {
+  public keys(): Iterator<string> {
     return this._map.keys();
   }
 
@@ -222,7 +222,7 @@ export class AliasMap<V> {
    * @see [[AliasMap.has]]
    * @see [[AliasMap.lookupQuiet]]
    */
-  lookup(key: string): V {
+  public lookup(key: string): V {
     let resolvedKey = this.noisyResolve(key);
     return <V>this._map.get(resolvedKey);
   }
@@ -245,7 +245,7 @@ export class AliasMap<V> {
    *
    * @see [[AliasMap.lookup]]
    */
-  lookupQuiet(key: string): V {
+  public lookupQuiet(key: string): V {
     let resolvedKey = this.resolve(key);
     if (resolvedKey !== undefined) {
       return <V>this._map.get(resolvedKey);
@@ -278,7 +278,7 @@ export class AliasMap<V> {
    * - If alias `key` could not be resolved.
    * - If a circular alias reference was encountered.
    */
-  noisyResolve(key: string): string {
+  public noisyResolve(key: string): string {
     let resolvedKey = this.resolve(key);
     if (resolvedKey === undefined) {
       let errorMessage = formatUnicorn(this._options.strings.invalidKey, { key: key });
@@ -307,7 +307,7 @@ export class AliasMap<V> {
    * @throws {Error}
    * - If a circular alias reference was encountered.
    */
-  resolve(key: string): string {
+  public resolve(key: string): string {
     key = this._sanitizeKey(key);
 
     let value = this._map.get(key);
@@ -347,7 +347,7 @@ export class AliasMap<V> {
    * @see [[AliasMap.get]]
    * @see [[AliasMap.lookup]]
    */
-  set(key: string, value: V | string): this {
+  public set(key: string, value: V | string): this {
     key = this._sanitizeKey(key);
     this._map.set(key, value);
     return this;
@@ -356,7 +356,7 @@ export class AliasMap<V> {
   /**
    * Gets an object that iterates the collection's values.
    */
-  values(): Iterator<V | string> {
+  public values(): Iterator<V | string> {
     return this._map.values();
   }
 

@@ -34,10 +34,10 @@ export class ResourceType {
   /**
    * Map of conversion transformations from the current resource type to another.
    */
-  get conversions(): TransformationPluginMap {
+  public get conversions(): TransformationPluginMap {
     return this._conversions;
   }
-  set conversions(value: TransformationPluginMap) {
+  public set conversions(value: TransformationPluginMap) {
     this._conversions = { };
     for (let key of Object.keys(value)) {
       this._conversions[key] = Array.from(value[key]);
@@ -47,7 +47,7 @@ export class ResourceType {
   /**
    * Holds custom key/value pairs.
    */
-  get custom(): CustomResourceTypeOptions {
+  public get custom(): CustomResourceTypeOptions {
     return this._custom;
   }
 
@@ -65,10 +65,10 @@ export class ResourceType {
    * - If argument `value` is an empty string.
    * - If argument `value` is a value of ".".
    */
-  get defaultTargetExtension(): string {
+  public get defaultTargetExtension(): string {
     return this._defaultTargetExtension;
   }
-  set defaultTargetExtension(value: string) {
+  public set defaultTargetExtension(value: string) {
     if (value !== null) {
       if (value === "") {
         throw new Error("argument 'value' must be a non-empty string");
@@ -84,10 +84,10 @@ export class ResourceType {
   /**
    * Encoding of the resource's body.
    */
-  get encoding(): string {
+  public get encoding(): string {
     return this._encoding;
   }
-  set encoding(value: string) {
+  public set encoding(value: string) {
     this._encoding = value;
   }
 
@@ -99,10 +99,10 @@ export class ResourceType {
    *
    * A value of `null` when no generator plugin is specified.
    */
-  get generator(): PluginContext {
+  public get generator(): PluginContext {
     return this._generator;
   }
-  set generator(value: PluginContext) {
+  public set generator(value: PluginContext) {
     this._generator = value;
   }
 
@@ -114,20 +114,20 @@ export class ResourceType {
    *
    * A value of `null` when no handler plugin is specified.
    */
-  get handler(): PluginContext {
+  public get handler(): PluginContext {
     return this._handler;
   }
-  set handler(value: PluginContext) {
+  public set handler(value: PluginContext) {
     this._handler = value;
   }
 
   /**
    * Name of the file mode.
    */
-  get mode(): string {
+  public get mode(): string {
     return this._mode;
   }
-  set mode(value: string) {
+  public set mode(value: string) {
     if (value === "") {
       throw new Error("argument 'value' must be a non-empty string");
     }
@@ -138,10 +138,10 @@ export class ResourceType {
    * Indicates whether the file mode should attempt to parse frontmatter when reading the
    * source content file. This property is not necessarily applicable to all file modes.
    */
-  get parseFrontmatter(): boolean {
+  public get parseFrontmatter(): boolean {
     return this._parseFrontmatter;
   }
-  set parseFrontmatter(value: boolean) {
+  public set parseFrontmatter(value: boolean) {
     this._parseFrontmatter = value;
   }
 
@@ -149,10 +149,10 @@ export class ResourceType {
    * An array of zero-or-more transforms that are applied in order to a resource **before**
    * any conversion transformations are applied.
    */
-  get process(): PluginContext[] {
+  public get process(): PluginContext[] {
     return this._process;
   }
-  set process(value: PluginContext[]) {
+  public set process(value: PluginContext[]) {
     this._process = Array.from(value);
   }
 
@@ -164,10 +164,10 @@ export class ResourceType {
    *
    * A value of `null` when no template engine plugin is specified.
    */
-  get templateEngine(): PluginContext {
+  public get templateEngine(): PluginContext {
     return this._templateEngine;
   }
-  set templateEngine(value: PluginContext) {
+  public set templateEngine(value: PluginContext) {
     this._templateEngine = value;
   }
 

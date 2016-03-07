@@ -89,10 +89,10 @@ export class Environment {
    * A value of "/" is useful in situations where you want to be able to easily move
    * the generated output to different locations or servers.
    */
-  get baseUrl(): string {
+  public get baseUrl(): string {
     return this._baseUrl;
   }
-  set baseUrl(value: string) {
+  public set baseUrl(value: string) {
     this._baseUrl = value;
   }
 
@@ -115,17 +115,17 @@ export class Environment {
    *
    *     delete env.behaviors.build;
    */
-  get behaviors(): BehaviorFunctionMap {
+  public get behaviors(): BehaviorFunctionMap {
     return this._behaviors;
   }
 
   /**
    * Name of the default generator.
    */
-  get defaultGeneratorName(): string {
+  public get defaultGeneratorName(): string {
     return this._defaultGeneratorName;
   }
-  set defaultGeneratorName(value: string) {
+  public set defaultGeneratorName(value: string) {
     if (value === "") {
       throw new Error("argument 'value' must be a non-empty string");
     }
@@ -135,10 +135,10 @@ export class Environment {
   /**
    * Name of the default resource mode.
    */
-  get defaultModeName(): string {
+  public get defaultModeName(): string {
     return this._defaultModeName;
   }
-  set defaultModeName(value: string) {
+  public set defaultModeName(value: string) {
     if (value === "") {
       throw new Error("argument 'value' must be a non-empty string");
     }
@@ -148,42 +148,42 @@ export class Environment {
   /**
    * Map of resource types.
    */
-  get resourceTypes(): AliasMap<ResourceType> {
+  public get resourceTypes(): AliasMap<ResourceType> {
     return this._resourceTypes;
   }
 
   /**
    * Map of content generators.
    */
-  get generators(): AliasMap<Generator> {
+  public get generators(): AliasMap<Generator> {
     return this._generators;
   }
 
   /**
    * Map of content handlers.
    */
-  get handlers(): AliasMap<Handler> {
+  public get handlers(): AliasMap<Handler> {
     return this._handlers;
   }
 
   /**
    * Set of file extensions that should be hidden in generated URLs.
    */
-  get hiddenUrlExtensions(): Set<string> {
+  public get hiddenUrlExtensions(): Set<string> {
     return this._hiddenUrlExtensions;
   }
 
   /**
    * Set of file names that should be hidden in generated URLs.
    */
-  get hiddenUrlFileNames(): Set<string> {
+  public get hiddenUrlFileNames(): Set<string> {
     return this._hiddenUrlFileNames;
   }
 
   /**
    * Map of file modes.
    */
-  get modes(): AliasMap<Mode> {
+  public get modes(): AliasMap<Mode> {
     return this._modes;
   }
 

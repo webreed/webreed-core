@@ -30,10 +30,10 @@ export class PluginContext {
   /**
    * Name of the plugin.
    */
-  get name(): string {
+  public get name(): string {
     return this._name;
   }
-  set name(value: string) {
+  public set name(value: string) {
     if (value === "") {
       throw new Error("argument 'value' must be a non-empty string");
     }
@@ -46,10 +46,10 @@ export class PluginContext {
    *
    * Assumes an empty object when a value of `null` is assigned.
    */
-  get options(): Object {
+  public get options(): Object {
     return this._options;
   }
-  set options(value: Object) {
+  public set options(value: Object) {
     this._options = value || { };
   }
 

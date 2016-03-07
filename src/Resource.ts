@@ -77,7 +77,7 @@ export class Resource {
    * @returns
    *   A new instance.
    */
-  clone(overrides: Object = null, overrideEnv: Environment = null): Resource {
+  public clone(overrides: Object = null, overrideEnv: Environment = null): Resource {
     return new Resource(overrideEnv || this.__env, overrides, this);
   }
 
@@ -85,34 +85,34 @@ export class Resource {
   /**
    * Base URL of the resource.
    */
-  _baseUrl: string;
+  public _baseUrl: string;
 
   /**
    * Path of the resource in the output directory.
    */
-  _path: string;
+  public _path: string;
 
   /**
    * Encoding of the resource type (for instance, this could be a value of "utf8").
    */
-  _encoding: string;
+  public _encoding: string;
 
   /**
    * File extension of the resource.
    */
-  _extension: string;
+  public _extension: string;
 
   /**
    * Path identifying which page the resource represents of a paginated resource.
    */
-  _page: string;
+  public _page: string;
 
   /**
    * Name of the resource.
    *
    * This is a computed property which cannot be directly overridden.
    */
-  _name: string;
+  public _name: string;
 
   /**
    * URL of the resource is automatically determined from other properties of the
@@ -120,18 +120,18 @@ export class Resource {
    *
    * This is a computed property which cannot be directly overridden.
    */
-  _url: string;
+  public _url: string;
 
   /**
    * An array of zero-or-more segments from the URL.
    *
    * This is a computed property which cannot be directly overridden.
    */
-  _segments: string[];
+  public _segments: string[];
 
   /**
    * Body of the resource.
    */
-  body: any;
+  public body: any;
 
 }
