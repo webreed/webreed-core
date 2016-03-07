@@ -4,8 +4,9 @@
   "description": "Core library that support webreed projects.",
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "tsc",
-    "test": "mocha ./test/ --recursive --compilers js:babel-register"
+    "prepublish": "npm run build_cjs",
+    "build_cjs": "rm -rf lib && tsc --pretty",
+    "test": "npm run build_cjs && mocha ./test/ --recursive --compilers js:babel-register"
   },
   "author": "Rotorz Limited",
   "license": "MIT",
