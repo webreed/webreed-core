@@ -8,9 +8,6 @@ import * as url from "url";
 
 const join = path.join;
 
-// Packages
-import * as moment from "moment";
-
 // Project
 import * as defaultBehaviors from "./behaviors/defaults";
 import AliasMap from "./AliasMap";
@@ -47,12 +44,6 @@ export default class Environment {
   private _baseUrl = DEFAULT_BASE_URL;
   private _hiddenUrlExtensions = new Set<string>();
   private _hiddenUrlFileNames = new Set<string>();
-
-  //!TODO: Make the value of the `timeStartedField` immutable when moment.js resolves:
-  //   TypeError: Can't add property _isValid, object is not extensible
-  //    at valid__isValid (...\node_modules\moment\moment.js:93:24)
-  //private _timeStarted = Object.freeze(moment());
-  private _timeStarted = moment();
 
   private _defaultGeneratorName = "standard";
   private _defaultModeName = "text";
@@ -217,13 +208,6 @@ export default class Environment {
    */
   public get templateEngines(): AliasMap<TemplateEngine> {
     return this._templateEngines;
-  }
-
-  /**
-   * The time that the webreed environment was created.
-   */
-  public get timeStarted(): moment.Moment {
-    return this._timeStarted;
   }
 
   /**
