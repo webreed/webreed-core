@@ -11,6 +11,6 @@
  * @returns
  *   A value of `true` if argument `value` is a string of the form "alias-of({target})".
  */
-export default function isAliasReference(value: any): boolean {
+export function isAliasReference(value: any): boolean {
   return /^alias-of\(([^\(\)]*)\)$/.test(value);
 }

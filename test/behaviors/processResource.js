@@ -2,17 +2,17 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-import Rx from "rxjs";
+import {Observable} from "rxjs";
 import given from "mocha-testdata";
 import should from "should";
 
-import Environment from "../../lib/Environment";
-import PluginContext from "../../lib/PluginContext";
-import Resource from "../../lib/Resource";
-import ResourceType from "../../lib/ResourceType";
-import processResource from "../../lib/behaviors/processResource";
+import {Environment} from "../../lib/Environment";
+import {PluginContext} from "../../lib/PluginContext";
+import {Resource} from "../../lib/Resource";
+import {ResourceType} from "../../lib/ResourceType";
+import {processResource} from "../../lib/behaviors/processResource";
 
-import FakeErrorTransformer from "../fakes/FakeErrorTransformer";
+import {FakeErrorTransformer} from "../fakes/FakeErrorTransformer";
 
 
 describe("behaviors/processResource", function () {
@@ -39,7 +39,7 @@ describe("behaviors/processResource", function () {
     let resourceType = new ResourceType();
 
     processResource(this.env, resource, resourceType)
-      .should.be.instanceOf(Rx.Observable);
+      .should.be.instanceOf(Observable);
   });
 
   it("resolves with an output `Resource`", function () {

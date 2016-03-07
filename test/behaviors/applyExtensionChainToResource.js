@@ -6,13 +6,13 @@ import Rx from "rxjs";
 import given from "mocha-testdata";
 import should from "should";
 
-import Environment from "../../lib/Environment";
-import PluginContext from "../../lib/PluginContext";
-import ResourceType from "../../lib/ResourceType";
-import applyExtensionChainToResource from "../../lib/behaviors/applyExtensionChainToResource";
+import {Environment} from "../../lib/Environment";
+import {PluginContext} from "../../lib/PluginContext";
+import {ResourceType} from "../../lib/ResourceType";
+import {applyExtensionChainToResource} from "../../lib/behaviors/applyExtensionChainToResource";
 
-import FakeErrorTransformer from "../fakes/FakeErrorTransformer";
-import FakeTransformer from "../fakes/FakeTransformer";
+import {FakeErrorTransformer} from "../fakes/FakeErrorTransformer";
+import {FakeTransformer} from "../fakes/FakeTransformer";
 
 
 describe("behaviors/applyExtensionChainToResource", function () {

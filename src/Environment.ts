@@ -7,16 +7,16 @@ import * as url from "url";
 const join = path.join;
 
 import * as defaultBehaviors from "./behaviors/defaults";
-import AliasMap from "./AliasMap";
-import Generator from "./plugin/Generator";
-import Handler from "./plugin/Handler";
-import Mode from "./plugin/Mode";
-import Resource from "./Resource";
-import ResourceType from "./ResourceType";
-import TemplateEngine from "./plugin/TemplateEngine";
-import Transformer from "./plugin/Transformer";
-import normalizePathSeparators from "./util/normalizePathSeparators";
-import trimTrailingSlash from "./util/trimTrailingSlash";
+import {AliasMap} from "./AliasMap";
+import {Generator} from "./plugin/Generator";
+import {Handler} from "./plugin/Handler";
+import {Mode} from "./plugin/Mode";
+import {Resource} from "./Resource";
+import {ResourceType} from "./ResourceType";
+import {TemplateEngine} from "./plugin/TemplateEngine";
+import {Transformer} from "./plugin/Transformer";
+import {normalizePathSeparators} from "./util/normalizePathSeparators";
+import {trimTrailingSlash} from "./util/trimTrailingSlash";
 
 
 const DEFAULT_BASE_URL = "/";
@@ -31,7 +31,7 @@ export type BehaviorFunctionMap = {
 /**
  * Represents the environment of a webreed project.
  */
-export default class Environment {
+export class Environment {
 
   private _behaviors: BehaviorFunctionMap;
 

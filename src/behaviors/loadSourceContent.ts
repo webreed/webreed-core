@@ -6,10 +6,10 @@ import {basename, dirname, join} from "path";
 
 const _ = require("lodash");
 
-import Environment from "../Environment";
-import Resource from "../Resource";
-import getExtensionChainFromPath from "../util/getExtensionChainFromPath";
-import normalizePathSeparators from "../util/normalizePathSeparators";
+import {Environment} from "../Environment";
+import {Resource} from "../Resource";
+import {getExtensionChainFromPath} from "../util/getExtensionChainFromPath";
+import {normalizePathSeparators} from "../util/normalizePathSeparators";
 
 
 /**
@@ -35,7 +35,7 @@ import normalizePathSeparators from "../util/normalizePathSeparators";
  * @throws {Error}
  * - If attempting to load resource with an unknown mode.
  */
-export default function loadSourceContent(env: Environment, contentRelativePath: string, resourceTypeExtension: string = null, baseProperties: Object = null): Promise<Resource> {
+export function loadSourceContent(env: Environment, contentRelativePath: string, resourceTypeExtension: string = null, baseProperties: Object = null): Promise<Resource> {
   if (contentRelativePath === "") {
     throw new Error("argument 'contentRelativePath' must be a non-empty string")
   }

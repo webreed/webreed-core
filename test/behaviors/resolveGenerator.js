@@ -5,10 +5,10 @@
 import given from "mocha-testdata";
 import should from "should";
 
-import Environment from "../../lib/Environment";
-import PluginContext from "../../lib/PluginContext";
-import ResourceType from "../../lib/ResourceType";
-import resolveGenerator from "../../lib/behaviors/resolveGenerator";
+import {Environment} from "../../lib/Environment";
+import {PluginContext} from "../../lib/PluginContext";
+import {ResourceType} from "../../lib/ResourceType";
+import {resolveGenerator} from "../../lib/behaviors/resolveGenerator";
 
 
 describe("behaviors/resolveGenerator", function () {

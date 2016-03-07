@@ -12,7 +12,7 @@
  *   The chain of zero-or-more file extensions; an empty string when argument contains
  *   zero file extensions.
  */
-export default function getExtensionChainFromPath(path: string): string {
+export function getExtensionChainFromPath(path: string): string {
   let result = path.match(/\.[^\\\/]+$/);
   return result !== null ? result[0] : "";
 }

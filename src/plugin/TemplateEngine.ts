@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 /**
  * Interface for a template engine.
  */
-interface TemplateEngine {
+export interface TemplateEngine {
 
   /**
    * Clears any cache associated with rendering of templates so that the cache can be
@@ -47,6 +47,3 @@ interface TemplateEngine {
   renderTemplateString(templateName: string, templateParams: Object, context: Object): Observable<string>;
 
 }
-
-
-export default TemplateEngine;

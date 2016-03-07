@@ -9,9 +9,9 @@ import glob from "glob";
 import rimraf from "rimraf";
 import should from "should";
 
-import Environment from "../../lib/Environment";
-import copyFilesToOutput from "../../lib/behaviors/copyFilesToOutput";
-import normalizePathSeparators from "../../lib/util/normalizePathSeparators";
+import {Environment} from "../../lib/Environment";
+import {copyFilesToOutput} from "../../lib/behaviors/copyFilesToOutput";
+import {normalizePathSeparators} from "../../lib/util/normalizePathSeparators";
 
 
 function getFixturePath(relativePath) {

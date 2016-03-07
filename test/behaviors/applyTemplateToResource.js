@@ -6,13 +6,13 @@ import Rx from "rxjs";
 import given from "mocha-testdata";
 import should from "should";
 
-import Environment from "../../lib/Environment";
-import PluginContext from "../../lib/PluginContext";
-import ResourceType from "../../lib/ResourceType";
-import applyTemplateToResource from "../../lib/behaviors/applyTemplateToResource";
+import {Environment} from "../../lib/Environment";
+import {PluginContext} from "../../lib/PluginContext";
+import {ResourceType} from "../../lib/ResourceType";
+import {applyTemplateToResource} from "../../lib/behaviors/applyTemplateToResource";
 
-import FakeErrorTemplateEngine from "../fakes/FakeErrorTemplateEngine";
-import FakeTemplateEngine from "../fakes/FakeTemplateEngine";
+import {FakeErrorTemplateEngine} from "../fakes/FakeErrorTemplateEngine";
+import {FakeTemplateEngine} from "../fakes/FakeTemplateEngine";
 
 
 describe("behaviors/applyTemplateToResource", function () {

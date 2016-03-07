@@ -5,7 +5,7 @@
 import given from "mocha-testdata";
 import should from "should";
 
-import PluginContext from "../lib/PluginContext";
+import {PluginContext} from "../lib/PluginContext";
 
 
 describe("PluginContext", function () {

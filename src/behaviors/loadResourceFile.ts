@@ -6,10 +6,10 @@ import {extname} from "path";
 
 const _ = require("lodash");
 
-import Environment from "../Environment";
-import Resource from "../Resource";
-import getExtensionChainFromPath from "../util/getExtensionChainFromPath";
-import getTargetExtensionFromPath from "../util/getTargetExtensionFromPath";
+import {Environment} from "../Environment";
+import {Resource} from "../Resource";
+import {getExtensionChainFromPath} from "../util/getExtensionChainFromPath";
+import {getTargetExtensionFromPath} from "../util/getTargetExtensionFromPath";
 
 
 /**
@@ -35,7 +35,7 @@ import getTargetExtensionFromPath from "../util/getTargetExtensionFromPath";
  * @throws {Error}
  * - If attempting to load resource with an unknown mode.
  */
-export default async function loadResourceFile(env: Environment, filePath: string, resourceTypeExtension: string = null, baseProperties: Object = null): Promise<Resource> {
+export async function loadResourceFile(env: Environment, filePath: string, resourceTypeExtension: string = null, baseProperties: Object = null): Promise<Resource> {
   if (resourceTypeExtension === null) {
     resourceTypeExtension = extname(filePath);
   }

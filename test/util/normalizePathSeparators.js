@@ -7,7 +7,7 @@ import path from "path";
 import given from "mocha-testdata";
 import should from "should";
 
-import normalizePathSeparators from "../../lib/util/normalizePathSeparators";
+import {normalizePathSeparators} from "../../lib/util/normalizePathSeparators";
 
 
 describe("util/normalizePathSeparators", function () {

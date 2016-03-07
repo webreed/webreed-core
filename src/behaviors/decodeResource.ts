@@ -2,10 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-import Environment from "../Environment";
-import Handler from "../plugin/Handler";
-import Resource from "../Resource";
-import ResourceType from "../ResourceType";
+import {Environment} from "../Environment";
+import {Handler} from "../plugin/Handler";
+import {Resource} from "../Resource";
+import {ResourceType} from "../ResourceType";
 
 
 /**
@@ -21,7 +21,7 @@ import ResourceType from "../ResourceType";
  * @returns
  *   A promise to fulfill with the decoded resource.
  */
-export default function decodeResource(env: Environment, resource: Resource, resourceType: ResourceType): Promise<Resource> {
+export function decodeResource(env: Environment, resource: Resource, resourceType: ResourceType): Promise<Resource> {
   if (resourceType.handler !== null) {
     let resolvedHandlerName = env.handlers.noisyResolve(resourceType.handler.name);
     let handlerPlugin = <Handler> env.handlers.get(resolvedHandlerName);

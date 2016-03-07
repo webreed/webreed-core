@@ -4,9 +4,9 @@
 
 import {Observable} from "rxjs";
 
-import Environment from "../Environment";
-import Resource from "../Resource";
-import ResourceType from "../ResourceType";
+import {Environment} from "../Environment";
+import {Resource} from "../Resource";
+import {ResourceType} from "../ResourceType";
 
 
 /**
@@ -25,7 +25,7 @@ import ResourceType from "../ResourceType";
  * @throws {Error}
  * - If the environment does not define the associated generator.
  */
-export default function generateResource(env: Environment, resource: Resource, resourceType: ResourceType): Observable<Resource> {
+export function generateResource(env: Environment, resource: Resource, resourceType: ResourceType): Observable<Resource> {
   let resolvedGenerator = env.invoke("resolveGenerator", resource, resourceType);
 
   return resolvedGenerator.generator.generate(resource, {

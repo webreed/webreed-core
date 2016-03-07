@@ -2,10 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-import Environment from "../Environment";
-import Mode from "../plugin/Mode";
-import Resource from "../Resource";
-import ResourceType from "../ResourceType";
+import {Environment} from "../Environment";
+import {Mode} from "../plugin/Mode";
+import {Resource} from "../Resource";
+import {ResourceType} from "../ResourceType";
 
 
 /**
@@ -42,7 +42,7 @@ export type ResolvedResourceMode = {
  * @throws {Error}
  * - If the resolved resource mode is not defined.
  */
-export default function resolveResourceMode(env: Environment, resource: Resource = null, resourceType: ResourceType = null): ResolvedResourceMode {
+export function resolveResourceMode(env: Environment, resource: Resource = null, resourceType: ResourceType = null): ResolvedResourceMode {
   let modeName: string;
 
   if (resource !== null && !!resource["__mode"]) {

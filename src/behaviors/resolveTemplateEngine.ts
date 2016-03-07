@@ -4,9 +4,9 @@
 
 import {extname} from "path";
 
-import Environment from "../Environment";
-import ResourceType from "../ResourceType";
-import TemplateEngine from "../plugin/TemplateEngine";
+import {Environment} from "../Environment";
+import {ResourceType} from "../ResourceType";
+import {TemplateEngine} from "../plugin/TemplateEngine";
 
 
 /**
@@ -47,7 +47,7 @@ export type ResolvedTemplateEngine = {
  * - If resource type is not associated with a template engine.
  * - If the resolved template engine is not defined.
  */
-export default function resolveTemplateEngine(env: Environment, templateName: string): ResolvedTemplateEngine {
+export function resolveTemplateEngine(env: Environment, templateName: string): ResolvedTemplateEngine {
   if (templateName === "") {
     throw new Error("argument 'templateName' must be a non-empty string");
   }

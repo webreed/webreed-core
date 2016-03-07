@@ -2,10 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-import Environment from "../Environment";
-import Generator from "../plugin/Generator";
-import Resource from "../Resource";
-import ResourceType from "../ResourceType";
+import {Environment} from "../Environment";
+import {Generator} from "../plugin/Generator";
+import {Resource} from "../Resource";
+import {ResourceType} from "../ResourceType";
 
 
 /**
@@ -47,7 +47,7 @@ export type ResolvedGenerator = {
  * @throws {Error}
  * - If the resolved generator is not defined.
  */
-export default function resolveGenerator(env: Environment, resource: Resource = null, resourceType: ResourceType = null): ResolvedGenerator {
+export function resolveGenerator(env: Environment, resource: Resource = null, resourceType: ResourceType = null): ResolvedGenerator {
   let generatorName: string;
   let generatorOptions = { };
 

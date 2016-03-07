@@ -4,13 +4,13 @@
 
 import {Observable} from "rxjs";
 
-import Resource from "../Resource";
+import {Resource} from "../Resource";
 
 
 /**
  * Interface for a mechanism that transforms a given resource.
  */
-interface Transformer {
+export interface Transformer {
 
   /**
    * Transforms a given resource.
@@ -30,6 +30,3 @@ interface Transformer {
   transform(resource: Resource, context: Object): Observable<Resource>;
 
 }
-
-
-export default Transformer;

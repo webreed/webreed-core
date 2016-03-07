@@ -2,14 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-import Resource from "../Resource";
-import ResourceType from "../ResourceType";
+import {Resource} from "../Resource";
+import {ResourceType} from "../ResourceType";
 
 
 /**
  * Interface for a mode that reads and writes resource files.
  */
-interface Mode {
+export interface Mode {
 
   /**
    * Reads resource data from a file.
@@ -40,6 +40,3 @@ interface Mode {
   writeFile(path: string, resource: Resource, resourceType: ResourceType): Promise<void>;
 
 }
-
-
-export default Mode;

@@ -4,13 +4,13 @@
 
 import {Observable} from "rxjs";
 
-import Resource from "../Resource";
+import {Resource} from "../Resource";
 
 
 /**
  * Interface for a mechanism that generates output resources from a given source resource.
  */
-interface Generator {
+export interface Generator {
 
   /**
    * Generates output resource(s) from a given source resource.
@@ -30,6 +30,3 @@ interface Generator {
   generate(sourceResource: Resource, context: Object): Observable<Resource>;
 
 }
-
-
-export default Generator;

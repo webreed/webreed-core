@@ -12,7 +12,7 @@
  *   A string that identifies the target of the alias reference when argument `value` is
  *   an alias reference; otherwise, a value of `null`.
  */
-export default function getTargetFromAliasReference(value: any): string {
+export function getTargetFromAliasReference(value: any): string {
   if (typeof value === "string") {
     let match = value.match(/^alias-of\(([^\(\)]*)\)$/);
     if (match !== null) {

@@ -4,8 +4,8 @@
 
 import {extname} from "path";
 
-import Environment from "../Environment";
-import Resource from "../Resource";
+import {Environment} from "../Environment";
+import {Resource} from "../Resource";
 
 
 /**
@@ -25,7 +25,7 @@ import Resource from "../Resource";
  * @throws {Error}
  * - If attempting to save resource with an unknown mode.
  */
-export default function saveResourceFile(env: Environment, outputFilePath: string, resource: Resource, resourceTypeExtension: string = null): Promise<void> {
+export function saveResourceFile(env: Environment, outputFilePath: string, resource: Resource, resourceTypeExtension: string = null): Promise<void> {
   if (resourceTypeExtension === null) {
     resourceTypeExtension = extname(outputFilePath);
   }

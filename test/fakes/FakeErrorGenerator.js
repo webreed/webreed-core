@@ -2,13 +2,13 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-import Rx from "rxjs";
+import {Observable} from "rxjs";
 
 
-export default class FakeErrorGenerator {
+export class FakeErrorGenerator {
 
   generate(resource, resourceType) {
-    return new Rx.Observable(observer => {
+    return new Observable(observer => {
       observer.error(new Error("generate failed!"));
     });
   }

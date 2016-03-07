@@ -7,13 +7,13 @@ import * as url from "url";
 
 const _ = require("lodash");
 
-import Environment from "./Environment";
+import {Environment} from "./Environment";
 
 
 /**
  * An immutable object that represents a source, intermediary or output resource.
  */
-export default class Resource {
+export class Resource {
 
   private __env: Environment;
 

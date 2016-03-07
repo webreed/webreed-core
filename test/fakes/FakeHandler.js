@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-export default class FakeHandler {
+export class FakeHandler {
 
   decode(encodedData, context) {
     this.lastDecodeArguments = Array.from(arguments);

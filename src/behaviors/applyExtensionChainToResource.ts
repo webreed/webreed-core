@@ -4,9 +4,9 @@
 
 import {Observable} from "rxjs";
 
-import Environment from "../Environment";
-import Resource from "../Resource";
-import ResourceType from "../ResourceType";
+import {Environment} from "../Environment";
+import {Resource} from "../Resource";
+import {ResourceType} from "../ResourceType";
 
 
 /**
@@ -32,7 +32,7 @@ import ResourceType from "../ResourceType";
  * @returns
  *   An observable stream of output resources.
  */
-export default function applyExtensionChainToResource(env: Environment, resource: Resource, extensionChain: string): Observable<Resource> {
+export function applyExtensionChainToResource(env: Environment, resource: Resource, extensionChain: string): Observable<Resource> {
   // Compose ordered list of extensions in chain.
   let extensions = (extensionChain.match(/\.[^\.]+/g) || [""]).reverse();
   // Add special end-terminator target.

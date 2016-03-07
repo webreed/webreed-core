@@ -5,7 +5,7 @@
 import {Observable} from "rxjs";
 import * as glob from "glob";
 
-import Environment from "../Environment";
+import {Environment} from "../Environment";
 
 
 /**
@@ -17,7 +17,7 @@ import Environment from "../Environment";
  * @returns
  *   An observable collection of content relative paths.
  */
-export default function getSourceContentRelativePaths(env: Environment): Observable<string> {
+export function getSourceContentRelativePaths(env: Environment): Observable<string> {
   let results = glob.sync("**/*", {
     cwd: env.resolvePath("content"),
     ignore: [

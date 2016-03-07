@@ -5,7 +5,7 @@
 /**
  * Interface for a plugin that can encode and/or decode data.
  */
-interface Handler {
+export interface Handler {
 
   /**
    * Decodes the given encoded data so that templates, transforms and/or generators can
@@ -35,6 +35,3 @@ interface Handler {
   encode(data: any, context: Object): Promise<any>;
 
 }
-
-
-export default Handler;

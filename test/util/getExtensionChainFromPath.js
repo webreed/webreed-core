@@ -5,7 +5,7 @@
 import given from "mocha-testdata";
 import should from "should";
 
-import getExtensionChainFromPath from "../../lib/util/getExtensionChainFromPath";
+import {getExtensionChainFromPath} from "../../lib/util/getExtensionChainFromPath";
 
 
 describe("util/getExtensionChainFromPath", function () {

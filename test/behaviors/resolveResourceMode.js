@@ -5,9 +5,9 @@
 import given from "mocha-testdata";
 import should from "should";
 
-import Environment from "../../lib/Environment";
-import ResourceType from "../../lib/ResourceType";
-import resolveResourceMode from "../../lib/behaviors/resolveResourceMode";
+import {Environment} from "../../lib/Environment";
+import {ResourceType} from "../../lib/ResourceType";
+import {resolveResourceMode} from "../../lib/behaviors/resolveResourceMode";
 
 
 describe("behaviors/resolveResourceMode", function () {

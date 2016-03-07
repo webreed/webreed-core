@@ -5,8 +5,8 @@
 import given from "mocha-testdata";
 import should from "should";
 
-import Environment from "../lib/Environment";
-import Resource from "../lib/Resource";
+import {Environment} from "../lib/Environment";
+import {Resource} from "../lib/Resource";
 
 
 describe("Resource", function () {

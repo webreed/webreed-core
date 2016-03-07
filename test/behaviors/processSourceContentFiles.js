@@ -7,14 +7,14 @@ import path from "path";
 import given from "mocha-testdata";
 import should from "should";
 
-import Environment from "../../lib/Environment";
-import PluginContext from "../../lib/PluginContext";
-import ResourceType from "../../lib/ResourceType";
-import processSourceContentFiles from "../../lib/behaviors/processSourceContentFiles";
+import {Environment} from "../../lib/Environment";
+import {PluginContext} from "../../lib/PluginContext";
+import {ResourceType} from "../../lib/ResourceType";
+import {processSourceContentFiles} from "../../lib/behaviors/processSourceContentFiles";
 
-import FakeGenerator from "../fakes/FakeGenerator";
-import FakeMode from "../fakes/FakeMode";
-import FakeTransformer from "../fakes/FakeTransformer";
+import {FakeGenerator} from "../fakes/FakeGenerator";
+import {FakeMode} from "../fakes/FakeMode";
+import {FakeTransformer} from "../fakes/FakeTransformer";
 
 
 function getFixturePath(relativePath) {

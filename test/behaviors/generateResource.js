@@ -6,13 +6,13 @@ import Rx from "rxjs";
 import given from "mocha-testdata";
 import should from "should";
 
-import Environment from "../../lib/Environment";
-import PluginContext from "../../lib/PluginContext";
-import ResourceType from "../../lib/ResourceType";
-import generateResource from "../../lib/behaviors/generateResource";
+import {Environment} from "../../lib/Environment";
+import {PluginContext} from "../../lib/PluginContext";
+import {ResourceType} from "../../lib/ResourceType";
+import {generateResource} from "../../lib/behaviors/generateResource";
 
-import FakeErrorGenerator from "../fakes/FakeErrorGenerator";
-import FakeGenerator from "../fakes/FakeGenerator";
+import {FakeErrorGenerator} from "../fakes/FakeErrorGenerator";
+import {FakeGenerator} from "../fakes/FakeGenerator";
 
 
 describe("behaviors/generateResource", function () {

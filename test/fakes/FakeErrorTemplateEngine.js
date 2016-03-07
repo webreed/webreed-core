@@ -2,23 +2,23 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-import Rx from "rxjs";
+import {Observable} from "rxjs";
 
 
-export default class FakeTemplateEngine {
+export class FakeErrorTemplateEngine {
 
   clearTemplateCache() {
     return Promise.reject(new Error("clearTemplateCache failed!"));
   }
 
   renderTemplateString(template, templateParams, context) {
-    return new Rx.Observable(observer => {
+    return new Observable(observer => {
       observer.error(new Error("renderTemplateString failed!"));
     });
   }
 
   renderTemplate(templateName, templateParams, context) {
-    return new Rx.Observable(observer => {
+    return new Observable(observer => {
       observer.error(new Error("renderTemplate failed!"));
     });
   }

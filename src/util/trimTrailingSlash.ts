@@ -11,7 +11,7 @@
  * @returns
  *   The trimmed value. Always returns a value of "/" when the input value is "/".
  */
-export default function trimTrailingSlash(value: string): string {
+export function trimTrailingSlash(value: string): string {
   if (value.length > 1 && value.endsWith("/")) {
     value = value.substr(0, value.length - 1);
 

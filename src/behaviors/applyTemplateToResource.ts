@@ -4,8 +4,8 @@
 
 import {Observable} from "rxjs";
 
-import Environment from "../Environment";
-import Resource from "../Resource";
+import {Environment} from "../Environment";
+import {Resource} from "../Resource";
 
 
 /**
@@ -25,7 +25,7 @@ import Resource from "../Resource";
  * - If resource type is not associated with a template engine.
  * - If the resolved template engine is not defined.
  */
-export default function applyTemplateToResource(env: Environment, resource: Resource, templateName: string): Observable<Resource> {
+export function applyTemplateToResource(env: Environment, resource: Resource, templateName: string): Observable<Resource> {
   if (templateName === "") {
     throw new Error("argument 'templateName' must be a non-empty string");
   }

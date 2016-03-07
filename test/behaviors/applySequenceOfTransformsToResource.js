@@ -6,12 +6,12 @@ import Rx from "rxjs";
 import given from "mocha-testdata";
 import should from "should";
 
-import Environment from "../../lib/Environment";
-import PluginContext from "../../lib/PluginContext";
-import applySequenceOfTransformsToResource from "../../lib/behaviors/applySequenceOfTransformsToResource";
+import {Environment} from "../../lib/Environment";
+import {PluginContext} from "../../lib/PluginContext";
+import {applySequenceOfTransformsToResource} from "../../lib/behaviors/applySequenceOfTransformsToResource";
 
-import FakeTransformer from "../fakes/FakeTransformer";
-import FakeErrorTransformer from "../fakes/FakeErrorTransformer";
+import {FakeTransformer} from "../fakes/FakeTransformer";
+import {FakeErrorTransformer} from "../fakes/FakeErrorTransformer";
 
 
 describe("behaviors/applySequenceOfTransformsToResource", function () {

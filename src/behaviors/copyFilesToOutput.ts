@@ -4,7 +4,7 @@
 
 const fs = require("fs-promise");
 
-import Environment from "../Environment";
+import {Environment} from "../Environment";
 
 
 /**
@@ -16,7 +16,7 @@ import Environment from "../Environment";
  * @returns
  *   A promise to complete the copy files operation.
  */
-export default async function copyFilesToOutput(env: Environment): Promise<void> {
+export async function copyFilesToOutput(env: Environment): Promise<void> {
   let filesPath = env.resolvePath("files");
   let outputPath = env.resolvePath("output");
 

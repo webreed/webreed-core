@@ -5,8 +5,8 @@
 const _ = require("lodash");
 const formatUnicorn = require("format-unicorn/safe");
 
-import getTargetFromAliasReference from "./util/getTargetFromAliasReference";
-import isAliasReference from "./util/isAliasReference";
+import {getTargetFromAliasReference} from "./util/getTargetFromAliasReference";
+import {isAliasReference} from "./util/isAliasReference";
 
 
 /**
@@ -71,7 +71,7 @@ export type AliasMapOptions<V> = {
 /**
  * A map of key/value pairs with support for alias entries.
  */
-export default class AliasMap<V> {
+export class AliasMap<V> {
 
   private _options: AliasMapOptions<V>;
   private _map: Map<string, V | string>;

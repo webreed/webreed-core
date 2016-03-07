@@ -4,9 +4,9 @@
 
 import {Observable} from "rxjs";
 
-import Environment from "../Environment";
-import Resource from "../Resource";
-import ResourceType from "../ResourceType";
+import {Environment} from "../Environment";
+import {Resource} from "../Resource";
+import {ResourceType} from "../ResourceType";
 
 
 /**
@@ -22,6 +22,6 @@ import ResourceType from "../ResourceType";
  * @returns
  *   An observable stream of output resources.
  */
-export default function processResource(env: Environment, resource: Resource, resourceType: ResourceType): Observable<Resource> {
+export function processResource(env: Environment, resource: Resource, resourceType: ResourceType): Observable<Resource> {
   return env.invoke("applySequenceOfTransformsToResource", resource, resourceType.process);
 }

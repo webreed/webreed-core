@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-import Environment from "../Environment";
+import {Environment} from "../Environment";
 
 
 /**
@@ -14,7 +14,7 @@ import Environment from "../Environment";
  * @returns
  *   A promise to complete the build.
  */
-export default function build(env: Environment): Promise<void> {
+export function build(env: Environment): Promise<void> {
   return Promise.resolve()
     .then(() => console.log("Processing content files..."))
     .then(() => env.invoke("processSourceContentFiles"))

@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-export default class FakeMode {
+export class FakeMode {
 
   readFile(path, resourceType) {
     this.lastReadFileArguments = Array.from(arguments);

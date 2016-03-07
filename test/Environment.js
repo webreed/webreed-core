@@ -7,10 +7,10 @@ import path from "path";
 import given from "mocha-testdata";
 import should from "should";
 
-import AliasMap from "../lib/AliasMap";
-import ResourceType from "../lib/ResourceType";
-import Environment from "../lib/Environment";
-import Resource from "../lib/Resource";
+import {AliasMap} from "../lib/AliasMap";
+import {ResourceType} from "../lib/ResourceType";
+import {Environment} from "../lib/Environment";
+import {Resource} from "../lib/Resource";
 
 
 describe("Environment", function () {

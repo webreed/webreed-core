@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-export default class FakeErrorGenerator {
+export class FakeErrorHandler {
 
   decode(sourceResource, context) {
     return Promise.reject(new Error("decode failed!"));

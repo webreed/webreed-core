@@ -5,7 +5,7 @@
 import given from "mocha-testdata";
 import should from "should";
 
-import getTargetFromAliasReference from "../../lib/util/getTargetFromAliasReference";
+import {getTargetFromAliasReference} from "../../lib/util/getTargetFromAliasReference";
 
 
 describe("util/getTargetFromAliasReference", function () {

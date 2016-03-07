@@ -2,22 +2,22 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-import Rx from "rxjs";
+import {Observable} from "rxjs";
 
 
-export default class FakeTemplateEngine {
+export class FakeTemplateEngine {
 
   clearTemplateCache() {
   }
 
   renderTemplateString(template, templateParams, context) {
     this.lastRenderTemplateStringArguments = Array.from(arguments);
-    return Rx.Observable.of(`Template Output: [[${template}]]`);
+    return Observable.of(`Template Output: [[${template}]]`);
   }
 
   renderTemplate(templateName, templateParams, context) {
     this.lastRenderTemplateArguments = Array.from(arguments);
-    return Rx.Observable.of(`Template Output: [[${templateName}]]`);
+    return Observable.of(`Template Output: [[${templateName}]]`);
   }
 
 }

@@ -5,7 +5,7 @@
 import given from "mocha-testdata";
 import should from "should";
 
-import trimTrailingSlash from "../../lib/util/trimTrailingSlash";
+import {trimTrailingSlash} from "../../lib/util/trimTrailingSlash";
 
 
 describe("util/trimTrailingSlash", function () {

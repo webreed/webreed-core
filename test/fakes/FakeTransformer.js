@@ -2,11 +2,11 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-import Rx from "rxjs";
+import {Observable} from "rxjs";
 import formatUnicorn from "format-unicorn/safe";
 
 
-export default class FakeTransformer {
+export class FakeTransformer {
 
   constructor(value, pageCount, bodyFormat) {
     this.value = value;
@@ -17,7 +17,7 @@ export default class FakeTransformer {
 
   transform(resource, context) {
     this.lastTransformArguments = Array.from(arguments);
-    return Rx.Observable.range(1, this.pageCount)
+    return Observable.range(1, this.pageCount)
       .map(page => resource.clone({
         page: this.hasMultipleOutputs ? page : resource.page,
         body: formatUnicorn(this.bodyFormat, { body: resource.body, value: this.value })

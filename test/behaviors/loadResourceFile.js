@@ -7,13 +7,13 @@ import path from "path";
 import given from "mocha-testdata";
 import should from "should";
 
-import Environment from "../../lib/Environment";
-import Resource from "../../lib/Resource";
-import ResourceType from "../../lib/ResourceType";
-import loadResourceFile from "../../lib/behaviors/loadResourceFile";
+import {Environment} from "../../lib/Environment";
+import {Resource} from "../../lib/Resource";
+import {ResourceType} from "../../lib/ResourceType";
+import {loadResourceFile} from "../../lib/behaviors/loadResourceFile";
 
-import FakeErrorMode from "../fakes/FakeErrorMode";
-import FakeMode from "../fakes/FakeMode";
+import {FakeErrorMode} from "../fakes/FakeErrorMode";
+import {FakeMode} from "../fakes/FakeMode";
 
 
 function getFixturePath(relativePath) {

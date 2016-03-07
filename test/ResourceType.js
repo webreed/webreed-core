@@ -5,8 +5,8 @@
 import given from "mocha-testdata";
 import should from "should";
 
-import PluginContext from "../lib/PluginContext";
-import ResourceType from "../lib/ResourceType";
+import {PluginContext} from "../lib/PluginContext";
+import {ResourceType} from "../lib/ResourceType";
 
 
 describe("ResourceType", function () {

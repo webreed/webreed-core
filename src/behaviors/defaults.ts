@@ -2,19 +2,19 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-export { default as applyExtensionChainToResource } from "./applyExtensionChainToResource";
-export { default as applySequenceOfTransformsToResource } from "./applySequenceOfTransformsToResource";
-export { default as applyTemplateToResource } from "./applyTemplateToResource";
-export { default as build } from "./build";
-export { default as copyFilesToOutput } from "./copyFilesToOutput";
-export { default as decodeResource } from "./decodeResource";
-export { default as generateResource } from "./generateResource";
-export { default as getSourceContentRelativePaths } from "./getSourceContentRelativePaths";
-export { default as loadResourceFile } from "./loadResourceFile";
-export { default as loadSourceContent } from "./loadSourceContent";
-export { default as processResource } from "./processResource";
-export { default as processSourceContentFiles } from "./processSourceContentFiles";
-export { default as resolveGenerator } from "./resolveGenerator";
-export { default as resolveResourceMode } from "./resolveResourceMode";
-export { default as resolveTemplateEngine } from "./resolveTemplateEngine";
-export { default as saveResourceFile } from "./saveResourceFile";
+export { applyExtensionChainToResource } from "./applyExtensionChainToResource";
+export { applySequenceOfTransformsToResource } from "./applySequenceOfTransformsToResource";
+export { applyTemplateToResource } from "./applyTemplateToResource";
+export { build } from "./build";
+export { copyFilesToOutput } from "./copyFilesToOutput";
+export { decodeResource } from "./decodeResource";
+export { generateResource } from "./generateResource";
+export { getSourceContentRelativePaths } from "./getSourceContentRelativePaths";
+export { loadResourceFile } from "./loadResourceFile";
+export { loadSourceContent } from "./loadSourceContent";
+export { processResource } from "./processResource";
+export { processSourceContentFiles } from "./processSourceContentFiles";
+export { resolveGenerator } from "./resolveGenerator";
+export { resolveResourceMode } from "./resolveResourceMode";
+export { resolveTemplateEngine } from "./resolveTemplateEngine";
+export { saveResourceFile } from "./saveResourceFile";

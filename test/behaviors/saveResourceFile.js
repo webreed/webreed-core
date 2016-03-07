@@ -7,12 +7,12 @@ import path from "path";
 import given from "mocha-testdata";
 import should from "should";
 
-import Environment from "../../lib/Environment";
-import ResourceType from "../../lib/ResourceType";
-import saveResourceFile from "../../lib/behaviors/saveResourceFile";
+import {Environment} from "../../lib/Environment";
+import {ResourceType} from "../../lib/ResourceType";
+import {saveResourceFile} from "../../lib/behaviors/saveResourceFile";
 
-import FakeErrorMode from "../fakes/FakeErrorMode";
-import FakeMode from "../fakes/FakeMode";
+import {FakeErrorMode} from "../fakes/FakeErrorMode";
+import {FakeMode} from "../fakes/FakeMode";
 
 
 function getOutputPath(relativePath) {

@@ -5,7 +5,7 @@
 import given from "mocha-testdata";
 import should from "should";
 
-import AliasMap from "../lib/AliasMap";
+import {AliasMap} from "../lib/AliasMap";
 
 
 describe("AliasMap", function () {

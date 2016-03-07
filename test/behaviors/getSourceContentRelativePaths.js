@@ -4,12 +4,12 @@
 
 import path from "path";
 
-import Rx from "rxjs";
+import {Observable} from "rxjs";
 import given from "mocha-testdata";
 import should from "should";
 
-import Environment from "../../lib/Environment";
-import getSourceContentRelativePaths from "../../lib/behaviors/getSourceContentRelativePaths";
+import {Environment} from "../../lib/Environment";
+import {getSourceContentRelativePaths} from "../../lib/behaviors/getSourceContentRelativePaths";
 
 
 describe("behaviors/getSourceContentRelativePaths", function () {
@@ -33,7 +33,7 @@ describe("behaviors/getSourceContentRelativePaths", function () {
 
   it("returns an observable", function () {
     getSourceContentRelativePaths(this.env)
-      .should.be.instanceOf(Rx.Observable);
+      .should.be.instanceOf(Observable);
   });
 
   it("resolves with the expected source content paths", function () {

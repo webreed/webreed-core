@@ -5,7 +5,7 @@
 /**
  * Identifies a named plugin with optional options.
  */
-export default class PluginContext {
+export class PluginContext {
 
   private _name: string;
   private _options: Object;

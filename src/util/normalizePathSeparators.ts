@@ -29,7 +29,7 @@ const OS_SEP_PATTERN = new RegExp(escapeStringRegexp(sep) + "+", "g");
  * @returns
  *   The normalized relative or absolute path.
  */
-export default function normalizePathSeparators(path: string): string {
+export function normalizePathSeparators(path: string): string {
   if (NEEDS_TO_NORMALIZE_SEP) {
     path = path.replace(OS_SEP_PATTERN, "/");
   }

@@ -4,10 +4,10 @@
 
 import {Observable} from "rxjs";
 
-import Environment from "../Environment";
-import PluginContext from "../PluginContext";
-import Resource from "../Resource";
-import Transformer from "../plugin/Transformer";
+import {Environment} from "../Environment";
+import {PluginContext} from "../PluginContext";
+import {Resource} from "../Resource";
+import {Transformer} from "../plugin/Transformer";
 
 
 /**
@@ -23,7 +23,7 @@ import Transformer from "../plugin/Transformer";
  * @returns
  *   An observable stream of transformed resources.
  */
-export default function applySequenceOfTransformsToResource(env: Environment, resource: Resource, transformers: PluginContext[] = null): Observable<Resource> {
+export function applySequenceOfTransformsToResource(env: Environment, resource: Resource, transformers: PluginContext[] = null): Observable<Resource> {
   if (transformers === null) {
     transformers = [ ];
   }

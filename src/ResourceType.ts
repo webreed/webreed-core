@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-import PluginContext from "./PluginContext";
+import {PluginContext} from "./PluginContext";
 
 
 export type TransformationPluginMap = {
@@ -17,7 +17,7 @@ export type CustomResourceTypeOptions = {
 /**
  * Defines a type of content and the various transformations that should be performed.
  */
-export default class ResourceType {
+export class ResourceType {
 
   private _conversions: TransformationPluginMap = { };
   private _custom: CustomResourceTypeOptions = { };

@@ -4,8 +4,8 @@
 
 import {Observable} from "rxjs";
 
-import Environment from "../Environment";
-import Resource from "../Resource";
+import {Environment} from "../Environment";
+import {Resource} from "../Resource";
 
 
 /**
@@ -17,7 +17,7 @@ import Resource from "../Resource";
  * @returns
  *   A promise to complete the process source content files operation.
  */
-export default function processSourceContentFiles(env: Environment): Promise<void> {
+export function processSourceContentFiles(env: Environment): Promise<void> {
   let sourceContentRelativePaths = env.invoke("getSourceContentRelativePaths") as Observable<string>;
   return sourceContentRelativePaths
     .concatMap<void>(contentRelativePath => Observable.fromPromise(processSourceContent(env, contentRelativePath)))
