@@ -1,8 +1,7 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
-
-import Rx from "rxjs";
+import {Observable} from "rxjs";
 import given from "mocha-testdata";
 import should from "should";
 
@@ -39,7 +38,7 @@ describe("behaviors/applyExtensionChainToResource", function () {
     let extensionChain = "";
 
     applyExtensionChainToResource(this.env, resource, extensionChain)
-      .should.be.instanceOf(Rx.Observable);
+      .should.be.instanceOf(Observable);
   });
 
 
