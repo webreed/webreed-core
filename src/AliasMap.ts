@@ -2,11 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// Packages
 const _ = require("lodash");
 const formatUnicorn = require("format-unicorn/safe");
 
-// Project
 import getTargetFromAliasReference from "./util/getTargetFromAliasReference";
 import isAliasReference from "./util/isAliasReference";
 

@@ -2,20 +2,16 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// System
 import path from "path";
 
-// Packages
 import given from "mocha-testdata";
 import should from "should";
 
-// Project
 import Environment from "../../lib/Environment";
 import Resource from "../../lib/Resource";
 import ResourceType from "../../lib/ResourceType";
 import loadSourceContent from "../../lib/behaviors/loadSourceContent";
 
-// Test
 import FakeErrorMode from "../fakes/FakeErrorMode";
 import FakeMode from "../fakes/FakeMode";
 

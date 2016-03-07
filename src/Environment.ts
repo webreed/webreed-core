@@ -2,13 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// System
 import * as path from "path";
 import * as url from "url";
-
 const join = path.join;
 
-// Project
 import * as defaultBehaviors from "./behaviors/defaults";
 import AliasMap from "./AliasMap";
 import Generator from "./interfaces/Generator";

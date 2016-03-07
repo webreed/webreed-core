@@ -2,20 +2,16 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// System
 import path from "path";
 
-// Packages
 import given from "mocha-testdata";
 import should from "should";
 
-// Project
 import Environment from "../../lib/Environment";
 import PluginContext from "../../lib/PluginContext";
 import ResourceType from "../../lib/ResourceType";
 import processSourceContentFiles from "../../lib/behaviors/processSourceContentFiles";
 
-// Test
 import FakeGenerator from "../fakes/FakeGenerator";
 import FakeMode from "../fakes/FakeMode";
 import FakeTransformer from "../fakes/FakeTransformer";

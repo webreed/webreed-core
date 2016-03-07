@@ -2,10 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// Packages
 import {Observable} from "rxjs";
 
-// Project
 import Environment from "../Environment";
 import PluginContext from "../PluginContext";
 import Resource from "../Resource";

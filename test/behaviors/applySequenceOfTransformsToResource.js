@@ -2,17 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// Packages
 import Rx from "rxjs";
 import given from "mocha-testdata";
 import should from "should";
 
-// Project
 import Environment from "../../lib/Environment";
 import PluginContext from "../../lib/PluginContext";
 import applySequenceOfTransformsToResource from "../../lib/behaviors/applySequenceOfTransformsToResource";
 
-// Test
 import FakeTransformer from "../fakes/FakeTransformer";
 import FakeErrorTransformer from "../fakes/FakeErrorTransformer";
 

@@ -2,10 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// System
 import {extname} from "path";
 
-// Project
 import Environment from "../Environment";
 import Resource from "../Resource";
 

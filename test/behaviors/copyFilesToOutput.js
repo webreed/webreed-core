@@ -2,16 +2,13 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// System
 import path from "path";
 
-// Packages
 import given from "mocha-testdata";
 import glob from "glob";
 import rimraf from "rimraf";
 import should from "should";
 
-// Project
 import Environment from "../../lib/Environment";
 import copyFilesToOutput from "../../lib/behaviors/copyFilesToOutput";
 import normalizePathSeparators from "../../lib/util/normalizePathSeparators";

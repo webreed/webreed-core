@@ -2,14 +2,11 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// System
 import path from "path";
 
-// Packages
 import given from "mocha-testdata";
 import should from "should";
 
-// Project
 import AliasMap from "../lib/AliasMap";
 import ResourceType from "../lib/ResourceType";
 import Environment from "../lib/Environment";

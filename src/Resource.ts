@@ -2,14 +2,11 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// System
 import * as path from "path";
 import * as url from "url";
 
-// Packages
 const _ = require("lodash");
 
-// Project
 import Environment from "./Environment";
 
 

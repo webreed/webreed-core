@@ -2,10 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// Packages
 import {Observable} from "rxjs";
 
-// Project
 import Resource from "../Resource";
 
 

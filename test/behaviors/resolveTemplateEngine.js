@@ -2,17 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// Packages
 import given from "mocha-testdata";
 import should from "should";
 
-// Project
 import Environment from "../../lib/Environment";
 import PluginContext from "../../lib/PluginContext";
 import ResourceType from "../../lib/ResourceType";
 import resolveTemplateEngine from "../../lib/behaviors/resolveTemplateEngine";
 
-// Test
 import FakeTemplateEngine from "../fakes/FakeTemplateEngine";
 
 

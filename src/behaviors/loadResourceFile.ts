@@ -2,13 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// System
 import {extname} from "path";
 
-// Packages
 const _ = require("lodash");
 
-// Project
 import Environment from "../Environment";
 import Resource from "../Resource";
 import getExtensionChainFromPath from "../util/getExtensionChainFromPath";

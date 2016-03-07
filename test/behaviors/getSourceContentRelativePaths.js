@@ -2,15 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// System
 import path from "path";
 
-// Packages
 import Rx from "rxjs";
 import given from "mocha-testdata";
 import should from "should";
 
-// Project
 import Environment from "../../lib/Environment";
 import getSourceContentRelativePaths from "../../lib/behaviors/getSourceContentRelativePaths";
 

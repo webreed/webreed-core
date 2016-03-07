@@ -2,14 +2,11 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// System
 import path from "path";
 
-// Packages
 import given from "mocha-testdata";
 import should from "should";
 
-// Project
 import normalizePathSeparators from "../../lib/util/normalizePathSeparators";
 
 

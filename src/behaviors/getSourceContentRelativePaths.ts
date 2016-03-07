@@ -2,11 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// Packages
 import {Observable} from "rxjs";
 import * as glob from "glob";
 
-// Project
 import Environment from "../Environment";
 
 

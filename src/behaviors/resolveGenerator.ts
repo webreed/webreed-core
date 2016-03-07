@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// Project
 import Environment from "../Environment";
 import Generator from "../interfaces/Generator";
 import Resource from "../Resource";

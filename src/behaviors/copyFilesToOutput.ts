@@ -2,10 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-// Packages
 const fs = require("fs-promise");
 
-// Project
 import Environment from "../Environment";
 
 
