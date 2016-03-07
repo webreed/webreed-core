@@ -11,10 +11,10 @@ import moment from "moment";
 import should from "should";
 
 // Project
-import AliasMap from "../src/AliasMap";
-import ResourceType from "../src/ResourceType";
-import Environment from "../src/Environment";
-import Resource from "../src/Resource";
+import AliasMap from "../lib/AliasMap";
+import ResourceType from "../lib/ResourceType";
+import Environment from "../lib/Environment";
+import Resource from "../lib/Resource";
 
 
 describe("Environment", function () {
@@ -52,11 +52,6 @@ describe("Environment", function () {
   });
 
   describe("#baseUrl=", function () {
-
-    it("throws error when argument 'value' is not a string", function () {
-      (() => this.env.baseUrl = 42)
-        .should.throw("argument 'value' must be a string");
-    });
 
     it("updates value of the property", function () {
       this.env.baseUrl = "http://example.com";
@@ -97,12 +92,6 @@ describe("Environment", function () {
 
   describe("#defaultGeneratorName=", function () {
 
-    given( undefined, null, 42 ).
-    it("throws error if argument 'value' is not a string", function (value) {
-      (() => this.env.defaultGeneratorName = value)
-        .should.throw("argument 'value' must be a string");
-    });
-
     it("throws error if argument 'value' is an empty string", function () {
       let value = "";
       (() => this.env.defaultGeneratorName = value)
@@ -127,12 +116,6 @@ describe("Environment", function () {
   });
 
   describe("#defaultModeName=", function () {
-
-    given( undefined, null, 42 ).
-    it("throws error if argument 'value' is not a string", function (value) {
-      (() => this.env.defaultModeName = value)
-        .should.throw("argument 'value' must be a string");
-    });
 
     it("throws error if argument 'value' is an empty string", function () {
       let value = "";
@@ -258,11 +241,6 @@ describe("Environment", function () {
 
   describe("#projectRootPath=", function () {
 
-    it("throws error when argument 'value' is not a string", function () {
-      (() => this.env.projectRootPath = 42)
-        .should.throw("argument 'value' must be a string");
-    });
-
     it("updates value of the property", function () {
       this.env.projectRootPath = "/abc";
       this.env.projectRootPath
@@ -382,26 +360,10 @@ describe("Environment", function () {
         .should.be.a.Function();
     });
 
-    it("throws error if argument 'path' is not a string", function () {
-      let path = 42;
-      (() => this.env.getOutputRelativePathForResource(path))
-        .should.throw("argument 'path' must be a string");
-    });
-
-    it("throws error if argument 'path' is not a string", function () {
+    it("throws error if argument 'path' is an empty string", function () {
       let path = "";
       (() => this.env.getOutputRelativePathForResource(path))
         .should.throw("argument 'path' must be a non-empty string");
-    });
-
-    it("throws error if argument 'extension' is not a string", function () {
-      (() => this.env.getOutputRelativePathForResource("abc", 42))
-        .should.throw("argument 'extension' must be a string");
-    });
-
-    it("throws error if argument 'page' is not a string", function () {
-      (() => this.env.getOutputRelativePathForResource("abc", null, 42))
-        .should.throw("argument 'page' must be a string");
     });
 
     given(
@@ -423,16 +385,6 @@ describe("Environment", function () {
     it("is a function", function () {
       this.env.getUrlForResource
         .should.be.a.Function();
-    });
-
-    it("throws error when argument 'outputRelativePath' is not a string", function () {
-      (() => this.env.getUrlForResource(42))
-        .should.throw("argument 'outputRelativePath' must be a string");
-    });
-
-    it("throws error when argument 'baseUrl' is defined but is not a string", function () {
-      (() => this.env.getUrlForResource("", 42))
-        .should.throw("argument 'baseUrl' must be a string");
     });
 
     given(
@@ -482,12 +434,6 @@ describe("Environment", function () {
     it("it a function", function () {
       this.env.invoke
         .should.be.a.Function();
-    });
-
-    given( undefined, null, 42 ).
-    it("throws error when argument 'behaviorName' is not a string", function (behaviorName) {
-      (() => this.env.invoke(behaviorName))
-        .should.throw("argument 'behaviorName' must be a string");
     });
 
     it("throws error when argument 'behaviorName' is an empty string", function () {
@@ -561,22 +507,10 @@ describe("Environment", function () {
         .should.be.a.Function();
     });
 
-    it("throws error when argument 'name' is not a string", function () {
-      let name = 42;
-      (() => this.env.resolvePath(name))
-        .should.throw("argument 'name' must be a string");
-    });
-
     it("throws error when argument 'name' is an empty string", function () {
       let name = "";
       (() => this.env.resolvePath(name))
         .should.throw("argument 'name' must be a non-empty string");
-    });
-
-    it("throws error when argument 'relativePath' is not a string", function () {
-      let outputRelativePath = 42;
-      (() => this.env.resolvePath("content", outputRelativePath))
-        .should.throw("argument 'relativePath' must be a string");
     });
 
     it("resolves path of a named sub-directory within project", function () {
@@ -603,19 +537,14 @@ describe("Environment", function () {
         .should.be.a.Function();
     });
 
-    it("throws error when argument 'name' is not a string", function () {
-      (() => this.env.setPath(42, "abc"))
-        .should.throw("argument 'name' must be a string");
-    });
-
     it("throws error when argument 'name' is an empty string", function () {
       (() => this.env.setPath("", "abc"))
         .should.throw("argument 'name' must be a non-empty string");
     });
 
-    it("throws error if argument 'path' is not a string", function () {
-      (() => this.env.setPath("abc", 42))
-        .should.throw("argument 'path' must be a string");
+    it("throws error when argument 'path' is an empty string", function () {
+      (() => this.env.setPath("content", ""))
+        .should.throw("argument 'path' must be a non-empty string");
     });
 
     it("overrides a named path", function () {

@@ -7,7 +7,7 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import getTargetExtensionFromPath from "../../src/util/getTargetExtensionFromPath";
+import getTargetExtensionFromPath from "../../lib/util/getTargetExtensionFromPath";
 
 
 describe("util/getTargetExtensionFromPath", function () {
@@ -15,12 +15,6 @@ describe("util/getTargetExtensionFromPath", function () {
   it("is a function", function () {
     return getTargetExtensionFromPath
       .should.be.a.Function();
-  });
-
-  given( undefined, null, 42 ).
-  it("throws error when argument 'path' is not a string", function (path) {
-    (() => getTargetExtensionFromPath(path))
-      .should.throw("argument 'path' must be a string");
   });
 
   given( "", "index", "blog/index", "category.2/index" ).

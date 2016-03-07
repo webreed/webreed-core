@@ -10,9 +10,9 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import ResourceType from "../../src/ResourceType";
-import build from "../../src/behaviors/build";
+import Environment from "../../lib/Environment";
+import ResourceType from "../../lib/ResourceType";
+import build from "../../lib/behaviors/build";
 
 // Test
 import FakeGenerator from "../fakes/FakeGenerator";
@@ -48,12 +48,6 @@ describe("behaviors/build", function () {
       .should.be.eql("build");
   });
 
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    (() => build(env))
-      .should.throw("argument 'env' must be a webreed environment");
-  });
 
   it("returns a promise", function () {
     let result = build(this.env)

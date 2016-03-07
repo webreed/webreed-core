@@ -7,7 +7,7 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import PluginContext from "../src/PluginContext";
+import PluginContext from "../lib/PluginContext";
 
 
 describe("PluginContext", function () {
@@ -30,22 +30,10 @@ describe("PluginContext", function () {
         .should.be.a.Function();
     });
 
-    given( undefined, null, 42 ).
-    it("throws error when argument 'name' is not a string", function (name) {
-      (() => new PluginContext(name))
-        .should.throw("argument 'name' must be a string");
-    });
-
     it("throws error when argument 'name' is an empty string", function () {
       let name = "";
       (() => new PluginContext(name))
         .should.throw("argument 'name' must be a non-empty string");
-    });
-
-    given( 42, "" ).
-    it("throws error when argument 'options' is not an object", function (options) {
-      (() => new PluginContext("foo", options))
-        .should.throw("argument 'options' must be an object");
     });
 
   });
@@ -61,12 +49,6 @@ describe("PluginContext", function () {
   });
 
   describe("#name=", function () {
-
-    given( undefined, null, 42 ).
-    it("throws error when argument 'value' is not a string", function (value) {
-      (() => this.pluginContext.name = value)
-        .should.throw("argument 'value' must be a string");
-    });
 
     it("throws error when argument 'value' is an empty string", function () {
       let value = "";
@@ -100,12 +82,6 @@ describe("PluginContext", function () {
   });
 
   describe("#options=", function () {
-
-    given( 42, "" ).
-    it("throws error when argument 'value' is specified but is not an object", function (value) {
-      (() => this.pluginContext.options = value)
-        .should.throw("argument 'value' must be an object");
-    });
 
     it("takes on the assigned value", function () {
       this.pluginContext.options = { a: 42 };

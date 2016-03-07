@@ -10,10 +10,10 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import Resource from "../../src/Resource";
-import ResourceType from "../../src/ResourceType";
-import loadResourceFile from "../../src/behaviors/loadResourceFile";
+import Environment from "../../lib/Environment";
+import Resource from "../../lib/Resource";
+import ResourceType from "../../lib/ResourceType";
+import loadResourceFile from "../../lib/behaviors/loadResourceFile";
 
 // Test
 import FakeErrorMode from "../fakes/FakeErrorMode";
@@ -58,52 +58,25 @@ describe("behaviors/loadResourceFile", function () {
   });
 
 
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    let filePath = getFixturePath("index.html");
-    (() => loadResourceFile(env, filePath))
-      .should.throw("argument 'env' must be a webreed environment");
-  });
-
-  given( undefined, null, 42 ).
-  it("throws error when argument 'filePath' is not a string", function (filePath) {
-    (() => loadResourceFile(this.env, filePath))
-      .should.throw("argument 'filePath' must be a string");
-  });
-
-  it("throws error when argument 'filePath' is an empty string", function () {
+  it("rejects with error when argument 'filePath' is an empty string", function () {
     let filePath = "";
-    (() => loadResourceFile(this.env, filePath))
-      .should.throw("argument 'filePath' must be a non-empty string");
-  });
-
-  it("throws error when argument 'resourceTypeExtension' is not a string", function () {
-    let filePath = getFixturePath("index.html");
-    let resourceTypeExtension = 42;
-    (() => loadResourceFile(this.env, filePath, resourceTypeExtension))
-      .should.throw("argument 'resourceTypeExtension' must be a string");
-  });
-
-  it("throws error when argument 'baseProperties' is not an object", function () {
-    let filePath = getFixturePath("index.html");
-    let baseProperties = 42;
-    (() => loadResourceFile(this.env, filePath, null, baseProperties))
-      .should.throw("argument 'baseProperties' must be an object");
+    return loadResourceFile(this.env, filePath)
+      .should.be.rejectedWith("argument 'filePath' must be a non-empty string");
   });
 
 
-  it("throws error when loading resource with an unknown mode (via argument 'filePath')", function () {
+  it("rejects with error when loading resource with an unknown mode (via argument 'filePath')", function () {
     let filePath = getFixturePath("index.foo");
 
     let fakeResourceType = new ResourceType();
     fakeResourceType.mode = "unknown";
     this.env.resourceTypes.set(".foo", fakeResourceType);
 
-    (() => loadResourceFile(this.env, filePath))
-      .should.throw("Resource mode 'unknown' is not defined.");
+    return loadResourceFile(this.env, filePath)
+      .should.be.rejectedWith("Resource mode 'unknown' is not defined.");
   });
 
-  it("throws error when loading resource with an unknown mode (via argument 'resourceTypeExtension')", function () {
+  it("rejects with error when loading resource with an unknown mode (via argument 'resourceTypeExtension')", function () {
     let filePath = getFixturePath("index.html");
     let resourceTypeExtension = ".foo";
 
@@ -111,8 +84,8 @@ describe("behaviors/loadResourceFile", function () {
     fakeResourceType.mode = "unknown";
     this.env.resourceTypes.set(resourceTypeExtension, fakeResourceType);
 
-    (() => loadResourceFile(this.env, filePath, resourceTypeExtension))
-      .should.throw("Resource mode 'unknown' is not defined.");
+    return loadResourceFile(this.env, filePath, resourceTypeExtension)
+      .should.be.rejectedWith("Resource mode 'unknown' is not defined.");
   });
 
 

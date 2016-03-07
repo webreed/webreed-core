@@ -10,10 +10,10 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import PluginContext from "../../src/PluginContext";
-import ResourceType from "../../src/ResourceType";
-import processSourceContentFiles from "../../src/behaviors/processSourceContentFiles";
+import Environment from "../../lib/Environment";
+import PluginContext from "../../lib/PluginContext";
+import ResourceType from "../../lib/ResourceType";
+import processSourceContentFiles from "../../lib/behaviors/processSourceContentFiles";
 
 // Test
 import FakeGenerator from "../fakes/FakeGenerator";
@@ -55,13 +55,6 @@ describe("behaviors/processSourceContentFiles", function () {
   it("is named 'processSourceContentFiles'", function () {
     processSourceContentFiles.name
       .should.be.eql("processSourceContentFiles");
-  });
-
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    (() => processSourceContentFiles(env))
-      .should.throw("argument 'env' must be a webreed environment");
   });
 
 

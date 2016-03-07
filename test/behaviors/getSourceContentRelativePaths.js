@@ -11,8 +11,8 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import getSourceContentRelativePaths from "../../src/behaviors/getSourceContentRelativePaths";
+import Environment from "../../lib/Environment";
+import getSourceContentRelativePaths from "../../lib/behaviors/getSourceContentRelativePaths";
 
 
 describe("behaviors/getSourceContentRelativePaths", function () {
@@ -33,12 +33,6 @@ describe("behaviors/getSourceContentRelativePaths", function () {
       .should.be.eql("getSourceContentRelativePaths");
   });
 
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    (() => getSourceContentRelativePaths(env))
-      .should.throw("argument 'env' must be a webreed environment");
-  });
 
   it("returns an observable", function () {
     getSourceContentRelativePaths(this.env)

@@ -7,10 +7,10 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import PluginContext from "../../src/PluginContext";
-import ResourceType from "../../src/ResourceType";
-import resolveGenerator from "../../src/behaviors/resolveGenerator";
+import Environment from "../../lib/Environment";
+import PluginContext from "../../lib/PluginContext";
+import ResourceType from "../../lib/ResourceType";
+import resolveGenerator from "../../lib/behaviors/resolveGenerator";
 
 
 describe("behaviors/resolveGenerator", function () {
@@ -28,25 +28,6 @@ describe("behaviors/resolveGenerator", function () {
   it("is named 'resolveGenerator'", function () {
     resolveGenerator.name
       .should.be.eql("resolveGenerator");
-  });
-
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    (() => resolveGenerator(env))
-      .should.throw("argument 'env' must be a webreed environment");
-  });
-
-  given( 42, "" ).
-  it("throws error when argument 'resource' is specified but is not an object", function (resource) {
-    (() => resolveGenerator(this.env, resource))
-      .should.throw("argument 'resource' must be a `Resource`");
-  });
-
-  given( 42, "" ).
-  it("throws error when argument 'resourceType' is specified but is not an object", function (resourceType) {
-    (() => resolveGenerator(this.env, null, resourceType))
-      .should.throw("argument 'resourceType' must be a `ResourceType`");
   });
 
 

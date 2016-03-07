@@ -8,10 +8,10 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import PluginContext from "../../src/PluginContext";
-import ResourceType from "../../src/ResourceType";
-import applyTemplateToResource from "../../src/behaviors/applyTemplateToResource";
+import Environment from "../../lib/Environment";
+import PluginContext from "../../lib/PluginContext";
+import ResourceType from "../../lib/ResourceType";
+import applyTemplateToResource from "../../lib/behaviors/applyTemplateToResource";
 
 // Test
 import FakeErrorTemplateEngine from "../fakes/FakeErrorTemplateEngine";
@@ -52,32 +52,7 @@ describe("behaviors/applyTemplateToResource", function () {
   });
 
 
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    let resource = this.env.createResource();
-    let templateName = "test.nunjucks";
-
-    (() => applyTemplateToResource(env, resource, templateName))
-      .should.throw("argument 'env' must be a webreed environment");
-  });
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'resource' is not a resource", function (resource) {
-    let templateName = "test.nunjucks";
-
-    (() => applyTemplateToResource(this.env, resource, templateName))
-      .should.throw("argument 'resource' must be a `Resource`");
-  });
-
-  given( undefined, null, 42 ).
-  it("throws error when argument 'templateName' is not a string", function (templateName) {
-    let resource = this.env.createResource();
-
-    (() => applyTemplateToResource(this.env, resource, templateName))
-      .should.throw("argument 'templateName' must be a string");
-  });
-
-  it("throws error when argument 'templateName' is not a non-empty string", function () {
+  it("throws error when argument 'templateName' is an empty string", function () {
     let resource = this.env.createResource();
     let templateName = "";
 

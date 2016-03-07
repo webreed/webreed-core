@@ -7,7 +7,7 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import * as defaultBehaviors from "../../src/behaviors/defaults";
+import * as defaultBehaviors from "../../lib/behaviors/defaults";
 
 
 describe("behaviors/defaults", function () {

@@ -8,10 +8,10 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import PluginContext from "../../src/PluginContext";
-import ResourceType from "../../src/ResourceType";
-import applyExtensionChainToResource from "../../src/behaviors/applyExtensionChainToResource";
+import Environment from "../../lib/Environment";
+import PluginContext from "../../lib/PluginContext";
+import ResourceType from "../../lib/ResourceType";
+import applyExtensionChainToResource from "../../lib/behaviors/applyExtensionChainToResource";
 
 // Test
 import FakeErrorTransformer from "../fakes/FakeErrorTransformer";
@@ -34,32 +34,6 @@ describe("behaviors/applyExtensionChainToResource", function () {
   it("is named 'applyExtensionChainToResource'", function () {
     applyExtensionChainToResource.name
       .should.be.eql("applyExtensionChainToResource");
-  });
-
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    let resource = this.env.createResource();
-    let extensionChain = "";
-
-    (() => applyExtensionChainToResource(env, resource, extensionChain))
-      .should.throw("argument 'env' must be a webreed environment");
-  });
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'resource' is not a `Resource`", function (resource) {
-    let extensionChain = "";
-
-    (() => applyExtensionChainToResource(this.env, resource, extensionChain))
-      .should.throw("argument 'resource' must be a `Resource`");
-  });
-
-  given( undefined, null, 42 ).
-  it("throws error when argument 'extensionChain' is not a string", function (extensionChain) {
-    let resource = this.env.createResource();
-
-    (() => applyExtensionChainToResource(this.env, resource, extensionChain))
-      .should.throw("argument 'extensionChain' must be a string");
   });
 
 

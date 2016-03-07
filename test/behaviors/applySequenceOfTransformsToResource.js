@@ -8,9 +8,9 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import PluginContext from "../../src/PluginContext";
-import applySequenceOfTransformsToResource from "../../src/behaviors/applySequenceOfTransformsToResource";
+import Environment from "../../lib/Environment";
+import PluginContext from "../../lib/PluginContext";
+import applySequenceOfTransformsToResource from "../../lib/behaviors/applySequenceOfTransformsToResource";
 
 // Test
 import FakeTransformer from "../fakes/FakeTransformer";
@@ -40,32 +40,6 @@ describe("behaviors/applySequenceOfTransformsToResource", function () {
   it("is named 'applySequenceOfTransformsToResource'", function () {
     applySequenceOfTransformsToResource.name
       .should.be.eql("applySequenceOfTransformsToResource");
-  });
-
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    let resource = this.env.createResource();
-    let transformers = [ ];
-
-    (() => applySequenceOfTransformsToResource(env, resource, transformers))
-      .should.throw("argument 'env' must be a webreed environment");
-  });
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'resource' is not a `Resource`", function (resource) {
-    let transformers = [ ];
-
-    (() => applySequenceOfTransformsToResource(this.env, resource, transformers))
-      .should.throw("argument 'resource' must be a `Resource`");
-  });
-
-  it("throws error when argument 'transformers' is not `null` or an array", function () {
-    let resource = this.env.createResource();
-    let transformers = 42;
-
-    (() => applySequenceOfTransformsToResource(this.env, resource, transformers))
-      .should.throw("argument 'transformers' must be an array");
   });
 
 

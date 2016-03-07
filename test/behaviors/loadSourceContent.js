@@ -10,10 +10,10 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import Resource from "../../src/Resource";
-import ResourceType from "../../src/ResourceType";
-import loadSourceContent from "../../src/behaviors/loadSourceContent";
+import Environment from "../../lib/Environment";
+import Resource from "../../lib/Resource";
+import ResourceType from "../../lib/ResourceType";
+import loadSourceContent from "../../lib/behaviors/loadSourceContent";
 
 // Test
 import FakeErrorMode from "../fakes/FakeErrorMode";
@@ -61,34 +61,10 @@ describe("behaviors/loadSourceContent", function () {
   });
 
 
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    (() => loadSourceContent(env, "index.html"))
-      .should.throw("argument 'env' must be a webreed environment");
-  });
-
-  it("throws error when argument 'contentRelativePath' is not a string", function () {
-    let contentRelativePath = 42;
-    (() => loadSourceContent(this.env, contentRelativePath))
-      .should.throw("argument 'contentRelativePath' must be a string");
-  });
-
   it("throws error when argument 'contentRelativePath' is an empty string", function () {
     let contentRelativePath = "";
     (() => loadSourceContent(this.env, contentRelativePath))
       .should.throw("argument 'contentRelativePath' must be a non-empty string");
-  });
-
-  it("throws error when argument 'resourceTypeExtension' is not a string", function () {
-    let resourceTypeExtension = 42;
-    (() => loadSourceContent(this.env, "index.html", resourceTypeExtension))
-      .should.throw("argument 'resourceTypeExtension' must be a string");
-  });
-
-  it("throws error when argument 'baseProperties' is not an object", function () {
-    let baseProperties = 42;
-    (() => loadSourceContent(this.env, "index.html", null, baseProperties))
-      .should.throw("argument 'baseProperties' must be an object");
   });
 
 

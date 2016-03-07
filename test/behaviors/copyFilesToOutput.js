@@ -12,9 +12,9 @@ import rimraf from "rimraf";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import copyFilesToOutput from "../../src/behaviors/copyFilesToOutput";
-import normalizePathSeparators from "../../src/util/normalizePathSeparators";
+import Environment from "../../lib/Environment";
+import copyFilesToOutput from "../../lib/behaviors/copyFilesToOutput";
+import normalizePathSeparators from "../../lib/util/normalizePathSeparators";
 
 
 function getFixturePath(relativePath) {
@@ -50,13 +50,6 @@ describe("behaviors/copyFilesToOutput", function () {
   it("is named 'copyFilesToOutput'", function () {
     copyFilesToOutput.name
       .should.be.eql("copyFilesToOutput");
-  });
-
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    (() => copyFilesToOutput(env))
-      .should.throw("argument 'env' must be a webreed environment");
   });
 
 

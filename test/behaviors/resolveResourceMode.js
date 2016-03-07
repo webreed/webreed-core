@@ -7,9 +7,9 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import ResourceType from "../../src/ResourceType";
-import resolveResourceMode from "../../src/behaviors/resolveResourceMode";
+import Environment from "../../lib/Environment";
+import ResourceType from "../../lib/ResourceType";
+import resolveResourceMode from "../../lib/behaviors/resolveResourceMode";
 
 
 describe("behaviors/resolveResourceMode", function () {
@@ -27,25 +27,6 @@ describe("behaviors/resolveResourceMode", function () {
   it("is named 'resolveResourceMode'", function () {
     resolveResourceMode.name
       .should.be.eql("resolveResourceMode");
-  });
-
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    (() => resolveResourceMode(env))
-      .should.throw("argument 'env' must be a webreed environment");
-  });
-
-  given( 42, "" ).
-  it("throws error when argument 'resource' is specified but is not an object", function (resource) {
-    (() => resolveResourceMode(this.env, resource))
-      .should.throw("argument 'resource' must be a `Resource`");
-  });
-
-  given( 42, "" ).
-  it("throws error when argument 'resourceType' is specified but is not an object", function (resourceType) {
-    (() => resolveResourceMode(this.env, null, resourceType))
-      .should.throw("argument 'resourceType' must be a `ResourceType`");
   });
 
 

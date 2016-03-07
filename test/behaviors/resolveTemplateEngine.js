@@ -7,10 +7,10 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import PluginContext from "../../src/PluginContext";
-import ResourceType from "../../src/ResourceType";
-import resolveTemplateEngine from "../../src/behaviors/resolveTemplateEngine";
+import Environment from "../../lib/Environment";
+import PluginContext from "../../lib/PluginContext";
+import ResourceType from "../../lib/ResourceType";
+import resolveTemplateEngine from "../../lib/behaviors/resolveTemplateEngine";
 
 // Test
 import FakeTemplateEngine from "../fakes/FakeTemplateEngine";
@@ -44,19 +44,6 @@ describe("behaviors/resolveTemplateEngine", function () {
       .should.be.eql("resolveTemplateEngine");
   });
 
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    let templateName = "test.nunjucks";
-    (() => resolveTemplateEngine(env, templateName))
-      .should.throw("argument 'env' must be a webreed environment");
-  });
-
-  given( undefined, null, 42 ).
-  it("throws error when argument 'templateName' is not a string", function (templateName) {
-    (() => resolveTemplateEngine(this.env, templateName))
-      .should.throw("argument 'templateName' must be a string");
-  });
 
   it("throws error when argument 'templateName' is an empty string", function () {
     let templateName = "";

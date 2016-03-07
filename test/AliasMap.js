@@ -7,7 +7,7 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import AliasMap from "../src/AliasMap";
+import AliasMap from "../lib/AliasMap";
 
 
 describe("AliasMap", function () {
@@ -33,16 +33,6 @@ describe("AliasMap", function () {
     it("is a function", function () {
       AliasMap.prototype.constructor
         .should.be.a.Function();
-    });
-
-    it("throws error when argument 'iterable' is not an iterable object", function () {
-      (() => new AliasMap(42))
-        .should.throw("argument 'iterable' must be an iterable object");
-    });
-
-    it("throws error when argument 'options' is not an object", function () {
-      (() => new AliasMap(null, 42))
-        .should.throw("argument 'options' must be an object");
     });
 
     it("calls #set for each key/value pair yielded by argument 'iterable'", function () {
@@ -200,11 +190,6 @@ describe("AliasMap", function () {
     it("is a function", function () {
       this.aliasMap.forEach
         .should.be.a.Function();
-    });
-
-    it("throws error when argument 'callback' is not a function", function () {
-      (() => this.aliasMap.forEach())
-        .should.throw("argument 'callback' must be a function");
     });
 
     it("passes key, value and map to callback for each entry", function () {

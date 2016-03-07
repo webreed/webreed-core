@@ -7,10 +7,10 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import PluginContext from "../../src/PluginContext";
-import ResourceType from "../../src/ResourceType";
-import decodeResource from "../../src/behaviors/decodeResource";
+import Environment from "../../lib/Environment";
+import PluginContext from "../../lib/PluginContext";
+import ResourceType from "../../lib/ResourceType";
+import decodeResource from "../../lib/behaviors/decodeResource";
 
 // Test
 import FakeErrorHandler from "../fakes/FakeErrorHandler";
@@ -34,32 +34,6 @@ describe("behaviors/decodeResource", function () {
   it("is named 'decodeResource'", function () {
     decodeResource.name
       .should.be.eql("decodeResource");
-  });
-
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    let resource = this.env.createResource();
-    let resourceType = new ResourceType();
-
-    (() => decodeResource(env, resource, resourceType))
-      .should.throw("argument 'env' must be a webreed environment");
-  });
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'resource' is not a `Resource`", function (resource) {
-    let resourceType = new ResourceType();
-
-    (() => decodeResource(this.env, resource, resourceType))
-      .should.throw("argument 'resource' must be a `Resource`");
-  });
-
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'resourceType' is not a `ResourceType`", function (resourceType) {
-    let resource = this.env.createResource();
-
-    (() => decodeResource(this.env, resource, resourceType))
-      .should.throw("argument 'resourceType' must be a `ResourceType`");
   });
 
 

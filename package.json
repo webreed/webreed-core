@@ -4,8 +4,7 @@
   "description": "Core library that support webreed projects.",
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "babel src --out-dir lib",
-    "devmode": "babel --watch src --out-dir lib",
+    "prepublish": "tsc",
     "test": "mocha ./test/ --recursive --compilers js:babel-register"
   },
   "author": "Rotorz Limited",
@@ -15,7 +14,8 @@
     "babel-preset-node5": "^10.6.0",
     "mocha": "^2.3.4",
     "mocha-testdata": "^1.1.2",
-    "should": "^8.0.2"
+    "should": "^8.0.2",
+    "typescript": "^1.8.7"
   },
   "dependencies": {
     "escape-string-regexp": "^1.0.4",

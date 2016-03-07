@@ -7,7 +7,7 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import trimTrailingSlash from "../../src/util/trimTrailingSlash";
+import trimTrailingSlash from "../../lib/util/trimTrailingSlash";
 
 
 describe("util/trimTrailingSlash", function () {
@@ -15,11 +15,6 @@ describe("util/trimTrailingSlash", function () {
   it("is a function", function () {
     return trimTrailingSlash
       .should.be.a.Function();
-  });
-
-  it("throws error when argument 'value' is not a string", function () {
-    (() => trimTrailingSlash(null))
-      .should.throw("argument 'value' must be a string");
   });
 
   given( "foo//", "foo//bar//" ).

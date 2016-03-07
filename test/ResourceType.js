@@ -7,8 +7,8 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import PluginContext from "../src/PluginContext";
-import ResourceType from "../src/ResourceType";
+import PluginContext from "../lib/PluginContext";
+import ResourceType from "../lib/ResourceType";
 
 
 describe("ResourceType", function () {
@@ -44,27 +44,6 @@ describe("ResourceType", function () {
   });
 
   describe("#conversions=", function () {
-
-    given( undefined, null, 42, "", [ ] ).
-    it("throws error when argument 'value' is not an object", function (value) {
-      (() => this.resourceType.conversions = value)
-        .should.throw("argument 'value' must be an object");
-    });
-
-    given(
-      { ".html": undefined },
-      { ".html": null },
-      { ".html": 42 }
-    ).
-    it("throws error when argument 'value' has a property value that is not iterable", function (value) {
-      (() => this.resourceType.conversions = value)
-        .should.throw("argument 'value[\".html\"]' must be iterable");
-    });
-
-    it("throws error when argument 'value' has a property value that is not an iterable of `PluginContext`", function () {
-      (() => this.resourceType.conversions = { ".html": [ 42 ] })
-        .should.throw("argument 'value[\".html\"]' must be an iterable of zero-or-more `PluginContext` values");
-    });
 
     given(
       { },
@@ -105,12 +84,6 @@ describe("ResourceType", function () {
 
   describe("#defaultTargetExtension=", function () {
 
-    given( undefined, 42 ).
-    it("throws error when argument 'value' is not a string", function (value) {
-      (() => this.resourceType.defaultTargetExtension = value)
-        .should.throw("argument 'value' must be a string");
-    });
-
     it("throws error when argument 'value' is an empty string", function () {
       let value = "";
       (() => this.resourceType.defaultTargetExtension = value)
@@ -142,12 +115,6 @@ describe("ResourceType", function () {
 
   describe("#generator=", function () {
 
-    given( undefined, 42, "", { }, [ ] ).
-    it("throws error when argument 'value' is non-null and is not a `PluginContext`", function (value) {
-      (() => this.resourceType.generator = value)
-        .should.throw("argument 'value' must be `null` or a `PluginContext`");
-    });
-
     it("takes on a value of `null`", function () {
       this.resourceType.generator = null;
       should(this.resourceType.generator)
@@ -173,12 +140,6 @@ describe("ResourceType", function () {
   });
 
   describe("#handler=", function () {
-
-    given( undefined, 42, "", { }, [ ] ).
-    it("throws error when argument 'value' is non-null and is not a `PluginContext`", function (value) {
-      (() => this.resourceType.handler = value)
-        .should.throw("argument 'value' must be `null` or a `PluginContext`");
-    });
 
     it("takes on a value of `null`", function () {
       this.resourceType.handler = null;
@@ -206,13 +167,7 @@ describe("ResourceType", function () {
 
   describe("#mode=", function () {
 
-    given( undefined, null, 42, { }, [ ] ).
-    it("throws error when argument 'value' is not a string", function (value) {
-      (() => this.resourceType.mode = value)
-        .should.throw("argument 'value' must be a string");
-    });
-
-    it("throws error when argument 'value' is not a non-empty string", function () {
+    it("throws error when argument 'value' is an empty string", function () {
       let value = "";
       (() => this.resourceType.mode = value)
         .should.throw("argument 'value' must be a non-empty string");
@@ -236,12 +191,6 @@ describe("ResourceType", function () {
   });
 
   describe("#parseFrontmatter=", function () {
-
-    given( undefined, 42, "", { }, [ ] ).
-    it("throws error when argument 'value' is not boolean", function (value) {
-      (() => this.resourceType.parseFrontmatter = value)
-        .should.throw("argument 'value' must be a boolean value");
-    });
 
     it("takes on a value of `false`", function () {
       this.resourceType.parseFrontmatter = false;
@@ -269,17 +218,6 @@ describe("ResourceType", function () {
 
   describe("#process=", function () {
 
-    given( undefined, null, 42 ).
-    it("throws error when argument 'value' is not iterable", function (value) {
-      (() => this.resourceType.process = value)
-        .should.throw("argument 'value' must be iterable");
-    });
-
-    it("throws error when argument 'value' is not an iterable of `PluginContext`", function () {
-      (() => this.resourceType.process = [ 42 ])
-        .should.throw("argument 'value' must be an iterable of zero-or-more `PluginContext` values");
-    });
-
     given(
       [  [ ]                                                     ],
       [  [ new PluginContext("foo") ]                            ],
@@ -303,12 +241,6 @@ describe("ResourceType", function () {
   });
 
   describe("#templateEngine=", function () {
-
-    given( undefined, 42, "", { }, [ ] ).
-    it("throws error when argument 'value' is non-null and is not a `PluginContext`", function (value) {
-      (() => this.resourceType.templateEngine = value)
-        .should.throw("argument 'value' must be `null` or a `PluginContext`");
-    });
 
     it("takes on a value of `null`", function () {
       this.resourceType.templateEngine = null;

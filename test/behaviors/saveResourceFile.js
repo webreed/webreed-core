@@ -10,9 +10,9 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../../src/Environment";
-import ResourceType from "../../src/ResourceType";
-import saveResourceFile from "../../src/behaviors/saveResourceFile";
+import Environment from "../../lib/Environment";
+import ResourceType from "../../lib/ResourceType";
+import saveResourceFile from "../../lib/behaviors/saveResourceFile";
 
 // Test
 import FakeErrorMode from "../fakes/FakeErrorMode";
@@ -52,41 +52,11 @@ describe("behaviors/saveResourceFile", function () {
   });
 
 
-  given( undefined, null, 42, "" ).
-  it("throws error when argument 'env' is not a webreed environment", function (env) {
-    let outputFilePath = getOutputPath("index.html");
-    let resource = this.env.createResource();
-    (() => saveResourceFile(env, outputFilePath, resource))
-      .should.throw("argument 'env' must be a webreed environment");
-  });
-
-  given( undefined, null, 42, { }, [ ] ).
-  it("throws error when argument 'outputFilePath' is not a string", function (outputFilePath) {
-    let resource = this.env.createResource();
-    (() => saveResourceFile(this.env, outputFilePath, resource))
-      .should.throw("argument 'outputFilePath' must be a string");
-  });
-
   it("throws error when argument 'outputFilePath' is an empty string", function () {
     let outputFilePath = "";
     let resource = this.env.createResource();
     (() => saveResourceFile(this.env, outputFilePath, resource))
       .should.throw("argument 'outputFilePath' must be a non-empty string");
-  });
-
-  given( undefined, null, 42, "", { }, [ ] ).
-  it("throws error when argument 'resource' is not a `Resource`", function (resource) {
-    let outputFilePath = getOutputPath("index.html");
-    (() => saveResourceFile(this.env, outputFilePath, resource))
-      .should.throw("argument 'resource' must be a `Resource`");
-  });
-
-  it("throws error when argument 'resourceTypeExtension' is not a string", function () {
-    let outputFilePath = getOutputPath("index.html");
-    let resource = this.env.createResource();
-    let resourceTypeExtension = 42;
-    (() => saveResourceFile(this.env, outputFilePath, resource, resourceTypeExtension))
-      .should.throw("argument 'resourceTypeExtension' must be a string");
   });
 
 

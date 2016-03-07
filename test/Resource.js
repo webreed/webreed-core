@@ -7,8 +7,8 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import Environment from "../src/Environment";
-import Resource from "../src/Resource";
+import Environment from "../lib/Environment";
+import Resource from "../lib/Resource";
 
 
 describe("Resource", function () {
@@ -23,16 +23,6 @@ describe("Resource", function () {
     it("is a function", function () {
       Resource.prototype.constructor
         .should.be.a.Function();
-    });
-
-    it("throws error when argument 'env' is not specified", function () {
-      (() => new Resource())
-        .should.throw("argument 'env' must be a webreed environment");
-    });
-
-    it("throws error when argument 'props' is defined but is not an object", function () {
-      (() => new Resource(this.env, 42))
-        .should.throw("argument 'props' must be an object");
     });
 
     it("creates a new resource when argument 'props' is not specified", function () {
@@ -143,18 +133,6 @@ describe("Resource", function () {
     it("is a function", function () {
       Resource.prototype.clone
         .should.be.a.Function();
-    });
-
-    it("throws error when argument 'overrides' is defined but is not an object", function () {
-      let resource = new Resource(this.env);
-      (() => resource.clone(42))
-        .should.throw("argument 'overrides' must be an object");
-    });
-
-    it("throws error when argument 'overrideEnv' is defined but is not a webreed environment", function () {
-      let resource = new Resource(this.env);
-      (() => resource.clone(null, 42))
-        .should.throw("argument 'overrideEnv' must be a webreed environment");
     });
 
     it("creates a new resource", function () {

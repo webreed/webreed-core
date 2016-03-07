@@ -10,7 +10,7 @@ import given from "mocha-testdata";
 import should from "should";
 
 // Project
-import normalizePathSeparators from "../../src/util/normalizePathSeparators";
+import normalizePathSeparators from "../../lib/util/normalizePathSeparators";
 
 
 describe("util/normalizePathSeparators", function () {
