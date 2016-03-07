@@ -38,7 +38,7 @@ interface Mode {
    * @returns
    *   A promise to notify upon completion; or to throw an error.
    */
-  writeFile(path: string, resource: Resource | Object, resourceType: ResourceType): Promise<void>;
+  writeFile(path: string, resource: Resource, resourceType: ResourceType): Promise<void>;
 
 }
 
