@@ -503,9 +503,10 @@ describe("AliasMap", function () {
         .should.throw("Circular alias 'c' was encountered whilst resolving key.");
     });
 
-    it("returns `undefined` when the specified key could not be resolved", function () {
+    it("returns `null` when the specified key could not be resolved", function () {
       let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ]);
-      should.not.exist( newAliasMap.resolveKey("z") );
+      should( newAliasMap.resolveKey("z") )
+        .be.null();
     });
 
     it("reverts to fallback function when key cannot be resolved", function () {
@@ -513,7 +514,7 @@ describe("AliasMap", function () {
       let newAliasMap = new AliasMap(null, {
         fallbackResolve: function () {
           invokedFallbackResolveFunction = true;
-          return undefined;
+          return null;
         }
       });
 

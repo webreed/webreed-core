@@ -247,7 +247,7 @@ export class AliasMap<V> {
    */
   public lookupQuiet(key: string): V {
     let resolvedKey = this.resolveKey(key);
-    if (resolvedKey !== undefined) {
+    if (resolvedKey !== null) {
       return <V>this._map.get(resolvedKey);
     }
     else {
@@ -280,7 +280,7 @@ export class AliasMap<V> {
    */
   public noisyResolveKey(key: string): string {
     let resolvedKey = this.resolveKey(key);
-    if (resolvedKey === undefined) {
+    if (resolvedKey === null) {
       let errorMessage = formatUnicorn(this._options.strings.invalidKey, { key: key });
       throw new Error(errorMessage);
     }
@@ -302,7 +302,7 @@ export class AliasMap<V> {
    *   Key or alias key of the entry, which must be non-empty.
    *
    * @returns
-   *   The resolved key of an entry if resolution was successful; otherwise, `undefined`.
+   *   The resolved key of an entry if resolution was successful; otherwise, `null`.
    *
    * @throws {Error}
    * - If a circular alias reference was encountered.
@@ -313,11 +313,11 @@ export class AliasMap<V> {
     let value = this._map.get(key);
     if (value === undefined) {
       key = this._options.fallbackResolve(this, key);
-      if (key !== undefined) {
+      if (key !== null) {
         value = this._map.get(key);
       }
       if (value === undefined) {
-        return undefined;
+        return null;
       }
     }
 
