@@ -45,8 +45,8 @@ export type ResolvedResourceMode = {
 export function resolveResourceMode(env: Environment, resource: Resource = null, resourceType: ResourceType = null): ResolvedResourceMode {
   let modeName: string;
 
-  if (resource !== null && !!resource["__mode"]) {
-    modeName = resource["__mode"];
+  if (resource !== null && !!resource.__mode) {
+    modeName = resource.__mode;
   }
   else if (resourceType !== null) {
     modeName = resourceType.mode;

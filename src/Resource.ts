@@ -84,6 +84,45 @@ export class Resource {
 
 
   /**
+   * Extension chain of source resource file.
+   */
+  public __sourceExtensionChain: string;
+
+  /**
+   * Absolute path to the source resource file.
+   */
+  public __sourceFilePath: string;
+
+  /**
+   * Resolved type of resource file.
+   */
+  public __sourceType: string;
+
+  /**
+   * File mode that was used to read the [[Resource]].
+   */
+  public __mode: string;
+
+
+  /**
+   * Name of the generator to use when generating the [[Resource]].
+   */
+  public _generator: string;
+
+  /**
+   * Overrides the extension chain of the [[Resource]].
+   */
+  public _extensionChain: string;
+
+  /**
+   * Name of the template to apply to the [[Resource]].
+   *
+   * No template is applied when the value of this property is falsy.
+   */
+  public _template: string;
+
+
+  /**
    * Base URL of the resource.
    */
   public _baseUrl: string;
@@ -99,7 +138,7 @@ export class Resource {
   public _encoding: string;
 
   /**
-   * File extension of the resource.
+   * File extension of the output resource.
    */
   public _extension: string;
 

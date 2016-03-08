@@ -51,8 +51,8 @@ export function resolveGenerator(env: Environment, resource: Resource = null, re
   let generatorName: string;
   let generatorOptions = { };
 
-  if (!!resource && !!resource["_generator"]) {
-    generatorName = resource["_generator"];
+  if (!!resource && !!resource._generator) {
+    generatorName = resource._generator;
   }
   else if (!!resourceType && !!resourceType.generator) {
     generatorName = resourceType.generator.name;
