@@ -2,8 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 
-import {Observable} from "rxjs";
 import glob = require("glob");
+import {Observable} from "rxjs";
 
 import {Environment} from "../Environment";
 

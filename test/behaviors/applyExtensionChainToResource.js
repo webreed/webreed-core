@@ -1,9 +1,9 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
-import {Observable} from "rxjs";
 import given from "mocha-testdata";
 import should from "should";
+import {Observable} from "rxjs";
 
 import {Environment} from "../../lib/Environment";
 import {PluginContext} from "../../lib/PluginContext";

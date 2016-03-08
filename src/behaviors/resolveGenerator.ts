@@ -4,8 +4,8 @@
 
 import {Environment} from "../Environment";
 import {Generator} from "../plugin/Generator";
-import {Resource} from "../Resource";
 import {ResourceType} from "../ResourceType";
+import {Resource} from "../Resource";
 
 
 /**

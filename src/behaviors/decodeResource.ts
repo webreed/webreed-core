@@ -4,8 +4,8 @@
 
 import {Environment} from "../Environment";
 import {Handler} from "../plugin/Handler";
-import {Resource} from "../Resource";
 import {ResourceType} from "../ResourceType";
+import {Resource} from "../Resource";
 
 
 /**

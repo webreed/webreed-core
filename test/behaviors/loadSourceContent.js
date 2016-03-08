@@ -8,8 +8,8 @@ import given from "mocha-testdata";
 import should from "should";
 
 import {Environment} from "../../lib/Environment";
-import {Resource} from "../../lib/Resource";
 import {ResourceType} from "../../lib/ResourceType";
+import {Resource} from "../../lib/Resource";
 import {loadSourceContent} from "../../lib/behaviors/loadSourceContent";
 
 import {FakeErrorMode} from "../fakes/FakeErrorMode";

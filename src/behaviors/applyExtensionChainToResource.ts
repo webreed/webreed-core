@@ -5,8 +5,8 @@
 import {Observable} from "rxjs";
 
 import {Environment} from "../Environment";
-import {Resource} from "../Resource";
 import {ResourceType} from "../ResourceType";
+import {Resource} from "../Resource";
 
 
 /**
