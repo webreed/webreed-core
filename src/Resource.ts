@@ -5,7 +5,7 @@
 import * as path from "path";
 import * as url from "url";
 
-const _ = require("lodash");
+import _ = require("lodash");
 
 import {Environment} from "./Environment";
 
@@ -32,7 +32,8 @@ export class Resource {
     }
 
     if (cloneFromResource !== null) {
-      props = _.chain(cloneFromResource)
+      //!TODO: Remove hack when type declaration file includes `cloneDeep`.
+      props = (<any> _.chain(cloneFromResource))
         .cloneDeep()
         .assign(props)
         .value();

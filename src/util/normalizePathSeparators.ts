@@ -4,7 +4,7 @@
 
 import {sep} from "path";
 
-const escapeStringRegexp = require("escape-string-regexp");
+import escapeStringRegexp = require("escape-string-regexp");
 
 
 // Indicates whether slash characters need to be normalized for the active platform.

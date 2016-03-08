@@ -3,7 +3,7 @@
 
 
 import {Observable} from "rxjs";
-import * as glob from "glob";
+import glob = require("glob");
 
 import {Environment} from "../Environment";
 

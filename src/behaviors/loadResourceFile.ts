@@ -4,7 +4,7 @@
 
 import {extname} from "path";
 
-const _ = require("lodash");
+import _ = require("lodash");
 
 import {Environment} from "../Environment";
 import {Resource} from "../Resource";
