@@ -55,7 +55,7 @@ export function resolveResourceMode(env: Environment, resource: Resource = null,
     modeName = env.defaultModeName;
   }
 
-  let resolvedModeName = env.modes.noisyResolve(modeName);
+  let resolvedModeName = env.modes.noisyResolveKey(modeName);
 
   return {
     name: resolvedModeName,

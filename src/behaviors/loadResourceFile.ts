@@ -62,7 +62,7 @@ export async function loadResourceFile(env: Environment, filePath: string, resou
   // Resolve the resource type here rather than using `env.resourceTypes.lookup`
   // below so that the resolved resource type extension can be included in the
   // meta data of the loaded resource.
-  resourceTypeExtension = env.resourceTypes.resolve(resourceTypeExtension);
+  resourceTypeExtension = env.resourceTypes.resolveKey(resourceTypeExtension);
 
   let resourceType = env.resourceTypes.get(resourceTypeExtension);
   let resolvedMode = env.invoke("resolveResourceMode", null, resourceType);

@@ -349,18 +349,18 @@ describe("AliasMap", function () {
         .should.throw("The magical key 'z' could not be resolved.");
     });
 
-    it("invokes #noisyResolve to resolve the specified key", function () {
-      let invokedResolveMethod = false;
+    it("invokes #noisyResolveKey to resolve the specified key", function () {
+      let invokedResolveKeyMethod = false;
 
       let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ]);
-      newAliasMap.noisyResolve = function (key) {
-        invokedResolveMethod = true;
-        return AliasMap.prototype.noisyResolve.call(this, key);
+      newAliasMap.noisyResolveKey = function (key) {
+        invokedResolveKeyMethod = true;
+        return AliasMap.prototype.noisyResolveKey.call(this, key);
       };
 
       newAliasMap.lookup("b");
 
-      invokedResolveMethod
+      invokedResolveKeyMethod
         .should.be.true();
     });
 
@@ -400,17 +400,17 @@ describe("AliasMap", function () {
     });
 
     it("invokes #resolve to resolve the specified key", function () {
-      let invokedResolveMethod = false;
+      let invokedResolveKeyMethod = false;
 
       let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ]);
-      newAliasMap.resolve = function (key) {
-        invokedResolveMethod = true;
-        return AliasMap.prototype.resolve.call(this, key);
+      newAliasMap.resolveKey = function (key) {
+        invokedResolveKeyMethod = true;
+        return AliasMap.prototype.resolveKey.call(this, key);
       };
 
       newAliasMap.lookup("b");
 
-      invokedResolveMethod
+      invokedResolveKeyMethod
         .should.be.true();
     });
 
@@ -431,22 +431,22 @@ describe("AliasMap", function () {
 
   });
 
-  describe("#noisyResolve(key)", function () {
+  describe("#noisyResolveKey(key)", function () {
 
     it("is a function", function () {
-      this.aliasMap.noisyResolve
+      this.aliasMap.noisyResolveKey
         .should.be.a.Function();
     });
 
     given( undefined, null, 42 ).
     it("throws error when argument 'key' is not a string", function (key) {
-      (() => this.aliasMap.noisyResolve(key))
+      (() => this.aliasMap.noisyResolveKey(key))
         .should.throw("argument 'key' must be a string");
     });
 
     it("throws error when the specified key could not be resolved", function () {
       let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ]);
-      (() => newAliasMap.noisyResolve("z"))
+      (() => newAliasMap.noisyResolveKey("z"))
         .should.throw("Key 'z' could not be resolved.");
     });
 
@@ -454,37 +454,37 @@ describe("AliasMap", function () {
       let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ], {
         strings: { invalidKey: "The magical key '{key}' could not be resolved." }
       });
-      (() => newAliasMap.noisyResolve("z"))
+      (() => newAliasMap.noisyResolveKey("z"))
         .should.throw("The magical key 'z' could not be resolved.");
     });
 
     it("invokes #resolve to resolve the specified key", function () {
-      let invokedResolveMethod = false;
+      let invokedResolveKeyMethod = false;
 
       let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ]);
-      newAliasMap.resolve = function (key) {
-        invokedResolveMethod = true;
-        return AliasMap.prototype.resolve.call(this, key);
+      newAliasMap.resolveKey = function (key) {
+        invokedResolveKeyMethod = true;
+        return AliasMap.prototype.resolveKey.call(this, key);
       };
 
-      newAliasMap.noisyResolve("b");
+      newAliasMap.noisyResolveKey("b");
 
-      invokedResolveMethod
+      invokedResolveKeyMethod
         .should.be.true();
     });
 
   });
 
-  describe("#resolve(key)", function () {
+  describe("#resolveKey(key)", function () {
 
     it("is a function", function () {
-      this.aliasMap.resolve
+      this.aliasMap.resolveKey
         .should.be.a.Function();
     });
 
     given( undefined, null, 42 ).
     it("throws error when argument 'key' is not a string", function (key) {
-      (() => this.aliasMap.resolve(key))
+      (() => this.aliasMap.resolveKey(key))
         .should.throw("argument 'key' must be a string");
     });
 
@@ -495,17 +495,17 @@ describe("AliasMap", function () {
         [ "c", "alias-of(b)" ]
       ]);
 
-      (() => newAliasMap.resolve("A"))
+      (() => newAliasMap.resolveKey("A"))
         .should.throw("Circular alias 'A' was encountered whilst resolving key.");
-      (() => newAliasMap.resolve("b"))
+      (() => newAliasMap.resolveKey("b"))
         .should.throw("Circular alias 'b' was encountered whilst resolving key.");
-      (() => newAliasMap.resolve("c"))
+      (() => newAliasMap.resolveKey("c"))
         .should.throw("Circular alias 'c' was encountered whilst resolving key.");
     });
 
     it("returns `undefined` when the specified key could not be resolved", function () {
       let newAliasMap = new AliasMap([ [ "A", 42 ], [ "b", "alias-of(A)" ] ]);
-      should.not.exist( newAliasMap.resolve("z") );
+      should.not.exist( newAliasMap.resolveKey("z") );
     });
 
     it("reverts to fallback function when key cannot be resolved", function () {
@@ -517,7 +517,7 @@ describe("AliasMap", function () {
         }
       });
 
-      newAliasMap.resolve("z");
+      newAliasMap.resolveKey("z");
 
       invokedFallbackResolveFunction
         .should.be.true();
@@ -526,8 +526,8 @@ describe("AliasMap", function () {
     it("normalizes casing of key when AliasMap ignores casing of keys", function () {
       let newAliasMap = new AliasMap([ [ "A", 42 ] ], { ignoreCase: true });
 
-      let result1 = newAliasMap.resolve("A");
-      let result2 = newAliasMap.resolve("a");
+      let result1 = newAliasMap.resolveKey("A");
+      let result2 = newAliasMap.resolveKey("a");
 
       result1
         .should.be.eql(result2);
@@ -536,8 +536,8 @@ describe("AliasMap", function () {
     it("does not normalize casing of key when AliasMap is case-sensitive", function () {
       let newAliasMap = new AliasMap([ [ "A", 42 ] ], { ignoreCase: false });
 
-      let result1 = newAliasMap.resolve("A");
-      let result2 = newAliasMap.resolve("a");
+      let result1 = newAliasMap.resolveKey("A");
+      let result2 = newAliasMap.resolveKey("a");
 
       result1
         .should.not.be.eql(result2);
@@ -549,7 +549,7 @@ describe("AliasMap", function () {
         [ "b", "alias-of(A)" ]
       ]);
 
-      newAliasMap.resolve("b")
+      newAliasMap.resolveKey("b")
         .should.be.eql("A");
     });
 
@@ -560,7 +560,7 @@ describe("AliasMap", function () {
         [ "c", "alias-of(b)" ]
       ]);
 
-      newAliasMap.resolve("c")
+      newAliasMap.resolveKey("c")
         .should.be.eql("A");
     });
 
@@ -570,7 +570,7 @@ describe("AliasMap", function () {
         [ "b", "alias-of()" ]
       ]);
 
-      newAliasMap.resolve("b")
+      newAliasMap.resolveKey("b")
         .should.be.eql("");
     });
 
@@ -580,7 +580,7 @@ describe("AliasMap", function () {
         [ "b", "alias-of(a)" ]
       ], { ignoreCase: true });
 
-      newAliasMap.resolve("B")
+      newAliasMap.resolveKey("B")
         .should.be.eql("a");
     });
 
@@ -591,7 +591,7 @@ describe("AliasMap", function () {
         [ "C", "alias-of(B)" ]
       ], { ignoreCase: true });
 
-      newAliasMap.resolve("C")
+      newAliasMap.resolveKey("C")
         .should.be.eql("a");
     });
 

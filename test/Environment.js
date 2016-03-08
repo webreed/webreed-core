@@ -141,7 +141,7 @@ describe("Environment", function () {
 
     it("falls back to the default resource type '*'", function () {
       this.env.resourceTypes.set("*", new ResourceType());
-      this.env.resourceTypes.resolve("key-that-does-not-exist")
+      this.env.resourceTypes.resolveKey("key-that-does-not-exist")
         .should.be.eql("*");
     });
 

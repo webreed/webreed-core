@@ -23,7 +23,7 @@ import {ResourceType} from "../ResourceType";
  */
 export function decodeResource(env: Environment, resource: Resource, resourceType: ResourceType): Promise<Resource> {
   if (resourceType.handler !== null) {
-    let resolvedHandlerName = env.handlers.noisyResolve(resourceType.handler.name);
+    let resolvedHandlerName = env.handlers.noisyResolveKey(resourceType.handler.name);
     let handlerPlugin = <Handler> env.handlers.get(resolvedHandlerName);
 
     return handlerPlugin.decode(resource.body, {

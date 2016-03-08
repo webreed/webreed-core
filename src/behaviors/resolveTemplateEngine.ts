@@ -53,7 +53,7 @@ export function resolveTemplateEngine(env: Environment, templateName: string): R
   }
 
   let templateExtension = extname(templateName);
-  let resolvedTemplateExtension = env.resourceTypes.resolve(templateExtension);
+  let resolvedTemplateExtension = env.resourceTypes.resolveKey(templateExtension);
   let templateResourceType = <ResourceType> env.resourceTypes.get(resolvedTemplateExtension);
 
   let templateEngineInstance = templateResourceType.templateEngine;
@@ -62,7 +62,7 @@ export function resolveTemplateEngine(env: Environment, templateName: string): R
   }
 
   let templateEngineName = templateEngineInstance.name;
-  let resolvedTemplateEngineName = env.templateEngines.noisyResolve(templateEngineName);
+  let resolvedTemplateEngineName = env.templateEngines.noisyResolveKey(templateEngineName);
 
   return {
     name: resolvedTemplateEngineName,

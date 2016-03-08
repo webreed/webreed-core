@@ -62,7 +62,7 @@ export function resolveGenerator(env: Environment, resource: Resource = null, re
     generatorName = env.defaultGeneratorName;
   }
 
-  let resolvedGeneratorName = env.generators.noisyResolve(generatorName);
+  let resolvedGeneratorName = env.generators.noisyResolveKey(generatorName);
 
   return {
     name: resolvedGeneratorName,

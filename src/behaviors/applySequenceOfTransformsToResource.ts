@@ -29,7 +29,7 @@ export function applySequenceOfTransformsToResource(env: Environment, resource: 
   }
 
   let reducer = (stream: Observable<Resource>, pluginContext: PluginContext) => {
-    let resolvedTransformerName = env.transformers.noisyResolve(pluginContext.name);
+    let resolvedTransformerName = env.transformers.noisyResolveKey(pluginContext.name);
     let transformer = <Transformer> env.transformers.get(resolvedTransformerName);
 
     return stream.flatMap(resource => transformer.transform(resource, {
