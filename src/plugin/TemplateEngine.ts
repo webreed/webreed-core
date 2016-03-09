@@ -6,6 +6,32 @@ import {Observable} from "rxjs";
 
 
 /**
+ * Rendered template output.
+ */
+export class TemplateOutput {
+
+  /**
+   * Indicates whether the template output is paginated.
+   */
+  public get isPaginated(): boolean {
+    let type = typeof this.page;
+    return type === "string" || type === "number";
+  }
+
+  /**
+   * Slug representing page of paginated output.
+   */
+  public page: number | string = undefined;
+
+  /**
+   * Body of output.
+   */
+  public body: string = "";
+
+}
+
+
+/**
  * Interface for a template engine.
  */
 export interface TemplateEngine {
@@ -29,7 +55,7 @@ export interface TemplateEngine {
    * @returns
    *   An observable stream of zero-or-more outputs.
    */
-  renderTemplateString(template: string, templateParams: Object, context: Object): Observable<string>;
+  renderTemplate(template: string, templateParams: Object, context: Object): Observable<TemplateOutput>;
 
   /**
    * Renders the named template.
@@ -44,6 +70,6 @@ export interface TemplateEngine {
    * @returns
    *   An observable stream of zero-or-more outputs.
    */
-  renderTemplateString(templateName: string, templateParams: Object, context: Object): Observable<string>;
+  renderTemplateString(templateName: string, templateParams: Object, context: Object): Observable<TemplateOutput>;
 
 }

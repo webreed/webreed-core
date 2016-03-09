@@ -89,7 +89,9 @@ describe("behaviors/applyTemplateToResource", function () {
 
     return applyTemplateToResource(this.env, resource, templateName)
       .toPromise()
-      .should.eventually.be.eql("Template Output: [[test.nunjucks]]");
+      .should.eventually.have.properties({
+        body: "Template Output: [[test.nunjucks]]"
+      });
   });
 
   it("rejects with error from template engine", function () {

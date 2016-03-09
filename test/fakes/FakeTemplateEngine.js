@@ -4,6 +4,8 @@
 
 import {Observable} from "rxjs";
 
+import {TemplateOutput} from "../../lib/plugin/TemplateEngine";
+
 
 export class FakeTemplateEngine {
 
@@ -12,12 +14,20 @@ export class FakeTemplateEngine {
 
   renderTemplateString(template, templateParams, context) {
     this.lastRenderTemplateStringArguments = Array.from(arguments);
-    return Observable.of(`Template Output: [[${template}]]`);
+
+    let output = new TemplateOutput();
+    output.body = `Template Output: [[${template}]]`;
+
+    return Observable.of(output);
   }
 
   renderTemplate(templateName, templateParams, context) {
     this.lastRenderTemplateArguments = Array.from(arguments);
-    return Observable.of(`Template Output: [[${templateName}]]`);
+
+    let output = new TemplateOutput();
+    output.body = `Template Output: [[${templateName}]]`;
+
+    return Observable.of(output);
   }
 
 }
