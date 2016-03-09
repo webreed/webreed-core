@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Core library that support webreed projects.",
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "prepublish": "npm run build_cjs",
     "build_cjs": "rm -rf lib && tsc --pretty",
