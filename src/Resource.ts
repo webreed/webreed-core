@@ -32,7 +32,6 @@ export class Resource {
     }
 
     if (cloneFromResource !== null) {
-      //!TODO: Remove hack when type declaration file includes `cloneDeep`.
       props = _.chain(cloneFromResource)
         .cloneDeep()
         .assign(props)
