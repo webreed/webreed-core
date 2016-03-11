@@ -9,29 +9,6 @@ import {ResourceType} from "../ResourceType";
 import {Resource} from "../Resource";
 
 
-/**
- * Applies a given extension chain to a resource in order from right to left.
- *
- * For instance, given an extension chain of 'about.md.nunjucks' the input resource will
- * be transformed in the following order:
- *
- * 1. Apply any conversion transformations .nunjucks > .md
- * 2. Apply any .md process transformations
- * 3. Apply any conversion transformations .md > .html
- * 4. Apply any .html process transformations
- * 5. Apply any conversion transformations from .html > $
- * 6. Apply any $ process transformations
- *
- * @param env
- *   An environment that represents a webreed project.
- * @param resource
- *   The resource that is to be transformed.
- * @param extensionChain
- *   A sequence of zero or more file extensions.
- *
- * @returns
- *   An observable stream of output resources.
- */
 export function applyExtensionChainToResource(env: Environment, resource: Resource, extensionChain: string): Observable<Resource> {
   // Compose ordered list of extensions in chain.
   let extensions = (extensionChain.match(/\.[^\.]+/g) || [""]).reverse();

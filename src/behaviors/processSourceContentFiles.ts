@@ -9,15 +9,6 @@ import {ResourceType} from "../ResourceType";
 import {Resource} from "../Resource";
 
 
-/**
- * Process source content files and save generated outputs.
- *
- * @param env
- *   An environment that represents a webreed project.
- *
- * @returns
- *   A promise to complete the process source content files operation.
- */
 export function processSourceContentFiles(env: Environment): Promise<void> {
   let sourceContentRelativePaths = env.behaviors.getSourceContentRelativePaths();
   return sourceContentRelativePaths

@@ -31,22 +31,6 @@ export type ResolvedGenerator = {
 };
 
 
-/**
- * Resolves the generator for the given context.
- *
- * @param env
- *   An environment that represents a webreed project.
- * @param resource
- *   The resource that will be processed with the generator that is being resolved.
- * @param resourceType
- *   The type of resource that will be processed with the generator that is being resolved.
- *
- * @returns
- *   The resolved generator.
- *
- * @throws {Error}
- * - If the resolved generator is not defined.
- */
 export function resolveGenerator(env: Environment, resource: Resource = null, resourceType: ResourceType = null): ResolvedGenerator {
   let generatorName: string;
   let generatorOptions = { };

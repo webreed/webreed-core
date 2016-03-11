@@ -7,15 +7,6 @@ const fs = require("fs-promise");
 import {Environment} from "../Environment";
 
 
-/**
- * Copies files from 'files' directory into 'output' directory.
- *
- * @param env
- *   An environment that represents a webreed project.
- *
- * @returns
- *   A promise to complete the copy files operation.
- */
 export async function copyFilesToOutput(env: Environment): Promise<void> {
   let filesPath = env.resolvePath("files");
   let outputPath = env.resolvePath("output");

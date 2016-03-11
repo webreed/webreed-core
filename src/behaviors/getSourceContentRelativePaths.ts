@@ -8,15 +8,6 @@ import {Observable} from "rxjs";
 import {Environment} from "../Environment";
 
 
-/**
- * Gets source content paths relative to the content directory.
- *
- * @param env
- *   An environment that represents a webreed project.
- *
- * @returns
- *   An observable collection of content relative paths.
- */
 export function getSourceContentRelativePaths(env: Environment): Observable<string> {
   let results = glob.sync("**/*", {
     cwd: env.resolvePath("content"),

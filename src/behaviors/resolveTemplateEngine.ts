@@ -32,21 +32,6 @@ export type ResolvedTemplateEngine = {
 };
 
 
-/**
- * Resolves the template engine for the given template name.
- *
- * @param env
- *   An environment that represents a webreed project.
- * @param templateName
- *   Name of the template relative to the templates directory.
- *
- * @returns
- *   The resolved template engine.
- *
- * @throws {Error}
- * - If resource type is not associated with a template engine.
- * - If the resolved template engine is not defined.
- */
 export function resolveTemplateEngine(env: Environment, templateName: string): ResolvedTemplateEngine {
   if (templateName === "") {
     throw new Error("argument 'templateName' must be a non-empty string");

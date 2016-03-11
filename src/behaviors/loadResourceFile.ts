@@ -13,29 +13,6 @@ import {getExtensionChainFromPath} from "../util/getExtensionChainFromPath";
 import {getTargetExtensionFromPath} from "../util/getTargetExtensionFromPath";
 
 
-/**
- * Loads a resource file.
- *
- * Note: This method does not cache resources.
- *
- * @param env
- *   An environment that represents a webreed project.
- * @param filePath
- *   Absolute path to the input resource file, which must be non-empty.
- * @param resourceTypeExtension
- *   When specified allows caller to specify the type of the resource; otherwise the
- *   resource type is resolved using file extension from argument 'filePath'.
- * @param baseProperties
- *   Base properties for the resource which can be overridden by properties found in the
- *   source resource's frontmatter.
- *
- * @returns
- *   A promise to return a [[Resource]] representing the resource and its frontmatter; or
- *   to throw an error.
- *
- * @throws {Error}
- * - If attempting to load resource with an unknown mode.
- */
 export async function loadResourceFile(env: Environment, filePath: string, resourceTypeExtension: string = null, baseProperties: Object = null): Promise<Resource> {
   if (resourceTypeExtension === null) {
     resourceTypeExtension = extname(filePath);

@@ -5,15 +5,6 @@
 import {Environment} from "../Environment";
 
 
-/**
- * Builds output for a given webreed environment.
- *
- * @param env
- *   An environment that represents a webreed project.
- *
- * @returns
- *   A promise to complete the build.
- */
 export function build(env: Environment): Promise<void> {
   return Promise.resolve()
     .then(() => console.log("Processing content files..."))

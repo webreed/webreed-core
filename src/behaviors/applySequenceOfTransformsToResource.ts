@@ -10,19 +10,6 @@ import {Resource} from "../Resource";
 import {Transformer} from "../plugin/Transformer";
 
 
-/**
- * Applies a sequence of transformations to a given resource.
- *
- * @param env
- *   An environment that represents a webreed project.
- * @param resource
- *   The resource that is to be transformed.
- * @param transformers
- *   An array of zero-or-more transformers that will be applied to the input resource.
- *
- * @returns
- *   An observable stream of transformed resources.
- */
 export function applySequenceOfTransformsToResource(env: Environment, resource: Resource, transformers: PluginContext[] = null): Observable<Resource> {
   if (transformers === null) {
     transformers = [ ];

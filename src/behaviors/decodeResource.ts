@@ -8,19 +8,6 @@ import {ResourceType} from "../ResourceType";
 import {Resource} from "../Resource";
 
 
-/**
- * Decodes a source resource of a specified type.
- *
- * @param env
- *   An environment that represents a webreed project.
- * @param resource
- *   The source resource that is being decoded.
- * @param resourceType
- *   Represents the type of resource that is being processed.
- *
- * @returns
- *   A promise to fulfill with the decoded resource.
- */
 export function decodeResource(env: Environment, resource: Resource, resourceType: ResourceType): Promise<Resource> {
   if (resourceType.handler !== null) {
     let resolvedHandlerName = env.handlers.noisyResolveKey(resourceType.handler.name);

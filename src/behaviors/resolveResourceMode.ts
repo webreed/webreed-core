@@ -26,22 +26,6 @@ export type ResolvedResourceMode = {
 };
 
 
-/**
- * Resolves the resource mode for the given context.
- *
- * @param env
- *   An environment that represents a webreed project.
- * @param resource
- *   The resource that will be processed with the mode that is being resolved.
- * @param resourceType
- *   The type of resource that will be processed with the mode that is being resolved.
- *
- * @returns
- *   The resolved resource mode.
- *
- * @throws {Error}
- * - If the resolved resource mode is not defined.
- */
 export function resolveResourceMode(env: Environment, resource: Resource = null, resourceType: ResourceType = null): ResolvedResourceMode {
   let modeName: string;
 
