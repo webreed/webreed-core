@@ -5,6 +5,7 @@
 import {Observable} from "rxjs";
 
 import {Environment} from "../Environment";
+import {ResourceType} from "../ResourceType";
 import {Resource} from "../Resource";
 
 
@@ -18,7 +19,7 @@ import {Resource} from "../Resource";
  *   A promise to complete the process source content files operation.
  */
 export function processSourceContentFiles(env: Environment): Promise<void> {
-  let sourceContentRelativePaths = env.invoke("getSourceContentRelativePaths") as Observable<string>;
+  let sourceContentRelativePaths = env.behaviors.getSourceContentRelativePaths();
   return sourceContentRelativePaths
     .concatMap<void>(contentRelativePath => Observable.fromPromise(processSourceContent(env, contentRelativePath)))
     .toPromise();
@@ -26,10 +27,10 @@ export function processSourceContentFiles(env: Environment): Promise<void> {
 
 
 async function processSourceContent(env: Environment, contentRelativePath: string): Promise<void> {
-  let sourceResource = await env.invoke("loadSourceContent", contentRelativePath);
+  let sourceResource = await env.behaviors.loadSourceContent(contentRelativePath);
 
-  let resourceType = env.resourceTypes.lookup(sourceResource.__sourceType);
-  let generatedResourceStream = env.invoke("generateResource", sourceResource, resourceType);
+  let resourceType = <ResourceType> env.resourceTypes.lookup(sourceResource.__sourceType);
+  let generatedResourceStream = env.behaviors.generateResource(sourceResource, resourceType);
 
   let reducer = (promise: Promise<void>, outputResource: Resource) => {
     let outputRelativePath = env.getOutputRelativePathForResource(
@@ -38,7 +39,7 @@ async function processSourceContent(env: Environment, contentRelativePath: strin
     let outputFilePath = env.resolvePath("output", outputRelativePath);
 
     return promise.then(
-      () => env.invoke("saveResourceFile", outputFilePath, outputResource)
+      () => env.behaviors.saveResourceFile(outputFilePath, outputResource)
     );
   };
 

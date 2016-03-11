@@ -5,7 +5,6 @@
 import {Observable} from "rxjs";
 
 import {Environment} from "../Environment";
-import {ResolvedTemplateEngine} from "./resolveTemplateEngine";
 import {Resource} from "../Resource";
 
 
@@ -31,7 +30,7 @@ export function applyTemplateToResource(env: Environment, resource: Resource, te
     throw new Error("argument 'templateName' must be a non-empty string");
   }
 
-  let resolvedTemplateEngine = <ResolvedTemplateEngine> env.invoke("resolveTemplateEngine", templateName);
+  let resolvedTemplateEngine = env.behaviors.resolveTemplateEngine(templateName);
 
   let templateOutputStream = resolvedTemplateEngine.templateEngine.renderTemplate(templateName, resource, {
     templateEngine: {

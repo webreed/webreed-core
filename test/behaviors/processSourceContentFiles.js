@@ -72,9 +72,9 @@ describe("behaviors/processSourceContentFiles", function () {
   });
 
   it("rejects with error", function () {
-    this.env.behaviors.saveResourceFile = function (env, outputFilePath, outputResource) {
+    this.env.behaviors.set("saveResourceFile", function (env, outputFilePath, outputResource) {
       return Promise.reject(new Error("Failed to save generated resource!"));
-    };
+    });
 
     return this.env.build()
       .should.be.rejectedWith("Failed to save generated resource!");
@@ -85,11 +85,11 @@ describe("behaviors/processSourceContentFiles", function () {
     let outputFilePaths = [ ];
     let outputResourceBodies = [ ];
 
-    this.env.behaviors.saveResourceFile = function (env, outputFilePath, outputResource) {
+    this.env.behaviors.set("saveResourceFile", function (env, outputFilePath, outputResource) {
       outputFilePaths.push(outputFilePath);
       outputResourceBodies.push(outputResource.body);
       return Promise.resolve();
-    };
+    });
 
     return this.env.build()
       .then(() => {

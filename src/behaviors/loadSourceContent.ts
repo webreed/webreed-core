@@ -53,5 +53,5 @@ export function loadSourceContent(env: Environment, contentRelativePath: string,
 
   baseProperties = _.assign({ }, sourceContentProperties, baseProperties)
 
-  return <Promise<Resource>> env.invoke("loadResourceFile", contentFilePath, resourceTypeExtension, baseProperties);
+  return env.behaviors.loadResourceFile(contentFilePath, resourceTypeExtension, baseProperties);
 }

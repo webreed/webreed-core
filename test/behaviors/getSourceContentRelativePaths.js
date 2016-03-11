@@ -38,10 +38,9 @@ describe("behaviors/getSourceContentRelativePaths", function () {
 
   it("resolves with the expected source content paths", function () {
     return getSourceContentRelativePaths(this.env)
-      .toArray()
-      .toPromise()
-      .then(results => new Set(results)
-        .should.be.eql(new Set([
+      .toArray().toPromise()
+      .then(results =>
+        new Set(results).should.be.eql(new Set([
           "blog/cat.png",
           "blog/index.md",
           "about.md",

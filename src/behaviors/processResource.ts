@@ -23,5 +23,5 @@ import {Resource} from "../Resource";
  *   An observable stream of output resources.
  */
 export function processResource(env: Environment, resource: Resource, resourceType: ResourceType): Observable<Resource> {
-  return env.invoke("applySequenceOfTransformsToResource", resource, resourceType.process);
+  return env.behaviors.applySequenceOfTransformsToResource(resource, resourceType.process);
 }

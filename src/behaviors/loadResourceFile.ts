@@ -7,6 +7,7 @@ import {extname} from "path";
 import _ = require("lodash");
 
 import {Environment} from "../Environment";
+import {ResourceType} from "../ResourceType";
 import {Resource} from "../Resource";
 import {getExtensionChainFromPath} from "../util/getExtensionChainFromPath";
 import {getTargetExtensionFromPath} from "../util/getTargetExtensionFromPath";
@@ -64,8 +65,8 @@ export async function loadResourceFile(env: Environment, filePath: string, resou
   // meta data of the loaded resource.
   resourceTypeExtension = env.resourceTypes.resolveKey(resourceTypeExtension);
 
-  let resourceType = env.resourceTypes.get(resourceTypeExtension);
-  let resolvedMode = env.invoke("resolveResourceMode", null, resourceType);
+  let resourceType = <ResourceType> env.resourceTypes.get(resourceTypeExtension);
+  let resolvedMode = env.behaviors.resolveResourceMode(null, resourceType);
 
   let data = await resolvedMode.mode.readFile(filePath, resourceType);
 
@@ -75,11 +76,11 @@ export async function loadResourceFile(env: Environment, filePath: string, resou
     _.assign(data, baseProperties, resourceOverridesBaseProperties);
   }
 
-  data.__sourceExtensionChain = sourceExtensionChain;
-  data.__sourceFilePath = filePath;
-  data.__sourceType = resourceTypeExtension;
-  data.__mode = resolvedMode.name;
-  data._extension = targetExtension;
+  data["__sourceExtensionChain"] = sourceExtensionChain;
+  data["__sourceFilePath"] = filePath;
+  data["__sourceType"] = resourceTypeExtension;
+  data["__mode"] = resolvedMode.name;
+  data["_extension"] = targetExtension;
 
   return env.createResource(data);
 }

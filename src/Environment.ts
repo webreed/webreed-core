@@ -6,8 +6,8 @@ import * as path from "path";
 import * as url from "url";
 const join = path.join;
 
-import * as defaultBehaviors from "./behaviors/defaults";
 import {AliasMap} from "./AliasMap";
+import {BehaviorMap} from "./BehaviorMap";
 import {Generator} from "./plugin/Generator";
 import {Handler} from "./plugin/Handler";
 import {Mode} from "./plugin/Mode";
@@ -23,17 +23,12 @@ const DEFAULT_BASE_URL = "/";
 const DEFAULT_PROJECT_ROOT_PATH = "";
 
 
-export type BehaviorFunctionMap = {
-  [behaviorName: string]: Function
-};
-
-
 /**
  * Represents the environment of a webreed project.
  */
 export class Environment {
 
-  private _behaviors: BehaviorFunctionMap;
+  private _behaviors: BehaviorMap;
 
   private _projectRootPath = DEFAULT_PROJECT_ROOT_PATH;
   private _namedPaths = { };
@@ -55,8 +50,7 @@ export class Environment {
 
 
   constructor() {
-    let inheritedBehaviors = Object.assign({ }, defaultBehaviors);
-    this._behaviors = Object.create(inheritedBehaviors);
+    this._behaviors = new BehaviorMap(this);
 
     this._resourceTypes = new AliasMap<ResourceType>(null, {
       fallbackResolve: (aliasMap, key) => "*",
@@ -115,7 +109,7 @@ export class Environment {
    *
    *     delete env.behaviors.build;
    */
-  public get behaviors(): BehaviorFunctionMap {
+  public get behaviors(): BehaviorMap {
     return this._behaviors;
   }
 
@@ -222,7 +216,7 @@ export class Environment {
    *   A promise to complete the build.
    */
   public build(): Promise<void> {
-    return this.invoke("build");
+    return this.behaviors.build();
   }
 
   /**
@@ -295,33 +289,6 @@ export class Environment {
     }
 
     return url.resolve(baseUrl, outputRelativePath);
-  }
-
-  /**
-   * Invokes behavior from the [.Environment}]]
-   *
-   * @param behaviorName
-   *   Name of the behavior.
-   * @param behaviorArguments
-   *   Zero-or-more arguments that will be provided to the behavior.
-   *
-   * @returns
-   *   Result returned by the the behavior.
-   *
-   * @throws {Error}
-   * - If requested behavior is not defined.
-   */
-  public invoke(behaviorName: string, ...behaviorArguments: any[]): any {
-    if (behaviorName === "") {
-      throw new Error("argument 'behaviorName' must be a non-empty string");
-    }
-
-    let behavior = this.behaviors[behaviorName];
-    if (!behavior) {
-      throw new Error(`Behavior '${behaviorName}' is not defined.`);
-    }
-
-    return behavior(this, ...behaviorArguments);
   }
 
   /**

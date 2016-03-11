@@ -35,7 +35,7 @@ export function saveResourceFile(env: Environment, outputFilePath: string, resou
   }
 
   let resourceType = env.resourceTypes.lookup(resourceTypeExtension);
-  let resolvedMode = env.invoke("resolveResourceMode", resource, resourceType);
+  let resolvedMode = env.behaviors.resolveResourceMode(resource, resourceType);
 
   return resolvedMode.mode.writeFile(outputFilePath, resource, resourceType);
 }

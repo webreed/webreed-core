@@ -69,10 +69,10 @@ describe("behaviors/loadSourceContent", function () {
 
     // By verifying that the 'loadResourceFile' behavior is used we also infer that all of
     // the unit tests of 'loadResourceFile' are also valid for 'loadSourceContent'.
-    this.env.behaviors.loadResourceFile = function (env, filePath) {
+    this.env.behaviors.set("loadResourceFile", function (env, filePath) {
       loadedFilePath = filePath;
-      return env.behaviors.__proto__.loadResourceFile.apply(null, arguments);
-    };
+      return env.behaviors.invokeDefault("loadResourceFile", filePath);
+    });
 
     return loadSourceContent(this.env, "index.html")
       .then(() => {

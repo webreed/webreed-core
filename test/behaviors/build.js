@@ -65,10 +65,10 @@ describe("behaviors/build", function () {
   it("invokes behavior 'processSourceContentFiles'", function () {
     let invokedProcessSourceContentFiles = false;
 
-    this.env.behaviors.processSourceContentFiles = function (env) {
+    this.env.behaviors.set("processSourceContentFiles", function (env) {
       invokedProcessSourceContentFiles = true;
-      env.behaviors.__proto__.processSourceContentFiles.apply(null, arguments);
-    };
+      env.behaviors.invokeDefault("processSourceContentFiles");
+    });
 
     return build(this.env)
       .then(() => {
@@ -80,10 +80,10 @@ describe("behaviors/build", function () {
   it("invokes behavior 'copyFilesToOutput'", function () {
     let invokedCopyFilesToOutput = false;
 
-    this.env.behaviors.copyFilesToOutput = function (env) {
+    this.env.behaviors.set("copyFilesToOutput", function (env) {
       invokedCopyFilesToOutput = true;
-      env.behaviors.__proto__.copyFilesToOutput.apply(null, arguments);
-    };
+      env.behaviors.invokeDefault("copyFilesToOutput");
+    });
 
     return build(this.env)
       .then(() => {

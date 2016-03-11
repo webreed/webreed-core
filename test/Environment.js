@@ -8,8 +8,9 @@ import given from "mocha-testdata";
 import should from "should";
 
 import {AliasMap} from "../lib/AliasMap";
-import {ResourceType} from "../lib/ResourceType";
+import {BehaviorMap} from "../lib/BehaviorMap";
 import {Environment} from "../lib/Environment";
+import {ResourceType} from "../lib/ResourceType";
 import {Resource} from "../lib/Resource";
 
 
@@ -59,20 +60,14 @@ describe("Environment", function () {
 
   describe("#behaviors", function () {
 
-    it("is an object", function () {
+    it("is a `BehaviorMap`", function () {
       this.env.behaviors
-        .should.be.an.Object();
+        .should.be.instanceOf(BehaviorMap);
     });
 
     it("is read-only", function () {
       (() => this.env.behaviors = 42)
         .should.throw();
-    });
-
-    it("inherits default behaviors", function () {
-      delete this.env.behaviors.build;
-      this.env.behaviors.build
-        .should.be.a.Function();
     });
 
   });
@@ -295,10 +290,10 @@ describe("Environment", function () {
     it("assumes override 'build' behavior", function () {
       let invokedOverride = false;
 
-      this.env.behaviors.build = function () {
+      this.env.behaviors.set("build", function () {
         invokedOverride = true;
         return Promise.resolve();
-      };
+      });
 
       return this.env.build()
         .then(() => {
@@ -405,77 +400,6 @@ describe("Environment", function () {
 
       this.env.getUrlForResource(outputRelativePath, baseUrl)
         .should.be.eql(expectedResult);
-    });
-
-  });
-
-  describe("#invoke(behaviorName, ...)", function () {
-
-    it("it a function", function () {
-      this.env.invoke
-        .should.be.a.Function();
-    });
-
-    it("throws error when argument 'behaviorName' is an empty string", function () {
-      let behaviorName = "";
-      (() => this.env.invoke(behaviorName))
-        .should.throw("argument 'behaviorName' must be a non-empty string");
-    });
-
-    it("throws error when behavior is not defined", function () {
-      (() => this.env.invoke("behaviorThatDoesNotExist"))
-        .should.throw("Behavior 'behaviorThatDoesNotExist' is not defined.");
-    });
-
-    it("should invoke the specified behavior", function () {
-      let invokedFakeBehavior = false;
-      this.env.behaviors.fakeBehavior = function(env) {
-        invokedFakeBehavior = true;
-      };
-
-      this.env.invoke("fakeBehavior");
-
-      invokedFakeBehavior
-        .should.be.true();
-    });
-
-    it("should provide correct environment for argument 'env'", function () {
-      let providedEnvArgument;
-      this.env.behaviors.fakeBehavior = function(env) {
-        providedEnvArgument = env;
-      };
-
-      this.env.invoke("fakeBehavior");
-
-      providedEnvArgument
-        .should.be.exactly(this.env);
-    });
-
-    given(
-      [  [ ]                 ],
-      [  [ 1 ]               ],
-      [  [ 1, true ]         ],
-      [  [ 1, true, "bob" ]  ]
-    ).
-    it("should provide correct arguments", function (behaviorArguments) {
-      let providedArguments;
-      this.env.behaviors.fakeBehavior = function(env) {
-        providedArguments = Array.from(arguments).slice(1);
-      };
-
-      this.env.invoke("fakeBehavior", ...behaviorArguments);
-
-      providedArguments
-        .should.be.eql(behaviorArguments);
-    });
-
-    it("relays return value of behavior", function () {
-      this.env.behaviors.fakeBehavior = function(env) {
-        return 42;
-      };
-
-      this.env.invoke("fakeBehavior")
-        .should.be.eql(42);
     });
 
   });

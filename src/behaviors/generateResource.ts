@@ -26,7 +26,7 @@ import {Resource} from "../Resource";
  * - If the environment does not define the associated generator.
  */
 export function generateResource(env: Environment, resource: Resource, resourceType: ResourceType): Observable<Resource> {
-  let resolvedGenerator = env.invoke("resolveGenerator", resource, resourceType);
+  let resolvedGenerator = env.behaviors.resolveGenerator(resource, resourceType);
 
   return resolvedGenerator.generator.generate(resource, {
     generator: {

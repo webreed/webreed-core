@@ -47,7 +47,7 @@ export function applyExtensionChainToResource(env: Environment, resource: Resour
       let conversionTransformers = fromResourceType.conversions[toResourceTypeExtension];
       if (!!conversionTransformers) {
         outputStream = outputStream.flatMap(outputResource =>
-          env.invoke("applySequenceOfTransformsToResource", outputResource, conversionTransformers)
+          env.behaviors.applySequenceOfTransformsToResource(outputResource, conversionTransformers)
         );
       }
     }
@@ -57,7 +57,7 @@ export function applyExtensionChainToResource(env: Environment, resource: Resour
 
     // Apply process transformations for the current resource type.
     return outputStream.flatMap(outputResource =>
-      env.invoke("processResource", outputResource, toResourceType)
+      env.behaviors.processResource(outputResource, toResourceType)
     );
   };
 
