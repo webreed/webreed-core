@@ -48,21 +48,6 @@ export interface TemplateEngine {
   /**
    * Renders the template supplied by argument 'template'.
    *
-   * @param template
-   *   Template in source form.
-   * @param templateParams
-   *   Bag of parameters to pass to the template.
-   * @param context
-   *   An object with properties providing some context for the operation.
-   *
-   * @returns
-   *   An observable stream of zero-or-more outputs.
-   */
-  renderTemplate(template: string, templateParams: Object, context: Object): Observable<TemplateOutput>;
-
-  /**
-   * Renders the named template.
-   *
    * @param templateName
    *   Name of the template file relative to the 'templates' directory.
    * @param templateParams
@@ -73,6 +58,21 @@ export interface TemplateEngine {
    * @returns
    *   An observable stream of zero-or-more outputs.
    */
-  renderTemplateString(templateName: string, templateParams: Object, context: Object): Observable<TemplateOutput>;
+  renderTemplate(templateName: string, templateParams: Object, context: Object): Observable<TemplateOutput>;
+
+  /**
+   * Renders the named template.
+   *
+   * @param template
+   *   Template in source form.
+   * @param templateParams
+   *   Bag of parameters to pass to the template.
+   * @param context
+   *   An object with properties providing some context for the operation.
+   *
+   * @returns
+   *   An observable stream of zero-or-more outputs.
+   */
+  renderTemplateString(template: string, templateParams: Object, context: Object): Observable<TemplateOutput>;
 
 }
