@@ -470,4 +470,41 @@ describe("Environment", function () {
 
   });
 
+  describe("#use(pluginSetupFunction, [options])", function () {
+
+    it("is a function", function () {
+      this.env.use
+        .should.be.a.Function();
+    });
+
+    given([
+      [ undefined, { } ],
+      [ null, { } ],
+      [ { a: 42 }, { a: 42 } ]
+    ]).
+    it("invokes plugin setup function with expected arguments", function (options, expectedOptions) {
+      let suppliedEnv, suppliedOptions;
+      let fakeSetupFunction = function (env, options) {
+        suppliedEnv = env;
+        suppliedOptions = options;
+      };
+
+      this.env.use(fakeSetupFunction, options);
+
+      suppliedEnv
+        .should.be.exactly(this.env);
+      suppliedOptions
+        .should.be.an.Object();
+      suppliedOptions
+        .should.have.properties(expectedOptions);
+    });
+
+    it("returns self allowing for chained function calls", function () {
+      let fakeSetupFunction = function (env, options) { };
+      this.env.use(fakeSetupFunction)
+        .should.be.exactly(this.env);
+    });
+
+  });
+
 });

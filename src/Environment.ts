@@ -23,6 +23,20 @@ const DEFAULT_BASE_URL = "/";
 const DEFAULT_PROJECT_ROOT_PATH = "";
 
 
+
+/**
+ * Setup a new instance of the plugin.
+ *
+ * @param env
+ *   An environment that represents a webreed project.
+ * @param options
+ *   Additional options for configuring the plugin instnace.
+ */
+export interface PluginSetupFunction {
+  (env: Environment, options: Object): void;
+}
+
+
 /**
  * Represents the environment of a webreed project.
  */
@@ -347,6 +361,19 @@ export class Environment {
 
     this._namedPaths[name] = path;
 
+    return this;
+  }
+
+  /**
+   * Uses a specified webreed plugin.
+   *
+   * @param pluginSetupFunction
+   *   Setup function of the webreed plugin.
+   * @param options
+   *   Options to supply to the plugin's setup function.
+   */
+  public use(pluginSetupFunction: PluginSetupFunction, options?: Object): this {
+    pluginSetupFunction(this, options || { });
     return this;
   }
 
