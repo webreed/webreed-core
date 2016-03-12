@@ -14,14 +14,13 @@ export class TemplateOutput {
    * Indicates whether the template output is paginated.
    */
   public get isPaginated(): boolean {
-    let type = typeof this.page;
-    return type === "string" || type === "number";
+    return typeof this.page === "string";
   }
 
   /**
    * Slug representing page of paginated output.
    */
-  public page: number | string = undefined;
+  public page: string = undefined;
 
   /**
    * Body of output.

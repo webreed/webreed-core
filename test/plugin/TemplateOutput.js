@@ -45,9 +45,8 @@ describe("TemplateOutput", function () {
         .should.be.false();
     });
 
-    given( 42, "index" ).
-    it("is `true` when #page is defined", function (value) {
-      this.templateOutput.page = value;
+    it("is `true` when #page is defined", function () {
+      this.templateOutput.page = "index";
       this.templateOutput.isPaginated
         .should.be.true();
     });
