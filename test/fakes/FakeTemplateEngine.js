@@ -10,6 +10,7 @@ import {TemplateOutput} from "../../lib/plugin/TemplateEngine";
 export class FakeTemplateEngine {
 
   clearTemplateCache() {
+    return Promise.resolve();
   }
 
   renderTemplateString(template, templateParams, context) {

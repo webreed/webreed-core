@@ -39,8 +39,11 @@ export interface TemplateEngine {
   /**
    * Clears any cache associated with rendering of templates so that the cache can be
    * reconstructed from fresh when templates are next rendered.
+   *
+   * @returns
+   *   A promise to complete the operation.
    */
-  clearTemplateCache(): void;
+  clearTemplateCache(): Promise<void>;
 
   /**
    * Renders the template supplied by argument 'template'.
