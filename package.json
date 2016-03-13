@@ -2,6 +2,10 @@
   "name": "webreed-core",
   "version": "0.0.1",
   "description": "Core library that support webreed projects.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webreed/webreed-core"
+  },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
