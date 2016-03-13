@@ -18,11 +18,9 @@ gulp.task("build", function() {
 
   let tsResult = gulp.src([ "src/**/*.ts", "typings/**/*.ts" ])
     .pipe(sourcemaps.init())
-    .pipe(ts(tsProject))
-    .on("error", function () { failed = true; })
-    .on("finish", function () { failed && process.exit(1); });
+    .pipe(ts(tsProject));
 
-  return merge([
+  let finalResult = merge([
     tsResult.dts
       .pipe(gulp.dest('lib')),
 
@@ -31,4 +29,8 @@ gulp.task("build", function() {
       .pipe(sourcemaps.write("."))
       .pipe(gulp.dest("lib"))
   ]);
+
+  return finalResult
+    .on("error", function () { failed = true; })
+    .on("finish", function () { failed && process.exit(1); });
 });
