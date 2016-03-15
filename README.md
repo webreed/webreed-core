@@ -1,6 +1,10 @@
-# webreed-core [![Build Status](https://travis-ci.org/webreed/webreed-core.svg?branch=master)](https://travis-ci.org/webreed/webreed-core)
+# webreed-core
 
 Core package for the webreed static website generator.
+
+[![Build Status](https://travis-ci.org/webreed/webreed-core.svg?branch=master)](https://travis-ci.org/webreed/webreed-core)
+[![Dependency Status](https://david-dm.org/webreed/webreed-core.svg)](https://david-dm.org/webreed/webreed-core)
+[![devDependency Status](https://david-dm.org/webreed/webreed-core/dev-status.svg)](https://david-dm.org/webreed/webreed-core#info=devDependencies)
 
 Refer to the following packages for further information regarding usage:
 
