@@ -34,11 +34,11 @@ describe("behaviors/processSourceContentFiles", function () {
     this.env.resourceTypes.set("*", defaultResourceType);
 
     let markdownResourceType = new ResourceType();
-    markdownResourceType.defaultTargetExtension = ".html";
+    markdownResourceType.targetExtension = ".html";
     this.env.resourceTypes.set(".md", markdownResourceType);
 
     let nunjucksResourceType = new ResourceType();
-    nunjucksResourceType.defaultTargetExtension = ".json";
+    nunjucksResourceType.targetExtension = ".json";
     this.env.resourceTypes.set(".nunjucks", nunjucksResourceType);
   });
 

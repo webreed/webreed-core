@@ -34,7 +34,7 @@ describe("behaviors/loadResourceFile", function () {
 
     let markdownResourceType = new ResourceType();
     markdownResourceType.mode = "fake";
-    markdownResourceType.defaultTargetExtension = ".html";
+    markdownResourceType.targetExtension = ".html";
     this.env.resourceTypes.set(".md", markdownResourceType);
 
     let alwaysFailsResourceType = new ResourceType();
@@ -160,7 +160,7 @@ describe("behaviors/loadResourceFile", function () {
   });
 
   given( "index.md", "index.html.md" ).
-  it("takes target extension from `ResourceType#defaultTargetExtension`", function (contentRelativePath) {
+  it("takes target extension from `ResourceType#targetExtension`", function (contentRelativePath) {
     let filePath = getFixturePath(contentRelativePath);
     return loadResourceFile(this.env, filePath)
       .should.eventually.have.properties({

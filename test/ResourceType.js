@@ -71,32 +71,32 @@ describe("ResourceType", function () {
 
   });
 
-  describe("#defaultTargetExtension", function () {
+  describe("#targetExtension", function () {
 
     it("is `null` by default", function () {
-      should( this.resourceType.defaultTargetExtension )
+      should( this.resourceType.targetExtension )
         .be.null();
     });
 
   });
 
-  describe("#defaultTargetExtension=", function () {
+  describe("#targetExtension=", function () {
 
     it("throws error when argument 'value' is an empty string", function () {
       let value = "";
-      (() => this.resourceType.defaultTargetExtension = value)
+      (() => this.resourceType.targetExtension = value)
         .should.throw("argument 'value' must be a non-empty string");
     });
 
     it("throws error when argument 'value' has the value '.'", function () {
-      (() => this.resourceType.defaultTargetExtension = ".")
+      (() => this.resourceType.targetExtension = ".")
         .should.throw("argument 'value' must not be '.'");
     });
 
     given( null, ".html" ).
     it("takes on assigned value", function (value) {
-      this.resourceType.defaultTargetExtension = value;
-      should( this.resourceType.defaultTargetExtension )
+      this.resourceType.targetExtension = value;
+      should( this.resourceType.targetExtension )
         .be.eql(value);
     });
 

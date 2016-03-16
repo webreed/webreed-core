@@ -21,7 +21,7 @@ export class ResourceType {
 
   private _conversions: TransformationPluginMap = { };
   private _custom: CustomResourceTypeOptions = { };
-  private _defaultTargetExtension: string = null;
+  private _targetExtension: string = null;
   private _encoding: string = null;
   private _generator: PluginContext = null;
   private _handler: PluginContext = null;
@@ -65,10 +65,10 @@ export class ResourceType {
    * - If argument `value` is an empty string.
    * - If argument `value` is a value of ".".
    */
-  public get defaultTargetExtension(): string {
-    return this._defaultTargetExtension;
+  public get targetExtension(): string {
+    return this._targetExtension;
   }
-  public set defaultTargetExtension(value: string) {
+  public set targetExtension(value: string) {
     if (value !== null) {
       if (value === "") {
         throw new Error("argument 'value' must be a non-empty string");
@@ -78,7 +78,7 @@ export class ResourceType {
       }
     }
 
-    this._defaultTargetExtension = value;
+    this._targetExtension = value;
   }
 
   /**

@@ -27,13 +27,13 @@ export async function loadResourceFile(env: Environment, filePath: string, resou
 
   // Resolve an implied target extension.
   let targetResourceType = env.resourceTypes.lookupQuiet(targetExtension);
-  if (targetResourceType && typeof targetResourceType.defaultTargetExtension === "string") {
+  if (targetResourceType && typeof targetResourceType.targetExtension === "string") {
     // Update extension in base properties.
-    targetExtension = targetResourceType.defaultTargetExtension;
+    targetExtension = targetResourceType.targetExtension;
 
-    // Make sure that `__sourceExtensionChain` includes an implied `defaultTargetExtension`.
-    if (!sourceExtensionChain.startsWith(targetResourceType.defaultTargetExtension)) {
-      sourceExtensionChain = targetResourceType.defaultTargetExtension + sourceExtensionChain;
+    // Make sure that `__sourceExtensionChain` includes an implied `targetExtension`.
+    if (!sourceExtensionChain.startsWith(targetResourceType.targetExtension)) {
+      sourceExtensionChain = targetResourceType.targetExtension + sourceExtensionChain;
     }
   }
 
