@@ -65,13 +65,15 @@ export class BehaviorMap {
    *
    * @param resource
    *   The resource that is to be transformed.
+   * @param resourceType
+   *   Type of the resource that is being transformed.
    * @param transformers
    *   An array of zero-or-more transformers that will be applied to the input resource.
    *
    * @returns
    *   An observable stream of transformed resources.
    */
-  public applySequenceOfTransformsToResource(resource: Resource, transformers: PluginContext[] = null): Observable<Resource> {
+  public applySequenceOfTransformsToResource(resource: Resource, resourceType: ResourceType, transformers: PluginContext[]): Observable<Resource> {
     return this._map["applySequenceOfTransformsToResource"](this._env, ...arguments);
   }
 

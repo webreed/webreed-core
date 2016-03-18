@@ -10,5 +10,5 @@ import {Resource} from "../Resource";
 
 
 export function processResource(env: Environment, resource: Resource, resourceType: ResourceType): Observable<Resource> {
-  return env.behaviors.applySequenceOfTransformsToResource(resource, resourceType.process);
+  return env.behaviors.applySequenceOfTransformsToResource(resource, resourceType, resourceType.process);
 }

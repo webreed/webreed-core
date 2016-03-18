@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 
 import {Environment} from "../../lib/Environment";
 import {PluginContext} from "../../lib/PluginContext";
+import {ResourceType} from "../../lib/ResourceType";
 import {applySequenceOfTransformsToResource} from "../../lib/behaviors/applySequenceOfTransformsToResource";
 
 import {FakeTransformer} from "../fakes/FakeTransformer";
@@ -42,35 +43,39 @@ describe("behaviors/applySequenceOfTransformsToResource", function () {
 
   it("throws error when transformer is not defined", function () {
     let resource = this.env.createResource();
+    let resourceType = new ResourceType();
     let transformers = [ new PluginContext("transformer-that-is-not-defined") ];
 
-    (() => applySequenceOfTransformsToResource(this.env, resource, transformers))
+    (() => applySequenceOfTransformsToResource(this.env, resource, resourceType, transformers))
       .should.throw("Transformer 'transformer-that-is-not-defined' is not defined.");
   });
 
 
   it("returns an observable stream", function () {
     let resource = this.env.createResource();
+    let resourceType = new ResourceType();
     let transformers = [ ];
 
-    applySequenceOfTransformsToResource(this.env, resource, transformers)
+    applySequenceOfTransformsToResource(this.env, resource, resourceType, transformers)
       .should.be.instanceOf(Observable);
   });
 
   it("resolves with an output `Resource`", function () {
     let resource = this.env.createResource({ foo: 42 });
+    let resourceType = new ResourceType();
     let transformers = [ ];
 
-    return applySequenceOfTransformsToResource(this.env, resource, transformers)
+    return applySequenceOfTransformsToResource(this.env, resource, resourceType, transformers)
       .toPromise()
       .should.eventually.have.property("foo", 42);
   });
 
   it("rejects with error from transformer plugin", function () {
     let resource = this.env.createResource();
+    let resourceType = new ResourceType();
     let transformers = [ new PluginContext("always-fails") ];
 
-    return applySequenceOfTransformsToResource(this.env, resource, transformers)
+    return applySequenceOfTransformsToResource(this.env, resource, resourceType, transformers)
       .toPromise()
       .should.be.rejectedWith("transform failed!");
   });
@@ -80,14 +85,17 @@ describe("behaviors/applySequenceOfTransformsToResource", function () {
     let fakeTransformer = this.env.transformers.get("fake-1");
 
     let resource = this.env.createResource({ inputProperty: 42 });
+    let resourceType = new ResourceType();
     let transformers = [ new PluginContext("fake-1", { instanceProperty: 42 }) ];
 
-    return applySequenceOfTransformsToResource(this.env, resource, transformers)
+    return applySequenceOfTransformsToResource(this.env, resource, resourceType, transformers)
       .toPromise()
       .then(() => {
         fakeTransformer.lastTransformArguments[0].inputProperty
           .should.be.eql(42);
 
+        fakeTransformer.lastTransformArguments[1].resourceType
+          .should.be.exactly(resourceType);
         fakeTransformer.lastTransformArguments[1].transformer
           .should.have.properties({
             name: "fake-1",
@@ -98,26 +106,28 @@ describe("behaviors/applySequenceOfTransformsToResource", function () {
 
   it("applies transformations in the correct order", function () {
     let resource = this.env.createResource({ body: "start" });
+    let resourceType = new ResourceType();
     let transformers = [
       new PluginContext("fake-1"),
       new PluginContext("fake-2"),
       new PluginContext("fake-3")
     ];
 
-    return applySequenceOfTransformsToResource(this.env, resource, transformers)
+    return applySequenceOfTransformsToResource(this.env, resource, resourceType, transformers)
       .toPromise()
       .should.eventually.have.property("body", "start,a,b,c");
   });
 
   it("resolves with multiple outputs", function () {
     let resource = this.env.createResource({ body: "start" });
+    let resourceType = new ResourceType();
     let transformers = [
       new PluginContext("fake-two-pages"),
       new PluginContext("fake-1"),
       new PluginContext("fake-2")
     ];
 
-    return applySequenceOfTransformsToResource(this.env, resource, transformers)
+    return applySequenceOfTransformsToResource(this.env, resource, resourceType, transformers)
       .toArray()
       .toPromise()
       .then(results => {

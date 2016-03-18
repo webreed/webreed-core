@@ -6,12 +6,13 @@ import {Observable} from "rxjs";
 
 import {Environment} from "../Environment";
 import {PluginContext} from "../PluginContext";
+import {ResourceType} from "../ResourceType";
 import {Resource} from "../Resource";
 import {Transformer} from "../plugin/Transformer";
 
 
-export function applySequenceOfTransformsToResource(env: Environment, resource: Resource, transformers: PluginContext[] = null): Observable<Resource> {
-  if (transformers === null) {
+export function applySequenceOfTransformsToResource(env: Environment, resource: Resource, resourceType: ResourceType, transformers: PluginContext[]): Observable<Resource> {
+  if (transformers === undefined || transformers === null) {
     transformers = [ ];
   }
 
@@ -20,6 +21,7 @@ export function applySequenceOfTransformsToResource(env: Environment, resource: 
     let transformer = <Transformer> env.transformers.get(resolvedTransformerName);
 
     return stream.flatMap(resource => transformer.transform(resource, {
+      resourceType: resourceType,
       transformer: {
         name: resolvedTransformerName,
         options: pluginContext.options

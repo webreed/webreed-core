@@ -24,7 +24,7 @@ export function applyExtensionChainToResource(env: Environment, resource: Resour
       let conversionTransformers = fromResourceType.conversions[toResourceTypeExtension];
       if (!!conversionTransformers) {
         outputStream = outputStream.flatMap(outputResource =>
-          env.behaviors.applySequenceOfTransformsToResource(outputResource, conversionTransformers)
+          env.behaviors.applySequenceOfTransformsToResource(outputResource, fromResourceType, conversionTransformers)
         );
       }
     }
