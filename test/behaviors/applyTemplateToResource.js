@@ -12,6 +12,7 @@ import {ResourceType} from "../../lib/ResourceType";
 import {applyTemplateToResource} from "../../lib/behaviors/applyTemplateToResource";
 
 import {FakeErrorTemplateEngine} from "../fakes/FakeErrorTemplateEngine";
+import {FakePaginatedTemplateEngine} from "../fakes/FakePaginatedTemplateEngine";
 import {FakeTemplateEngine} from "../fakes/FakeTemplateEngine";
 
 
@@ -21,6 +22,7 @@ describe("behaviors/applyTemplateToResource", function () {
     this.env = new Environment();
     this.env.templateEngines.set("nunjucks", new FakeTemplateEngine());
     this.env.templateEngines.set("always-fails", new FakeErrorTemplateEngine());
+    this.env.templateEngines.set("paginated", new FakePaginatedTemplateEngine());
 
     let nunjucksResourceType = new ResourceType();
     nunjucksResourceType.templateEngine = new PluginContext("nunjucks", { instanceProperty: 42 });
@@ -29,6 +31,10 @@ describe("behaviors/applyTemplateToResource", function () {
     let alwaysFailsResourceType = new ResourceType();
     alwaysFailsResourceType.templateEngine = new PluginContext("always-fails");
     this.env.resourceTypes.set(".always-fails", alwaysFailsResourceType);
+
+    let paginatedResourceType = new ResourceType();
+    paginatedResourceType.templateEngine = new PluginContext("paginated");
+    this.env.resourceTypes.set(".paginated", paginatedResourceType);
 
     this.env.resourceTypes.set(".non-template", new ResourceType());
 
@@ -124,6 +130,34 @@ describe("behaviors/applyTemplateToResource", function () {
             name: "nunjucks",
             options: { instanceProperty: 42 }
           });
+      });
+  });
+
+  it("augments resource with page key when paginated", function () {
+    let resource = this.env.createResource({ _path: "blog" });
+    let templateName = "test.paginated";
+
+    return applyTemplateToResource(this.env, resource, templateName)
+      .toPromise()
+      .then(outputResource => {
+        outputResource._path
+          .should.be.eql("blog");
+        outputResource._page
+          .should.be.eql("index");
+      });
+  });
+
+  it("updates resource path and page key when paginating an already paginated resource", function () {
+    let resource = this.env.createResource({ _path: "blog", _page: "key" });
+    let templateName = "test.paginated";
+
+    return applyTemplateToResource(this.env, resource, templateName)
+      .toPromise()
+      .then(outputResource => {
+        outputResource._path
+          .should.be.eql("blog/key");
+        outputResource._page
+          .should.be.eql("index");
       });
   });
 

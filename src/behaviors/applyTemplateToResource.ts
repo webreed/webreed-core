@@ -22,8 +22,21 @@ export function applyTemplateToResource(env: Environment, resource: Resource, te
     }
   });
 
-  return templateOutputStream.map(output => resource.clone({
-    _page: output.page,
-    body: output.body
-  }));
+  return templateOutputStream.map(output => {
+    let overrides = {
+      body: output.body
+    };
+
+    if (output.page !== undefined) {
+      // Add page key to output resource.
+      overrides["_page"] = output.page;
+
+      // If resource was already paginated then the pagination need to be... paginated.
+      if (resource._page !== undefined) {
+        overrides["_path"] = resource._path + "/" + resource._page;
+      }
+    }
+
+    return resource.clone(overrides);
+  });
 }
