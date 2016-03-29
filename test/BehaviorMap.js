@@ -37,6 +37,7 @@ describe("BehaviorMap", function () {
   describeBehavior("applySequenceOfTransformsToResource", [ "resource", "transformers" ]);
   describeBehavior("applyTemplateToResource", [ "resource", "templateName" ]);
   describeBehavior("build", [ ]);
+  describeBehavior("clean", [ ]);
   describeBehavior("copyFilesToOutput", [ ]);
   describeBehavior("decodeResource", [ "resource", "resourceType" ]);
   describeBehavior("generateResource", [ "resource", "resourceType" ]);

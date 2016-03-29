@@ -303,6 +303,34 @@ describe("Environment", function () {
 
   });
 
+  describe("#clean()", function () {
+
+    it("is a function", function () {
+      this.env.clean
+        .should.be.a.Function();
+    });
+
+    it("returns a promise", function () {
+      this.env.clean()
+        .should.be.a.Promise();
+    });
+
+    it("assumes override 'clean' behavior", function () {
+      let invokedOverride = false;
+
+      this.env.behaviors.set("clean", function () {
+        invokedOverride = true;
+        return Promise.resolve();
+      });
+
+      return this.env.clean()
+        .then(() => {
+          invokedOverride.should.be.true();
+        });
+    });
+
+  });
+
   describe("#createResource", function () {
 
     it("is a function", function () {

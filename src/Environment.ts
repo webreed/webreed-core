@@ -227,10 +227,20 @@ export class Environment {
    * Builds output of the webreed project that is described by the environment.
    *
    * @returns
-   *   A promise to complete the build.
+   *   A promise to complete the build operation.
    */
   public build(): Promise<void> {
     return this.behaviors.build();
+  }
+
+  /**
+   * Cleans previous output of the webreed project that is described by the environment.
+   *
+   * @returns
+   *   A promise to complete the clean operation.
+   */
+  public clean(): Promise<void> {
+    return this.behaviors.clean();
   }
 
   /**

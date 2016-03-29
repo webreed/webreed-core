@@ -6,6 +6,7 @@ export { applyExtensionChainToResource } from "./applyExtensionChainToResource";
 export { applySequenceOfTransformsToResource } from "./applySequenceOfTransformsToResource";
 export { applyTemplateToResource } from "./applyTemplateToResource";
 export { build } from "./build";
+export { clean } from "./clean";
 export { copyFilesToOutput } from "./copyFilesToOutput";
 export { decodeResource } from "./decodeResource";
 export { generateResource } from "./generateResource";

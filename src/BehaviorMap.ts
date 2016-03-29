@@ -100,10 +100,20 @@ export class BehaviorMap {
    * Builds output for a given webreed environment.
    *
    * @returns
-   *   A promise to complete the build.
+   *   A promise to complete the build operation.
    */
   public build(): Promise<void> {
     return this._map["build"](this._env, ...arguments);
+  }
+
+  /**
+   * Cleans output for a given webreed environment.
+   *
+   * @returns
+   *   A promise to complete the clean operation.
+   */
+  public clean(): Promise<void> {
+    return this._map["clean"](this._env, ...arguments);
   }
 
   /**
