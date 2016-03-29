@@ -19,5 +19,5 @@ export function getSourceContentRelativePaths(env: Environment): Observable<stri
     nodir: true
   });
 
-  return Observable.fromArray(results);
+  return Observable.from<string>(results);
 }
