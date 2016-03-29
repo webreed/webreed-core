@@ -41,7 +41,7 @@ describe("BehaviorMap", function () {
   describeBehavior("copyFilesToOutput", [ ]);
   describeBehavior("decodeResource", [ "resource", "resourceType" ]);
   describeBehavior("generateResource", [ "resource", "resourceType" ]);
-  describeBehavior("getSourceContentRelativePaths", [ ]);
+  describeBehavior("getSourceContentRelativePaths", [ "sourceName" ]);
   describeBehavior("loadResourceFile", [ "filePath", "resourceTypeExtension", "baseProperties" ]);
   describeBehavior("loadSourceContent", [ "contentRelativePath", "resourceTypeExtension", "baseProperties" ]);
   describeBehavior("processResource", [ "resource", "resourceType" ]);

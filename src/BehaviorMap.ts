@@ -162,10 +162,14 @@ export class BehaviorMap {
   /**
    * Gets source content paths relative to the content directory.
    *
+   * @param sourceName
+   *   Name of environment path where content is to be discovered. This defaults to the
+   *   main 'content' path when the parameter is not specified.
+   *
    * @returns
    *   An observable collection of content relative paths.
    */
-  public getSourceContentRelativePaths(): Observable<string> {
+  public getSourceContentRelativePaths(sourceName: string = "content"): Observable<string> {
     return this._map["getSourceContentRelativePaths"](this._env, ...arguments);
   }
 

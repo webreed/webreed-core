@@ -8,9 +8,9 @@ import {Observable} from "rxjs";
 import {Environment} from "../Environment";
 
 
-export function getSourceContentRelativePaths(env: Environment): Observable<string> {
+export function getSourceContentRelativePaths(env: Environment, sourceName: string = "content"): Observable<string> {
   let results = glob.sync("**/*", {
-    cwd: env.resolvePath("content"),
+    cwd: env.resolvePath(sourceName),
     ignore: [
       "**/_*",    // Exclude files starting with '_'.
       "**/_*/**", // Exclude entire directories starting with '_'.

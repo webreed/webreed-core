@@ -49,4 +49,16 @@ describe("behaviors/getSourceContentRelativePaths", function () {
       );
   });
 
+  it("resolves with the expected source config paths", function () {
+    return getSourceContentRelativePaths(this.env, "config")
+      .toArray().toPromise()
+      .then(results =>
+        new Set(results).should.be.eql(new Set([
+          "site.yaml",
+          "authors/admin.json",
+          "authors/kruncher.yaml"
+        ]))
+      );
+  });
+
 });
