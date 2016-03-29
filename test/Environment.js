@@ -451,6 +451,20 @@ describe("Environment", function () {
         .should.throw("argument 'path' must be a non-empty string");
     });
 
+    given(
+      "/",
+      ".",
+      "/abc/def/../ghi/../..",
+      process.env.HOME,
+      path.join(process.env.HOME, "Documents"),
+      path.join(process.env.HOME, "My Documents")
+    ).
+    it("throws error when resolved output path is potentially dangerous", function (dangerousOutputPath) {
+      this.env.projectRootPath = "/";
+      (() => this.env.setPath("output", dangerousOutputPath))
+        .should.throw("Refusing to set output path that is potentially very dangerous.");
+    });
+
     it("overrides a named path", function () {
       this.env.setPath("content", "new-content/2015");
       this.env.resolvePath("content")

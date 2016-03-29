@@ -359,6 +359,12 @@ export class Environment {
       throw new Error("argument 'path' must be a non-empty string");
     }
 
+    if (name.toLowerCase() === "output" && isOutputPathPotentiallyDangerous(this, path)) {
+      let err = new Error("Refusing to set output path that is potentially very dangerous.");
+      err["path"] = path;
+      throw err;
+    }
+
     this._namedPaths[name] = path;
 
     return this;
@@ -377,4 +383,25 @@ export class Environment {
     return this;
   }
 
+}
+
+
+/**
+ * An output path is potentially dangerous when it may lead to the removal of a large
+ * number of user files upon being cleaned. Whilst this check is not extensive; it should
+ * hopefully avoid data loss in some cases of incorrect usage.
+ */
+function isOutputPathPotentiallyDangerous(env: Environment, outputPath: string): boolean {
+  let dangerousPaths = [
+    "/",
+    process.env.HOME,
+    path.join(process.env.HOME, "Documents"),
+    path.join(process.env.HOME, "My Documents")
+  ];
+
+  let resolvedOutputPath = path.resolve(env.projectRootPath, outputPath);
+
+  return dangerousPaths
+    .map(x => path.resolve(x).toLowerCase())
+    .indexOf(resolvedOutputPath.toLowerCase()) !== -1;
 }
