@@ -135,9 +135,9 @@ export class BehaviorMap {
    *   Represents the type of resource that is being processed.
    *
    * @returns
-   *   A promise to fulfill with the decoded resource.
+   *   A promise to fulfill with the decoded data.
    */
-  public decodeResource(resource: Resource, resourceType: ResourceType): Promise<Resource> {
+  public decodeResource(resource: Resource, resourceType: ResourceType): Promise<any> {
     return this._map["decodeResource"](this._env, ...arguments);
   }
 

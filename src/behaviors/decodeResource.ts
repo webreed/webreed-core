@@ -8,7 +8,7 @@ import {ResourceType} from "../ResourceType";
 import {Resource} from "../Resource";
 
 
-export function decodeResource(env: Environment, resource: Resource, resourceType: ResourceType): Promise<Resource> {
+export function decodeResource(env: Environment, resource: Resource, resourceType: ResourceType): Promise<any> {
   if (resourceType.handler !== null) {
     let resolvedHandlerName = env.handlers.noisyResolveKey(resourceType.handler.name);
     let handlerPlugin = <Handler> env.handlers.get(resolvedHandlerName);
