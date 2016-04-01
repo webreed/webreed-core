@@ -10,6 +10,7 @@ import should from "should";
 import {AliasMap} from "../lib/AliasMap";
 import {BehaviorMap} from "../lib/BehaviorMap";
 import {Environment} from "../lib/Environment";
+import {ProjectConfig} from "../lib/ProjectConfig";
 import {ResourceType} from "../lib/ResourceType";
 import {Resource} from "../lib/Resource";
 
@@ -67,6 +68,20 @@ describe("Environment", function () {
 
     it("is read-only", function () {
       (() => this.env.behaviors = 42)
+        .should.throw();
+    });
+
+  });
+
+  describe("#config", function () {
+
+    it("is a `ProjectConfig", function () {
+      this.env.config
+        .should.be.instanceOf(ProjectConfig);
+    });
+
+    it("is read-only", function () {
+      (() => this.env.config = 42)
         .should.throw();
     });
 

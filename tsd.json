@@ -25,6 +25,9 @@
     },
     "escape-string-regexp/escape-string-regexp.d.ts": {
       "commit": "0144ad5a74053f2292424847259c4c8e1d0fecaa"
+    },
+    "deep-freeze/deep-freeze.d.ts": {
+      "commit": "e8f8e7471b8ca92ca417f8c878f64ae4d1067972"
     }
   }
 }

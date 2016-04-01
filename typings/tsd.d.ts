@@ -5,3 +5,4 @@
 /// <reference path="lodash/lodash.d.ts" />
 /// <reference path="format-unicorn/format-unicorn-safe.d.ts" />
 /// <reference path="escape-string-regexp/escape-string-regexp.d.ts" />
+/// <reference path="deep-freeze/deep-freeze.d.ts" />

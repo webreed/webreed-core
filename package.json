@@ -30,6 +30,7 @@
     "should": "^8.0.2"
   },
   "dependencies": {
+    "deep-freeze": "0.0.1",
     "escape-string-regexp": "^1.0.4",
     "format-unicorn": "^1.1.0",
     "fs-extra": "^0.26.5",

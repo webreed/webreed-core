@@ -11,6 +11,7 @@ import {BehaviorMap} from "./BehaviorMap";
 import {Generator} from "./plugin/Generator";
 import {Handler} from "./plugin/Handler";
 import {Mode} from "./plugin/Mode";
+import {ProjectConfig} from "./ProjectConfig";
 import {ResourceType} from "./ResourceType";
 import {Resource} from "./Resource";
 import {TemplateEngine} from "./plugin/TemplateEngine";
@@ -43,6 +44,7 @@ export interface PluginSetupFunction {
 export class Environment {
 
   private _behaviors: BehaviorMap;
+  private _config: ProjectConfig;
 
   private _projectRootPath = DEFAULT_PROJECT_ROOT_PATH;
   private _namedPaths = { };
@@ -65,6 +67,7 @@ export class Environment {
 
   constructor() {
     this._behaviors = new BehaviorMap(this);
+    this._config = new ProjectConfig();
 
     this._resourceTypes = new AliasMap<ResourceType>(null, {
       fallbackResolve: (aliasMap, key) => "*",
@@ -125,6 +128,13 @@ export class Environment {
    */
   public get behaviors(): BehaviorMap {
     return this._behaviors;
+  }
+
+  /**
+   * Gets the project's configuration.
+   */
+  public get config(): ProjectConfig {
+    return this._config;
   }
 
   /**
@@ -230,7 +240,9 @@ export class Environment {
    *   A promise to complete the build operation.
    */
   public build(): Promise<void> {
-    return this.behaviors.build();
+    return Promise.resolve()
+      .then(() => this.config.load(this))
+      .then(() => this.behaviors.build());
   }
 
   /**
