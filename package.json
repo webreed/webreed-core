@@ -1,6 +1,6 @@
 {
   "name": "webreed-core",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Core library that support webreed projects.",
   "repository": {
     "type": "git",
