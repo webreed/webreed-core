@@ -91,6 +91,9 @@ export class ProjectConfig {
       }
     }
 
+    // Ensure that data is a simple JavaScript object.
+    data = JSON.parse(JSON.stringify(data));
+
     this._data = deepFreeze(data);
     this._isLoading = false;
   }
