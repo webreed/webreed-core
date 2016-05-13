@@ -28,6 +28,10 @@ describe("behaviors/loadResourceFile", function () {
     this.env.modes.set("fake", new FakeMode());
     this.env.modes.set("alwaysFails", new FakeErrorMode());
 
+    let modeAugmentsWithOutputExtension = new FakeMode();
+    modeAugmentsWithOutputExtension.outputExtension = ".ext";
+    this.env.modes.set("augmentsWithOutputExtension", modeAugmentsWithOutputExtension);
+
     let defaultResourceType = new ResourceType();
     defaultResourceType.mode = "fake";
     this.env.resourceTypes.set("*", defaultResourceType);
@@ -40,6 +44,10 @@ describe("behaviors/loadResourceFile", function () {
     let alwaysFailsResourceType = new ResourceType();
     alwaysFailsResourceType.mode = "alwaysFails";
     this.env.resourceTypes.set(".always-fails", alwaysFailsResourceType);
+
+    let resourceTypeAugmentsWithOutputExtension = new ResourceType();
+    resourceTypeAugmentsWithOutputExtension.mode = "augmentsWithOutputExtension";
+    this.env.resourceTypes.set(".has-custom-output-extension", resourceTypeAugmentsWithOutputExtension);
   });
 
 
@@ -168,6 +176,17 @@ describe("behaviors/loadResourceFile", function () {
         __sourceFilePath: filePath,
         __sourceType: ".md",
         _extension: ".html"
+      });
+  });
+
+  it("uses output extension from the source content file", function () {
+    let filePath = getFixturePath("foo.has-custom-output-extension");
+    return loadResourceFile(this.env, filePath)
+      .should.eventually.have.properties({
+        __sourceExtensionChain: ".has-custom-output-extension",
+        __sourceFilePath: filePath,
+        __sourceType: ".has-custom-output-extension",
+        _extension: ".ext"
       });
   });
 

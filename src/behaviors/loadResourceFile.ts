@@ -57,7 +57,7 @@ export async function loadResourceFile(env: Environment, filePath: string, resou
   data["__sourceFilePath"] = filePath;
   data["__sourceType"] = resourceTypeExtension;
   data["__mode"] = resolvedMode.name;
-  data["_extension"] = targetExtension;
+  data["_extension"] = data["_extension"] || targetExtension;
 
   return env.createResource(data);
 }

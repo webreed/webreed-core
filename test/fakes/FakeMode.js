@@ -6,7 +6,10 @@ export class FakeMode {
 
   readFile(path, resourceType) {
     this.lastReadFileArguments = Array.from(arguments);
-    return Promise.resolve({ body: "Fake body!" });
+    return Promise.resolve({
+      _extension: this.outputExtension,
+      body: "Fake body!"
+    });
   }
 
   writeFile(path, resource, resourceType) {
