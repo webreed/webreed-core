@@ -84,6 +84,8 @@ export class BehaviorMap {
    *   The resource that is being generated.
    * @param templateName
    *   Name of the template to apply to the resource.
+   * @param templateProperties
+   *   Additional properties to provide to template.
    *
    * @returns
    *   An observable stream of output resources.
@@ -92,7 +94,7 @@ export class BehaviorMap {
    * - If resource type is not associated with a template engine.
    * - If the resolved template engine is not defined.
    */
-  public applyTemplateToResource(resource: Resource, templateName: string): Observable<Resource> {
+  public applyTemplateToResource(resource: Resource, templateName: string, templateProperties: any = null): Observable<Resource> {
     return this._map["applyTemplateToResource"](this._env, ...arguments);
   }
 

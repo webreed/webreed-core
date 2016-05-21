@@ -115,15 +115,18 @@ describe("behaviors/applyTemplateToResource", function () {
 
     let resource = this.env.createResource({ inputProperty: 42 });
     let templateName = "test.nunjucks";
+    let templateProperties = { extraTemplateProperty: 72 };
 
-    return applyTemplateToResource(this.env, resource, templateName)
+    return applyTemplateToResource(this.env, resource, templateName, templateProperties)
       .toPromise()
       .then(() => {
         fakeTemplateEngine.lastRenderTemplateArguments[0]
           .should.be.eql("test.nunjucks");
 
-        fakeTemplateEngine.lastRenderTemplateArguments[1].inputProperty
+        fakeTemplateEngine.lastRenderTemplateArguments[1].content.inputProperty
           .should.be.eql(42);
+        fakeTemplateEngine.lastRenderTemplateArguments[1].extraTemplateProperty
+          .should.be.eql(72);
 
         fakeTemplateEngine.lastRenderTemplateArguments[2].templateEngine
           .should.have.properties({

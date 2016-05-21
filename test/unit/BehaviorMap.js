@@ -35,7 +35,7 @@ describe("BehaviorMap", function () {
 
   describeBehavior("applyExtensionChainToResource", [ "resource", "extensionChain" ]);
   describeBehavior("applySequenceOfTransformsToResource", [ "resource", "transformers" ]);
-  describeBehavior("applyTemplateToResource", [ "resource", "templateName" ]);
+  describeBehavior("applyTemplateToResource", [ "resource", "templateName", "templateProperties" ]);
   describeBehavior("build", [ ]);
   describeBehavior("clean", [ ]);
   describeBehavior("copyFilesToOutput", [ ]);

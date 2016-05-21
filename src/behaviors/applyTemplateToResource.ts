@@ -8,14 +8,15 @@ import {Environment} from "../Environment";
 import {Resource} from "../Resource";
 
 
-export function applyTemplateToResource(env: Environment, resource: Resource, templateName: string): Observable<Resource> {
+export function applyTemplateToResource(env: Environment, resource: Resource, templateName: string, templateProperties: any = null): Observable<Resource> {
   if (templateName === "") {
     throw new Error("argument 'templateName' must be a non-empty string");
   }
 
   let resolvedTemplateEngine = env.behaviors.resolveTemplateEngine(templateName);
+  let templateContext = Object.assign({ content: resource }, templateProperties || { });
 
-  let templateOutputStream = resolvedTemplateEngine.templateEngine.renderTemplate(templateName, resource, {
+  let templateOutputStream = resolvedTemplateEngine.templateEngine.renderTemplate(templateName, templateContext, {
     templateEngine: {
       name: resolvedTemplateEngine.name,
       options: resolvedTemplateEngine.options
