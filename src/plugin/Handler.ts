@@ -19,7 +19,7 @@ export interface Handler {
    * @returns
    *   A promise to fulfill with the decoded data.
    */
-  decode(encodedData: any, context: Object): Promise<any>;
+  decode(encodedData: any, context: any): Promise<any>;
 
   /**
    * Encodes data so that it can be persisted.
@@ -32,6 +32,6 @@ export interface Handler {
    * @returns
    *   A promise to fulfill with the encoded data.
    */
-  encode(data: any, context: Object): Promise<any>;
+  encode(data: any, context: any): Promise<any>;
 
 }

@@ -27,6 +27,6 @@ export interface Generator {
    *   An observable stream of zero-or-more output resources. The generator may decide
    *   to yield the source resource untouched in this stream.
    */
-  generate(sourceResource: Resource, context: Object): Observable<Resource>;
+  generate(sourceResource: Resource, context: any): Observable<Resource>;
 
 }

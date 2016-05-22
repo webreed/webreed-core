@@ -27,6 +27,6 @@ export interface Transformer {
    *   An observable stream of zero-or-more output resources. The transformer may
    *   decide to yield the input resource untouched in this stream.
    */
-  transform(resource: Resource, context: Object): Observable<Resource>;
+  transform(resource: Resource, context: any): Observable<Resource>;
 
 }
