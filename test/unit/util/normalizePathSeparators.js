@@ -1,13 +1,15 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import path from "path";
 
-import given from "mocha-testdata";
-import should from "should";
+const path = require("path");
 
-import {normalizePathSeparators} from "../../../lib/util/normalizePathSeparators";
+const given = require("mocha-testdata");
+const should = require("should");
+
+const normalizePathSeparators = require("../../../lib/util/normalizePathSeparators").normalizePathSeparators;
 
 
 describe("util/normalizePathSeparators", function () {

@@ -1,12 +1,14 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
-
-import {Observable} from "rxjs";
-import formatUnicorn from "format-unicorn/safe";
+"use strict";
 
 
-export class FakeTransformer {
+const Observable = require("rxjs").Observable;
+const formatUnicorn = require("format-unicorn/safe");
+
+
+class FakeTransformer {
 
   constructor(value, pageCount, bodyFormat) {
     this.value = value;
@@ -25,3 +27,6 @@ export class FakeTransformer {
   }
 
 }
+
+
+exports.FakeTransformer = FakeTransformer;

@@ -1,12 +1,14 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import given from "mocha-testdata";
-import should from "should";
 
-import {Environment} from "../../lib/Environment";
-import {Resource} from "../../lib/Resource";
+const given = require("mocha-testdata");
+const should = require("should");
+
+const Environment = require("../../lib/Environment").Environment;
+const Resource = require("../../lib/Resource").Resource;
 
 
 describe("Resource", function () {

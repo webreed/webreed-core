@@ -1,16 +1,18 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import given from "mocha-testdata";
-import should from "should";
 
-import {Environment} from "../../../lib/Environment";
-import {PluginContext} from "../../../lib/PluginContext";
-import {ResourceType} from "../../../lib/ResourceType";
-import {resolveTemplateEngine} from "../../../lib/behaviors/resolveTemplateEngine";
+const given = require("mocha-testdata");
+const should = require("should");
 
-import {FakeTemplateEngine} from "../../fakes/FakeTemplateEngine";
+const Environment = require("../../../lib/Environment").Environment;
+const PluginContext = require("../../../lib/PluginContext").PluginContext;
+const ResourceType = require("../../../lib/ResourceType").ResourceType;
+const resolveTemplateEngine = require("../../../lib/behaviors/resolveTemplateEngine").resolveTemplateEngine;
+
+const FakeTemplateEngine = require("../../fakes/FakeTemplateEngine").FakeTemplateEngine;
 
 
 describe("behaviors/resolveTemplateEngine", function () {

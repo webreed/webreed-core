@@ -1,13 +1,15 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import given from "mocha-testdata";
-import should from "should";
 
-import {Environment} from "../../../lib/Environment";
-import {ResourceType} from "../../../lib/ResourceType";
-import {resolveResourceMode} from "../../../lib/behaviors/resolveResourceMode";
+const given = require("mocha-testdata");
+const should = require("should");
+
+const Environment = require("../../../lib/Environment").Environment;
+const ResourceType = require("../../../lib/ResourceType").ResourceType;
+const resolveResourceMode = require("../../../lib/behaviors/resolveResourceMode").resolveResourceMode;
 
 
 describe("behaviors/resolveResourceMode", function () {

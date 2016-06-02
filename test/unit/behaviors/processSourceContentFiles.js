@@ -1,20 +1,22 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import path from "path";
 
-import given from "mocha-testdata";
-import should from "should";
+const path = require("path");
 
-import {Environment} from "../../../lib/Environment";
-import {PluginContext} from "../../../lib/PluginContext";
-import {ResourceType} from "../../../lib/ResourceType";
-import {processSourceContentFiles} from "../../../lib/behaviors/processSourceContentFiles";
+const given = require("mocha-testdata");
+const should = require("should");
 
-import {FakeGenerator} from "../../fakes/FakeGenerator";
-import {FakeMode} from "../../fakes/FakeMode";
-import {FakeTransformer} from "../../fakes/FakeTransformer";
+const Environment = require("../../../lib/Environment").Environment;
+const PluginContext = require("../../../lib/PluginContext").PluginContext;
+const ResourceType = require("../../../lib/ResourceType").ResourceType;
+const processSourceContentFiles = require("../../../lib/behaviors/processSourceContentFiles").processSourceContentFiles;
+
+const FakeGenerator = require("../../fakes/FakeGenerator").FakeGenerator;
+const FakeMode = require("../../fakes/FakeMode").FakeMode;
+const FakeTransformer = require("../../fakes/FakeTransformer").FakeTransformer;
 
 
 function getFixturePath(relativePath) {

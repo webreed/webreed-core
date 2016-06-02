@@ -1,8 +1,10 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-export class FakeErrorHandler {
+
+class FakeErrorHandler {
 
   decode(sourceResource, context) {
     return Promise.reject(new Error("decode failed!"));
@@ -13,3 +15,6 @@ export class FakeErrorHandler {
   }
 
 }
+
+
+exports.FakeErrorHandler = FakeErrorHandler;

@@ -1,17 +1,19 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import given from "mocha-testdata";
-import should from "should";
 
-import {Environment} from "../../../lib/Environment";
-import {PluginContext} from "../../../lib/PluginContext";
-import {ResourceType} from "../../../lib/ResourceType";
-import {decodeResource} from "../../../lib/behaviors/decodeResource";
+const given = require("mocha-testdata");
+const should = require("should");
 
-import {FakeErrorHandler} from "../../fakes/FakeErrorHandler";
-import {FakeHandler} from "../../fakes/FakeHandler";
+const Environment = require("../../../lib/Environment").Environment;
+const PluginContext = require("../../../lib/PluginContext").PluginContext;
+const ResourceType = require("../../../lib/ResourceType").ResourceType;
+const decodeResource = require("../../../lib/behaviors/decodeResource").decodeResource;
+
+const FakeErrorHandler = require("../../fakes/FakeErrorHandler").FakeErrorHandler;
+const FakeHandler = require("../../fakes/FakeHandler").FakeHandler;
 
 
 describe("behaviors/decodeResource", function () {

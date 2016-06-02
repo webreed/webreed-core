@@ -1,18 +1,20 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import path from "path";
 
-import given from "mocha-testdata";
-import should from "should";
+const path = require("path");
 
-import {Environment} from "../../../lib/Environment";
-import {ResourceType} from "../../../lib/ResourceType";
-import {saveResourceFile} from "../../../lib/behaviors/saveResourceFile";
+const given = require("mocha-testdata");
+const should = require("should");
 
-import {FakeErrorMode} from "../../fakes/FakeErrorMode";
-import {FakeMode} from "../../fakes/FakeMode";
+const Environment = require("../../../lib/Environment").Environment;
+const ResourceType = require("../../../lib/ResourceType").ResourceType;
+const saveResourceFile = require("../../../lib/behaviors/saveResourceFile").saveResourceFile;
+
+const FakeErrorMode = require("../../fakes/FakeErrorMode").FakeErrorMode;
+const FakeMode = require("../../fakes/FakeMode").FakeMode;
 
 
 function getOutputPath(relativePath) {

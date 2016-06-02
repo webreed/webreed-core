@@ -1,11 +1,13 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import given from "mocha-testdata";
-import should from "should";
 
-import {getTargetFromAliasReference} from "../../../lib/util/getTargetFromAliasReference";
+const given = require("mocha-testdata");
+const should = require("should");
+
+const getTargetFromAliasReference = require("../../../lib/util/getTargetFromAliasReference").getTargetFromAliasReference;
 
 
 describe("util/getTargetFromAliasReference", function () {

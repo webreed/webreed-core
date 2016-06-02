@@ -1,11 +1,13 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import given from "mocha-testdata";
-import should from "should";
 
-import {getTargetExtensionFromPath} from "../../../lib/util/getTargetExtensionFromPath";
+const given = require("mocha-testdata");
+const should = require("should");
+
+const getTargetExtensionFromPath = require("../../../lib/util/getTargetExtensionFromPath").getTargetExtensionFromPath;
 
 
 describe("util/getTargetExtensionFromPath", function () {

@@ -1,17 +1,20 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
-import given from "mocha-testdata";
-import should from "should";
-import {Observable} from "rxjs";
+"use strict";
 
-import {Environment} from "../../../lib/Environment";
-import {PluginContext} from "../../../lib/PluginContext";
-import {ResourceType} from "../../../lib/ResourceType";
-import {applyExtensionChainToResource} from "../../../lib/behaviors/applyExtensionChainToResource";
 
-import {FakeErrorTransformer} from "../../fakes/FakeErrorTransformer";
-import {FakeTransformer} from "../../fakes/FakeTransformer";
+const given = require("mocha-testdata");
+const should = require("should");
+const Observable = require("rxjs").Observable;
+
+const Environment = require("../../../lib/Environment").Environment;
+const PluginContext = require("../../../lib/PluginContext").PluginContext;
+const ResourceType = require("../../../lib/ResourceType").ResourceType;
+const applyExtensionChainToResource = require("../../../lib/behaviors/applyExtensionChainToResource").applyExtensionChainToResource;
+
+const FakeErrorTransformer = require("../../fakes/FakeErrorTransformer").FakeErrorTransformer;
+const FakeTransformer = require("../../fakes/FakeTransformer").FakeTransformer;
 
 
 describe("behaviors/applyExtensionChainToResource", function () {

@@ -1,18 +1,20 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import given from "mocha-testdata";
-import should from "should";
-import {Observable} from "rxjs";
 
-import {Environment} from "../../../lib/Environment";
-import {PluginContext} from "../../../lib/PluginContext";
-import {ResourceType} from "../../../lib/ResourceType";
-import {applySequenceOfTransformsToResource} from "../../../lib/behaviors/applySequenceOfTransformsToResource";
+const given = require("mocha-testdata");
+const should = require("should");
+const Observable = require("rxjs").Observable;
 
-import {FakeTransformer} from "../../fakes/FakeTransformer";
-import {FakeErrorTransformer} from "../../fakes/FakeErrorTransformer";
+const Environment = require("../../../lib/Environment").Environment;
+const PluginContext = require("../../../lib/PluginContext").PluginContext;
+const ResourceType = require("../../../lib/ResourceType").ResourceType;
+const applySequenceOfTransformsToResource = require("../../../lib/behaviors/applySequenceOfTransformsToResource").applySequenceOfTransformsToResource;
+
+const FakeTransformer = require("../../fakes/FakeTransformer").FakeTransformer;
+const FakeErrorTransformer = require("../../fakes/FakeErrorTransformer").FakeErrorTransformer;
 
 
 describe("behaviors/applySequenceOfTransformsToResource", function () {

@@ -1,12 +1,14 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import given from "mocha-testdata";
-import should from "should";
 
-import {BehaviorMap} from "../../lib/BehaviorMap";
-import {Environment} from "../../lib/Environment";
+const given = require("mocha-testdata");
+const should = require("should");
+
+const BehaviorMap = require("../../lib/BehaviorMap").BehaviorMap;
+const Environment = require("../../lib/Environment").Environment;
 
 
 describe("BehaviorMap", function () {

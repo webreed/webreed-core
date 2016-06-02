@@ -1,17 +1,19 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import path from "path";
 
-import given from "mocha-testdata";
-import glob from "glob";
-import rimraf from "rimraf";
-import should from "should";
+const path = require("path");
 
-import {Environment} from "../../../lib/Environment";
-import {copyFilesToOutput} from "../../../lib/behaviors/copyFilesToOutput";
-import {normalizePathSeparators} from "../../../lib/util/normalizePathSeparators";
+const given = require("mocha-testdata");
+const glob = require("glob");
+const rimraf = require("rimraf");
+const should = require("should");
+
+const Environment = require("../../../lib/Environment").Environment;
+const copyFilesToOutput = require("../../../lib/behaviors/copyFilesToOutput").copyFilesToOutput;
+const normalizePathSeparators = require("../../../lib/util/normalizePathSeparators").normalizePathSeparators;
 
 
 function getFixturePath(relativePath) {

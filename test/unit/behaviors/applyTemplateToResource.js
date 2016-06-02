@@ -1,19 +1,21 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import given from "mocha-testdata";
-import should from "should";
-import {Observable} from "rxjs";
 
-import {Environment} from "../../../lib/Environment";
-import {PluginContext} from "../../../lib/PluginContext";
-import {ResourceType} from "../../../lib/ResourceType";
-import {applyTemplateToResource} from "../../../lib/behaviors/applyTemplateToResource";
+const given = require("mocha-testdata");
+const should = require("should");
+const Observable = require("rxjs").Observable;
 
-import {FakeErrorTemplateEngine} from "../../fakes/FakeErrorTemplateEngine";
-import {FakePaginatedTemplateEngine} from "../../fakes/FakePaginatedTemplateEngine";
-import {FakeTemplateEngine} from "../../fakes/FakeTemplateEngine";
+const Environment = require("../../../lib/Environment").Environment;
+const PluginContext = require("../../../lib/PluginContext").PluginContext;
+const ResourceType = require("../../../lib/ResourceType").ResourceType;
+const applyTemplateToResource = require("../../../lib/behaviors/applyTemplateToResource").applyTemplateToResource;
+
+const FakeErrorTemplateEngine = require("../../fakes/FakeErrorTemplateEngine").FakeErrorTemplateEngine;
+const FakePaginatedTemplateEngine = require("../../fakes/FakePaginatedTemplateEngine").FakePaginatedTemplateEngine;
+const FakeTemplateEngine = require("../../fakes/FakeTemplateEngine").FakeTemplateEngine;
 
 
 describe("behaviors/applyTemplateToResource", function () {

@@ -1,11 +1,13 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import {Observable} from "rxjs";
+
+const Observable = require("rxjs").Observable;
 
 
-export class FakeGenerator {
+class FakeGenerator {
 
   generate(resource, resourceType) {
     this.lastGenerateArguments = Array.from(arguments);
@@ -15,3 +17,6 @@ export class FakeGenerator {
   }
 
 }
+
+
+exports.FakeGenerator = FakeGenerator;

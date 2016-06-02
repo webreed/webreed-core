@@ -1,18 +1,20 @@
 // Copyright (c) Rotorz Limited. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root.
 
+"use strict";
 
-import given from "mocha-testdata";
-import should from "should";
-import {Observable} from "rxjs";
 
-import {Environment} from "../../../lib/Environment";
-import {PluginContext} from "../../../lib/PluginContext";
-import {ResourceType} from "../../../lib/ResourceType";
-import {Resource} from "../../../lib/Resource";
-import {processResource} from "../../../lib/behaviors/processResource";
+const given = require("mocha-testdata");
+const should = require("should");
+const Observable = require("rxjs").Observable;
 
-import {FakeErrorTransformer} from "../../fakes/FakeErrorTransformer";
+const Environment = require("../../../lib/Environment").Environment;
+const PluginContext = require("../../../lib/PluginContext").PluginContext;
+const ResourceType = require("../../../lib/ResourceType").ResourceType;
+const Resource = require("../../../lib/Resource").Resource;
+const processResource = require("../../../lib/behaviors/processResource").processResource;
+
+const FakeErrorTransformer = require("../../fakes/FakeErrorTransformer").FakeErrorTransformer;
 
 
 describe("behaviors/processResource", function () {
