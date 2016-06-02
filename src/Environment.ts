@@ -4,7 +4,7 @@
 
 import * as path from "path";
 import * as url from "url";
-const join = path.join;
+import {join as path_join} from "path";
 
 import {AliasMap} from "./AliasMap";
 import {BehaviorMap} from "./BehaviorMap";
@@ -287,7 +287,7 @@ export class Environment {
     }
 
     if (page != "") {
-      path = normalizePathSeparators(join(path, page));
+      path = normalizePathSeparators(path_join(path, page));
     }
 
     return path + extension;
