@@ -4,4 +4,5 @@
 
 export {PaginationIterator} from "./PaginationIterator";
 export {PaginationProvider} from "./PaginationProvider";
+export {ResourcePaginationProvider} from "./ResourcePaginationProvider";
 export {paginate} from "./paginate";
