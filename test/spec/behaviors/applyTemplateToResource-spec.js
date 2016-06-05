@@ -138,6 +138,34 @@ describe("behaviors/applyTemplateToResource", function () {
       });
   });
 
+  it("provides pagination provider to template engine when resource can be paginated", function () {
+    let fakeTemplateEngine = this.env.templateEngines.get("nunjucks");
+
+    let resource = this.env.createResource({ _path: "test" });
+    let templateName = "test.nunjucks";
+
+    return applyTemplateToResource(this.env, resource, templateName)
+      .toPromise()
+      .then(() => {
+        fakeTemplateEngine.lastRenderTemplateArguments[2].paginationProvider.paginate
+          .should.be.a.Function();
+      });
+  });
+
+  it("does not provide pagination provider to template engine when resource cannot be paginated", function () {
+    let fakeTemplateEngine = this.env.templateEngines.get("nunjucks");
+
+    let resource = this.env.createResource();
+    let templateName = "test.nunjucks";
+
+    return applyTemplateToResource(this.env, resource, templateName)
+      .toPromise()
+      .then(() => {
+        should( fakeTemplateEngine.lastRenderTemplateArguments[2].paginationProvider )
+          .be.undefined();
+      });
+  });
+
   it("augments resource with page key when paginated", function () {
     let resource = this.env.createResource({ _path: "blog" });
     let templateName = "test.paginated";

@@ -5,6 +5,7 @@
 import {Observable} from "rxjs";
 
 import {Environment} from "../Environment";
+import {ResourcePaginationProvider} from "../pagination";
 import {Resource} from "../Resource";
 
 
@@ -20,7 +21,10 @@ export function applyTemplateToResource(env: Environment, resource: Resource, te
     templateEngine: {
       name: resolvedTemplateEngine.name,
       options: resolvedTemplateEngine.options
-    }
+    },
+    paginationProvider: resource._path
+      ? new ResourcePaginationProvider(env, resource)
+      : undefined
   });
 
   return templateOutputStream.map(output => {
