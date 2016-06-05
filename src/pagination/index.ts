@@ -3,5 +3,5 @@
 
 
 export {PaginationIterator} from "./PaginationIterator";
+export {PaginationProvider} from "./PaginationProvider";
 export {paginate} from "./paginate";
-
