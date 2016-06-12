@@ -115,7 +115,13 @@ describe("behaviors/applyTemplateToResource", function () {
   it("provides correct arguments to the template engine's 'renderTemplate' function", function () {
     let fakeTemplateEngine = this.env.templateEngines.get("nunjucks");
 
-    let resource = this.env.createResource({ inputProperty: 42 });
+    let resource = this.env.createResource({
+      _baseUrl: "http://example.com",
+      _path: "test",
+      _extension: ".html",
+      inputProperty: 42
+    });
+
     let templateName = "test.nunjucks";
     let templateProperties = { extraTemplateProperty: 72 };
 
@@ -135,6 +141,8 @@ describe("behaviors/applyTemplateToResource", function () {
             name: "nunjucks",
             options: { instanceProperty: 42 }
           });
+        fakeTemplateEngine.lastRenderTemplateArguments[2].url
+          .should.be.eql("http://example.com/test.html");
       });
   });
 

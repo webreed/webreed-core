@@ -22,6 +22,7 @@ export function applyTemplateToResource(env: Environment, resource: Resource, te
       name: resolvedTemplateEngine.name,
       options: resolvedTemplateEngine.options
     },
+    url: resource._url,
     paginationProvider: resource._path
       ? new ResourcePaginationProvider(env, resource)
       : undefined
