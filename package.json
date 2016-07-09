@@ -1,11 +1,14 @@
 {
   "name": "webreed-core",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Core library that support webreed projects.",
   "repository": {
     "type": "git",
     "url": "https://github.com/webreed/webreed-core"
   },
+  "keywords": [
+    "webreed"
+  ],
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
